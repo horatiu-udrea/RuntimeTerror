@@ -26,7 +26,11 @@ The system must:
 ## 3.2 External Interface Requirements
 
 ## 3.3 System Features
-
+The system needs to be:
+- able to logically behave as three seperate systems (Backend, Frontend, Database)
+- able to run the website responsively(Should work on multiple devices and browsers)
+- able to distinguish between different users when accessing the database
+- *not sure* able to operate transparently on data that is spread across a variety of different databases
 ## 3.4 Nonfunctional Requirements
 - Reliability: The system should be reliable even when a lot of users access it at the same time
 - Data integrity: The stored data should not become corrupted.
