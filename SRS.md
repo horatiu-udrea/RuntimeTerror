@@ -26,6 +26,12 @@ The purpose of the product is to ease the hosting of scientific/academic confere
 # 2. Overall Description
 
 ## 2.1 User Needs
+- also called user requirements
+- has to determine who is gonna use the program and how
+- there are multiple types of users that means that the program must be able to perform for their needs
+- are usually documented via narattive text
+- while designing a software product is important to know what the needs are
+- when the user is not able to communicate the entire needs and also because the information provided it also may be innacurate or incomplete the user requirements are consoidered separately from the sustem requirements (this job is done by the bussines analyst) 
 
 ## 2.2 Assumptions and Dependencies
 It is assumed that:
