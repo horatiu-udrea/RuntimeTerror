@@ -1,11 +1,18 @@
 # 1. Introduction 
 The Conference Management System is a web-based application which aims to help people organize scientific conferences faster and quicker
 ## 1.1 Purpose
-
+The purpose of the product is to ease the hosting of scientific/academic conferences centered around the presentation of papers/projects.
 ## 1.2 Intended Audience
-
+ - Primarily: The Conference Management System is addressed towards the academic and scientific comunities.
+ - Secondarily: The Conference Management System can be used by any individual seeking a platform to host a similar conference.
 ## 1.3 Intended Use
-
+ The Conference Management System is to be used strictly to organize scientific/academic conferences.
+ **(pe perforce era recomandat ca field-ul asta sa contina intended use pentru SRS. also intended use pentru product = prupose)**
+ The Document is to be used as follows:
+  - By Developers:
+    - As a general framework for the application.
+  - By QR:
+    - As a general description meant to assist with creating tests.
 ## 1.4 Scope 
 - Objective: Support the automatic management of information related to scientific conferences
 - Benefits:
