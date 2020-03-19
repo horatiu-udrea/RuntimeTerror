@@ -7,12 +7,26 @@
 ## 1.3 Intended Use
 
 ## 1.4 Scope
-
+- Description: The Conference Management System is a web-based application which aims to help people organize scientific conferences faster and quicker
+- Objective: Support the automatic management of information related to scientific conferences
+- Benefits:
+  - Gather information about speakers and papers easier
+  - Assign papers to reviewers based on preferences
+  - Create an accurate timetable for the meeting
+  - Assign the most appropriate rooms to the more requested sections of the conference
+- Goals:
+  - Create an easy-to-use application to automate all the processes involved in the organization of a scientific conference
+  
 # 2. Overall Description
 
 ## 2.1 User Needs
 
 ## 2.2 Assumptions and Dependencies
+It is assumed that:
+- the user is familiar with an internet browser and also familiar with handling the keyboard and mouse
+- the user has access to an internet browser since the application is a web-based application
+- the user possesses decent internet connectivity
+- the user possesses a valid email address
 
 # 3. System Features and Requirements
 
