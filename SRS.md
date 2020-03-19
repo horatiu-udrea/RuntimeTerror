@@ -44,7 +44,24 @@ The system must:
 - present its public information to the users
 
 ## 3.2 External Interface Requirements
-
+ There are 4 types of external interface requirements: User Interfaces, Hardware Interfaces, Software Interfaces and Communication Interfaces.
+ #### User Interfaces : 
+ The conference management system contains a form for users to log in, register, choose a section or buy a ticket. 
+ The users can be parts of the following categories: steering committe, program committee memeber or authors.
+ The program committee members are co-chairs, chairs or reviewers. 
+ Authors can be speakers as well.
+ Only the steering committee can create a conference or create a conference section.
+ Authors can submit a paper and the speakers can improve papers and also upload contents of a presentation.
+ Reviewers have to review papers and change them in case of the conflicting ones.
+ Chiars users can make a final decision for a conflictiong paper.
+ Co-chairs  can change conference deadlines, assign papers for reviewers and request decision for a conflicting paper.
+ Program committee members have the chance to bid on papers.
+ #### Hardware Interfaces :
+ The Conference Management System uses hardware interfaces similar to most online web applications including visual and interactional support (e.g monitor, keyboard, mouse).
+ #### Software Interfaces :
+ The system will include a database to store the user information, conference information and other types information  specific to the account type. The system will be separate from the native operating system as it functions entirely as a web application displayed within a web browser (i.e. Chrome, Firefox,  Internet Explorer).  
+ #### Communication Interfaces :
+ The system is a web application, so it needs to communicate with all web browsers available.The system also needs to communicate with an e-mail service to send reminders to  users. The system will use HTTP communication standards. 
 ## 3.3 System Features
 The system needs to be:
 - able to logically behave as three seperate systems (Backend, Frontend, Database)
