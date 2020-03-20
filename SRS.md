@@ -26,6 +26,22 @@ The purpose of the product is to ease the hosting of scientific/academic confere
 # 2. Overall Description
 
 ## 2.1 User Needs
+For each type of user the needs (requirements) are different:
+- **Steering committee:** create and manage a conference
+- **Author:** submit papers
+- **Speaker:** improve the paper and upload the content of the presentation
+- **Program committee member:** bid on papers for reviewing and then review the papers
+- **Chair/co-chair:**
+  - change the conference deadlines
+  - assign papers to reviewers
+  - requests discussions for conflicting papers
+- **Chair:** make the final decision for a conflicting paper
+- **All the users:**
+  - log in
+  - register
+  - choose conference section
+  - buy ticket
+  
 
 ## 2.2 Assumptions and Dependencies
 It is assumed that:
