@@ -48,14 +48,11 @@ The system must:
  #### User Interfaces : 
  The conference management system contains a form for users to log in, register, choose a section or buy a ticket. 
  The users can be parts of the following categories: steering committe, program committee memeber or authors.
- The program committee members are co-chairs, chairs or reviewers. 
- Authors can be speakers as well.
- Only the steering committee can create a conference or create a conference section.
- Authors can submit a paper and the speakers can improve papers and also upload contents of a presentation.
- Reviewers have to review papers and change them in case of the conflicting ones.
- Chiars users can make a final decision for a conflictiong paper.
- Co-chairs  can change conference deadlines, assign papers for reviewers and request decision for a conflicting paper.
- Program committee members have the chance to bid on papers.
+ Three will be forms for the steering committee to create a conference or to create a conference section.
+ Also, there will be a specific submision form to upload a paper, to improve or to upload contents of a presentation.
+ The web application will contain a platform to review papers,change them in case of conflicts and to emit final decision for conflicting papers.
+ As part of the system, it will be build a dashboard to change conference deadlines, assign papers for reviewers and request decision for a conflicting paper.
+ As part of the users communications it will contain a dashboard and a platform for users to have the chance to bid on papers.
  #### Hardware Interfaces :
  The Conference Management System uses hardware interfaces similar to most online web applications including visual and interactional support (e.g monitor, keyboard, mouse).
  #### Software Interfaces :
