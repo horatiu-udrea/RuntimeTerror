@@ -60,7 +60,21 @@ The system must:
 - present its public information to the users
 
 ## 3.2 External Interface Requirements
-
+ There are 4 types of external interface requirements: User Interfaces, Hardware Interfaces, Software Interfaces and Communication Interfaces.
+ #### User Interfaces : 
+ The conference management system contains a form for users to log in, register, choose a section or buy a ticket. 
+ The users can be part of the following categories: steering committee, program committee member or author.
+ There will be forms for the steering committee to create a conference or a conference section.
+ Also, there will be a specific submission form to upload a paper and to improve or to upload contents of a presentation.
+ The web application will contain a platform to review papers,change them in case of conflicts and to emit final decision for conflicting papers.
+ As part of the system, there will be a dashboard for changing conference deadlines, assigning papers for reviewers and requesting a decision for a conflicting paper.
+ As part of the users communications, there will be a dashboard and a platform for users to have the chance to bid on papers that need reviewing.
+ #### Hardware Interfaces :
+ The Conference Management System uses hardware interfaces similar to most online web applications including visual and interactional support (e.g monitor, keyboard, mouse).
+ #### Software Interfaces :
+ The system will include a database to store the user information, conference information and other types of information specific to the account type. The system will be separate from the native operating system as it functions entirely as a web application displayed within a web browser (i.e. Chrome, Firefox, Internet Explorer).  
+ #### Communication Interfaces :
+ The system is a web application, so it needs to communicate with all web browsers available. The system also needs to communicate with an e-mail service to send reminders to users. The system will use HTTP communication standards. 
 ## 3.3 System Features
 The system needs to be:
 - able to logically behave as three seperate systems (Backend, Frontend, Database)
