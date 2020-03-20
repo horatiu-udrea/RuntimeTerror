@@ -26,26 +26,20 @@ The purpose of the product is to ease the hosting of scientific/academic confere
 # 2. Overall Description
 
 ## 2.1 User Needs
-For different users the needs (requirements) are different:
-- for the **steering committee** they have to be able to create a conference
-- for the **author** they are able to submit papers
-- for the **speker** they have the posibillity to:
-  - submit papers same as an **author** 
-  - they can also improve their paper
-  - upload the content of presentation afterwards
-- a **program committee member** is able to bid the papers
-- the **reviewer** passes the papers to a **program committee member** and is able to :
-  - reviw the papers
-  - change the review for a conflicting paper
-- the **co-chair** passes the papers to a **program committee member** and is able to:
+For each type of user the needs (requirements) are different:
+- **Steering committee:** create and manage a conference
+- **Author:** submit papers
+- **Speaker:** improve the paper and upload the content of the presentation
+- **Program committee member:** bid on papers for reviewing and then review the papers
+- **Chair/co-chair:**
   - change the conference deadlines
-  - assign papers to reviewers 
+  - assign papers to reviewers
   - requests discussions for conflicting papers
-- the **chair** is able to make the final decision for a conflicting paper and passes the result to the **co-chair**
-- all the **users** are able to :
+- **Chair:** make the final decision for a conflicting paper
+- **All the users:**
   - log in
   - register
-  - choose section
+  - choose conference section
   - buy ticket
   
 
