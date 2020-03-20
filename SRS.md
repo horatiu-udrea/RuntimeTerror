@@ -1,18 +1,15 @@
-# 1. Introduction 
-The Conference Management System is a web-based application which aims to help people organize scientific conferences faster and quicker
+# Conference Management System
+# 1. Introduction
 ## 1.1 Purpose
 The purpose of the product is to ease the hosting of scientific/academic conferences centered around the presentation of papers/projects.
 ## 1.2 Intended Audience
- - Primarily: The Conference Management System is addressed towards the academic and scientific comunities.
- - Secondarily: The Conference Management System can be used by any individual seeking a platform to host a similar conference.
+ - Primarily: The Conference Management System is addressed towards the academic and scientific communities.
+ - Secondarily: The Conference Management System can be used by any individual seeking a platform to host a conference.
 ## 1.3 Intended Use
- The Conference Management System is to be used strictly to organize scientific/academic conferences.
- **(pe perforce era recomandat ca field-ul asta sa contina intended use pentru SRS. also intended use pentru product = prupose)**
- The Document is to be used as follows:
-  - By Developers:
-    - As a general framework for the application.
-  - By QR:
-    - As a general description meant to assist with creating tests.
+ The Conference Management System is to be used strictly to organize scientific/academic conferences.  
+This document is to be used as follows:
+  - By developers as a general framework for the application.
+  - By QR as a general description meant to assist with creating tests.
 ## 1.4 Scope 
 - Objective: Support the automatic management of information related to scientific conferences
 - Benefits:
@@ -46,7 +43,7 @@ For each type of user the needs (requirements) are different:
 ## 2.2 Assumptions and Dependencies
 It is assumed that:
 - the user is familiar with an internet browser and also familiar with handling the keyboard and mouse
-- the user has access to an internet browser since the application is a web-based application
+- the user has access to an internet browser (since the application is a web-based application)
 - the user possesses decent internet connectivity
 - the user possesses a valid email address
 
@@ -64,9 +61,8 @@ The system must:
 ## 3.3 System Features
 The system needs to be:
 - able to logically behave as three seperate systems (Backend, Frontend, Database)
-- able to run the website responsively(Should work on multiple devices and browsers)
+- able to run the website responsively (Should work on multiple devices and browsers)
 - able to distinguish between different users when accessing the database
-- **not sure** able to operate transparently on data that is spread across a variety of different databases
 ## 3.4 Nonfunctional Requirements
 - Reliability: The system should be reliable even when a lot of users access it at the same time
 - Data integrity: The stored data should not become corrupted.
