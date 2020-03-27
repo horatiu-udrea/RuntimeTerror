@@ -29,4 +29,4 @@ function myFunction() {
     document.getElementById("demo").innerHTML = x;
 }
 
-document.getElementById("tryItButton").addEventListener("click", myFunction);
+// document.getElementById("tryItButton").addEventListener("click", myFunction);
