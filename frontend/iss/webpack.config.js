@@ -3,12 +3,6 @@ const wpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 
-// const TSLintPlugin = require('tslint-webpack-plugin');
-
-// let tile = {
-//     tileId: 'main'
-// }
-// let tileFolder = 'tiles/main';
 let entry = '.\\src\\index.js';
 let watch = false;
 
@@ -17,16 +11,13 @@ let webpackConfig = {
     watch: watch,
     entry: {
         index: entry,
-        // worker: './tiles/main/src/workers/Worker.ts'
     },
     output: {
         filename: '[name].js',
         path: path.resolve(__dirname, "dist"),
-        // publicPath: '/'
     },
     resolve: {
-        extensions: ['.js'],
-        modules: ['./node_modules']
+        extensions: ['.js']
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -39,7 +30,6 @@ let webpackConfig = {
     ],
     devtool: 'eval',
     devServer: {
-        // contentBase: [path.join(__dirname, '/tiles/main')],
         port: 5500
     },
     optimization: {
@@ -47,7 +37,6 @@ let webpackConfig = {
     },
     module: {
         rules: [{
-            // TS Compiler
             test: /\.js$/,
             use: {
                 loader: 'babel-loader',
@@ -107,7 +96,6 @@ let webpackConfig = {
             }]
         },
         {
-            // Graphics
             test: /\.html$/,
             use: [{
                 loader: 'html-loader',
