@@ -25,7 +25,8 @@ let webpackConfig = {
         // publicPath: '/'
     },
     resolve: {
-        extensions: ['.js']
+        extensions: ['.js'],
+        modules: ['./node_modules']
     },
     plugins: [
         new HtmlWebpackPlugin({
