@@ -24,6 +24,7 @@
     width: 280px;
     margin-left: 10px;
     border: 2px outset #ffad66;
+    border-radius: 10px;
 }
 
 #userPassword {
@@ -42,6 +43,7 @@
     width: 280px;
     margin-left: 10px;
     border: 2px outset #ffad66;
+    border-radius: 10px;
 }
 
 #logInButton {
