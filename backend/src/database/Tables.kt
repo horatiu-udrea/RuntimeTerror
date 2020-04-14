@@ -50,14 +50,7 @@ object BidPaperTable : Table("BidPapers")
     val paperID = reference("FK_PaperID", PaperTable.id).primaryKey(1)
     val reviewChoice = integer("ReviewChoice")
 
-    init
-    {
-        index(
-            true,
-            userID,
-            paperID
-        )
-    }
+    override val primaryKey = PrimaryKey(userID, paperID, name = "PK_BidPaper")
 }
 
 object ReviewTable : Table("Reviews")
@@ -67,14 +60,7 @@ object ReviewTable : Table("Reviews")
     val content = varchar("Content", 5000)
     val score = integer("Score")
 
-    init
-    {
-        index(
-            true,
-            userID,
-            paperID
-        )
-    }
+    override val primaryKey = PrimaryKey(userID, paperID, name = "PK_Review")
 }
 
 object RoomTable : Table("Rooms")
@@ -103,14 +89,7 @@ object UserSectionChoiceTable : Table("UserSectionChoices")
     val sectionID = reference("FK_SectionID", SectionTable.id).primaryKey(0)
     val userID = reference("FK_UserID", UserTable.id).primaryKey(1)
 
-    init
-    {
-        index(
-            true,
-            sectionID,
-            userID
-        )
-    }
+    override val primaryKey = PrimaryKey(sectionID, userID, name = "PK_UserSectionChoice")
 }
 
 object PresentationTable : Table("Presentations")
@@ -119,12 +98,5 @@ object PresentationTable : Table("Presentations")
     val userID = reference("FK_UserID", UserTable.id).primaryKey(1)
     val documentPath = varchar("DocumentPath", 100)
 
-    init
-    {
-        index(
-            true,
-            sectionID,
-            userID
-        )
-    }
+    override val primaryKey = PrimaryKey(sectionID, userID, name = "PK_Presentation")
 }
