@@ -2,19 +2,108 @@ package ro.runtimeterror.cms.orm
 
 import org.jetbrains.exposed.sql.Table
 
-object Users : Table()
+object ConferenceTable : Table("Conferences")
 {
-    val id = varchar("id", 10) // Column<String>
-    val name = varchar("name", length = 50) // Column<String>
-    val cityId = (integer("city_id") references Cities.id).nullable() // Column<Int?>
-
-    override val primaryKey = PrimaryKey(id, name = "PK_User_ID") // name is optional here
+    val name = varchar("Name", 100)
+    val startDate = datetime("StartDate")
+    val endDate = datetime("EndDate")
+    val abstractDeadline = datetime("AbstractDeadline")
+    val proposalDeadline = datetime("ProposalDeadline")
+    val biddingDeadline = datetime("BiddingDeadline")
+    val submitPaperEarly = bool("SubmitPaperEarly")
 }
 
-object Cities : Table()
+object UserTable : Table("Users")
 {
-    val id = integer("id").autoIncrement() // Column<Int>
-    val name = varchar("name", 50) // Column<String>
+    val id = integer("PK_UserID").autoIncrement()
+    val name = varchar("Name", 50)
+    val username = varchar("Username", 10)
+    val password = varchar("Password", 10)
+    val accessLevel = varchar("AccessLevel", 50)
+    val sessionID = integet("SessionID").uniqueIndex()
+    val affilitaion = varchar("Affiliation", 50)
+    val email = varchar("Email", 50)
+    val hasTicket = bool("HasTicket")
 
-    override val primaryKey = PrimaryKey(id, name = "PK_Cities_ID")
+    override val primaryKey = PrimaryKey(id, name = "PK_UserID")
+}
+
+object PaperTable : Table("Papers")
+{
+    val id = integer("PK_PaperID").autoIncrement()
+    val field = varchar("Field", 100)
+    val documentPath = varchar("DocumentPath", 100)
+    val conflicting = bool("Conflicting")
+    val proposalName = varchar("ProposalName", 100)
+    val keywords = varchar("Keywords", 100)
+    val topics = varchar("Topics", 100)
+    val listOfAuthors = varchar("ListOfAuthors", 100)
+    val accepted = bool("Accepted")
+
+    override val primaryKey = PrimaryKey(id, name = "PK_PaperID")
+}
+
+object BidPaperTable : Table("BidPapers")
+{
+    val userID = reference("FK_UserID", UserTable).primaryKey(0)
+    val paperID = reference("FK_PaperID", PaperTable).primaryKey(1)
+    val reviewChoice = integer("ReviewChoice")
+
+    init {
+        index(true, userID, paperID)
+    }
+}
+
+object ReviewTable : Table("Reviews")
+{
+    val userID = reference("FK_UserID", UserTable).primaryKey(0)
+    val paperID = reference("FK_PaperID", PaperTable).primaryKey(1)
+    val content = varchar("Content", 5000)
+    val score = integer("Score")
+
+    init {
+        index(true, userID, paperID)
+    }
+}
+
+object RoomTable : Table("Rooms")
+{
+    val id = integer("PK_RoomID").autoIncrement()
+    val name = varchar("Name", 50)
+    val capacity = integer("Capacity")
+
+    override val primaryKey = PrimaryKey(id, name = "PK_RoomID")
+}
+
+object SectionTable : Table("Sections")
+{
+    val id = integer("PK_SectionID").autoIncrement()
+    val roomID = reference("FK_RoomID", RoomTable)
+    val name = varchar("Name", 100)
+    val description = varchar("Description", 500)
+    val startTime = datetime("StartTime")
+    val endTime = datetime("EndTime")
+
+    override val primaryKey = PrimaryKey(id, name = "PK_SectionID")
+}
+
+object UserSectionChoiceTable : Table("UserSectionChoices")
+{
+    val sectionID = reference("FK_SectionID", SectionTable).primaryKey(0)
+    val userID = reference("FK_UserID", UserTable).primaryKey(1)
+
+    init {
+        index(true, sectionID, userID)
+    }
+}
+
+object PresentationTable : Table("Presentations")
+{
+    val sectionID = reference("FK_SectionID", SectionTable).primaryKey(0)
+    val userID = reference("FK_UserID", UserTable).primaryKey(1)
+    val documentPath = varchar("DocumentPath", 100)
+
+    init {
+        index(true, sectionID, userID)
+    }
 }
