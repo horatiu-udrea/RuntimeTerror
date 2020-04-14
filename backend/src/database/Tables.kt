@@ -46,8 +46,8 @@ object PaperTable : Table("Papers")
 
 object BidPaperTable : Table("BidPapers")
 {
-    val userID = reference("FK_UserID", UserTable).primaryKey(0)
-    val paperID = reference("FK_PaperID", PaperTable).primaryKey(1)
+    val userID = reference("FK_UserID", UserTable.id).primaryKey(0)
+    val paperID = reference("FK_PaperID", PaperTable.id).primaryKey(1)
     val reviewChoice = integer("ReviewChoice")
 
     init
@@ -62,8 +62,8 @@ object BidPaperTable : Table("BidPapers")
 
 object ReviewTable : Table("Reviews")
 {
-    val userID = reference("FK_UserID", UserTable).primaryKey(0)
-    val paperID = reference("FK_PaperID", PaperTable).primaryKey(1)
+    val userID = reference("FK_UserID", UserTable.id).primaryKey(0)
+    val paperID = reference("FK_PaperID", PaperTable.id).primaryKey(1)
     val content = varchar("Content", 5000)
     val score = integer("Score")
 
@@ -89,7 +89,7 @@ object RoomTable : Table("Rooms")
 object SectionTable : Table("Sections")
 {
     val id = integer("PK_SectionID").autoIncrement()
-    val roomID = reference("FK_RoomID", RoomTable)
+    val roomID = reference("FK_RoomID", RoomTable.id)
     val name = varchar("Name", 100)
     val description = varchar("Description", 500)
     val startTime = datetime("StartTime")
@@ -100,8 +100,8 @@ object SectionTable : Table("Sections")
 
 object UserSectionChoiceTable : Table("UserSectionChoices")
 {
-    val sectionID = reference("FK_SectionID", SectionTable).primaryKey(0)
-    val userID = reference("FK_UserID", UserTable).primaryKey(1)
+    val sectionID = reference("FK_SectionID", SectionTable.id).primaryKey(0)
+    val userID = reference("FK_UserID", UserTable.id).primaryKey(1)
 
     init
     {
@@ -115,8 +115,8 @@ object UserSectionChoiceTable : Table("UserSectionChoices")
 
 object PresentationTable : Table("Presentations")
 {
-    val sectionID = reference("FK_SectionID", SectionTable).primaryKey(0)
-    val userID = reference("FK_UserID", UserTable).primaryKey(1)
+    val sectionID = reference("FK_SectionID", SectionTable.id).primaryKey(0)
+    val userID = reference("FK_UserID", UserTable.id).primaryKey(1)
     val documentPath = varchar("DocumentPath", 100)
 
     init
