@@ -25,6 +25,7 @@ fun main(): Unit
         file.bufferedWriter().use { out ->
             createStatements.forEach {
                 out.write(it)
+                out.write(";")
                 out.newLine()
             }
         }
