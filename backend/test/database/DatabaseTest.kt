@@ -16,14 +16,6 @@ internal class DatabaseTest
         override val primaryKey = PrimaryKey(id, name = "PK_Test_ID")
     }
 
-    object Cities : Table()
-    {
-        val id = ro.runtimeterror.cms.orm.Cities.integer("id").autoIncrement() // Column<Int>
-        val name = ro.runtimeterror.cms.orm.Cities.varchar("name", 50) // Column<String>
-
-        override val primaryKey = PrimaryKey(id, name = "PK_Cities_ID")
-    }
-
     @Test
     fun testConnection()
     {
