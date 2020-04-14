@@ -1,6 +1,7 @@
-package ro.runtimeterror.cms.orm
+package ro.runtimeterror.cms.database
 
 import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.jodatime.datetime
 
 object ConferenceTable : Table("Conferences")
 {
@@ -20,7 +21,7 @@ object UserTable : Table("Users")
     val username = varchar("Username", 10)
     val password = varchar("Password", 10)
     val accessLevel = varchar("AccessLevel", 50)
-    val sessionID = integet("SessionID").uniqueIndex()
+    val sessionID = integer("SessionID").uniqueIndex()
     val affilitaion = varchar("Affiliation", 50)
     val email = varchar("Email", 50)
     val hasTicket = bool("HasTicket")
@@ -49,8 +50,13 @@ object BidPaperTable : Table("BidPapers")
     val paperID = reference("FK_PaperID", PaperTable).primaryKey(1)
     val reviewChoice = integer("ReviewChoice")
 
-    init {
-        index(true, userID, paperID)
+    init
+    {
+        index(
+            true,
+            userID,
+            paperID
+        )
     }
 }
 
@@ -61,8 +67,13 @@ object ReviewTable : Table("Reviews")
     val content = varchar("Content", 5000)
     val score = integer("Score")
 
-    init {
-        index(true, userID, paperID)
+    init
+    {
+        index(
+            true,
+            userID,
+            paperID
+        )
     }
 }
 
@@ -92,8 +103,13 @@ object UserSectionChoiceTable : Table("UserSectionChoices")
     val sectionID = reference("FK_SectionID", SectionTable).primaryKey(0)
     val userID = reference("FK_UserID", UserTable).primaryKey(1)
 
-    init {
-        index(true, sectionID, userID)
+    init
+    {
+        index(
+            true,
+            sectionID,
+            userID
+        )
     }
 }
 
@@ -103,7 +119,12 @@ object PresentationTable : Table("Presentations")
     val userID = reference("FK_UserID", UserTable).primaryKey(1)
     val documentPath = varchar("DocumentPath", 100)
 
-    init {
-        index(true, sectionID, userID)
+    init
+    {
+        index(
+            true,
+            sectionID,
+            userID
+        )
     }
 }
