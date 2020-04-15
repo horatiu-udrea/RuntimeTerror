@@ -1,9 +1,10 @@
 package ro.runtimeterror.cms.database
 
+import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.Table
 import org.jetbrains.exposed.sql.jodatime.datetime
 
-object ConferenceTable : Table("Conferences")
+object ConferenceTable : Table("Conference")
 {
     val name = varchar("Name", 100)
     val startDate = datetime("StartDate")
@@ -14,24 +15,20 @@ object ConferenceTable : Table("Conferences")
     val submitPaperEarly = bool("SubmitPaperEarly")
 }
 
-object UserTable : Table("Users")
+object UserTable : IntIdTable("Users", "PK_UserID")
 {
-    val id = integer("PK_UserID").autoIncrement()
     val name = varchar("Name", 50)
     val username = varchar("Username", 10)
     val password = varchar("Password", 10)
     val accessLevel = varchar("AccessLevel", 50)
     val sessionID = integer("SessionID").uniqueIndex()
-    val affilitaion = varchar("Affiliation", 50)
+    val affiliation = varchar("Affiliation", 50)
     val email = varchar("Email", 50)
     val hasTicket = bool("HasTicket")
-
-    override val primaryKey = PrimaryKey(id, name = "PK_UserID")
 }
 
-object PaperTable : Table("Papers")
+object PaperTable : IntIdTable("Papers", "PK_PaperID")
 {
-    val id = integer("PK_PaperID").autoIncrement()
     val field = varchar("Field", 100)
     val documentPath = varchar("DocumentPath", 100)
     val conflicting = bool("Conflicting")
@@ -40,8 +37,6 @@ object PaperTable : Table("Papers")
     val topics = varchar("Topics", 100)
     val listOfAuthors = varchar("ListOfAuthors", 100)
     val accepted = bool("Accepted")
-
-    override val primaryKey = PrimaryKey(id, name = "PK_PaperID")
 }
 
 object BidPaperTable : Table("BidPapers")
@@ -63,25 +58,19 @@ object ReviewTable : Table("Reviews")
     override val primaryKey = PrimaryKey(userID, paperID, name = "PK_Review")
 }
 
-object RoomTable : Table("Rooms")
+object RoomTable : IntIdTable("Rooms", "PK_RoomID")
 {
-    val id = integer("PK_RoomID").autoIncrement()
     val name = varchar("Name", 50)
     val capacity = integer("Capacity")
-
-    override val primaryKey = PrimaryKey(id, name = "PK_RoomID")
 }
 
-object SectionTable : Table("Sections")
+object SectionTable : IntIdTable("Sections", "PK_SectionID")
 {
-    val id = integer("PK_SectionID").autoIncrement()
     val roomID = reference("FK_RoomID", RoomTable.id)
     val name = varchar("Name", 100)
     val description = varchar("Description", 500)
     val startTime = datetime("StartTime")
     val endTime = datetime("EndTime")
-
-    override val primaryKey = PrimaryKey(id, name = "PK_SectionID")
 }
 
 object UserSectionChoiceTable : Table("UserSectionChoices")
