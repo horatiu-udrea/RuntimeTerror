@@ -1,7 +1,8 @@
-package ro.runtimeterror.cms.database
+package ro.runtimeterror.cms.database.tables
 
 import org.jetbrains.exposed.dao.id.IntIdTable
 import org.jetbrains.exposed.sql.jodatime.datetime
+import ro.runtimeterror.cms.database.tables.RoomTable
 
 object SectionTable : IntIdTable("Sections", "PK_SectionID")
 {

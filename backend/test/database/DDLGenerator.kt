@@ -2,6 +2,7 @@ package ro.runtimeterror.cms.database
 
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+import ro.runtimeterror.cms.database.tables.*
 import java.io.File
 
 

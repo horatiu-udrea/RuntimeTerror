@@ -1,4 +1,4 @@
-package ro.runtimeterror.cms.database
+package ro.runtimeterror.cms.database.tables
 
 import org.jetbrains.exposed.dao.id.IntIdTable
 

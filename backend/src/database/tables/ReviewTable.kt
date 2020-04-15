@@ -1,4 +1,4 @@
-package ro.runtimeterror.cms.database
+package ro.runtimeterror.cms.database.tables
 
 import org.jetbrains.exposed.sql.Table
 
@@ -9,5 +9,8 @@ object ReviewTable : Table("Reviews")
     val content = varchar("Content", 5000)
     val score = integer("Score")
 
-    override val primaryKey = PrimaryKey(userID, paperID, name = "PK_Review")
+    override val primaryKey = PrimaryKey(
+        userID,
+        paperID, name = "PK_Review"
+    )
 }

@@ -1,20 +1,26 @@
-package ro.runtimeterror.cms
+package ro.runtimeterror.cms.networking
 
 import io.ktor.application.*
 import io.ktor.response.*
-import io.ktor.request.*
 import io.ktor.features.*
 import io.ktor.routing.*
 import io.ktor.http.*
 import io.ktor.auth.*
 import com.fasterxml.jackson.databind.*
 import io.ktor.jackson.*
+import ro.runtimeterror.cms.controller.Controller
+import ro.runtimeterror.cms.database.DatabaseRepository
 
-fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
+fun main(args: Array<String>): Unit
+{
+    Controller.repository = DatabaseRepository()
+    io.ktor.server.netty.EngineMain.main(args)
+}
 
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
-fun Application.module(testing: Boolean = false) {
+fun Application.module(testing: Boolean = false)
+{
     install(CORS) {
         method(HttpMethod.Options)
         method(HttpMethod.Put)

@@ -1,4 +1,4 @@
-package ro.runtimeterror.cms.database
+package ro.runtimeterror.cms.database.tables
 
 import org.jetbrains.exposed.sql.Table
 
@@ -8,5 +8,8 @@ object PresentationTable : Table("Presentations")
     val userID = reference("FK_UserID", UserTable.id)
     val documentPath = varchar("DocumentPath", 100)
 
-    override val primaryKey = PrimaryKey(sectionID, userID, name = "PK_Presentation")
+    override val primaryKey = PrimaryKey(
+        sectionID,
+        userID, name = "PK_Presentation"
+    )
 }
