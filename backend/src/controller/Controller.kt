@@ -4,5 +4,5 @@ import ro.runtimeterror.cms.repository.Repository
 
 object Controller
 {
-    lateinit var repository: Repository
+     lateinit var repository: Repository
 }

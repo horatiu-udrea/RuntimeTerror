@@ -11,5 +11,6 @@ object ConferenceTable : Table("Conference")
     val abstractDeadline = datetime("AbstractDeadline")
     val proposalDeadline = datetime("ProposalDeadline")
     val biddingDeadline = datetime("BiddingDeadline")
+    //TODO fratele meu, dece avem fielduri asta?!
     val submitPaperEarly = bool("SubmitPaperEarly")
 }
