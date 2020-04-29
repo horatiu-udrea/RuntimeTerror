@@ -11,6 +11,9 @@ class UserDAO(id: EntityID<Int>) : IntEntity(id), User
 {
     companion object : IntEntityClass<UserDAO>(UserTable)
 
+    override val userId: Int
+        get() = id.value
+
     override val name by UserTable.name
     override val username by UserTable.username
     override val password by UserTable.password

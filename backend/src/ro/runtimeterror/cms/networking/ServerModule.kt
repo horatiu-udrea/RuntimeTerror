@@ -1,22 +1,19 @@
-package ro.runtimeterror.cms
+package ro.runtimeterror.cms.networking
 
 import io.ktor.application.*
 import io.ktor.response.*
-import io.ktor.request.*
 import io.ktor.features.*
 import io.ktor.routing.*
 import io.ktor.http.*
-import io.ktor.auth.*
 import com.fasterxml.jackson.databind.*
 import io.ktor.jackson.*
-import ro.runtimeterror.cms.controller.Controller
-import ro.runtimeterror.cms.database.DatabaseRepository
+import io.ktor.sessions.SessionStorageMemory
+import io.ktor.sessions.Sessions
+import io.ktor.sessions.cookie
+import ro.runtimeterror.cms.Components
+import ro.runtimeterror.cms.exceptions.UnauthorizedException
 
-fun main(args: Array<String>): Unit
-{
-    Controller.repository = DatabaseRepository()
-    io.ktor.server.netty.EngineMain.main(args)
-}
+data class UserSession(val id: Int, val username: String)
 
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
@@ -28,12 +25,9 @@ fun Application.module(testing: Boolean = false)
         method(HttpMethod.Delete)
         method(HttpMethod.Patch)
         header(HttpHeaders.Authorization)
-        header("MyCustomHeader")
+//        header("MyCustomHeader")
         allowCredentials = true
         anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
-    }
-
-    install(Authentication) {
     }
 
     install(ContentNegotiation) {
@@ -42,14 +36,20 @@ fun Application.module(testing: Boolean = false)
         }
     }
 
-    routing {
-        get("/") {
-            call.respondText("HELLO WORLD!", contentType = ContentType.Text.Plain)
+    install(StatusPages) {
+        exception<UnauthorizedException> { exception ->
+            call.respond(HttpStatusCode.Unauthorized, mapOf("OK" to false, "error" to (exception.message ?: "")))
         }
+    }
 
-        get("/json/jackson") {
-            call.respond(mapOf("hello" to "world"))
+    install(Sessions) {
+        cookie<UserSession>("CMS_SESSION", SessionStorageMemory()) {
+            cookie.path = "/"
         }
+    }
+
+    routing {
+        authenticationRoute(Components.loginController)
     }
 }
 

@@ -2,7 +2,6 @@ package ro.runtimeterror.cms.controller
 
 import ro.runtimeterror.cms.repository.Repository
 
-object Controller
+class Controller(private var repository: Repository)
 {
-    lateinit var repository: Repository
 }

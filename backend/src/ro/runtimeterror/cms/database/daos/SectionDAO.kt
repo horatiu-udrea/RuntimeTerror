@@ -10,7 +10,9 @@ class SectionDAO(id: EntityID<Int>) : IntEntity(id), Section
 {
     companion object : IntEntityClass<SectionDAO>(SectionTable)
 
-    override val roomID by SectionTable.roomID
+    override val sectionId: Int
+        get() = id.value
+    val roomID by SectionTable.roomID
     override val name by SectionTable.name
     override val description by SectionTable.description
     override val startTime by SectionTable.startTime

@@ -5,7 +5,8 @@ import org.joda.time.DateTime
 
 interface Section
 {
-    val roomID: EntityID<Int>
+    val sectionId: Int
+    val room: Int
     val name: String
     val description: String
     val startTime: DateTime
