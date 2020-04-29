@@ -1,6 +1,8 @@
 package ro.runtimeterror.cms
 
+import ro.runtimeterror.cms.controller.AuthenticationController
 import ro.runtimeterror.cms.controller.Controller
+import ro.runtimeterror.cms.controller.ConferenceController
 import ro.runtimeterror.cms.database.DatabaseRepository
 import ro.runtimeterror.cms.repository.Repository
 
@@ -11,6 +13,8 @@ fun main(args: Array<String>): Unit
 
 object Components
 {
-    val repository: Repository = DatabaseRepository()
-    val controller = Controller(repository);
+    private val repository: Repository = DatabaseRepository()
+    val controller: Controller = Controller(repository);
+    val authenticationController: AuthenticationController = AuthenticationController(repository)
+    val conferenceController: ConferenceController = ConferenceController(repository)
 }

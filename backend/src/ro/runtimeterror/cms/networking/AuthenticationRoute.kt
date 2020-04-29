@@ -11,9 +11,8 @@ import io.ktor.sessions.clear
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import io.ktor.sessions.set
-import ro.runtimeterror.cms.exceptions.ProgramException
+import ro.runtimeterror.cms.controller.AuthenticationController
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
-import ro.runtimeterror.cms.model.AccessLevel
 import ro.runtimeterror.cms.model.User
 
 data class UserCredentials(val username: String, val password: String)
@@ -45,7 +44,7 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
                 val user: User? = authenticationController.authenticate(username, password)
                 if (user != null)
                 {
-                    call.sessions.set(UserSession(user.userId, user.username))
+                    call.sessions.set(UserSession(user.userId, user.accessLevel))
                 }
                 else
                 {

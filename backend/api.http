@@ -1,3 +1,4 @@
+##### Authentication
 ### Login
 POST {{URL}}/authentication/login
 Content-Type: application/json
@@ -12,3 +13,22 @@ POST {{URL}}/authentication/logout
 
 ### Get user information
 GET {{URL}}/authentication
+
+
+##### Conference
+### Get details
+GET {{URL}}/conference
+
+###Change details
+POST {{URL}}/conference
+Content-Type: application/json
+
+{
+  "name": "Name of the conference",
+  "startDate": "15.04.2020",
+  "endDate": "15.04.2020",
+  "abstractDeadline": "15.04.2020",
+  "proposalDeadline": "15.04.2020",
+  "biddingDeadline": "15.04.2020",
+  "submitPaperEarly": false
+}
