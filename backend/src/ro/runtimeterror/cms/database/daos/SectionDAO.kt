@@ -5,6 +5,7 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import ro.runtimeterror.cms.database.tables.SectionTable
 import ro.runtimeterror.cms.model.Section
+import ro.runtimeterror.cms.model.User
 
 class SectionDAO(id: EntityID<Int>) : IntEntity(id), Section
 {
@@ -17,4 +18,17 @@ class SectionDAO(id: EntityID<Int>) : IntEntity(id), Section
     override val description by SectionTable.description
     override val startTime by SectionTable.startTime
     override val endTime by SectionTable.endTime
+    override val documentPath by SectionTable.documentPath
+    private val sessionChairs by UserDAO optionalReferrersOn SectionTable.sessionChair
+    override val sessionChair: User?
+        get()
+        {
+            try
+            {
+                return sessionChairs.first()
+            } catch (e: NoSuchElementException)
+            {
+                return null
+            }
+        }
 }
