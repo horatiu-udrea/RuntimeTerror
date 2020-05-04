@@ -6,9 +6,11 @@ import ro.runtimeterror.cms.database.tables.RoomTable
 
 object SectionTable : IntIdTable("Sections", "PK_SectionID")
 {
-    val roomID = reference("FK_RoomID", RoomTable.id).nullable()
+    val sesscionChair = reference("FK_SessionChair", UserTable.id).nullable()
     val name = varchar("Name", 100)
     val description = varchar("Description", 500)
     val startTime = datetime("StartTime")
     val endTime = datetime("EndTime")
+    val documentPath = varchar("DocumentPath", 100)
+    val roomName = varchar("RoomName", 100)
 }
