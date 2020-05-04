@@ -16,7 +16,19 @@ class PaperController(private val repository: Repository)
     /**
      * Author submitted a paper
      */
-    fun addPaper(paper: Paper, userId: Int)
+    fun submitProposal(
+        field: String,
+        proposalName: String,
+        keywords: String,
+        topics: String,
+        listOfAuthors: String,
+        userId: Int
+    )
+    {
+        TODO("Not yet implemented")
+    }
+
+    fun fullPaperUploaded(path: String, userId: Int)
     {
         TODO("Not yet implemented")
     }
