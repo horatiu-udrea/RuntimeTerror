@@ -32,3 +32,6 @@ Content-Type: application/json
   "biddingDeadline": "15.04.2020",
   "submitPaperEarly": false
 }
+
+### Get phase (0, 1, 2)
+GET {{URL}}/conference/phase

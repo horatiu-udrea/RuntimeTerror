@@ -53,6 +53,8 @@ fun Conference.toDTO(): ConferenceDTO
     )
 }
 
+data class Phase(val phase: Int)
+
 fun Route.conferenceRoute(conferenceController: ConferenceController)
 {
     route("/conference") {
@@ -62,9 +64,13 @@ fun Route.conferenceRoute(conferenceController: ConferenceController)
         }
 
         post {
-            authorize(AccessLevel.ADMIN)
+            authorize(AccessLevel.CO_CHAIR)
             val conferenceDTO = call.receive<ConferenceDTO>()
             conferenceController.changeConferenceInformation(conferenceDTO.toModel())
+        }
+
+        get("/phase") {
+            call.respond(Phase(conferenceController.getPhase()))
         }
     }
 }

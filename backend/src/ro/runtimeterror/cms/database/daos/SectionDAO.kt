@@ -12,7 +12,7 @@ class SectionDAO(id: EntityID<Int>) : IntEntity(id), Section
 
     override val sectionId: Int
         get() = id.value
-    val roomID by SectionTable.roomID
+    override val roomName by SectionTable.roomName
     override val name by SectionTable.name
     override val description by SectionTable.description
     override val startTime by SectionTable.startTime

@@ -21,4 +21,9 @@ class ConferenceController(private val repository: Repository)
         TODO("Not yet implemented")
     }
 
+    fun getPhase(): Int
+    {
+        TODO("Not yet implemented")
+    }
+
 }

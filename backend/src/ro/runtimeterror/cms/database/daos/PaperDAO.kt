@@ -10,6 +10,9 @@ class PaperDAO(id: EntityID<Int>) : IntEntity(id), Paper
 {
     companion object : IntEntityClass<PaperDAO>(PaperTable)
 
+    override val paperId: Int
+        get() = id.value
+
     override val field by PaperTable.field
     override val documentPath by PaperTable.documentPath
     override val conflicting by PaperTable.conflicting
