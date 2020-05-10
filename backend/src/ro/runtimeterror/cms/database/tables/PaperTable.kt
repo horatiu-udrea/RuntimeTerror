@@ -4,6 +4,8 @@ import org.jetbrains.exposed.dao.id.IntIdTable
 
 object PaperTable : IntIdTable("Papers", "PK_PaperID")
 {
+
+
     val field = varchar("Field", 100)
     val documentPath = varchar("DocumentPath", 100)
     val conflicting = bool("Conflicting")
@@ -12,4 +14,5 @@ object PaperTable : IntIdTable("Papers", "PK_PaperID")
     val topics = varchar("Topics", 100)
     val listOfAuthors = varchar("ListOfAuthors", 100)
     val accepted = bool("Accepted")
+    val userId = integer("UserID").references( UserTable.id)
 }
