@@ -1,5 +1,12 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.transactions.transaction
+import ro.runtimeterror.cms.database.DatabaseSettings
+import ro.runtimeterror.cms.database.daos.PaperDAO
+import ro.runtimeterror.cms.database.daos.UserDAO
+import ro.runtimeterror.cms.database.tables.PaperTable
+import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.repository.Repository
 
@@ -10,7 +17,11 @@ class PaperController(private val repository: Repository)
      */
     fun getPapers(): List<Paper>
     {
-        TODO("Not yet implemented")
+        var listOfPapers: List<Paper> = ArrayList<Paper>()
+        transaction (DatabaseSettings.connection){
+            listOfPapers = PaperDAO.all().toList()
+        }
+        return listOfPapers
     }
 
     /**
@@ -25,7 +36,39 @@ class PaperController(private val repository: Repository)
         userId: Int
     )
     {
-        TODO("Not yet implemented")
+//        TODO I added userID to the paper class not sure if that's okay or not
+//        checks if the user exists
+        transaction(DatabaseSettings.connection) {
+            if(
+                UserDAO.find{
+                    UserTable.id eq userId
+                }.empty()
+            ) {
+                throw RuntimeException("User does not exist!")
+            }
+//            Checks if the user already as a paper
+            else if(
+                        !PaperDAO.find{
+                            PaperTable.userId eq userId
+                        }.empty()
+                    ){
+                throw RuntimeException("User already has a paper!")
+            }
+        }
+        //adds paper to the paper table
+        SchemaUtils.create(PaperTable)
+
+        transaction(DatabaseSettings.connection) {
+            PaperTable.insert{ newPaper ->
+                newPaper[PaperTable.field] = field
+                newPaper[PaperTable.proposalName] = proposalName
+                newPaper[PaperTable.keywords] = keywords
+                newPaper[PaperTable.topics] = topics
+                newPaper[PaperTable.listOfAuthors] = listOfAuthors
+                newPaper[PaperTable.userId] = userId
+
+            }
+        }
     }
 
     fun fullPaperUploaded(path: String, userId: Int)
