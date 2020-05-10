@@ -1,16 +1,40 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
+import ro.runtimeterror.cms.database.DatabaseSettings
+import ro.runtimeterror.cms.database.tables.ConferenceTable
 import ro.runtimeterror.cms.model.Conference
 import ro.runtimeterror.cms.repository.Repository
+import java.lang.RuntimeException
 
 class ConferenceController(private val repository: Repository)
 {
     /**
      * Conference details
      */
-    fun getConferenceDetails(): Conference
+    fun getConferenceDetails(): Conference?
     {
-        TODO("Not yet implemented")
+        var conference: Conference? = null
+        transaction(DatabaseSettings.connection){
+            SchemaUtils.create(ConferenceTable)
+            conference = ConferenceTable
+                .selectAll()
+                .map {
+                Conference(
+                    it[ConferenceTable.name],
+                    it[ConferenceTable.startDate],
+                    it[ConferenceTable.endDate],
+                    it[ConferenceTable.abstractDeadline],
+                    it[ConferenceTable.proposalDeadline],
+                    it[ConferenceTable.biddingDeadline],
+                    it[ConferenceTable.submitPaperEarly]
+                )
+            }.first()
+        }
+        return conference
     }
 
     /**
@@ -18,12 +42,23 @@ class ConferenceController(private val repository: Repository)
      */
     fun changeConferenceInformation(conferenceInformation: Conference)
     {
-        TODO("Not yet implemented")
+        transaction(DatabaseSettings.connection){
+            SchemaUtils.create(ConferenceTable)
+            ConferenceTable.update {
+                it[name] = conferenceInformation.name
+                it[endDate] = conferenceInformation.endDate
+                it[startDate] = conferenceInformation.startDate
+                it[abstractDeadline] = conferenceInformation.abstractDeadline
+                it[proposalDeadline] = conferenceInformation.proposalDeadline
+                it[biddingDeadline] = conferenceInformation.biddingDeadline
+                it[submitPaperEarly] = conferenceInformation.submitPaperEarly
+            }
+        }
     }
 
     fun getPhase(): Int
     {
-        TODO("Not yet implemented")
+        //TODO I guess we need to find a way to get what the current phase is?
+        return 1
     }
-
 }
