@@ -15,10 +15,11 @@ class PaperDAO(id: EntityID<Int>) : IntEntity(id), Paper
 
     override val field by PaperTable.field
     override val documentPath by PaperTable.documentPath
-    override val conflicting by PaperTable.conflicting
     override val proposalName by PaperTable.proposalName
+    override val conflicting by PaperTable.conflicting
     override val keywords by PaperTable.keywords
     override val topics by PaperTable.topics
     override val listOfAuthors by PaperTable.listOfAuthors
     override val accepted by PaperTable.accepted
+    override val userID: Int by PaperTable.userId
 }
