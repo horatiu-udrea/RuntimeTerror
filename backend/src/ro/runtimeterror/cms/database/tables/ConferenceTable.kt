@@ -6,6 +6,7 @@ import org.jetbrains.exposed.sql.jodatime.datetime
 object ConferenceTable : Table("Conference")
 {
     val name = varchar("ame", 100)
+    val currentPhase = integer("currentPhase")
     val startDate = datetime("startDate")
     val endDate = datetime("endDate")
     val submissionDeadline = datetime("submissionDeadline")
