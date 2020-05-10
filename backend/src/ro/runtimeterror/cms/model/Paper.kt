@@ -11,4 +11,5 @@ interface Paper
     val topics: String
     val listOfAuthors: String
     val accepted: Boolean
+    val userID: Int
 }
