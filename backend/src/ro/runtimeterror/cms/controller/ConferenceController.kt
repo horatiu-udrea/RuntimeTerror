@@ -27,10 +27,11 @@ class ConferenceController(private val repository: Repository)
                     it[ConferenceTable.name],
                     it[ConferenceTable.startDate],
                     it[ConferenceTable.endDate],
-                    it[ConferenceTable.abstractDeadline],
+                    it[ConferenceTable.submissionDeadline],
                     it[ConferenceTable.proposalDeadline],
                     it[ConferenceTable.biddingDeadline],
-                    it[ConferenceTable.submitPaperEarly]
+                    it[ConferenceTable.submitPaperEarly],
+                    it[ConferenceTable.currentPhase]
                 )
             }.first()
         }
@@ -48,7 +49,7 @@ class ConferenceController(private val repository: Repository)
                 it[name] = conferenceInformation.name
                 it[endDate] = conferenceInformation.endDate
                 it[startDate] = conferenceInformation.startDate
-                it[abstractDeadline] = conferenceInformation.abstractDeadline
+                it[submissionDeadline] = conferenceInformation.submissionDeadline
                 it[proposalDeadline] = conferenceInformation.proposalDeadline
                 it[biddingDeadline] = conferenceInformation.biddingDeadline
                 it[submitPaperEarly] = conferenceInformation.submitPaperEarly

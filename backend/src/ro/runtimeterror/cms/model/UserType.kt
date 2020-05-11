@@ -2,7 +2,7 @@ package ro.runtimeterror.cms.model
 
 import java.lang.RuntimeException
 
-enum class AccessLevel(val value: Int)
+enum class UserType(val value: Int)
 {
     ADMIN(5),
     CHAIR(4),
@@ -13,7 +13,7 @@ enum class AccessLevel(val value: Int)
 
     companion object
     {
-        fun from(value: Int): AccessLevel
+        fun from(value: Int): UserType
         {
             return values().find {
                 it.value == value

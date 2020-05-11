@@ -6,8 +6,8 @@ object ReviewTable : Table("Reviews")
 {
     val userID = reference("FK_UserID", UserTable.id)
     val paperID = reference("FK_PaperID", PaperTable.id)
-    val content = varchar("Content", 5000)
-    val score = integer("Score")
+    val recommandation = varchar("recommandation", 500)
+    val qualifier = integer("qualifier")
 
     override val primaryKey = PrimaryKey(
         userID,

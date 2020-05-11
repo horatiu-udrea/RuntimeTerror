@@ -10,11 +10,14 @@ class SectionDAO(id: EntityID<Int>) : IntEntity(id), Section
 {
     companion object : IntEntityClass<SectionDAO>(SectionTable)
 
+    override var roomName by SectionTable.roomName
+    override var user by UserDAO optionalReferencedOn SectionTable.userId
+    override var name by SectionTable.name
+    override var startTime by SectionTable.startTime
+    override var endTime by SectionTable.endTime
+    override var presentationDocumentPath by SectionTable.presentationDocumentPath
+    override var sessionChair by UserDAO optionalReferencedOn SectionTable.sessionChair
+
     override val sectionId: Int
         get() = id.value
-    override val roomName by SectionTable.roomName
-    override val name by SectionTable.name
-    override val description by SectionTable.description
-    override val startTime by SectionTable.startTime
-    override val endTime by SectionTable.endTime
 }

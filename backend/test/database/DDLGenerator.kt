@@ -6,7 +6,7 @@ import ro.runtimeterror.cms.database.tables.*
 import java.io.File
 
 
-fun main(): Unit
+fun main()
 {
     DatabaseSettings.connection
     transaction {
@@ -16,10 +16,8 @@ fun main(): Unit
             PaperTable,
             BidPaperTable,
             ReviewTable,
-            RoomTable,
             SectionTable,
-            UserSectionChoiceTable,
-            PresentationTable
+            UserSectionChoiceTable
         )
         val file = File("../database/ddl.sql")
         file.createNewFile()

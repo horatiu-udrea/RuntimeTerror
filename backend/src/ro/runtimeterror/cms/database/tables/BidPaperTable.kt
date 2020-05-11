@@ -6,7 +6,7 @@ object BidPaperTable : Table("BidPapers")
 {
     val userID = reference("FK_UserID", UserTable.id)
     val paperID = reference("FK_PaperID", PaperTable.id)
-    val reviewChoice = integer("ReviewChoice")
+    val paperBidResult = integer("paperBidResult")
 
     override val primaryKey = PrimaryKey(
         userID,

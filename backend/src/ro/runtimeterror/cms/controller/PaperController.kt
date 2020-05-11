@@ -49,7 +49,7 @@ class PaperController(private val repository: Repository)
 //            Checks if the user already as a paper
             else if(
                         !PaperDAO.find{
-                            PaperTable.userId eq userId
+                            PaperTable.userid eq userId
                         }.empty()
                     ){
                 throw RuntimeException("User already has a paper!")
@@ -60,12 +60,15 @@ class PaperController(private val repository: Repository)
 
         transaction(DatabaseSettings.connection) {
             PaperTable.insert{ newPaper ->
+                newPaper[userid] = userId
                 newPaper[PaperTable.field] = field
-                newPaper[PaperTable.proposalName] = proposalName
+                newPaper[name] = proposalName
                 newPaper[PaperTable.keywords] = keywords
                 newPaper[PaperTable.topics] = topics
-                newPaper[PaperTable.listOfAuthors] = listOfAuthors
-                newPaper[PaperTable.userId] = userId
+                newPaper[PaperTable.topics] = topics
+                newPaper[authors] = listOfAuthors
+                newPaper[accepted] = false
+                newPaper[conflicting] = false
 
             }
         }
