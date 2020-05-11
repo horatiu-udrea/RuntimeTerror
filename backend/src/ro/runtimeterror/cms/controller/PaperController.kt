@@ -36,7 +36,6 @@ class PaperController(private val repository: Repository)
         userId: Int
     )
     {
-//        TODO I added userID to the paper class not sure if that's okay or not
 //        checks if the user exists
         transaction(DatabaseSettings.connection) {
             if(
@@ -76,7 +75,11 @@ class PaperController(private val repository: Repository)
 
     fun fullPaperUploaded(path: String, userId: Int)
     {
-        TODO("Not yet implemented")
+        transaction(DatabaseSettings.connection) {
+            PaperTable.update({PaperTable.userid eq userId}) {
+                it[documentPath] = path
+            }
+        }
     }
 
 }

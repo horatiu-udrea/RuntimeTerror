@@ -19,7 +19,6 @@ class ConferenceController(private val repository: Repository)
     {
         var conference: Conference? = null
         transaction(DatabaseSettings.connection){
-            SchemaUtils.create(ConferenceTable)
             conference = ConferenceTable
                 .selectAll()
                 .map {
@@ -44,7 +43,6 @@ class ConferenceController(private val repository: Repository)
     fun changeConferenceInformation(conferenceInformation: Conference)
     {
         transaction(DatabaseSettings.connection){
-            SchemaUtils.create(ConferenceTable)
             ConferenceTable.update {
                 it[name] = conferenceInformation.name
                 it[endDate] = conferenceInformation.endDate
@@ -59,7 +57,13 @@ class ConferenceController(private val repository: Repository)
 
     fun getPhase(): Int
     {
-        //TODO I guess we need to find a way to get what the current phase is?
-        return 1
+        var currentPhase: Int? = null
+        transaction {
+            currentPhase = ConferenceTable
+                .selectAll()
+                .map { it[ConferenceTable.currentPhase] }
+                .first()
+        }
+        return currentPhase?: throw RuntimeException("invalid phase value!")
     }
 }
