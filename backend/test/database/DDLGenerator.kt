@@ -16,10 +16,8 @@ fun main(): Unit
             PaperTable,
             BidPaperTable,
             ReviewTable,
-            RoomTable,
             SectionTable,
-            UserSectionChoiceTable,
-            PresentationTable
+            UserSectionChoiceTable
         )
         val file = File("../database/ddl.sql")
         file.createNewFile()

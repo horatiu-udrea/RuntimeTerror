@@ -1,15 +1,16 @@
 package ro.runtimeterror.cms.model
 
-import org.jetbrains.exposed.dao.id.EntityID
 import org.joda.time.DateTime
-import ro.runtimeterror.cms.database.daos.RoomDAO
 
 interface Section
 {
     val sectionId: Int
-    val roomName: String
+    val sessionChair: User?
+    val userId: User?
     val name: String
-    val description: String
+    val presentationDocumentPath: String
     val startTime: DateTime
     val endTime: DateTime
+    val roomName: String
+
 }

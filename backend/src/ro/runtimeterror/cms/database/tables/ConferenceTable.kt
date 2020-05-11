@@ -5,11 +5,12 @@ import org.jetbrains.exposed.sql.jodatime.datetime
 
 object ConferenceTable : Table("Conference")
 {
-    val name = varchar("Name", 100)
-    val startDate = datetime("StartDate")
-    val endDate = datetime("EndDate")
-    val abstractDeadline = datetime("AbstractDeadline")
-    val proposalDeadline = datetime("ProposalDeadline")
-    val biddingDeadline = datetime("BiddingDeadline")
-    val submitPaperEarly = bool("SubmitPaperEarly")
+    val name = varchar("ame", 100)
+    val currentPhase = integer("currentPhase")
+    val startDate = datetime("startDate")
+    val endDate = datetime("endDate")
+    val submissionDeadline = datetime("submissionDeadline")
+    val proposalDeadline = datetime("proposalDeadline")
+    val biddingDeadline = datetime("biddingDeadline")
+    val submitPaperEarly = bool("submitPaperEarly")
 }
