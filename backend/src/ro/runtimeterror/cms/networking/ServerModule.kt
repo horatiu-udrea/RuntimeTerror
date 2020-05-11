@@ -55,7 +55,7 @@ fun Application.module(testing: Boolean = false)
     routing {
         authenticationRoute(Components.authenticationController)
         conferenceRoute(Components.conferenceController)
-        paperRoute(Components.paperController)
+        paperRoute(Components.paperSubmissionController)
     }
 }
 

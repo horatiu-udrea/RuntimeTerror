@@ -3,7 +3,7 @@ package ro.runtimeterror.cms
 import ro.runtimeterror.cms.controller.AuthenticationController
 import ro.runtimeterror.cms.controller.Controller
 import ro.runtimeterror.cms.controller.ConferenceController
-import ro.runtimeterror.cms.controller.PaperController
+import ro.runtimeterror.cms.controller.PaperSubmissionController
 import ro.runtimeterror.cms.database.DatabaseRepository
 import ro.runtimeterror.cms.repository.Repository
 
@@ -18,5 +18,5 @@ object Components
     val controller: Controller = Controller(repository);
     val authenticationController: AuthenticationController = AuthenticationController(repository)
     val conferenceController: ConferenceController = ConferenceController(repository)
-    val paperController: PaperController = PaperController(repository)
+    val paperSubmissionController: PaperSubmissionController = PaperSubmissionController(repository)
 }

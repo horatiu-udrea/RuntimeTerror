@@ -17,3 +17,6 @@ fun PipelineContext<Unit, ApplicationCall>.authorize(level: UserType)
         throw UnauthorizedException("Elevated privileges required!")
     }
 }
+
+fun PipelineContext<Unit, ApplicationCall>.userSession() =
+    call.sessions.get<UserSession>() ?: throw UnauthorizedException("Not logged in!")
