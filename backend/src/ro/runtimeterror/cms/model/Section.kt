@@ -6,7 +6,7 @@ interface Section
 {
     val sectionId: Int
     val sessionChair: User?
-    val userId: User?
+    val user: User?
     val name: String
     val presentationDocumentPath: String
     val startTime: DateTime

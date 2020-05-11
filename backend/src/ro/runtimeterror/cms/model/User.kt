@@ -11,5 +11,5 @@ interface User
     val webPage: String
     val validated: Boolean
     val hasTicket: Boolean
-    val type: Int
+    val type: UserType
 }

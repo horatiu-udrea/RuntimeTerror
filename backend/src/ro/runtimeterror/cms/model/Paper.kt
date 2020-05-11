@@ -2,8 +2,8 @@ package ro.runtimeterror.cms.model
 
 interface Paper
 {
+    val user: User
     val paperId: Int
-    val userId: User?
     val name: String
     val field: String
     val keywords: String
