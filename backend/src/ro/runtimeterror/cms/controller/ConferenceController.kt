@@ -56,15 +56,15 @@ class ConferenceController(private val repository: Repository)
         }
     }
 
-    fun getPhase(): Int
-    {
-        var currentPhase: Int? = null
-        transaction {
-            currentPhase = ConferenceTable
-                .selectAll()
-                .map { it[ConferenceTable.currentPhase] }
-                .first()
-        }
-        return currentPhase?: throw RuntimeException("invalid phase value!")
-    }
+//    fun getPhase(): Int
+//    {
+//        var currentPhase: Int? = null
+//        transaction {
+//            currentPhase = ConferenceTable
+//                .selectAll()
+//                .map { it[ConferenceTable.currentPhase] }
+//                .first()
+//        }
+//        return currentPhase?: throw RuntimeException("invalid phase value!")
+//    }
 }
