@@ -51,6 +51,7 @@ class ConferenceController(private val repository: Repository)
                 it[proposalDeadline] = conferenceInformation.proposalDeadline
                 it[biddingDeadline] = conferenceInformation.biddingDeadline
                 it[submitPaperEarly] = conferenceInformation.submitPaperEarly
+                it[currentPhase] = conferenceInformation.currentPhase
             }
         }
     }
