@@ -23,4 +23,19 @@ class AuthenticationController(private val repository: Repository)
         TODO("Not yet implemented")
     }
 
+    /**
+     * Create new user
+     */
+    fun newUser(
+        name: String,
+        username: String,
+        password: String,
+        affiliation: String,
+        email: String,
+        webPage: String
+    )
+    {
+        TODO("Not yet implemented")
+    }
+
 }

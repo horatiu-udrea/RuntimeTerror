@@ -1,4 +1,4 @@
-package ro.runtimeterror.cms.networking
+package ro.runtimeterror.cms.networking.route
 
 import io.ktor.application.call
 import io.ktor.request.receive
@@ -8,23 +8,15 @@ import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import ro.runtimeterror.cms.controller.PaperController
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
-import ro.runtimeterror.cms.model.AccessLevel
 import ro.runtimeterror.cms.model.Paper
+import ro.runtimeterror.cms.model.UserType
+import ro.runtimeterror.cms.networking.UserSession
+import ro.runtimeterror.cms.networking.authorize
+import ro.runtimeterror.cms.networking.dto.PaperDTO
+import ro.runtimeterror.cms.networking.dto.toDTO
+import ro.runtimeterror.cms.networking.uploadFile
 
-data class PaperDTO(
-    val field: String,
-    val documentPath: String,
-    val proposalName: String,
-    val keywords: String,
-    val topics: String,
-    val listOfAuthors: String,
-    val accepted: Boolean
-)
 
-fun Paper.toDTO(): PaperDTO
-{
-    return PaperDTO(field, documentPath, proposalName, keywords, topics, listOfAuthors, accepted)
-}
 
 fun Route.paperRoute(paperController: PaperController)
 {
@@ -35,23 +27,23 @@ fun Route.paperRoute(paperController: PaperController)
         }
 
         post {
-            authorize(AccessLevel.AUTHOR)
+            authorize(UserType.AUTHOR)
             val paper = call.receive<PaperDTO>()
             val user = call.sessions.get<UserSession>() ?: throw UnauthorizedException("User not logged in!")
             with(paper)
             {
                 paperController.submitProposal(
                     field,
-                    proposalName,
+                    name,
                     keywords,
                     topics,
-                    listOfAuthors,
+                    authors,
                     user.id
                 )
             }
         }
         put {
-            authorize(AccessLevel.AUTHOR)
+            authorize(UserType.AUTHOR)
             val user = call.sessions.get<UserSession>() ?: throw UnauthorizedException("User not logged in!")
             val path = uploadFile()
             paperController.fullPaperUploaded(path, user.id)

@@ -6,12 +6,12 @@ import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import io.ktor.util.pipeline.PipelineContext
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
-import ro.runtimeterror.cms.model.AccessLevel
+import ro.runtimeterror.cms.model.UserType
 
-fun PipelineContext<Unit, ApplicationCall>.authorize(level: AccessLevel)
+fun PipelineContext<Unit, ApplicationCall>.authorize(level: UserType)
 {
     val user = call.sessions.get<UserSession>() ?: throw UnauthorizedException("User not logged in!")
-    val authorized = user.level.value >= level.value
+    val authorized = user.type.value >= level.value
     if (!authorized)
     {
         throw UnauthorizedException("Elevated privileges required!")

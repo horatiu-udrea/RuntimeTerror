@@ -1,12 +1,9 @@
-package ro.runtimeterror.cms.networking
+package ro.runtimeterror.cms.networking.route
 
 import io.ktor.application.call
 import io.ktor.request.receive
 import io.ktor.response.respond
-import io.ktor.routing.Routing
-import io.ktor.routing.get
-import io.ktor.routing.post
-import io.ktor.routing.route
+import io.ktor.routing.*
 import io.ktor.sessions.clear
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
@@ -14,26 +11,11 @@ import io.ktor.sessions.set
 import ro.runtimeterror.cms.controller.AuthenticationController
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
 import ro.runtimeterror.cms.model.User
+import ro.runtimeterror.cms.networking.UserSession
+import ro.runtimeterror.cms.networking.dto.UserCredentials
+import ro.runtimeterror.cms.networking.dto.UserDTO
+import ro.runtimeterror.cms.networking.dto.toUserInformation
 
-data class UserCredentials(val username: String, val password: String)
-data class UserInformation(
-    val name: String,
-    val username: String,
-    val accessLevel: String,
-    val affiliation: String,
-    val email: String
-)
-{
-    companion object
-    {
-        fun from(user: User): UserInformation
-        {
-            with(user) {
-                return UserInformation(name, username, accessLevel.toString(), affiliation, email)
-            }
-        }
-    }
-}
 
 fun Routing.authenticationRoute(authenticationController: AuthenticationController)
 {
@@ -44,7 +26,12 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
                 val user: User? = authenticationController.authenticate(username, password)
                 if (user != null)
                 {
-                    call.sessions.set(UserSession(user.userId, user.accessLevel))
+                    call.sessions.set(
+                        UserSession(
+                            user.userId,
+                            user.type
+                        )
+                    )
                 }
                 else
                 {
@@ -61,7 +48,14 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
             val session = call.sessions.get<UserSession>() ?: throw UnauthorizedException("Not logged in!")
             val user: User = authenticationController.getUser(session.id)
                 ?: throw UnauthorizedException("Session error! Please log in again")
-            call.respond(UserInformation.from(user))
+            call.respond(user.toUserInformation())
+        }
+
+        put {
+            val userDTO = call.receive<UserDTO>()
+            with (userDTO){
+                authenticationController.newUser(name, username, password, affiliation, email, webPage)
+            }
         }
     }
 }

@@ -12,9 +12,12 @@ import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
 import ro.runtimeterror.cms.Components
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
-import ro.runtimeterror.cms.model.AccessLevel
+import ro.runtimeterror.cms.model.UserType
+import ro.runtimeterror.cms.networking.route.authenticationRoute
+import ro.runtimeterror.cms.networking.route.conferenceRoute
+import ro.runtimeterror.cms.networking.route.paperRoute
 
-data class UserSession(val id: Int, val level: AccessLevel)
+data class UserSession(val id: Int, val type: UserType)
 
 @Suppress("unused") // Referenced in application.conf
 @kotlin.jvm.JvmOverloads
@@ -52,6 +55,7 @@ fun Application.module(testing: Boolean = false)
     routing {
         authenticationRoute(Components.authenticationController)
         conferenceRoute(Components.conferenceController)
+        paperRoute(Components.paperController)
     }
 }
 
