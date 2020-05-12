@@ -15,7 +15,7 @@ import ro.runtimeterror.cms.exceptions.UnauthorizedException
 import ro.runtimeterror.cms.model.UserType
 import ro.runtimeterror.cms.networking.route.authenticationRoute
 import ro.runtimeterror.cms.networking.route.conferenceRoute
-import ro.runtimeterror.cms.networking.route.paperRoute
+import ro.runtimeterror.cms.networking.route.paperSubmissionRoute
 
 data class UserSession(val id: Int, val type: UserType)
 
@@ -55,7 +55,7 @@ fun Application.module(testing: Boolean = false)
     routing {
         authenticationRoute(Components.authenticationController)
         conferenceRoute(Components.conferenceController)
-        paperRoute(Components.paperSubmissionController)
+        paperSubmissionRoute(Components.paperSubmissionController)
     }
 }
 
