@@ -14,6 +14,19 @@ POST {{URL}}/authentication/logout
 ### Get user information
 GET {{URL}}/authentication
 
+### Sign up
+PUT {{URL}}/authentication
+Content-Type: application/json
+
+{
+  "name": "test",
+  "username": "test",
+  "password": "test",
+  "affiliation": "test",
+  "email": "test",
+  "webPage": "test"
+}
+
 
 ##### Conference
 ### Get details
@@ -27,32 +40,43 @@ Content-Type: application/json
   "name": "Name of the conference",
   "startDate": "15.04.2020",
   "endDate": "15.04.2020",
-  "abstractDeadline": "15.04.2020",
+  "submissionDeadline": "15.04.2020",
   "proposalDeadline": "15.04.2020",
   "biddingDeadline": "15.04.2020",
-  "submitPaperEarly": false
+  "submitPaperEarly": false,
+  "currentPhase": 0
 }
 
-### Get phase (0, 1, 2, 3)
-GET {{URL}}/conference/phase
+##### User management
+### List users
+GET {{URL}}/users
 
-
-##### Papers
-### Get list of papers
-GET {{URL}}/papers
-
-### Submit proposal
-POST {{URL}}/papers
+### Update type and validation
+PUT {{URL}}/users
 Content-Type: application/json
 
 {
+  "userId": 1,
+  "type": 1,
+  "validated": true
+}
+
+##### Paper submissioon
+### Get paper
+GET {{URL}}/paper
+
+### Submit proposal
+POST {{URL}}/paper
+Content-Type: application/json
+
+{
+  "name": "text",
   "field": "text",
-  "proposalName": "text",
   "keywords": "text",
   "topics": "text",
-  "listOfAuthors": "text"
+  "authors": "text"
 }
 
 ### Upload full paper
-PUT {{URL}}/papers
+PUT {{URL}}/paper
 Content-Type: multipart/form-data
