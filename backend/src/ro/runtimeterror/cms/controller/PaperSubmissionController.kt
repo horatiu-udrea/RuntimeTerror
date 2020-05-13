@@ -10,7 +10,7 @@ import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.repository.Repository
 
-class PaperController(private val repository: Repository)
+class PaperSubmissionController(private val repository: Repository)
 {
     /**
      * Get all papers
@@ -28,12 +28,12 @@ class PaperController(private val repository: Repository)
      * Author submitted a paper
      */
     fun submitProposal(
+        userId: Int,
+        name: String,
         field: String,
-        proposalName: String,
         keywords: String,
         topics: String,
-        listOfAuthors: String,
-        userId: Int
+        authors: String
     )
     {
 //        checks if the user exists
@@ -80,6 +80,14 @@ class PaperController(private val repository: Repository)
                 it[documentPath] = path
             }
         }
+    }
+
+    /**
+     * Get the user's paper
+     */
+    fun getPaper(userId: Int): Paper
+    {
+        TODO("Not yet implemented")
     }
 
 }
