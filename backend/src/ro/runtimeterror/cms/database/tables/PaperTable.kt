@@ -1,11 +1,10 @@
 package ro.runtimeterror.cms.database.tables
 
-import com.sun.jdi.IntegerValue
 import org.jetbrains.exposed.dao.id.IntIdTable
 
 object PaperTable : IntIdTable("Papers", "PK_PaperID")
 {
-    var userid = integer("User").references(UserTable.id)
+    var userid = reference("FK_UserID", UserTable.id)
     val name = varchar("name", 100)
     val field = varchar("field", 100)
     val keywords = varchar("keywords", 100)
