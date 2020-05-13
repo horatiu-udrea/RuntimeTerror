@@ -1,7 +1,6 @@
 package ro.runtimeterror.cms
 
 import ro.runtimeterror.cms.controller.AuthenticationController
-import ro.runtimeterror.cms.controller.Controller
 import ro.runtimeterror.cms.controller.ConferenceController
 import ro.runtimeterror.cms.controller.PaperSubmissionController
 
@@ -12,7 +11,6 @@ fun main(args: Array<String>)
 
 object Components
 {
-    val controller: Controller = Controller()
     val authenticationController: AuthenticationController = AuthenticationController()
     val conferenceController: ConferenceController = ConferenceController()
     val paperSubmissionController: PaperSubmissionController = PaperSubmissionController()

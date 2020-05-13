@@ -14,7 +14,7 @@ class ConferenceController
     /**
      * Conference details
      */
-    fun getConferenceDetails(): Conference?
+    fun getConferenceDetails(): Conference
     {
         var conference: Conference? = null
         transaction(DatabaseSettings.connection){
@@ -33,7 +33,7 @@ class ConferenceController
                 )
             }.first()
         }
-        return conference
+        return conference?:throw RuntimeException("Conference information is null!")
     }
 
     /**
