@@ -1,5 +1,11 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.transactions.transaction
+import ro.runtimeterror.cms.database.DatabaseSettings
+import ro.runtimeterror.cms.database.daos.UserDAO
+import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.User
 import ro.runtimeterror.cms.repository.Repository
 
@@ -12,7 +18,16 @@ class AuthenticationController(private val repository: Repository)
      */
     fun authenticate(username: String, password: String): User?
     {
-        TODO("Not yet implemented")
+        var user: User? = null
+        transaction(DatabaseSettings.connection) {
+            SchemaUtils.create(UserTable)
+            user = UserDAO
+                .find {
+                    (UserTable.username eq username) and (UserTable.password eq password)
+                }
+                .first()
+        }
+        return user
     }
 
     /**
@@ -20,7 +35,11 @@ class AuthenticationController(private val repository: Repository)
      */
     fun getUser(id: Int): User?
     {
-        TODO("Not yet implemented")
+        var user: User? = null
+        transaction(DatabaseSettings.connection) {
+            user = UserDAO.findById(id)
+        }
+        return user
     }
 
     /**

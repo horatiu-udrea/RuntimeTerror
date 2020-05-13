@@ -6,7 +6,7 @@ import ro.runtimeterror.cms.database.tables.*
 import java.io.File
 
 
-fun main(): Unit
+fun main()
 {
     DatabaseSettings.connection
     transaction {
