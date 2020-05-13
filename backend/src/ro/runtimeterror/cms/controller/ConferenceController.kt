@@ -7,10 +7,9 @@ import org.jetbrains.exposed.sql.update
 import ro.runtimeterror.cms.database.DatabaseSettings
 import ro.runtimeterror.cms.database.tables.ConferenceTable
 import ro.runtimeterror.cms.model.Conference
-import ro.runtimeterror.cms.repository.Repository
 import java.lang.RuntimeException
 
-class ConferenceController(private val repository: Repository)
+class ConferenceController
 {
     /**
      * Conference details

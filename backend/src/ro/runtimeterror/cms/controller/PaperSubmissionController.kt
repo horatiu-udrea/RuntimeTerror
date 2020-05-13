@@ -8,9 +8,8 @@ import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.Paper
-import ro.runtimeterror.cms.repository.Repository
 
-class PaperSubmissionController(private val repository: Repository)
+class PaperSubmissionController
 {
     /**
      * Get all papers

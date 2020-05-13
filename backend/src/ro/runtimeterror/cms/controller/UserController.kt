@@ -9,9 +9,8 @@ import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.User
 import ro.runtimeterror.cms.model.UserType
-import ro.runtimeterror.cms.repository.Repository
 
-class UserController(private val repository: Repository)
+class UserController
 {
     fun userList(): List<User>
     {
