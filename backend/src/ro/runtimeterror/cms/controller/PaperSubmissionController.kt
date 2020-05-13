@@ -61,11 +61,10 @@ class PaperController(private val repository: Repository)
             PaperTable.insert{ newPaper ->
                 newPaper[userid] = userId
                 newPaper[PaperTable.field] = field
-                newPaper[name] = proposalName
+                newPaper[PaperTable.name] = name
                 newPaper[PaperTable.keywords] = keywords
                 newPaper[PaperTable.topics] = topics
-                newPaper[PaperTable.topics] = topics
-                newPaper[authors] = listOfAuthors
+                newPaper[PaperTable.authors] = authors
                 newPaper[accepted] = false
                 newPaper[conflicting] = false
 
