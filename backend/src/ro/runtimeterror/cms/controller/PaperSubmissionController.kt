@@ -86,7 +86,14 @@ class PaperSubmissionController(private val repository: Repository)
      */
     fun getPaper(userId: Int): Paper
     {
-        TODO("Not yet implemented")
+        var paper: Paper? = null
+        transaction {
+            paper = PaperDAO.find{
+                PaperTable.userid eq userId
+            }.first()
+        }
+        return paper?: throw RuntimeException("The specified user has no submission!")
     }
+
 
 }
