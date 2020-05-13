@@ -20,7 +20,7 @@ How to configure Datagrip with our database (in order to run sql scripts):
 - Type `CMS` in the `Database` property (the name of our database)
 - Press the `Test Connection` button and look for a green tick
 
-Run sql scripts:
+How to run sql scripts:
 - Assure that Apache and MySql from XAMPP are up and running
 - In Datagrip do File->Open and go to `/database`
 - Click on `ddl.sql`
