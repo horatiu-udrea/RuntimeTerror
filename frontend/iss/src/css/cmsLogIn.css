@@ -65,3 +65,11 @@ body {
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
 }
+
+#logo {
+    position: absolute;
+    width: 280px;
+    height: 150px;
+    margin-top: 500px;
+    margin-left: 1200px;
+}
