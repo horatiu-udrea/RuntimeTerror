@@ -1,0 +1,82 @@
+##### Authentication
+### Login
+POST {{URL}}/authentication/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+### Logout
+POST {{URL}}/authentication/logout
+
+### Get user information
+GET {{URL}}/authentication
+
+### Sign up
+PUT {{URL}}/authentication
+Content-Type: application/json
+
+{
+  "name": "test",
+  "username": "test",
+  "password": "test",
+  "affiliation": "test",
+  "email": "test",
+  "webPage": "test"
+}
+
+
+##### Conference
+### Get details
+GET {{URL}}/conference
+
+###Change details
+POST {{URL}}/conference
+Content-Type: application/json
+
+{
+  "name": "Name of the conference",
+  "startDate": "15.04.2020",
+  "endDate": "15.04.2020",
+  "submissionDeadline": "15.04.2020",
+  "proposalDeadline": "15.04.2020",
+  "biddingDeadline": "15.04.2020",
+  "submitPaperEarly": false,
+  "currentPhase": 0
+}
+
+##### User management
+### List users
+GET {{URL}}/users
+
+### Update type and validation
+PUT {{URL}}/users
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "type": 1,
+  "validated": true
+}
+
+##### Paper submissioon
+### Get paper
+GET {{URL}}/paper
+
+### Submit proposal
+POST {{URL}}/paper
+Content-Type: application/json
+
+{
+  "name": "text",
+  "field": "text",
+  "keywords": "text",
+  "topics": "text",
+  "authors": "text"
+}
+
+### Upload full paper
+PUT {{URL}}/paper
+Content-Type: multipart/form-data

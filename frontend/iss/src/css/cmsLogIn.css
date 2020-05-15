@@ -1,0 +1,75 @@
+#logIn {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 30px;
+    /* text-color: #cc3300; */
+    font-size: 80px;
+    color: #ff7700;
+    text-shadow: 2px 2px #cc3300;
+}
+
+#userEmail {
+    position: absolute;
+    margin-top: 200px;
+    margin-left: 80px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #cc3300;
+}
+
+#userEmail #userEmailInput {
+    position: absolute;
+    margin-top: -1px;
+    height: 22px;
+    width: 280px;
+    margin-left: 10px;
+    border: 2px outset #ffad66;
+    border-radius: 10px;
+}
+
+#userPassword {
+    position: absolute;
+    margin-top: 240px;
+    margin-left: 160px;
+    font-weight: bold;
+    font-size: 20px;
+    color: #cc3300;
+}
+
+#userPassword #userPasswordInput {
+    position: absolute;
+    margin-top: -1px;
+    height: 22px;
+    width: 280px;
+    margin-left: 10px;
+    border: 2px outset #ffad66;
+    border-radius: 10px;
+}
+
+#logInButton {
+    position: absolute;
+    margin-top: 60px;
+    margin-left: 220px;
+    background-color: #ffad66;
+    height: 40px;
+    width: 160px;
+    border-radius: 15px 50px;
+    border: 2px solid #ffa04d;
+    font-size: 20px;
+    color: #eb3b00;
+    text-shadow: 1px 1px #a82b01;
+}
+
+body {
+    background-image: url("../../resources/loginBackground.jpg");
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+}
+
+#logo {
+    position: absolute;
+    width: 280px;
+    height: 150px;
+    margin-top: 500px;
+    margin-left: 1200px;
+}
