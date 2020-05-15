@@ -74,9 +74,28 @@ Content-Type: application/json
   "field": "text",
   "keywords": "text",
   "topics": "text",
-  "authors": "text"
+  "abstract": "text",
+  "authors": [
+    {
+      "name": "author1",
+      "email": "author1Email"
+    },
+    {
+      "name": "author2",
+      "email": "author2Email"
+    }
+  ]
 }
 
-### Upload full paper
+### Upload abstract for paper with id 1
 PUT {{URL}}/paper
+Content-Type: application/json
+
+{
+  "paperId": 1,
+  "abstract": "text"
+}
+
+### Upload full paper for id 1
+PUT {{URL}}/paper/full/1
 Content-Type: multipart/form-data

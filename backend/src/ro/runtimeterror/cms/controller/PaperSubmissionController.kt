@@ -9,12 +9,17 @@ import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.Paper
 
+data class Author(
+    val name: String,
+    val email: String
+)
+
 class PaperSubmissionController
 {
     /**
-     * Get all papers
+     * Get all papers of the user
      */
-    fun getPapers(): List<Paper>
+    fun getPapers(userId: Int): List<Paper>
     {
         var listOfPapers: List<Paper> = ArrayList<Paper>()
         transaction (DatabaseSettings.connection){
@@ -32,7 +37,8 @@ class PaperSubmissionController
         field: String,
         keywords: String,
         topics: String,
-        authors: String
+        abstract: String,
+        authors: List<Author>
     )
     {
 //        checks if the user exists
@@ -71,7 +77,7 @@ class PaperSubmissionController
         }
     }
 
-    fun fullPaperUploaded(path: String, userId: Int)
+    fun uploadFullPaper(path: String, paperId: Int, userId: Int)
     {
         transaction(DatabaseSettings.connection) {
             PaperTable.update({PaperTable.userid eq userId}) {
@@ -80,18 +86,9 @@ class PaperSubmissionController
         }
     }
 
-    /**
-     * Get the user's paper
-     */
-    fun getPaper(userId: Int): Paper
+    fun changeAbstract(userId:Int, paperId: Int, abstract: String)
     {
-        var paper: Paper? = null
-        transaction {
-            paper = PaperDAO.find{
-                PaperTable.userid eq userId
-            }.first()
-        }
-        return paper?: throw RuntimeException("The specified user has no submission!")
+        TODO("Not yet implemented")
     }
 
 
