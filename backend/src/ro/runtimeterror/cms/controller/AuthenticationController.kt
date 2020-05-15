@@ -1,9 +1,14 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.transactions.transaction
+import ro.runtimeterror.cms.database.DatabaseSettings
+import ro.runtimeterror.cms.database.daos.UserDAO
+import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.User
-import ro.runtimeterror.cms.repository.Repository
+import ro.runtimeterror.cms.model.UserType
 
-class AuthenticationController(private val repository: Repository)
+class AuthenticationController
 {
     /**
      * Authenticates the user
@@ -12,7 +17,16 @@ class AuthenticationController(private val repository: Repository)
      */
     fun authenticate(username: String, password: String): User?
     {
-        TODO("Not yet implemented")
+        var user: User? = null
+        transaction(DatabaseSettings.connection) {
+            SchemaUtils.create(UserTable)
+            user = UserDAO
+                .find {
+                    (UserTable.username eq username) and (UserTable.password eq password)
+                }
+                .first()
+        }
+        return user
     }
 
     /**
@@ -20,7 +34,11 @@ class AuthenticationController(private val repository: Repository)
      */
     fun getUser(id: Int): User?
     {
-        TODO("Not yet implemented")
+        var user: User? = null
+        transaction(DatabaseSettings.connection) {
+            user = UserDAO.findById(id)
+        }
+        return user
     }
 
     /**
@@ -35,7 +53,19 @@ class AuthenticationController(private val repository: Repository)
         webPage: String
     )
     {
-        TODO("Not yet implemented")
+        transaction {
+            UserTable.insert {
+                it[UserTable.name] = name
+                it[UserTable.username] = username
+                it[UserTable.password] = password
+                it[UserTable.affiliation] = affiliation
+                it[UserTable.email] = email
+                it[UserTable.webPage] = webPage
+                it[validated] = false
+                it[hasTicket] = false
+                it[type] = UserType.NORMAL.value
+            }
+        }
     }
 
 }
