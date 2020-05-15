@@ -11,6 +11,5 @@ object UserTable : IntIdTable("Users", "PK_UserID")
     val email = varchar("email", 50)
     val webPage = varchar("webPage", 50)
     val validated = bool("validated")
-    val hasTicket = bool("hasTicket")
     val type = integer("type")
 }
