@@ -14,4 +14,7 @@ object Components
     val conferenceController: ConferenceController = ConferenceController()
     val paperSubmissionController: PaperSubmissionController = PaperSubmissionController()
     val paperBidController: PaperBidController = PaperBidController()
+    val paperReviewController: PaperReviewController = PaperReviewController()
+    val paperAssignController: PaperAssignController = PaperAssignController()
+    val paperDecisionController: PaperDecisionController = PaperDecisionController()
 }

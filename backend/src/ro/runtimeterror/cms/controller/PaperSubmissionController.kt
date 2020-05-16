@@ -1,24 +1,17 @@
 package ro.runtimeterror.cms.controller
 
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 import ro.runtimeterror.cms.database.DatabaseSettings
 import ro.runtimeterror.cms.database.daos.PaperDAO
 import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.database.tables.UserTable
+import ro.runtimeterror.cms.model.Author
 import ro.runtimeterror.cms.model.Paper
-import ro.runtimeterror.cms.model.User
-
-data class Author(
-    val name: String,
-    val email: String
-)
-
-fun User.toAuthor(): Author
-{
-    return Author(name, email)
-}
+import ro.runtimeterror.cms.model.PaperStatus
 
 class PaperSubmissionController
 {
@@ -76,9 +69,7 @@ class PaperSubmissionController
                 newPaper[PaperTable.keywords] = keywords
                 newPaper[PaperTable.topics] = topics
                 newPaper[PaperTable.authors] = authors
-                newPaper[accepted] = false
-                newPaper[conflicting] = false
-
+                newPaper[status] = PaperStatus.UNDECIDED.value
             }
         }
     }

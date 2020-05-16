@@ -1,9 +1,8 @@
 package ro.runtimeterror.cms.networking.dto
 
-import ro.runtimeterror.cms.controller.Author
-import ro.runtimeterror.cms.controller.PaperBid
-import ro.runtimeterror.cms.controller.toAuthor
+import ro.runtimeterror.cms.model.Author
 import ro.runtimeterror.cms.model.Paper
+import ro.runtimeterror.cms.model.toAuthor
 
 data class AbstractDTO(val paperId: Int, val abstract: String)
 
@@ -15,8 +14,7 @@ data class PaperDTO(
     val authors: List<Author>,
     val abstract: String,
     val documentPath: String,
-    val conflicting: Boolean,
-    val accepted: Boolean
+    val status: Int
 )
 
 data class PaperDTOWithId(
@@ -28,8 +26,7 @@ data class PaperDTOWithId(
     val authors: List<Author>,
     val abstract: String,
     val documentPath: String,
-    val conflicting: Boolean,
-    val accepted: Boolean
+    val status: Int
 )
 
 fun Paper.toDTO(): PaperDTO
@@ -42,8 +39,7 @@ fun Paper.toDTO(): PaperDTO
         authors.map { user -> user.toAuthor() },
         abstract,
         documentPath,
-        conflicting,
-        accepted
+        paperStatus.value
     )
 }
 
@@ -60,7 +56,6 @@ fun Paper.toDTOWithId(): PaperDTOWithId
         authors.map{user -> user.toAuthor()},
         abstract,
         documentPath,
-        conflicting,
-        accepted
+        paperStatus.value
     )
 }

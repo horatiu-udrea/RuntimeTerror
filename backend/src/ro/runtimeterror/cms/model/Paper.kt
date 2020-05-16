@@ -9,7 +9,6 @@ interface Paper
     val keywords: String
     val topics: String
     val documentPath: String
-    val accepted: Boolean
-    val conflicting: Boolean
+    val paperStatus: PaperStatus
     val authors: List<User>
 }

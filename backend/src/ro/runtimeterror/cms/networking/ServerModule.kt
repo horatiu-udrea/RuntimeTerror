@@ -1,12 +1,18 @@
 package ro.runtimeterror.cms.networking
 
-import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.features.*
-import io.ktor.routing.*
-import io.ktor.http.*
-import com.fasterxml.jackson.databind.*
-import io.ktor.jackson.*
+import com.fasterxml.jackson.databind.SerializationFeature
+import io.ktor.application.Application
+import io.ktor.application.call
+import io.ktor.application.install
+import io.ktor.features.CORS
+import io.ktor.features.ContentNegotiation
+import io.ktor.features.StatusPages
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
+import io.ktor.jackson.jackson
+import io.ktor.response.respond
+import io.ktor.routing.routing
 import io.ktor.sessions.SessionStorageMemory
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
@@ -56,6 +62,9 @@ fun Application.module(testing: Boolean = false)
         conferenceRoute(Components.conferenceController)
         paperSubmissionRoute(Components.paperSubmissionController)
         paperBidRoute(Components.paperBidController)
+        paperReviewRoute(Components.paperReviewController)
+        paperAssignRoute(Components.paperAssignController)
+        paperDecisionRoute(Components.paperDecisionController)
     }
 }
 
