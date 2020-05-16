@@ -1,0 +1,11 @@
+### Get all papers
+GET {{URL}}/paper/assign
+
+### Change paper status
+PUT {{URL}}/paper/decision
+Content-Type: application/json
+
+{
+  "paperId": 1,
+  "status": 1
+}
