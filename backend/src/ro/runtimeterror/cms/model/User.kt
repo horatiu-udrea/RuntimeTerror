@@ -10,6 +10,5 @@ interface User
     val email: String
     val webPage: String
     val validated: Boolean
-    val hasTicket: Boolean
     val type: UserType
 }
