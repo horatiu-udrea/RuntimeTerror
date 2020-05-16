@@ -8,11 +8,17 @@ import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.Paper
+import ro.runtimeterror.cms.model.User
 
 data class Author(
     val name: String,
     val email: String
 )
+
+fun User.toAuthor(): Author
+{
+    return Author(name, email)
+}
 
 class PaperSubmissionController
 {

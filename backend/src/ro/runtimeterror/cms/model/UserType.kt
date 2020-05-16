@@ -8,8 +8,7 @@ enum class UserType(val value: Int)
     CHAIR(4),
     CO_CHAIR(3),
     PC_MEMBER(2),
-    AUTHOR(1),
-    NORMAL(0);
+    AUTHOR(1);
 
     companion object
     {

@@ -1,12 +1,12 @@
 package ro.runtimeterror.cms.networking.dto
 
 import ro.runtimeterror.cms.controller.Author
+import ro.runtimeterror.cms.controller.toAuthor
 import ro.runtimeterror.cms.model.Paper
 
 data class AbstractDTO(val paperId:Int, val abstract: String)
 
 data class PaperDTO(
-    val userId: Int,
     val name: String,
     val field: String,
     val keywords: String,
@@ -20,7 +20,6 @@ data class PaperDTO(
 
 data class PaperDTOWithId(
     val paperId: Int,
-    val userId: Int,
     val name: String,
     val field: String,
     val keywords: String,
@@ -35,12 +34,11 @@ data class PaperDTOWithId(
 fun Paper.toDTO(): PaperDTO
 {
     return PaperDTO(
-        user.userId,
         name,
         field,
         keywords,
         topics,
-        authors,
+        authors.map{user -> user.toAuthor()},
         abstract,
         documentPath,
         conflicting,
@@ -53,13 +51,12 @@ fun List<Paper>.toDTO(): List<PaperDTOWithId> = map { paper -> paper.toDTOWithId
 fun Paper.toDTOWithId(): PaperDTOWithId
 {
     return PaperDTOWithId(
-        user.userId,
         paperId,
         name,
         field,
         keywords,
         topics,
-        authors,
+        authors.map{user -> user.toAuthor()},
         abstract,
         documentPath,
         conflicting,
