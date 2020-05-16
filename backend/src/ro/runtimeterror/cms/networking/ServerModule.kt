@@ -1,21 +1,25 @@
 package ro.runtimeterror.cms.networking
 
-import io.ktor.application.*
-import io.ktor.response.*
-import io.ktor.features.*
-import io.ktor.routing.*
-import io.ktor.http.*
-import com.fasterxml.jackson.databind.*
-import io.ktor.jackson.*
+import com.fasterxml.jackson.databind.SerializationFeature
+import io.ktor.application.Application
+import io.ktor.application.call
+import io.ktor.application.install
+import io.ktor.features.CORS
+import io.ktor.features.ContentNegotiation
+import io.ktor.features.StatusPages
+import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
+import io.ktor.jackson.jackson
+import io.ktor.response.respond
+import io.ktor.routing.routing
 import io.ktor.sessions.SessionStorageMemory
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
 import ro.runtimeterror.cms.Components
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
 import ro.runtimeterror.cms.model.UserType
-import ro.runtimeterror.cms.networking.route.authenticationRoute
-import ro.runtimeterror.cms.networking.route.conferenceRoute
-import ro.runtimeterror.cms.networking.route.paperSubmissionRoute
+import ro.runtimeterror.cms.networking.route.*
 
 data class UserSession(val id: Int, val type: UserType)
 
@@ -54,8 +58,13 @@ fun Application.module(testing: Boolean = false)
 
     routing {
         authenticationRoute(Components.authenticationController)
+        userRoute(Components.userController)
         conferenceRoute(Components.conferenceController)
         paperSubmissionRoute(Components.paperSubmissionController)
+        paperBidRoute(Components.paperBidController)
+        paperReviewRoute(Components.paperReviewController)
+        paperAssignRoute(Components.paperAssignController)
+        paperDecisionRoute(Components.paperDecisionController)
     }
 }
 

@@ -10,7 +10,5 @@ object PaperTable : IntIdTable("Papers", "PK_PaperID")
     val keywords = varchar("keywords", 100)
     val topics = varchar("topics", 100)
     val documentPath = varchar("documentPath", 100)
-    val accepted = bool("accepted")
-    val conflicting = bool("conflicting")
-
+    val status = integer("status")
 }

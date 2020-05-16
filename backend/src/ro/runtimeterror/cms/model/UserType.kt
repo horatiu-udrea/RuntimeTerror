@@ -16,7 +16,7 @@ enum class UserType(val value: Int)
         {
             return values().find {
                 it.value == value
-            } ?: throw RuntimeException("Invalid access level")
+            } ?: throw RuntimeException("Invalid user type")
         }
     }
 }
