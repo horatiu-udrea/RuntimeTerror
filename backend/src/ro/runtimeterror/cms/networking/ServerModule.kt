@@ -13,9 +13,7 @@ import io.ktor.sessions.cookie
 import ro.runtimeterror.cms.Components
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
 import ro.runtimeterror.cms.model.UserType
-import ro.runtimeterror.cms.networking.route.authenticationRoute
-import ro.runtimeterror.cms.networking.route.conferenceRoute
-import ro.runtimeterror.cms.networking.route.paperSubmissionRoute
+import ro.runtimeterror.cms.networking.route.*
 
 data class UserSession(val id: Int, val type: UserType)
 
@@ -54,8 +52,10 @@ fun Application.module(testing: Boolean = false)
 
     routing {
         authenticationRoute(Components.authenticationController)
+        userRoute(Components.userController)
         conferenceRoute(Components.conferenceController)
         paperSubmissionRoute(Components.paperSubmissionController)
+        paperBidRoute(Components.paperBidController)
     }
 }
 
