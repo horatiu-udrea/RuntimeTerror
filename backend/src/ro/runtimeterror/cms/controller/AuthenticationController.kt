@@ -62,8 +62,7 @@ class AuthenticationController
                 it[UserTable.email] = email
                 it[UserTable.webPage] = webPage
                 it[validated] = false
-                it[hasTicket] = false
-                it[type] = UserType.NORMAL.value
+                it[type] = UserType.AUTHOR.value
             }
         }
     }

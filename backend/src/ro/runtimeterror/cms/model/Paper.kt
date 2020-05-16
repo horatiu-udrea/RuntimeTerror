@@ -11,4 +11,5 @@ interface Paper
     val documentPath: String
     val accepted: Boolean
     val conflicting: Boolean
+    val authors: List<User>
 }
