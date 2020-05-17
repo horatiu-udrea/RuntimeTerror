@@ -15,7 +15,7 @@ class UserValidator {
                     UserTable.id eq userID
                 }.empty()
             }
-            if(exists == false){
+            if(!exists){
                 throw RuntimeException("The user doesn't exists")
             }
         }

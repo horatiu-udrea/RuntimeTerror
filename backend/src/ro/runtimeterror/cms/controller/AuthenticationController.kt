@@ -39,7 +39,7 @@ class AuthenticationController
         transaction(DatabaseSettings.connection) {
             user = UserDAO.findById(id)
         }
-        return user!!
+        return user
     }
 
     /**
