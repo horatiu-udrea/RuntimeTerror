@@ -9,6 +9,7 @@ import ro.runtimeterror.cms.database.tables.PaperSubmissionTable
 import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.model.PaperStatus
+import ro.runtimeterror.cms.model.validators.UserValidator
 import java.lang.RuntimeException
 
 class PaperSubmissionController
@@ -18,6 +19,7 @@ class PaperSubmissionController
      */
     fun getPapers(userId: Int): List<Paper>
     {
+        UserValidator.exists(userId)
         val paperIDs: List<Int> = getPaperIdsFromUser(userId)
         val listOfPapers: ArrayList<Paper> = ArrayList<Paper>()
         transaction (DatabaseSettings.connection){
@@ -51,6 +53,8 @@ class PaperSubmissionController
         status: PaperStatus,
         userID: Int
     ) {
+
+        UserValidator.exists(userID)
 //        checks if the user exists
         val paperID:Int = addPaperAndGetID(name, abstract, field, keywords, topics, status)
         transaction(DatabaseSettings.connection) {

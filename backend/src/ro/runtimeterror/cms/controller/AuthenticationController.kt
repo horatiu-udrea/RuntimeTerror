@@ -7,6 +7,7 @@ import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.User
 import ro.runtimeterror.cms.model.UserType
+import ro.runtimeterror.cms.model.validators.UserValidator
 
 class AuthenticationController
 {
@@ -19,7 +20,6 @@ class AuthenticationController
     {
         var user: User? = null
         transaction(DatabaseSettings.connection) {
-            SchemaUtils.create(UserTable)
             user = UserDAO
                 .find {
                     (UserTable.username eq username) and (UserTable.password eq password)
@@ -34,11 +34,12 @@ class AuthenticationController
      */
     fun getUser(id: Int): User?
     {
+        UserValidator.exists(id)
         var user: User? = null
         transaction(DatabaseSettings.connection) {
             user = UserDAO.findById(id)
         }
-        return user
+        return user!!
     }
 
     /**
