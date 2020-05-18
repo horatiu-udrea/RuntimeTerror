@@ -6,10 +6,10 @@ object PaperSubmissionTable : Table("PaperSubmissions")
 {
 
 
-    val paperID = integer("paper")
+    val paperID = integer("FK_PaperID")
             .references(PaperTable.id)
 //                    PaperSubmissionTable.reference("FK_PaperID", PaperTable.id)
-    val userID = integer("user")
+    val userID = integer("FK_UserID")
         .references(UserTable.id)
 //        PaperSubmissionTable.reference("FK_UserID", UserTable.id)
 
