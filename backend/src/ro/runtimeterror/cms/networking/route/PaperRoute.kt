@@ -30,31 +30,35 @@ fun Route.paperSubmissionRoute(paperSubmissionController: PaperSubmissionControl
             val paper = call.receive<PaperDTO>()
             val user = userSession()
             with(paper)
+//            Todo made some changes here
             {
                 paperSubmissionController.submitProposal(
-                    user.id,
                     name,
+                    abstract,
                     field,
                     keywords,
                     topics,
-                    abstract,
-                    authors
+                    status,
+                    user.id,
+                    authors.toString()
                 )
             }
         }
         put {
             authorize(UserType.AUTHOR)
-            val user = userSession()
+//            val user = userSession()
             val abstract = call.receive<AbstractDTO>()
-            paperSubmissionController.changeAbstract(user.id, abstract.paperId, abstract.abstract)
+//            todo you don't really need the userID (I guess?) here so I removed it
+            paperSubmissionController.changeAbstract(abstract.paperId, abstract.abstract)
         }
 
         put("/full/{paperId}") {
             authorize(UserType.AUTHOR)
-            val user = userSession()
+//            val user = userSession()
             val path = uploadFile()
             val paperId = call.parameters["paperId"]?.toInt() ?: throw NumberFormatException()
-            paperSubmissionController.uploadFullPaper(path, paperId, user.id)
+//            todo you don't really need the userID (I guess?) here so I removed it
+            paperSubmissionController.uploadFullPaper(path, paperId)
         }
     }
 }

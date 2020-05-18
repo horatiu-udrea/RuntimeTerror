@@ -37,7 +37,7 @@ class PaperReviewController
      * todo you sure it's change a review?
      * Change a review
      */
-    fun review(userID: Int, paperID: Int, recommendation: String, qualifier: Qualifier)
+    fun review(userID: Int, paperID: Int, recommendation: String, qualifier: Int)
     {
         UserValidator.exists(userID)
         PaperValidator.exists(paperID)
@@ -46,7 +46,7 @@ class PaperReviewController
                     .insert {
                         it[ReviewTable.userID] = userID
                         it[ReviewTable.paperID] = paperID
-                        it[ReviewTable.qualifier] = qualifier.value
+                        it[ReviewTable.qualifier] = qualifier
                         it[recommandation] = recommendation
                     }
         }

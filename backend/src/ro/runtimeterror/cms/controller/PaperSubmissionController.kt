@@ -49,8 +49,9 @@ class PaperSubmissionController
         field: String,
         keywords: String,
         topics: String,
-        status: PaperStatus,
-        userID: Int
+        status: Int,
+        userID: Int,
+        authors: String
     ) {
 
         UserValidator.exists(userID)
@@ -63,7 +64,7 @@ class PaperSubmissionController
         }
     }
 
-    private fun addPaperAndGetID(name: String, abstract: String, field: String, keywords: String, topics: String, status: PaperStatus): Int {
+    private fun addPaperAndGetID(name: String, abstract: String, field: String, keywords: String, topics: String, status: Int): Int {
         var paperID: Int? = null
         transaction(DatabaseSettings.connection) {
             //adds paper to the paper table
@@ -73,7 +74,7 @@ class PaperSubmissionController
                 newPaper[PaperTable.field] = field
                 newPaper[PaperTable.keywords] = keywords
                 newPaper[PaperTable.topics] = topics
-                newPaper[PaperTable.status] = status.value
+                newPaper[PaperTable.status] = status
             }.value
         }
         return paperID?: throw RuntimeException("Something went wrong when adding the paper")
