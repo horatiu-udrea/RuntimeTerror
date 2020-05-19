@@ -1,13 +1,13 @@
 package ro.runtimeterror.cms.controller
 
-import ro.runtimeterror.cms.model.Review
+import ro.runtimeterror.cms.model.PaperReview
 
 class PaperReviewController
 {
     /**
      * Get all the review made by the user or assigned to him
      */
-    fun getReviews(userId: Int): List<Review>
+    fun getReviews(userId: Int): List<PaperReview>
     {
         TODO("Not yet implemented")
     }
