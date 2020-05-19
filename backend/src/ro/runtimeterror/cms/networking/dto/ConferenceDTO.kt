@@ -16,7 +16,7 @@ class ConferenceDTO(
     val currentPhase: Int
 )
 
-val dateTimeFormatter: DateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy")
+val dateTimeFormatter: DateTimeFormatter = DateTimeFormat.forPattern("dd/MM/yyyy")
 
 fun ConferenceDTO.toModel(): Conference
 {
