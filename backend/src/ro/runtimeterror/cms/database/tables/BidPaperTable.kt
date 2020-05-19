@@ -4,8 +4,8 @@ import org.jetbrains.exposed.sql.Table
 
 object BidPaperTable : Table("BidPapers")
 {
-    val userID = reference("FK_UserID", UserTable.id)
-    val paperID = reference("FK_PaperID", PaperTable.id)
+    val userID = integer("FK_UserID").references(UserTable.id)
+    val paperID = integer("FK_PaperID").references(PaperTable.id)
     val paperBidResult = integer("paperBidResult")
 
     override val primaryKey = PrimaryKey(
