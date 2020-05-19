@@ -6,6 +6,8 @@ import ro.runtimeterror.cms.database.DatabaseSettings
 import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.model.PaperStatus
 
+import ro.runtimeterror.cms.model.PaperSuggestion
+
 class PaperDecisionController
 {
     /**
@@ -19,6 +21,14 @@ class PaperDecisionController
                 it[PaperTable.status] = paperStatus.value
             }
         }
+    }
+
+    /**
+     * Get all the papers and associate a suggestion based on the reviews
+     */
+    fun getPapers(): List<PaperSuggestion>
+    {
+        TODO("Not yet implemented")
     }
 
 }
