@@ -4,95 +4,106 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import ro.runtimeterror.cms.database.DatabaseSettings
 import ro.runtimeterror.cms.database.daos.PaperDAO
-import ro.runtimeterror.cms.database.daos.UserDAO
+import ro.runtimeterror.cms.database.tables.PaperSubmissionTable
 import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.database.tables.UserTable
+import ro.runtimeterror.cms.model.Author
 import ro.runtimeterror.cms.model.Paper
+import ro.runtimeterror.cms.model.PaperStatus
+import ro.runtimeterror.cms.model.validators.UserValidator
+import java.lang.RuntimeException
 
 class PaperSubmissionController
 {
     /**
-     * Get all papers
+     * Get all papers of the user
      */
-    fun getPapers(): List<Paper>
+    fun getPapers(userId: Int): List<Paper>
     {
-        var listOfPapers: List<Paper> = ArrayList<Paper>()
+        UserValidator.exists(userId)
+        val paperIDs: MutableList<Int> = getPaperIdsFromUser(userId)
+        val listOfPapers: MutableList<Paper> = ArrayList<Paper>()
         transaction (DatabaseSettings.connection){
-            listOfPapers = PaperDAO.all().toList()
+            for(paperID in paperIDs){
+                listOfPapers += PaperDAO.findById(paperID)!!
+            }
         }
         return listOfPapers
     }
 
+    private fun getPaperIdsFromUser(userId: Int): MutableList<Int> {
+        val papers: MutableList<Int> = ArrayList()
+        transaction(DatabaseSettings.connection) {
+            PaperSubmissionTable
+                    .select{PaperSubmissionTable.userID eq userId}
+                    .forEach(){papers += it[PaperSubmissionTable.paperID]}
+
+        }
+        return papers
+    }
+
     /**
-     * Author submitted a paper
+     * Author submits a paper
      */
     fun submitProposal(
-        userId: Int,
+        userID: Int,
         name: String,
+        abstract: String,
         field: String,
         keywords: String,
         topics: String,
-        authors: String
-    )
-    {
-//        checks if the user exists
-        transaction(DatabaseSettings.connection) {
-            if(
-                UserDAO.find{
-                    UserTable.id eq userId
-                }.empty()
-            ) {
-                throw RuntimeException("User does not exist!")
-            }
-//            Checks if the user already as a paper
-            else if(
-                        !PaperDAO.find{
-                            PaperTable.userid eq userId
-                        }.empty()
-                    ){
-                throw RuntimeException("User already has a paper!")
-            }
-        }
-        //adds paper to the paper table
-        SchemaUtils.create(PaperTable)
+        authors: List<Author>
+    ) {
 
+        UserValidator.exists(userID)
+        val paperID:Int = addPaperAndGetID(name, abstract, field, keywords, topics)
         transaction(DatabaseSettings.connection) {
-            PaperTable.insert{ newPaper ->
-                newPaper[userid] = userId
-                newPaper[PaperTable.field] = field
+            PaperSubmissionTable.insert{
+                it[PaperSubmissionTable.paperID] = paperID
+                it[PaperSubmissionTable.userID] = userID
+            }
+
+            for(author in authors){
+                UserTable.insert {
+                    it[username] = author.name
+                    it[email] = author.email
+                }
+            }
+
+        }
+    }
+
+    private fun addPaperAndGetID(name: String, abstract: String, field: String, keywords: String, topics: String): Int {
+        var paperID: Int? = null
+        transaction(DatabaseSettings.connection) {
+            //adds paper to the paper table
+            paperID = PaperTable.insertAndGetId { newPaper ->
                 newPaper[PaperTable.name] = name
+                newPaper[PaperTable.abstract] = abstract
+                newPaper[PaperTable.field] = field
                 newPaper[PaperTable.keywords] = keywords
                 newPaper[PaperTable.topics] = topics
-                newPaper[PaperTable.authors] = authors
-                newPaper[accepted] = false
-                newPaper[conflicting] = false
-
-            }
+                newPaper[status] = PaperStatus.UNDECIDED.value
+            }.value
         }
+        return paperID?: throw RuntimeException("Something wrong in addPaperAndGetID at PaperSubmissionController")
     }
 
-    fun fullPaperUploaded(path: String, userId: Int)
+    fun uploadFullPaper(documentPath: String, paperID: Int, userID: Int)
     {
         transaction(DatabaseSettings.connection) {
-            PaperTable.update({PaperTable.userid eq userId}) {
-                it[documentPath] = path
+            PaperTable.update({PaperTable.id eq paperID}) {
+                it[PaperTable.documentPath] = documentPath
             }
         }
     }
 
-    /**
-     * Get the user's paper
-     */
-    fun getPaper(userId: Int): Paper
+    fun changeAbstract(userID: Int, paperID: Int, abstract: String)
     {
-        var paper: Paper? = null
-        transaction {
-            paper = PaperDAO.find{
-                PaperTable.userid eq userId
-            }.first()
+        transaction (DatabaseSettings.connection){
+            PaperTable.update({PaperTable.id eq paperID}) {
+                it[PaperTable.abstract] = abstract
+            }
         }
-        return paper?: throw RuntimeException("The specified user has no submission!")
     }
-
-
 }

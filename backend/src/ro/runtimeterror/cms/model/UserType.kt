@@ -8,8 +8,7 @@ enum class UserType(val value: Int)
     CHAIR(4),
     CO_CHAIR(3),
     PC_MEMBER(2),
-    AUTHOR(1),
-    NORMAL(0);
+    AUTHOR(1);
 
     companion object
     {
@@ -17,7 +16,7 @@ enum class UserType(val value: Int)
         {
             return values().find {
                 it.value == value
-            } ?: throw RuntimeException("Invalid access level")
+            } ?: throw RuntimeException("Invalid user type")
         }
     }
 }

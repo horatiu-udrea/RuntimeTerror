@@ -7,6 +7,7 @@ import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.User
 import ro.runtimeterror.cms.model.UserType
+import ro.runtimeterror.cms.model.validators.UserValidator
 
 class AuthenticationController
 {
@@ -17,16 +18,21 @@ class AuthenticationController
      */
     fun authenticate(username: String, password: String): User?
     {
-        var user: User? = null
-        transaction(DatabaseSettings.connection) {
-            SchemaUtils.create(UserTable)
-            user = UserDAO
-                .find {
-                    (UserTable.username eq username) and (UserTable.password eq password)
-                }
-                .first()
+        try {
+            var user: User? = null
+            transaction(DatabaseSettings.connection) {
+                user = UserDAO
+                    .find {
+                        (UserTable.username eq username) and (UserTable.password eq password)
+                    }
+                    .first()
+            }
+            return user
+        }catch(exception: NoSuchElementException){
+            exception.printStackTrace()
+            return null
         }
-        return user
+
     }
 
     /**
@@ -34,6 +40,7 @@ class AuthenticationController
      */
     fun getUser(id: Int): User?
     {
+        UserValidator.exists(id)
         var user: User? = null
         transaction(DatabaseSettings.connection) {
             user = UserDAO.findById(id)
@@ -62,8 +69,7 @@ class AuthenticationController
                 it[UserTable.email] = email
                 it[UserTable.webPage] = webPage
                 it[validated] = false
-                it[hasTicket] = false
-                it[type] = UserType.NORMAL.value
+                it[type] = UserType.AUTHOR.value
             }
         }
     }
