@@ -1,6 +1,7 @@
 package ro.runtimeterror.cms.networking.route
 
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
@@ -30,6 +31,7 @@ fun Route.conferenceRoute(conferenceController: ConferenceController)
             authorize(UserType.CO_CHAIR)
             val conferenceDTO = call.receive<ConferenceDTO>()
             conferenceController.changeConferenceInformation(conferenceDTO.toModel())
+            call.respond(HttpStatusCode.OK)
         }
     }
 }

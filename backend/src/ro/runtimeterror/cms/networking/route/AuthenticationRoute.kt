@@ -1,6 +1,7 @@
 package ro.runtimeterror.cms.networking.route
 
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
@@ -32,6 +33,7 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
                             user.type
                         )
                     )
+                    call.respond(HttpStatusCode.OK)
                 }
                 else
                 {
@@ -42,6 +44,7 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
 
         post("/logout") {
             Components.sessionManager.clearUserSession(this)
+            call.respond(HttpStatusCode.OK)
         }
 
         get {
@@ -56,6 +59,7 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
             with(userDTO) {
                 authenticationController.newUser(name, username, password, affiliation, email, webPage)
             }
+            call.respond(HttpStatusCode.OK)
         }
     }
 }
