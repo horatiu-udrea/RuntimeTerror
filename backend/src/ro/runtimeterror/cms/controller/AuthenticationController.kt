@@ -18,15 +18,21 @@ class AuthenticationController
      */
     fun authenticate(username: String, password: String): User?
     {
-        var user: User? = null
-        transaction(DatabaseSettings.connection) {
-            user = UserDAO
-                .find {
-                    (UserTable.username eq username) and (UserTable.password eq password)
-                }
-                .first()
+        try {
+            var user: User? = null
+            transaction(DatabaseSettings.connection) {
+                user = UserDAO
+                    .find {
+                        (UserTable.username eq username) and (UserTable.password eq password)
+                    }
+                    .first()
+            }
+            return user
+        }catch(exception: NoSuchElementException){
+            exception.printStackTrace()
+            return null
         }
-        return user
+
     }
 
     /**

@@ -1,6 +1,5 @@
 package ro.runtimeterror.cms.controller
 
-import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
@@ -16,23 +15,23 @@ class ConferenceController
      */
     fun getConferenceDetails(): Conference
     {
-        var conference: Conference? = null
-        transaction(DatabaseSettings.connection){
-            conference = ConferenceTable
-                .selectAll()
-                .map {
-                Conference(
-                    it[ConferenceTable.name],
-                    it[ConferenceTable.startDate],
-                    it[ConferenceTable.endDate],
-                    it[ConferenceTable.submissionDeadline],
-                    it[ConferenceTable.proposalDeadline],
-                    it[ConferenceTable.biddingDeadline],
-                    it[ConferenceTable.submitPaperEarly],
-                    it[ConferenceTable.currentPhase]
-                )
-            }.first()
-        }
+            var conference: Conference? = null
+            transaction(DatabaseSettings.connection){
+                conference = ConferenceTable
+                    .selectAll()
+                    .map {
+                        Conference(
+                            it[ConferenceTable.name],
+                            it[ConferenceTable.startDate],
+                            it[ConferenceTable.endDate],
+                            it[ConferenceTable.submissionDeadline],
+                            it[ConferenceTable.proposalDeadline],
+                            it[ConferenceTable.biddingDeadline],
+                            it[ConferenceTable.submitPaperEarly],
+                            it[ConferenceTable.currentPhase]
+                        )
+                    }.first()
+            }
         return conference?:throw RuntimeException("Conference information is null!")
     }
 

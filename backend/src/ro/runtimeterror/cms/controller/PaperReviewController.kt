@@ -34,16 +34,17 @@ class PaperReviewController
     /**
      * Change a review
      */
-    fun review(userID: Int, paperID: Int, recommendation: String, qualifier: Qualifier)
+    fun review(userID: Int, paperID: Int, recommendation: String, qualifier: Int)
     {
         UserValidator.exists(userID)
         PaperValidator.exists(paperID)
+        val sQualifier: Qualifier = Qualifier.from(qualifier)
         transaction {
             ReviewTable
                     .insert {
                         it[ReviewTable.userID] = userID
                         it[ReviewTable.paperID] = paperID
-                        it[ReviewTable.qualifier] = qualifier.value
+                        it[ReviewTable.qualifier] = sQualifier.value
                         it[recommandation] = recommendation
                     }
         }
