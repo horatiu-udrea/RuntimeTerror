@@ -35,11 +35,16 @@ class AuthenticationController
     fun getUser(id: Int): User?
     {
         UserValidator.exists(id)
-        var user: User? = null
-        transaction(DatabaseSettings.connection) {
-            user = UserDAO.findById(id)
+        try{
+            var user: User? = null
+            transaction(DatabaseSettings.connection) {
+                user = UserDAO.findById(id)
+            }
+            return user
+        }catch (exception: Exception){
+            exception.printStackTrace()
+            return null
         }
-        return user
     }
 
     /**
