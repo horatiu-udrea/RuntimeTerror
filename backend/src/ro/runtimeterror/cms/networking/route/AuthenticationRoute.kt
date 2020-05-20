@@ -1,15 +1,12 @@
 package ro.runtimeterror.cms.networking.route
 
-import io.ktor.application.ApplicationCall
 import io.ktor.application.call
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
-import io.ktor.sessions.clear
-import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import io.ktor.sessions.set
-import io.ktor.util.pipeline.PipelineContext
+import ro.runtimeterror.cms.Components
 import ro.runtimeterror.cms.controller.AuthenticationController
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
 import ro.runtimeterror.cms.model.User
@@ -44,7 +41,7 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
         }
 
         post("/logout") {
-            call.sessions.clear<UserSession>()
+            Components.sessionManager.clearUserSession(this)
         }
 
         get {
@@ -56,7 +53,7 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
 
         put {
             val userDTO = call.receive<UserDTO>()
-            with (userDTO){
+            with(userDTO) {
                 authenticationController.newUser(name, username, password, affiliation, email, webPage)
             }
         }
