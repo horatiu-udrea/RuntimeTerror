@@ -8,12 +8,12 @@ import ro.runtimeterror.cms.database.DatabaseSettings
 import ro.runtimeterror.cms.database.daos.PaperDAO
 import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.tables.BidPaperTable
-import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.database.tables.ReviewTable
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.*
 import ro.runtimeterror.cms.model.validators.PaperValidator
 import ro.runtimeterror.cms.model.validators.UserValidator
+import java.lang.RuntimeException
 
 class PaperAssignController
 {
@@ -43,7 +43,7 @@ class PaperAssignController
                     .map {it[BidPaperTable.paperBidResult]}
                     .first()
         }
-        return PaperBidResult.from(bidResult!!)
+        return PaperBidResult.from(bidResult?:throw RuntimeException("Problem in getBidResult at PaperAssignController"))
     }
 
     /**

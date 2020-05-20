@@ -1,6 +1,7 @@
 package ro.runtimeterror.cms.networking.route
 
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
@@ -29,6 +30,7 @@ fun Route.paperBidRoute(paperBidController: PaperBidController)
             val user = userSession()
             val bidDTO = call.receive<BidDTO>()
             paperBidController.bid(user.id, bidDTO.paperId, bidDTO.bidResult)
+            call.respond(HttpStatusCode.OK)
         }
     }
 }

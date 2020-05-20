@@ -6,6 +6,7 @@ import ro.runtimeterror.cms.database.DatabaseSettings
 import ro.runtimeterror.cms.database.daos.PaperDAO
 import ro.runtimeterror.cms.database.tables.PaperSubmissionTable
 import ro.runtimeterror.cms.database.tables.PaperTable
+import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.Author
 import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.model.PaperStatus
@@ -45,26 +46,34 @@ class PaperSubmissionController
      * Author submits a paper
      */
     fun submitProposal(
-        userid: Int,
+        userID: Int,
         name: String,
+        abstract: String,
         field: String,
         keywords: String,
         topics: String,
-        abstract: String,
         authors: List<Author>
     ) {
 
-//        UserValidator.exists(userID)
-//        val paperID:Int = addPaperAndGetID(name, abstract, field, keywords, topics, status)
-//        transaction(DatabaseSettings.connection) {
-//            PaperSubmissionTable.insert{
-//                it[PaperSubmissionTable.paperID] = paperID
-//                it[PaperSubmissionTable.userID] = userID
-//            }
-//        }
+        UserValidator.exists(userID)
+        val paperID:Int = addPaperAndGetID(name, abstract, field, keywords, topics)
+        transaction(DatabaseSettings.connection) {
+            PaperSubmissionTable.insert{
+                it[PaperSubmissionTable.paperID] = paperID
+                it[PaperSubmissionTable.userID] = userID
+            }
+
+            for(author in authors){
+                UserTable.insert {
+                    it[username] = author.name
+                    it[email] = author.email
+                }
+            }
+
+        }
     }
 
-    private fun addPaperAndGetID(name: String, abstract: String, field: String, keywords: String, topics: String, status: PaperStatus): Int {
+    private fun addPaperAndGetID(name: String, abstract: String, field: String, keywords: String, topics: String): Int {
         var paperID: Int? = null
         transaction(DatabaseSettings.connection) {
             //adds paper to the paper table
@@ -74,13 +83,13 @@ class PaperSubmissionController
                 newPaper[PaperTable.field] = field
                 newPaper[PaperTable.keywords] = keywords
                 newPaper[PaperTable.topics] = topics
-                newPaper[PaperTable.status] = status.value
+                newPaper[status] = PaperStatus.UNDECIDED.value
             }.value
         }
-        return paperID?: throw RuntimeException("Something went wrong when adding the paper")
+        return paperID?: throw RuntimeException("Something wrong in addPaperAndGetID at PaperSubmissionController")
     }
 
-    fun uploadFullPaper(documentPath: String, paperID: Int, userId: Int)
+    fun uploadFullPaper(documentPath: String, paperID: Int, userID: Int)
     {
         transaction(DatabaseSettings.connection) {
             PaperTable.update({PaperTable.id eq paperID}) {

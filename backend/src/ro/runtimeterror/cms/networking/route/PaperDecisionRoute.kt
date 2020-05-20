@@ -1,6 +1,7 @@
 package ro.runtimeterror.cms.networking.route
 
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
@@ -25,6 +26,7 @@ fun Route.paperDecisionRoute(paperDecisionController: PaperDecisionController)
             authorize(UserType.CO_CHAIR)
             val (paperId, status) = call.receive<PaperDecisionDTO>()
             paperDecisionController.decide(paperId, status)
+            call.respond(HttpStatusCode.OK)
         }
     }
 }

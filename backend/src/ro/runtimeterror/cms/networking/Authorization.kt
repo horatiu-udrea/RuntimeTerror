@@ -5,6 +5,7 @@ import io.ktor.application.call
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
 import io.ktor.util.pipeline.PipelineContext
+import ro.runtimeterror.cms.Components
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
 import ro.runtimeterror.cms.model.UserType
 
@@ -19,4 +20,4 @@ fun PipelineContext<Unit, ApplicationCall>.authorize(level: UserType)
 }
 
 fun PipelineContext<Unit, ApplicationCall>.userSession() =
-    MockSession.userSession ?: throw UnauthorizedException("Not logged in!")
+    Components.sessionManager.getUserSession(this) ?: throw UnauthorizedException("Not logged in!")

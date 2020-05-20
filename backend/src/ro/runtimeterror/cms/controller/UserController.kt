@@ -1,7 +1,5 @@
 package ro.runtimeterror.cms.controller
 
-import org.jetbrains.exposed.sql.UserDataHolder
-import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.jetbrains.exposed.sql.update
 import ro.runtimeterror.cms.database.DatabaseSettings

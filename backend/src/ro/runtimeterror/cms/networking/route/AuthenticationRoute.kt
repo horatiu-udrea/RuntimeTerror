@@ -5,12 +5,12 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
-import io.ktor.sessions.clear
 import io.ktor.sessions.sessions
+import io.ktor.sessions.set
+import ro.runtimeterror.cms.Components
 import ro.runtimeterror.cms.controller.AuthenticationController
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
 import ro.runtimeterror.cms.model.User
-import ro.runtimeterror.cms.networking.MockSession
 import ro.runtimeterror.cms.networking.UserSession
 import ro.runtimeterror.cms.networking.dto.UserCredentials
 import ro.runtimeterror.cms.networking.dto.UserDTO
@@ -27,12 +27,13 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
                 val user: User? = authenticationController.authenticate(username, password)
                 if (user != null)
                 {
-                    MockSession.userSession =
+                    call.sessions.set(
                         UserSession(
                             user.userId,
                             user.type
                         )
-
+                    )
+                    call.respond(HttpStatusCode.OK)
                 }
                 else
                 {
@@ -42,7 +43,8 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
         }
 
         post("/logout") {
-            MockSession.userSession = null
+            Components.sessionManager.clearUserSession(this)
+            call.respond(HttpStatusCode.OK)
         }
 
         get {
@@ -57,7 +59,7 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
             with(userDTO) {
                 authenticationController.newUser(name, username, password, affiliation, email, webPage)
             }
-            call.respond(HttpStatusCode.OK)//TODO @Huri
+            call.respond(HttpStatusCode.OK)
         }
     }
 }

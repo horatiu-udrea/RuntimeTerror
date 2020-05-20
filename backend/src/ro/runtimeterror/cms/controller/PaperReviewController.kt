@@ -36,17 +36,18 @@ class PaperReviewController
      */
     fun review(userID: Int, paperID: Int, recommendation: String, qualifier: Int)
     {
-//        UserValidator.exists(userID)
-//        PaperValidator.exists(paperID)
-//        transaction {
-//            ReviewTable
-//                    .insert {
-//                        it[ReviewTable.userID] = userID
-//                        it[ReviewTable.paperID] = paperID
-//                        it[ReviewTable.qualifier] = qualifier.value
-//                        it[recommandation] = recommendation
-//                    }
-//        }
+        UserValidator.exists(userID)
+        PaperValidator.exists(paperID)
+        val sQualifier: Qualifier = Qualifier.from(qualifier)
+        transaction {
+            ReviewTable
+                    .insert {
+                        it[ReviewTable.userID] = userID
+                        it[ReviewTable.paperID] = paperID
+                        it[ReviewTable.qualifier] = sQualifier.value
+                        it[recommandation] = recommendation
+                    }
+        }
     }
 
 }
