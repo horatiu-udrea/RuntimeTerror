@@ -6,6 +6,7 @@ import ro.runtimeterror.cms.database.DatabaseSettings
 import ro.runtimeterror.cms.database.daos.PaperDAO
 import ro.runtimeterror.cms.database.tables.PaperSubmissionTable
 import ro.runtimeterror.cms.database.tables.PaperTable
+import ro.runtimeterror.cms.model.Author
 import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.model.PaperStatus
 import ro.runtimeterror.cms.model.validators.UserValidator
@@ -44,23 +45,23 @@ class PaperSubmissionController
      * Author submits a paper
      */
     fun submitProposal(
+        userid: Int,
         name: String,
-        abstract: String,
         field: String,
         keywords: String,
         topics: String,
-        status: PaperStatus,
-        userID: Int
+        abstract: String,
+        authors: List<Author>
     ) {
 
-        UserValidator.exists(userID)
-        val paperID:Int = addPaperAndGetID(name, abstract, field, keywords, topics, status)
-        transaction(DatabaseSettings.connection) {
-            PaperSubmissionTable.insert{
-                it[PaperSubmissionTable.paperID] = paperID
-                it[PaperSubmissionTable.userID] = userID
-            }
-        }
+//        UserValidator.exists(userID)
+//        val paperID:Int = addPaperAndGetID(name, abstract, field, keywords, topics, status)
+//        transaction(DatabaseSettings.connection) {
+//            PaperSubmissionTable.insert{
+//                it[PaperSubmissionTable.paperID] = paperID
+//                it[PaperSubmissionTable.userID] = userID
+//            }
+//        }
     }
 
     private fun addPaperAndGetID(name: String, abstract: String, field: String, keywords: String, topics: String, status: PaperStatus): Int {
@@ -79,7 +80,7 @@ class PaperSubmissionController
         return paperID?: throw RuntimeException("Something went wrong when adding the paper")
     }
 
-    fun uploadFullPaper(documentPath: String, paperID: Int)
+    fun uploadFullPaper(documentPath: String, paperID: Int, userId: Int)
     {
         transaction(DatabaseSettings.connection) {
             PaperTable.update({PaperTable.id eq paperID}) {
@@ -88,7 +89,7 @@ class PaperSubmissionController
         }
     }
 
-    fun changeAbstract(paperID: Int, abstract: String)
+    fun changeAbstract(userID: Int, paperID: Int, abstract: String)
     {
         transaction (DatabaseSettings.connection){
             PaperTable.update({PaperTable.id eq paperID}) {
