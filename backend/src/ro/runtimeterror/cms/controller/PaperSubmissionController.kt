@@ -10,7 +10,6 @@ import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.Author
 import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.model.PaperStatus
-import ro.runtimeterror.cms.model.User
 import ro.runtimeterror.cms.model.validators.UserValidator
 import java.lang.RuntimeException
 
@@ -87,7 +86,7 @@ class PaperSubmissionController
                 newPaper[status] = PaperStatus.UNDECIDED.value
             }.value
         }
-        return paperID?: throw RuntimeException("Something went wrong when adding the paper")
+        return paperID?: throw RuntimeException("Something wrong in addPaperAndGetID at PaperSubmissionController")
     }
 
     fun uploadFullPaper(documentPath: String, paperID: Int, userID: Int)
