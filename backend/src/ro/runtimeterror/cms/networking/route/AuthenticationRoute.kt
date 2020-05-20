@@ -1,18 +1,16 @@
 package ro.runtimeterror.cms.networking.route
 
-import io.ktor.application.ApplicationCall
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
 import io.ktor.sessions.clear
-import io.ktor.sessions.get
 import io.ktor.sessions.sessions
-import io.ktor.sessions.set
-import io.ktor.util.pipeline.PipelineContext
 import ro.runtimeterror.cms.controller.AuthenticationController
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
 import ro.runtimeterror.cms.model.User
+import ro.runtimeterror.cms.networking.MockSession
 import ro.runtimeterror.cms.networking.UserSession
 import ro.runtimeterror.cms.networking.dto.UserCredentials
 import ro.runtimeterror.cms.networking.dto.UserDTO
@@ -29,12 +27,12 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
                 val user: User? = authenticationController.authenticate(username, password)
                 if (user != null)
                 {
-                    call.sessions.set(
+                    MockSession.userSession =
                         UserSession(
                             user.userId,
                             user.type
                         )
-                    )
+
                 }
                 else
                 {
@@ -44,7 +42,7 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
         }
 
         post("/logout") {
-            call.sessions.clear<UserSession>()
+            MockSession.userSession = null
         }
 
         get {
@@ -56,9 +54,10 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
 
         put {
             val userDTO = call.receive<UserDTO>()
-            with (userDTO){
+            with(userDTO) {
                 authenticationController.newUser(name, username, password, affiliation, email, webPage)
             }
+            call.respond(HttpStatusCode.OK)//TODO @Huri
         }
     }
 }

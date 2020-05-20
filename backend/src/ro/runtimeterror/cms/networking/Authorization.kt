@@ -10,7 +10,7 @@ import ro.runtimeterror.cms.model.UserType
 
 fun PipelineContext<Unit, ApplicationCall>.authorize(level: UserType)
 {
-    val user = call.sessions.get<UserSession>() ?: throw UnauthorizedException("User not logged in!")
+    val user = userSession()
     val authorized = user.type.value >= level.value
     if (!authorized)
     {
@@ -19,4 +19,4 @@ fun PipelineContext<Unit, ApplicationCall>.authorize(level: UserType)
 }
 
 fun PipelineContext<Unit, ApplicationCall>.userSession() =
-    call.sessions.get<UserSession>() ?: throw UnauthorizedException("Not logged in!")
+    MockSession.userSession ?: throw UnauthorizedException("Not logged in!")

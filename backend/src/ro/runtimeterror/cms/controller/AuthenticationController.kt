@@ -3,6 +3,7 @@ package ro.runtimeterror.cms.controller
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import ro.runtimeterror.cms.database.DatabaseSettings
+import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.User
@@ -24,7 +25,7 @@ class AuthenticationController
                 .find {
                     (UserTable.username eq username) and (UserTable.password eq password)
                 }
-                .first()
+                .first()//TODO fix this: throws exception if the user is not found
         }
         return user
     }
@@ -54,7 +55,7 @@ class AuthenticationController
         webPage: String
     )
     {
-        transaction {
+        transaction(connection) {//TODO fix this: you need to connect to the database here
             UserTable.insert {
                 it[UserTable.name] = name
                 it[UserTable.username] = username
