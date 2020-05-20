@@ -1,6 +1,7 @@
 package ro.runtimeterror.cms.networking.route
 
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
@@ -41,12 +42,14 @@ fun Route.paperSubmissionRoute(paperSubmissionController: PaperSubmissionControl
                     authors
                 )
             }
+            call.respond(HttpStatusCode.OK)
         }
         put {
             authorize(UserType.AUTHOR)
             val user = userSession()
             val abstract = call.receive<AbstractDTO>()
             paperSubmissionController.changeAbstract(user.id, abstract.paperId, abstract.abstract)
+            call.respond(HttpStatusCode.OK)
         }
 
         put("/full/{paperId}") {
@@ -55,6 +58,7 @@ fun Route.paperSubmissionRoute(paperSubmissionController: PaperSubmissionControl
             val path = uploadFile()
             val paperId = call.parameters["paperId"]?.toInt() ?: throw NumberFormatException()
             paperSubmissionController.uploadFullPaper(path, paperId, user.id)
+            call.respond(HttpStatusCode.OK)
         }
     }
 }

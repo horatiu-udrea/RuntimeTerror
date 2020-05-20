@@ -1,6 +1,7 @@
 package ro.runtimeterror.cms.networking.route
 
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
@@ -29,6 +30,7 @@ fun Route.paperReviewRoute(paperReviewController: PaperReviewController)
             val user = userSession()
             val changeReview = call.receive<ChangeReviewDTO>()
             paperReviewController.review(user.id, changeReview.paperId, changeReview.recommendation, changeReview.qualifier)
+            call.respond(HttpStatusCode.OK)
         }
     }
 }

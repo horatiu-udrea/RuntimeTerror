@@ -1,6 +1,7 @@
 package ro.runtimeterror.cms.networking.route
 
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
@@ -30,6 +31,7 @@ fun Route.paperAssignRoute(paperAssignController: PaperAssignController)
             authorize(UserType.CO_CHAIR)
             val (paperId, userId) = call.receive<PaperAssignDTO>()
             paperAssignController.assign(paperId, userId)
+            call.respond(HttpStatusCode.OK)
         }
     }
     get("/member") {
