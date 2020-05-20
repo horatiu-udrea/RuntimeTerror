@@ -106,4 +106,12 @@ class PaperSubmissionController
             }
         }
     }
+
+    /**
+     * Get all accepted papers
+     */
+    fun getAcceptedPapers(): List<Paper>
+    {
+        TODO("Not yet implemented")
+    }
 }

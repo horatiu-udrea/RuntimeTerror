@@ -21,4 +21,5 @@ object Components
     val paperAssignController: PaperAssignController = PaperAssignController()
     val paperDecisionController: PaperDecisionController = PaperDecisionController()
     val sessionManager: SessionManager = if (true) CookieSessionManager() else ServerSessionManager()
+    val sectionController: SectionController = SectionController()
 }

@@ -26,6 +26,11 @@ fun Route.paperSubmissionRoute(paperSubmissionController: PaperSubmissionControl
             call.respond(papers.toDTO())
         }
 
+        get("/accepted") {
+            val papers = paperSubmissionController.getAcceptedPapers()
+            call.respond(papers.toDTO())
+        }
+
         post {
             authorize(UserType.AUTHOR)
             val paper = call.receive<PaperDTO>()
@@ -59,6 +64,15 @@ fun Route.paperSubmissionRoute(paperSubmissionController: PaperSubmissionControl
             val paperId = call.parameters["paperId"]?.toInt() ?: throw NumberFormatException()
             paperSubmissionController.uploadFullPaper(path, paperId, user.id)
             call.respond(HttpStatusCode.OK)
+        }
+        route("/remaining"){
+            get { // Get remaining papers
+                authorize(UserType.ADMIN)
+
+            }
+            get("/{paperId}"){  // Get remaining authors for paper
+
+            }
         }
     }
 }

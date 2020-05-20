@@ -65,6 +65,7 @@ fun Application.module(testing: Boolean = false)
         paperReviewRoute(Components.paperReviewController)
         paperAssignRoute(Components.paperAssignController)
         paperDecisionRoute(Components.paperDecisionController)
+        sectionRoute(Components.sectionController)
     }
 }
 
