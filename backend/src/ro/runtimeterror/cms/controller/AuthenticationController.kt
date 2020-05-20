@@ -26,7 +26,7 @@ class AuthenticationController
                     .find {
                         (UserTable.username eq username) and (UserTable.password eq password)
                     }
-                    .first()
+                    .first()//TODO use firstOrNull()
             }
             return user
         }catch(exception: NoSuchElementException){
@@ -61,6 +61,7 @@ class AuthenticationController
         webPage: String
     )
     {
+        //TODO check if the user already exists
         transaction(connection) {//TODO fix this: you need to connect to the database here
             UserTable.insert {
                 it[UserTable.name] = name
