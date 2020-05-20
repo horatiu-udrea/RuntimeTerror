@@ -12,34 +12,25 @@ import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.model.PaperStatus
 import ro.runtimeterror.cms.model.validators.UserValidator
 import java.lang.RuntimeException
+import ro.runtimeterror.cms.database.DatabaseSettings.connection
 
 class PaperSubmissionController
 {
     /**
      * Get all papers of the user
      */
-    fun getPapers(userId: Int): List<Paper>
-    {
-        UserValidator.exists(userId)
-        val paperIDs: MutableList<Int> = getPaperIdsFromUser(userId)
-        val listOfPapers: MutableList<Paper> = ArrayList<Paper>()
-        transaction (DatabaseSettings.connection){
-            for(paperID in paperIDs){
-                listOfPapers += PaperDAO.findById(paperID)!!
-            }
+    fun getPapers(userId: Int): List<Paper> = transaction(connection){
+            UserValidator.exists(userId)
+            return@transaction getPaperIdsFromUser(userId)
+                .map { PaperDAO.findById(it)!! }
+                .toList()
         }
-        return listOfPapers
-    }
 
-    private fun getPaperIdsFromUser(userId: Int): MutableList<Int> {
-        val papers: MutableList<Int> = ArrayList()
-        transaction(DatabaseSettings.connection) {
-            PaperSubmissionTable
+    private fun getPaperIdsFromUser(userId: Int): MutableList<Int> = transaction(connection) {
+            return@transaction PaperSubmissionTable
                     .select{PaperSubmissionTable.userID eq userId}
-                    .forEach(){papers += it[PaperSubmissionTable.paperID]}
-
-        }
-        return papers
+                    .map { it[PaperSubmissionTable.paperID] }
+                    .toMutableList()
     }
 
     /**
@@ -53,31 +44,26 @@ class PaperSubmissionController
         keywords: String,
         topics: String,
         authors: List<Author>
-    ) {
+    ) =
+        transaction(connection) {
+            UserValidator.exists(userID)
 
-        UserValidator.exists(userID)
-        val paperID:Int = addPaperAndGetID(name, abstract, field, keywords, topics)
-        transaction(DatabaseSettings.connection) {
             PaperSubmissionTable.insert{
-                it[PaperSubmissionTable.paperID] = paperID
+                it[paperID] = addPaperAndGetID(name, abstract, field, keywords, topics)
                 it[PaperSubmissionTable.userID] = userID
             }
-
-            for(author in authors){
-                UserTable.insert {
-                    it[username] = author.name
-                    it[email] = author.email
+            authors
+                .forEach{author ->
+                    UserTable.insert {
+                        it[username] = author.name
+                        it[email] = author.email
+                    }
                 }
-            }
-
         }
-    }
 
-    private fun addPaperAndGetID(name: String, abstract: String, field: String, keywords: String, topics: String): Int {
-        var paperID: Int? = null
-        transaction(DatabaseSettings.connection) {
+    private fun addPaperAndGetID(name: String, abstract: String, field: String, keywords: String, topics: String): Int = transaction(connection) {
             //adds paper to the paper table
-            paperID = PaperTable.insertAndGetId { newPaper ->
+            return@transaction PaperTable.insertAndGetId { newPaper ->
                 newPaper[PaperTable.name] = name
                 newPaper[PaperTable.abstract] = abstract
                 newPaper[PaperTable.field] = field
@@ -86,24 +72,18 @@ class PaperSubmissionController
                 newPaper[status] = PaperStatus.UNDECIDED.value
             }.value
         }
-        return paperID?: throw RuntimeException("Something wrong in addPaperAndGetID at PaperSubmissionController")
-    }
 
-    fun uploadFullPaper(documentPath: String, paperID: Int, userID: Int)
-    {
-        transaction(DatabaseSettings.connection) {
+    fun uploadFullPaper(documentPath: String, paperID: Int, userID: Int) =
+        transaction(connection) {
             PaperTable.update({PaperTable.id eq paperID}) {
                 it[PaperTable.documentPath] = documentPath
-            }
         }
     }
 
-    fun changeAbstract(userID: Int, paperID: Int, abstract: String)
-    {
-        transaction (DatabaseSettings.connection){
+    fun changeAbstract(userID: Int, paperID: Int, abstract: String) =
+        transaction (connection){
             PaperTable.update({PaperTable.id eq paperID}) {
                 it[PaperTable.abstract] = abstract
             }
-        }
     }
 }

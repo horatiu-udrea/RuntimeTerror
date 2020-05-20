@@ -2,11 +2,13 @@ package ro.runtimeterror.cms.controller
 
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
+import ro.runtimeterror.cms.database.DatabaseSettings
 import ro.runtimeterror.cms.database.tables.ReviewTable
 import ro.runtimeterror.cms.model.PaperReview
 import ro.runtimeterror.cms.model.Qualifier
 import ro.runtimeterror.cms.model.validators.PaperValidator
 import ro.runtimeterror.cms.model.validators.UserValidator
+import ro.runtimeterror.cms.database.DatabaseSettings.connection
 
 class PaperReviewController
 {
@@ -34,20 +36,15 @@ class PaperReviewController
     /**
      * Change a review
      */
-    fun review(userID: Int, paperID: Int, recommendation: String, qualifier: Int)
-    {
-        UserValidator.exists(userID)
-        PaperValidator.exists(paperID)
-        val sQualifier: Qualifier = Qualifier.from(qualifier)
-        transaction {
+    fun review(userID: Int, paperID: Int, recommendation: String, qualifier: Int)= transaction(connection) {
+            UserValidator.exists(userID)
+            PaperValidator.exists(paperID)
             ReviewTable
                     .insert {
                         it[ReviewTable.userID] = userID
                         it[ReviewTable.paperID] = paperID
-                        it[ReviewTable.qualifier] = sQualifier.value
+                        it[ReviewTable.qualifier] = Qualifier.from(qualifier).value
                         it[recommandation] = recommendation
                     }
         }
-    }
-
 }
