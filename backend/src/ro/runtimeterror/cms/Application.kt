@@ -1,6 +1,9 @@
 package ro.runtimeterror.cms
 
 import ro.runtimeterror.cms.controller.*
+import ro.runtimeterror.cms.networking.session.CookieSessionManager
+import ro.runtimeterror.cms.networking.session.ServerSessionManager
+import ro.runtimeterror.cms.networking.session.SessionManager
 
 fun main(args: Array<String>)
 {
@@ -17,4 +20,5 @@ object Components
     val paperReviewController: PaperReviewController = PaperReviewController()
     val paperAssignController: PaperAssignController = PaperAssignController()
     val paperDecisionController: PaperDecisionController = PaperDecisionController()
+    val sessionManager: SessionManager = if (true) CookieSessionManager() else ServerSessionManager()
 }
