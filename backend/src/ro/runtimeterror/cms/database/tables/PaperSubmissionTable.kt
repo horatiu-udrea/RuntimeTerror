@@ -6,12 +6,8 @@ object PaperSubmissionTable : Table("PaperSubmissions")
 {
 
 
-    val paperID = integer("FK_PaperID")
-            .references(PaperTable.id)
-//                    PaperSubmissionTable.reference("FK_PaperID", PaperTable.id)
-    val userID = integer("FK_UserID")
-        .references(UserTable.id)
-//        PaperSubmissionTable.reference("FK_UserID", UserTable.id)
+    val paperID = integer("FK_PaperID").references(PaperTable.id)
+    val userID = integer("FK_UserID").references(UserTable.id)
 
     override val primaryKey = PrimaryKey(
         paperID,
