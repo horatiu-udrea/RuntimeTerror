@@ -90,22 +90,10 @@
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scene_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scene.js */ \"./src/scene.js\");\n/* harmony import */ var _scene_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_scene_js__WEBPACK_IMPORTED_MODULE_0__);\n // function component() {\n//     const element = document.createElement('div');\n//     // Lodash, currently included via a script, is required for this line to work\n//     // element.innerHTML = _.join(['Hello', 'webpack'], ' ');\n//     var scene = new MainScene();\n//     element.innerHTML = scene;\n//     return element;\n//   }\n//   document.body.appendChild(component());\n\n//# sourceURL=webpack:///./src/index.js?");
-
-/***/ }),
-
-/***/ "./src/scene.js":
-/*!**********************!*\
-  !*** ./src/scene.js ***!
-  \**********************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// import * as THREE from \"../node_modules/three/build/three.module.js\";\n// var scene = new THREE.Scene();\n// var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);\n// var renderer = new THREE.WebGLRenderer();\n// renderer.setSize(window.innerWidth, window.innerHeight);\n// document.body.appendChild(renderer.domElement);\n// var geometry = new THREE.BoxGeometry();\n// var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });\n// var cube = new THREE.Mesh(geometry, material);\n// scene.add(cube);\n// camera.position.z = 5;\n// var animate = function () {\n//     requestAnimationFrame(animate);\n//     cube.rotation.x += 0.01;\n//     cube.rotation.y += 0.01;\n//     renderer.render(scene, camera);\n// };\n// animate();\nfunction myFunction() {\n  var x = document.getElementById(\"myText\").value;\n  document.getElementById(\"demo\").innerHTML = x;\n} // document.getElementById(\"tryItButton\").addEventListener(\"click\", myFunction);\n\n//# sourceURL=webpack:///./src/scene.js?");
+eval("console.log(\"entry\");\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 

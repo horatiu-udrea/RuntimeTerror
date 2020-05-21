@@ -17,7 +17,7 @@ let webpackConfig = {
         path: path.resolve(__dirname, "dist"),
     },
     resolve: {
-        extensions: ['.js']
+        extensions: ['.js', '.ts']
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -45,45 +45,7 @@ let webpackConfig = {
                 }
             }
         },
-        // {
-        //     test: /\.worker\.js$/,
-        //     use: {
-        //         loader: 'worker-loader',
-        //         options: {
-        //             inline: true,
-        //             fallback: false,
-        //             name: "worker.[hash].js"
-        //         }
-        //     }
-        // },
-        // {
-        //     // Styles
-        //     test: /\.css$/,
-        //     use: [
-        //         'style-loader',
-        //         'css-loader'
-        //     ]
-        // },
-        // {
-        //     test: /\.(scss)$/,
-        //     use: [{
-        //         loader: 'style-loader', // inject CSS to page
-        //     }, {
-        //         loader: 'css-loader', // translates CSS into CommonJS modules
-        //     }, {
-        //         loader: 'postcss-loader', // Run post css actions
-        //         options: {
-        //             plugins: function () { // post css plugins, can be exported to postcss.config.js
-        //                 return [
-        //                     require('precss'),
-        //                     require('autoprefixer')
-        //                 ];
-        //             }
-        //         }
-        //     }, {
-        //         loader: 'sass-loader' // compiles Sass to CSS
-        //     }]
-        // },
+        
         {
             // Graphics
             test: /\.(png|jpg|jpeg|gif|bmp|svg)/,
