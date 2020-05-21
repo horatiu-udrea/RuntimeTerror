@@ -17,9 +17,14 @@ This file will be used to simulate the first phase of execution of our program:
 -- To make things faster we will add all the things concerned with the preliminary phase
 -- in this file too. Thus we will be able to run this file and then we will have our
 -- database in the first phase of the execution.
+--
+-- In the preliminary phase file the execution of the phase was not completed.
+-- Here in this file we will make sure that the preliminary phase is completed.
  */
 
 DELETE FROM conference;
+DELETE FROM reviews;
+DELETE FROM bidpapers;
 DELETE FROM papersubmissions;
 DELETE FROM papers;
 DELETE FROM users;
@@ -44,29 +49,28 @@ INSERT INTO cms.users (name, username, password, affiliation, email, webpage, va
 
 /*
 Program committee members:
--- 1 of them have the default Author
--- 2 PCMember
+-- 3 PCMember
 -- 1 Co chair
 -- 1 chair
  */
 INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad Ungureanu', 'Vlad99', 'Vlad99', 'ubb Cluj', 'VU99@gmail.com', 'Vladweb.com', 1, 2);
 INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Razvan Zoltan', 'Zoli99', 'Zoli99', 'ubb Cluj', 'RZ99@gmail.com', 'Zoliweb.com', 1, 2);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei Suciu', 'Andrei99', 'Andrei99', 'ubb Cluj', 'AS99@gmail.com', 'Andreiweb.com', 0, 1);
+INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei Suciu', 'Andrei99', 'Andrei99', 'ubb Cluj', 'AS99@gmail.com', 'Andreiweb.com', 1, 2);
 INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Antoniu Stan', 'Toni99', 'Toni99', 'ubb Cluj', 'TS99@gmail.com', 'Toniweb.com', 1, 3);
 INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Darius Ternovan', 'Darius99', 'Darius99', 'ubb Cluj', 'DT99@gmail.com', 'Dariusweb.com', 1, 4);
 
 /*
 Authors:
--- 5 of them have the "Author" type updated and because of that they are also validated but
--- they did not submit anything yet and nor have they bought their tickets
--- 1 of them has the "Author" type, is validated, has a ticket bought and also submitted the abstract
--- 1 of them has the "Author" type, is validated, has a ticket bought, submitted abstract + full paper
+-- 3 of them have the "Author" default type and are not validated
+-- 2 of them have the "Author" type, they are validated but they did not submit anything
+-- 1 of them has the "Author" type, is validated and also submitted the abstract
+-- 1 of them has the "Author" type, is validated and submitted abstract + full paper
 -- (because we set the conference to be special and to allow the authors to submit the full paper early)
  */
 
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Mihai Berechet', 'Mihai99', 'Mihai99', 'Cambridge', 'MB99@gmail.com', 'Mihaiweb.com', 1, 1);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Corina Mihai', 'Corina99', 'Corina99', 'ubb Cluj', 'CM99@gmail.com', 'Corinaweb.com', 1, 1);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad Enache', 'VladE99', 'VladE99', 'poli Bucuresti', 'VE99@gmail.com', 'Vladeweb.com', 1, 1);
+INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Mihai Berechet', 'Mihai99', 'Mihai99', 'Cambridge', 'MB99@gmail.com', 'Mihaiweb.com', 0, 1);
+INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Corina Mihai', 'Corina99', 'Corina99', 'ubb Cluj', 'CM99@gmail.com', 'Corinaweb.com', 0, 1);
+INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad Enache', 'VladE99', 'VladE99', 'poli Bucuresti', 'VE99@gmail.com', 'Vladeweb.com', 0, 1);
 INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Ana Enache', 'Ana99', 'Ana99', 'ubb Cluj', 'AE99@gmail.com', 'Anaweb.com', 1, 1);
 INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Diana Sirbu', 'Diana99', 'Diana99', '-', 'DS99@gmail.com', 'Dianaweb.com', 1, 1);
 INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Bianca Berlea', 'Bianca99', 'Bianca99', 'poli Bucuresti', 'BB99@gmail.com', 'Biancaweb.com', 1, 1);
@@ -78,7 +82,7 @@ Abstract and Paper:
 -- 1 of the validated author submitted the abstract and the full paper
 -- We will have an entry in the PaperSubmissions table for both situations
  */
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru medicina', 'medicinaAbstract', 'software, medicina', 'medicina, software', 'Bianca Berlea', '', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('AiPaper', 'ITAbstract', 'ai, artificial intelligence', 'artificial intelligence', 'Bianca Caluian', './FolderFiles/aiPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru medicina', 'medicinaAbstract', 'medicina', 'medicina, software', 'medicina Topic', '', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('AiPaper', 'ITAbstract', 'ai', 'ai, artificial intelligence', 'ai Topic', './FolderFiles/aiPaper.pdf', 1);
 INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (1, 17) ON DUPLICATE KEY UPDATE fk_userid = 17;
-INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (1, 18) ON DUPLICATE KEY UPDATE fk_userid = 18;
+INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (2, 18) ON DUPLICATE KEY UPDATE fk_userid = 18;
