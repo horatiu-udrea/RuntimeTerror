@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $("#createConference").click(function () {
+    $("#createConference").click(function (e) {
 
         $.post("http://localhost:8080/conference", {
             name: $("#conferenceName").val(),
