@@ -1,22 +1,24 @@
 package ro.runtimeterror.cms
 
-import ro.runtimeterror.cms.controller.AuthenticationController
-import ro.runtimeterror.cms.controller.Controller
-import ro.runtimeterror.cms.controller.ConferenceController
-import ro.runtimeterror.cms.controller.PaperSubmissionController
-import ro.runtimeterror.cms.database.DatabaseRepository
-import ro.runtimeterror.cms.repository.Repository
+import ro.runtimeterror.cms.controller.*
+import ro.runtimeterror.cms.networking.session.CookieSessionManager
+import ro.runtimeterror.cms.networking.session.ServerSessionManager
+import ro.runtimeterror.cms.networking.session.SessionManager
 
-fun main(args: Array<String>): Unit
+fun main(args: Array<String>)
 {
     io.ktor.server.netty.EngineMain.main(args)
 }
 
 object Components
 {
-    private val repository: Repository = DatabaseRepository()
-    val controller: Controller = Controller(repository);
-    val authenticationController: AuthenticationController = AuthenticationController(repository)
-    val conferenceController: ConferenceController = ConferenceController(repository)
-    val paperSubmissionController: PaperSubmissionController = PaperSubmissionController(repository)
+    val authenticationController: AuthenticationController = AuthenticationController()
+    val userController: UserController = UserController()
+    val conferenceController: ConferenceController = ConferenceController()
+    val paperSubmissionController: PaperSubmissionController = PaperSubmissionController()
+    val paperBidController: PaperBidController = PaperBidController()
+    val paperReviewController: PaperReviewController = PaperReviewController()
+    val paperAssignController: PaperAssignController = PaperAssignController()
+    val paperDecisionController: PaperDecisionController = PaperDecisionController()
+    val sessionManager: SessionManager = if (true) CookieSessionManager() else ServerSessionManager()
 }

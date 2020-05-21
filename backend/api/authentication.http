@@ -1,0 +1,27 @@
+### Login
+POST {{URL}}/authentication/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+### Logout
+POST {{URL}}/authentication/logout
+
+### Get user information
+GET {{URL}}/authentication
+
+### Sign up
+PUT {{URL}}/authentication
+Content-Type: application/json
+
+{
+  "name": "test",
+  "username": "test",
+  "password": "test",
+  "affiliation": "test",
+  "email": "test",
+  "webPage": "test"
+}

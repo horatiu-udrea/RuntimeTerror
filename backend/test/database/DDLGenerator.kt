@@ -6,18 +6,19 @@ import ro.runtimeterror.cms.database.tables.*
 import java.io.File
 
 
-fun main(): Unit
+fun main()
 {
     DatabaseSettings.connection
     transaction {
         val createStatements = SchemaUtils.createStatements(
-            ConferenceTable,
-            UserTable,
-            PaperTable,
-            BidPaperTable,
-            ReviewTable,
-            SectionTable,
-            UserSectionChoiceTable
+                ConferenceTable,
+                UserTable,
+                PaperTable,
+                PaperSubmissionTable,
+                BidPaperTable,
+                ReviewTable,
+                SectionTable,
+                UserSectionChoiceTable
         )
         val file = File("../database/ddl.sql")
         file.createNewFile()

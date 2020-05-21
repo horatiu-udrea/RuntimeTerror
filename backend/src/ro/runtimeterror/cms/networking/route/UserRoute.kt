@@ -1,6 +1,7 @@
 package ro.runtimeterror.cms.networking.route
 
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Routing
@@ -26,6 +27,7 @@ fun Routing.userRoute(userController: UserController)
             authorize(UserType.ADMIN)
             val userDTO = call.receive<UserUpdateDTO>()
             userController.changeUser(userDTO.userId, UserType.from(userDTO.type), userDTO.validated)
+            call.respond(HttpStatusCode.OK)
         }
     }
 }

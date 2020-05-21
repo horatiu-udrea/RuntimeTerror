@@ -1,0 +1,23 @@
+### Get all papers
+GET {{URL}}/paper/assign
+
+### Check bid result of PC member
+POST {{URL}}/paper/assign
+Content-Type: application/json
+
+{
+  "paperId": 1,
+  "userId": 1
+}
+
+### Get all PC members
+GET {{URL}}/member
+
+### Assign paper to PC member
+PUT {{URL}}/paper/assign
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "paperId": 1
+}

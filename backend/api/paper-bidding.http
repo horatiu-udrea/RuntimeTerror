@@ -1,0 +1,11 @@
+### Get all papers and assigned bid result
+GET {{URL}}/paper/bid
+
+### Bid on paper
+PUT {{URL}}/paper/bid
+Content-Type: application/json
+
+{
+  "paperId": 1,
+  "bidResult": 1
+}
