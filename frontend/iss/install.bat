@@ -3,4 +3,4 @@ echo ### Install app modules
 call npm Install
 
 echo ### building the app
-call npm tun build
+call npm run build
