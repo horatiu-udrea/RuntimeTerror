@@ -22,4 +22,8 @@ class ServerSessionManager : SessionManager
         userSession = null
     }
 
+    override fun setUserSession(context: PipelineContext<*, ApplicationCall>, userSession: UserSession) {
+        this.userSession = userSession
+    }
+
 }
