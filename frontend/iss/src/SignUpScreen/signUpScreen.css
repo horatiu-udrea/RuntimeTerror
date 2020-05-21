@@ -1,0 +1,77 @@
+body,html{
+    overflow: hidden;
+    margin: 0%;
+    padding: 0%;
+    height: 100%;
+    width: 100%;
+}
+
+#supportStripeBackground{
+    top:0%;
+    left:0%;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #696773;
+    clip-path: polygon(0 0, 50% 0, 80% 100%, 50% 100%, 20% 100%, 0% 30%);
+}
+
+#supportStripeForeground{
+    top:0%;
+    left:0%;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: #BFC0C0;
+    clip-path: polygon(0 0, 48% 0, 78% 100%, 50% 100%, 22% 100%, 0 23%);
+}
+
+input[type=text],input[type=password]{
+    background-color: transparent;
+    border-style: none;
+    border-bottom: solid rgb(255, 0, 0) 1px;
+
+    position: absolute;
+    width: 380px;
+    height: 18px;
+}
+
+input[type=text],input[type=password]:focus {
+    outline:none;
+}
+
+.buttonDiv{
+    position: absolute;
+    /*clip-path: polygon(15% 0%, 100% 0, 85% 100%, 0% 100%);*/
+    width: 200px;
+    height: 18px;
+
+    font-family: DejaVu Sans Mono;
+    user-select: none;
+
+    /*border: solid rgb(167, 0, 0) 1px;  this adds a border on the top and bottom and top of the div.*/
+    transition-property: border-color; 
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+    background-color: #EFF2C0;
+    border-radius: 20px;
+    border: solid 2px #EFF2C0;
+}
+
+.buttonDiv:hover{
+    border-color: rgb(141, 238, 255);
+}
+
+img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0%;
+    margin: 0%;
+}
+
+p{
+    position: absolute;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+}

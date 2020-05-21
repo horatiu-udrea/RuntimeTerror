@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="pcMemberPickScreen.js"></script>
+</head>
+<body>
+    <ul id='listOfPapers'>
+        
+    </ul>
+    <form>
+        <label>
+            Role:
+        </label>
+        <select name="role" id="roleSelector">
+            <option value="2">Pc Member</option>
+            <option value="1">Author</option>
+            <option value="3">Chair</option>
+            <option value="4">co Chair</option>
+        </select>
+        <label>
+            Valid: 
+        </label>
+        <input type="checkbox" name="Valid" id="validCheckbox">
+        <button id="submitButton" type='button'>Submit</button>
+    </form>
+    <p id="message"></p>
+</body>
+</html>
