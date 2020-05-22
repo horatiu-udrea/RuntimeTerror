@@ -13,7 +13,7 @@ data class UserInformation(
     val email: String,
     val webPage: String
 )
-
+//TODO add validated field
 fun User.toUserInformation(): UserInformation
 {
     return UserInformation(
