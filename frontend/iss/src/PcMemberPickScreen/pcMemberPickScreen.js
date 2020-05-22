@@ -1,4 +1,4 @@
-import { HOST, PORT } from "./Globuls.js"
+import { HOST, PORT } from "../Globuls.js"
 
 {
     let list = []
