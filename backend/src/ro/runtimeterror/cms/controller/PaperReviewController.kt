@@ -58,13 +58,6 @@ class PaperReviewController
         }
     }
 
-    private fun checkIfPCMember(userId: Int): Boolean {
-        return UserDAO
-            .findById(userId)
-            ?.type
-            ?.value == UserType.PC_MEMBER.value
-    }
-
     /**
      * Change a review
      */
