@@ -9,4 +9,6 @@ interface SessionManager
     fun getUserSession(context: PipelineContext<*, ApplicationCall>): UserSession?
 
     fun clearUserSession(context: PipelineContext<*, ApplicationCall>)
+
+    fun setUserSession(context: PipelineContext<*, ApplicationCall>, userSession: UserSession)
 }

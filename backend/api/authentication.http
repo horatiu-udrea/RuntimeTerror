@@ -3,8 +3,8 @@ POST {{URL}}/authentication/login
 Content-Type: application/json
 
 {
-  "username": "Cami99",
-  "password": "Cami99"
+  "username": "admin",
+  "password": "admin"
 }
 
 ### Logout

@@ -27,7 +27,8 @@ fun Routing.authenticationRoute(authenticationController: AuthenticationControll
                 val user: User? = authenticationController.authenticate(username, password)
                 if (user != null)
                 {
-                    call.sessions.set(
+                    Components.sessionManager.setUserSession(
+                        this@post,
                         UserSession(
                             user.userId,
                             user.type
