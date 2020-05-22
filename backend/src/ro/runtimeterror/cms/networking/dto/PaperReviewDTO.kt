@@ -13,9 +13,9 @@ data class PaperReviewDTO(
 fun PaperReview.toDTO(): PaperReviewDTO
 {
     return PaperReviewDTO(
-        paper.toDTOWithId(),
-        recommendation,
-        qualifier.value,
+        paper!!.toDTOWithId(),
+        recommendation!!,
+        qualifier!!.value,
         otherReviews.map { review -> review.toDTO() })
 }
 
