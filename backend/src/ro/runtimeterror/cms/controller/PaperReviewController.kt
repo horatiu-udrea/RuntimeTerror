@@ -22,10 +22,10 @@ class PaperReviewController
      */
     fun getReviews(userId: Int): List<PaperReview>
     {
-        return getPCMemberReviews(userId)?: throw NoPapersException("The user hasn't made/gotten any reviews")
+        return getPCMemberReviews(userId)
     }
 
-    private fun getPCMemberReviews(userId: Int): List<PaperReview>? = transaction(connection){
+    private fun getPCMemberReviews(userId: Int): List<PaperReview> = transaction(connection){
         val authoredPapers: List<Int> = PaperDAO
             .all()
             .filter{ userId in it.authors.map {user-> user.userId } }
