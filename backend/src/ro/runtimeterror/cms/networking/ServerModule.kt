@@ -29,6 +29,8 @@ fun Application.module(testing: Boolean = false)
 {
     install(CORS) {
         method(HttpMethod.Options)
+        method(HttpMethod.Post)
+        method(HttpMethod.Get)
         method(HttpMethod.Put)
         method(HttpMethod.Delete)
         method(HttpMethod.Patch)
@@ -36,6 +38,7 @@ fun Application.module(testing: Boolean = false)
 //        header("MyCustomHeader")
         allowCredentials = true
         anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
+        host("localhost:5500");
     }
 
     install(ContentNegotiation) {

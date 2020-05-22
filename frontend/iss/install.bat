@@ -1,6 +1,6 @@
 ECHO OFF
 echo ### Install app modules
-call npm Install
+call npm install
 
 echo ### building the app
-call npm run build
+call npm run build  
