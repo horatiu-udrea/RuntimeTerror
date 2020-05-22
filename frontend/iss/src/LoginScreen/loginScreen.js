@@ -62,21 +62,34 @@ $(document).ready(function () {
 
     //Login Button Click
     $("#loginButtonStripe").click(function(){
-        /*
-        http://localhost:4444
-        */
-        $.post(HOST + PORT + "/authentication/login", {username: $("#usernameInput").val(), password: $("#passwordInput").val()})
-        .done(function(){
+
+       $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: HOST + PORT + "/authentication/login",
+        data: { username: $("#usernameInput").val(), password: $("#passwordInput").val() },
+        dataType: "json"
+        }).done(function(){
         
             let role, phase, bidDate;
             let today = new Date();
-
-            $.get(HOST + PORT + "/authentication", function(data){
+            
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: HOST + PORT + "/authentication",
+                dataType: "json"
+            }).done(function(data){
                 role = data.type
                 bidDate = Date.parse(data.biddingDeadline)
             });
-
-            $.get(HOST + PORT + "/conference", function(data){
+            
+            $.ajax({
+                type: "GET",
+                contentType: "application/json",
+                url: HOST + PORT + "/conference",
+                dataType: "json"
+            }).done(function(data){
                 phase = data.phase
             });
             
