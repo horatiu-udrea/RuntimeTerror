@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Create Conference</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./createConference.js"></script>
+
+</head>
+<!-- Conferences should have : 
+        1. name - string
+        2. current phase - number
+        3. start date - date
+        4. end date - date
+        5. submissions deadline - date
+        6. proposals dealine - date
+        7. bidding deadline - date
+        8. submit paper early - bool -->
+
+<body style="background-color: #FAF3DD;">
+
+    Conference Name: <input type="text" name="ConferenceName" id="conferenceName" placeholder="conference name">
+    <br>
+    Coneference Current Phase: <input type="text" name="ConferenceCurrentPhase" id="conferenceCurrentPhase" placeholder="conference current phase">
+    <br>
+    Start Date:<input type="date" id="conferenceStartDate" name="trip-start">
+    <br>
+    End Date: <input type="date" id="conferenceEndDate" name="trip-start">
+    <br>
+    Submissions Dealdline : <input type="date" id="conferenceSubmissionsDeadline" name="trip-start">
+    <br>
+    Proposals Deadline: <input type="date" id="conferenceProposalsDeadline" name="trip-start">
+    <br>
+    Bidding Deadline : <input type="date" id="conferenceBiddingDeadline" name="trip-start">
+    <br>
+    Allow Early Paper Submission: <select id="coneferenceEarlySubmissions">
+        <option value="yes">Yes</option>
+        <option value="no">NO</option>
+    </select>
+    <br>
+    <input type="submit" name="createConference" id="createConference" value="CreateConference">
+</body>
+
+</html>
