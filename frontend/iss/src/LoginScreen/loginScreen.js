@@ -116,6 +116,7 @@ $(document).ready(function () {
                                 if (dataConference.statusText == "OK") {
                                     bidDate = dataConference.responseJSON.biddingDeadline
                                     phase = dataConference.responseJSON.currentPhase;
+                                    console.log(role, phase);
                                      switch (role | phase) {
                                         case 0 | 1:
                                             window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
@@ -185,7 +186,7 @@ $(document).ready(function () {
                                             window.location = "ADD scmember in phase 3 LINK HERE";
                                             break;
                                         default:
-                                            // window.location = "Nothing-to-do-here page....";
+                                            window.location = "Nothing-to-do-here page....";
                                             break;
                                     }
 

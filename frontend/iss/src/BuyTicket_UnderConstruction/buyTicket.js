@@ -1,16 +1,23 @@
-import { HOST,PORT } from "../Globuls.js"
+import { HOST, PORT } from "../Globuls.js"
 
 $(document).ready(function () {
-    
-    $.getJSON(HOST + PORT + "/conference", data,
-        function (data) {
-            $("#conferenceInfo").text(data.startDate +"<br>"+data.endDate+"<br>"+data.description)
-        }
-    );
 
-    $("#paypalButton").click(function (e) { 
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: HOST + PORT + "/conference",
+        dataType: "json",
+        complete: function (data) {
+            if (data.statusText == "OK") {
+                $("#conferenceInfo").text(data.responseJSON.startDate + "\n" + data.responseJSON.endDate + "\n" + data.responseJSON.name)
+            }
+        }
+    });
+
+
+    $("#paypalButton").click(function (e) {
         e.preventDefault();
-        
+
         $(this).parent().parent().css("display", "none")
 
         e.stopPropagation();
