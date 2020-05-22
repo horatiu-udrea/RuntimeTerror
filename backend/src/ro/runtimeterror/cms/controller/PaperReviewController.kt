@@ -12,7 +12,6 @@ import ro.runtimeterror.cms.database.daos.PaperDAO
 import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.exceptions.NoPapersException
 import ro.runtimeterror.cms.model.UserReview
-import ro.runtimeterror.cms.model.UserType
 
 class PaperReviewController
 {
