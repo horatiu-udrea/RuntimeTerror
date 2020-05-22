@@ -1,0 +1,12 @@
+### Get all assigned reviews
+GET {{URL}}/paper/review
+
+### Change review
+PUT {{URL}}/paper/review
+Content-Type: application/json
+
+{
+  "paperId": 1,
+  "recommendation": "text",
+  "qualifier": 1
+}
