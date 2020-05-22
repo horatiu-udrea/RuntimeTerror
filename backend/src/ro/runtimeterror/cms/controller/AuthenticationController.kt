@@ -5,6 +5,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.tables.UserTable
+import ro.runtimeterror.cms.exceptions.UserAlreadyExistsException
 import ro.runtimeterror.cms.model.User
 import ro.runtimeterror.cms.model.UserType
 import ro.runtimeterror.cms.model.validators.UserValidator
@@ -52,7 +53,7 @@ class AuthenticationController
                 UserTable.username eq username
                 }.empty()
             ){
-                return@transaction
+                throw UserAlreadyExistsException("The user $username already exists!")
             }
 
             UserTable.insert {

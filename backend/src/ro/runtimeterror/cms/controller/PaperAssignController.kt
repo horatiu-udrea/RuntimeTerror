@@ -11,6 +11,7 @@ import ro.runtimeterror.cms.database.tables.ReviewTable
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.exceptions.BidDoesNotExistException
+import ro.runtimeterror.cms.exceptions.NoPapersException
 import ro.runtimeterror.cms.model.*
 import ro.runtimeterror.cms.model.validators.PaperValidator
 import ro.runtimeterror.cms.model.validators.UserValidator

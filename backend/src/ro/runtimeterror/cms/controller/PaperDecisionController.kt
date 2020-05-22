@@ -50,13 +50,14 @@ class PaperDecisionController
             .toList()
     }
 
+//    Returns true if there are no rejects
     private fun noRejects(paperId: Int): Boolean = transaction(connection){
         return@transaction ReviewTable
             .select { ReviewTable.paperID eq paperId }
             .filter { it[ReviewTable.qualifier] != Qualifier.STRONG_REJECT.value || it[ReviewTable.qualifier] != Qualifier.REJECT.value}
             .isEmpty()
     }
-
+//  Returns true if there are no accepts
     private fun noAccepts(paperId: Int): Boolean = transaction(connection){
         return@transaction ReviewTable
             .select { ReviewTable.paperID eq paperId }
