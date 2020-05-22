@@ -55,16 +55,12 @@ class PaperAssignController
      * Assign the paper to the pc member
      */
 //    TODO not sure about this, if I don't add the qualifier and the status, is it null or would it give an error?
-    fun assign(paperID: Int, userID: Int)
-    {
-        PaperValidator.exists(paperID)
-        UserValidator.exists(userID)
-        transaction(connection) {
+    fun assign(paperID: Int, userID: Int) = transaction(connection) {
+            PaperValidator.exists(paperID)
+            UserValidator.exists(userID)
             ReviewTable.insert {
                 it[ReviewTable.userID] = userID
                 it[ReviewTable.paperID] = paperID
             }
         }
-    }
-
 }
