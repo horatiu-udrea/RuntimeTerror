@@ -1,4 +1,6 @@
-import { HOST, PORT } from "../Globuls.js"
+// import { HOST, PORT } from "../Globuls.js"
+const HOST = "http://localhost:"
+const PORT = "8080"
 
 var imageArray = ["#background4","#background1","#background2","#background3","#background4"];
 var currentImage = 1;
@@ -36,19 +38,25 @@ $(document).ready(function () {
             $("#errorMessage").text("");
 
             $.ajax({
-                type: 'PUT',
+                type: "PUT",
                 url: HOST + PORT + "/authentication",
-                contentType: 'application/json',
-                data: JSON.stringify({"name":$("#nameField").val,
-                                      "username":$("#usernameField").val,
-                                      "password":$("#passwordField").val, 
-                                      "affiliation":$("#affiliationField").val, 
-                                      "email":$("#emailField").val, 
-                                      "webpage":$("#webpageField").val}),
-            }).done(function () {
-                //Aici va veni... previous link? sau ceva de genul
-            }).fail(function (error) {
-                $("input[type=text]").val = error.responseText;
+                contentType: "application/json",
+                data: JSON.stringify({name:$("#nameField").val,
+                                      username:$("#usernameField").val,
+                                      password:$("#passwordField").val, 
+                                      affiliation:$("#affiliationField").val, 
+                                      email:$("#emailField").val, 
+                                      webpage:$("#webpageField").val}),
+                dataType: "json",
+                complete: function(data, status) {
+                    console.log(data);
+                    if(data.statusText == "OK") {
+                        alert("wait untill a PC Member validates your account");
+                        window.location = "../LoginScreen/loginScreen.html";
+                    }else {
+                        alert("invalid request");
+                    }
+                }
             });
         }
     });
