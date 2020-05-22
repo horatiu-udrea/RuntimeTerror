@@ -11,6 +11,7 @@ import io.ktor.routing.route
 import ro.runtimeterror.cms.controller.UserController
 import ro.runtimeterror.cms.model.UserType
 import ro.runtimeterror.cms.networking.authorize
+import ro.runtimeterror.cms.networking.dto.UserDTO
 import ro.runtimeterror.cms.networking.dto.UserUpdateDTO
 import ro.runtimeterror.cms.networking.dto.toUserInformation
 
@@ -26,6 +27,7 @@ fun Routing.userRoute(userController: UserController)
         put {
             authorize(UserType.ADMIN)
             val userDTO = call.receive<UserUpdateDTO>()
+            println(userDTO.userId);
             userController.changeUser(userDTO.userId, UserType.from(userDTO.type), userDTO.validated)
             call.respond(HttpStatusCode.OK)
         }
