@@ -26,3 +26,9 @@ fun Section.toDTO(): SectionDTO
         roomName
     )
 }
+
+data class CreateSectionDTO(
+    val name: String,
+    val startTime: String,
+    val endTime: String
+)

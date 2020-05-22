@@ -6,12 +6,12 @@ import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
 import ro.runtimeterror.cms.controller.PaperSubmissionController
+import ro.runtimeterror.cms.exceptions.ProgramException
 import ro.runtimeterror.cms.model.UserType
 import ro.runtimeterror.cms.networking.authorize
 import ro.runtimeterror.cms.networking.dto.AbstractDTO
-import ro.runtimeterror.cms.networking.dto.PaperDTO
+import ro.runtimeterror.cms.networking.dto.CreatePaperDTO
 import ro.runtimeterror.cms.networking.dto.toDTO
-import ro.runtimeterror.cms.networking.dto.toDTOWithId
 import ro.runtimeterror.cms.networking.uploadFile
 import ro.runtimeterror.cms.networking.userSession
 
@@ -33,7 +33,7 @@ fun Route.paperSubmissionRoute(paperSubmissionController: PaperSubmissionControl
 
         post {
             authorize(UserType.AUTHOR)
-            val paper = call.receive<PaperDTO>()
+            val paper = call.receive<CreatePaperDTO>()
             val user = userSession()
             with(paper)
             {
@@ -61,17 +61,20 @@ fun Route.paperSubmissionRoute(paperSubmissionController: PaperSubmissionControl
             authorize(UserType.AUTHOR)
             val user = userSession()
             val path = uploadFile()
-            val paperId = call.parameters["paperId"]?.toInt() ?: throw NumberFormatException()
+            val paperId = call.parameters["paperId"]?.toInt() ?: throw ProgramException("Specify the paper id")
             paperSubmissionController.uploadFullPaper(path, paperId, user.id)
             call.respond(HttpStatusCode.OK)
         }
         route("/remaining"){
             get { // Get remaining papers
                 authorize(UserType.ADMIN)
-
+                val remainingPapers = paperSubmissionController.getRemainingPapers()
+                call.respond(remainingPapers.map { paper -> paper.toDTO() })
             }
             get("/{paperId}"){  // Get remaining authors for paper
-
+                authorize(UserType.ADMIN)
+                val paperId = call.parameters["paperId"]?.toInt() ?: throw ProgramException("Specify the paper id")
+                paperSubmissionController.getRemainingAuthors(paperId)
             }
         }
     }

@@ -17,6 +17,7 @@ import io.ktor.sessions.SessionStorageMemory
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
 import ro.runtimeterror.cms.Components
+import ro.runtimeterror.cms.exceptions.ProgramException
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
 import ro.runtimeterror.cms.model.UserType
 import ro.runtimeterror.cms.networking.route.*
@@ -46,7 +47,10 @@ fun Application.module(testing: Boolean = false)
 
     install(StatusPages) {
         exception<UnauthorizedException> { exception ->
-            call.respond(HttpStatusCode.Unauthorized, mapOf("OK" to false, "error" to (exception.message ?: "")))
+            call.respond(HttpStatusCode.Unauthorized, mapOf("error" to (exception.message ?: "")))
+        }
+        exception<ProgramException> { exception ->
+            call.respond(HttpStatusCode.InternalServerError, mapOf("error" to (exception.message ?: "")))
         }
     }
 
