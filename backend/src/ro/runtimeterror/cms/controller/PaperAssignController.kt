@@ -1,5 +1,6 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.dao.with
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
@@ -26,6 +27,7 @@ class PaperAssignController
         transaction (connection){
             return@transaction PaperDAO
                     .all()
+                    .with(PaperDAO::authorIterable)
                     .toList()
         }
 

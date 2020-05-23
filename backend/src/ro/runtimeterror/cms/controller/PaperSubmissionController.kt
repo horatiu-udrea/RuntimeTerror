@@ -1,5 +1,6 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.dao.load
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import ro.runtimeterror.cms.database.DatabaseSettings
@@ -23,7 +24,7 @@ class PaperSubmissionController
     fun getPapers(userId: Int): List<Paper> = transaction(connection){
             UserValidator.exists(userId)
             return@transaction getPaperIdsFromUser(userId)
-                .map { PaperDAO.findById(it)!! }
+                .map { PaperDAO.findById(it)!!.load(PaperDAO::authorIterable) }
                 .toList()
         }
 

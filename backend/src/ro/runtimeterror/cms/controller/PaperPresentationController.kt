@@ -1,5 +1,7 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.dao.load
+import org.jetbrains.exposed.dao.with
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -21,7 +23,7 @@ class PaperPresentationController
      * Get all accepted papers
      */
     fun getAcceptedPapers(): List<Paper> = transaction(connection) {
-        return@transaction PaperDAO.all().filter {
+        return@transaction PaperDAO.all().with(PaperDAO::authorIterable).filter {
                 it.paperStatus == PaperStatus.ACCEPTED
         }.toList()
     }
@@ -29,7 +31,7 @@ class PaperPresentationController
     fun getAllPapersThatAreAssignedASection(): List<Paper> = transaction(connection) {
         return@transaction SectionTable
             .selectAll()
-            .map { PaperDAO.findById(it[SectionTable.paperId]!!)!!}
+            .map { PaperDAO.findById(it[SectionTable.paperId]!!)!!.load(PaperDAO::authorIterable)}
             .toList()
     }
     /**
@@ -42,8 +44,8 @@ class PaperPresentationController
 
         return@transaction SectionTable
             .selectAll()
-            .filter{ it[SectionTable.paperId]?.value  in papersAssigned }
-            .map{PaperDAO.findById(it[SectionTable.paperId]!!)!!}
+            .filter{ it[SectionTable.paperId]  in papersAssigned }
+            .map{PaperDAO.findById(it[SectionTable.paperId]!!)!!.load(PaperDAO::authorIterable)}
             .toList()
     }
 
@@ -51,7 +53,7 @@ class PaperPresentationController
      * Get the authors of the paper that are not assigned to speak in a section yet
      */
     fun getRemainingAuthors(paperId: Int): List<User> = transaction(connection){
-        var assignedAuthors:List<Int> = authorsThatWereAlreadyAssignedASection(paperId)
+        val assignedAuthors:List<Int> = authorsThatWereAlreadyAssignedASection(paperId)
             .map { it.userId }
             .toList()
         return@transaction PaperSubmissionTable

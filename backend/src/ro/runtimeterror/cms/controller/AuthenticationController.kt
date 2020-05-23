@@ -1,5 +1,6 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.dao.load
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import ro.runtimeterror.cms.database.DatabaseSettings
@@ -25,6 +26,7 @@ class AuthenticationController
                         (UserTable.username eq username) and (UserTable.password eq password)
                     }
                     .firstOrNull()
+
             }
 
 

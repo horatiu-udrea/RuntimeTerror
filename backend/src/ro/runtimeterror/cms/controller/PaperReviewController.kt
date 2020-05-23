@@ -1,5 +1,7 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.dao.load
+import org.jetbrains.exposed.dao.with
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import ro.runtimeterror.cms.database.tables.ReviewTable
@@ -28,6 +30,7 @@ class PaperReviewController
     private fun getPCMemberReviews(userId: Int): List<PaperReview> = transaction(connection){
         val authoredPapers: List<Int> = PaperDAO
             .all()
+            .with(PaperDAO::authorIterable)
             .filter{ userId in it.authors.map {user-> user.userId } }
             .map { it.paperId }
             .toList()
@@ -37,7 +40,7 @@ class PaperReviewController
             .filter { it[ReviewTable.paperID] !in authoredPapers }
             .map {
                 PaperReview(
-                        PaperDAO.findById(it[ReviewTable.paperID])!!,
+                        PaperDAO.findById(it[ReviewTable.paperID])!!.load(PaperDAO::authorIterable),
                         it[ReviewTable.recommandation],
                         Qualifier.from(it[ReviewTable.qualifier]),
                         getOtherReviews(userId, it[ReviewTable.paperID])

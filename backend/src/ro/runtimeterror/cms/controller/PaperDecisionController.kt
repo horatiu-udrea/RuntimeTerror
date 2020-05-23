@@ -1,5 +1,6 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.dao.with
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -36,7 +37,7 @@ class PaperDecisionController
      *  else conflicting
      */
     fun getPapers(): List<PaperSuggestion> = transaction(connection){
-        val allPapers: List<Paper> = PaperDAO.all().toList()
+        val allPapers: List<Paper> = PaperDAO.all().with(PaperDAO::authorIterable).toList()
         return@transaction allPapers
             .map {
                 if(noAccepts(it.paperId)){

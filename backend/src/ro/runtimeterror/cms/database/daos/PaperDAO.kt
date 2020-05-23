@@ -21,7 +21,7 @@ class PaperDAO(id: EntityID<Int>) : IntEntity(id), Paper
     override var keywords by PaperTable.keywords
     override var topics by PaperTable.topics
     //TODO Eager loading Exposed framework
-    private val authorIterable by UserDAO via PaperSubmissionTable
+    val authorIterable by UserDAO via PaperSubmissionTable
     override var abstract by PaperTable.abstract
     override var documentPath by PaperTable.documentPath
     override val paperStatus: PaperStatus get() = PaperStatus.from(status)
