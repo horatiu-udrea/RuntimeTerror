@@ -2,6 +2,7 @@ package ro.runtimeterror.cms.controller
 
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import ro.runtimeterror.cms.database.DatabaseSettings
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.tables.UserTable
@@ -54,6 +55,16 @@ class AuthenticationController
                 }.empty()
             ){
                 throw UserAlreadyExistsException("The user $username already exists!")
+            }else if(
+                !UserTable.select {
+                    UserTable.email eq email
+                }.empty()
+            ){
+                UserTable.insert {
+                    it[UserTable.name] = name
+                    it[UserTable.username] = username
+                    it[UserTable.password] = password
+                }
             }
 
             UserTable.insert {
