@@ -34,7 +34,9 @@ class SectionController
     /**
      * Get all sections of the conference
      */
-    fun getAllSections() : List<Section> = SectionDAO.all().toList()
+    fun getAllSections() : List<Section> = SectionDAO
+                                            .all()
+                                            .toList()
 
     /**
      * User chose to participate in this section
@@ -49,44 +51,36 @@ class SectionController
     /**
      * Create a section
      */
-    fun createSection(name: String, startTime: LocalDateTime, endTime: LocalDateTime)
-    {
+    fun createSection(name: String, startTime: LocalDateTime, endTime: LocalDateTime) =
         SectionTable.insert {
             it[roomName] = name
             it[SectionTable.startTime] = startTime.toDateTime()
             it[SectionTable.endTime] = endTime.toDateTime()
-        }
-    }
+            }
 
     /**
      * Choose section chair
      */
-    fun chooseSectionChair(sectionId: Int, userId: Int)
-    {
+    fun chooseSectionChair(sectionId: Int, userId: Int) =
         SectionTable.update({SectionTable.id eq sectionId}) {
             it[SectionTable.userId] = userId
         }
-    }
 
     /**
      * Choose the specker that presents in this section as well as its paper
      */
-    fun chooseSectionPresenter(userId: Int, paperId: Int, sectionId: Int)
-    {
+    fun chooseSectionPresenter(userId: Int, paperId: Int, sectionId: Int) =
         SectionTable
             .update({SectionTable.id eq sectionId}){
                 it[SectionTable.paperId] = paperId
                 it[SectionTable.userId] = userId
             }
-    }
 
     /**
      * Change the room name of the section
      */
-    fun changeSectionRoom(sectionId: Int, roomName: String)
-    {
+    fun changeSectionRoom(sectionId: Int, roomName: String) =
         SectionTable.update ({ SectionTable.id eq sectionId }){
             it[SectionTable.roomName] = roomName
         }
-    }
 }

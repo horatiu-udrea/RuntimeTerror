@@ -21,8 +21,7 @@ class PaperDecisionController
     /**
      * Decide the status of a paper (accepted, rejected, conflicting)
      */
-    fun decide(paperID: Int, status: Int) =
-        transaction(connection) {
+    fun decide(paperID: Int, status: Int) = transaction(connection) {
             PaperTable.update({PaperTable.id eq paperID}) {
                 it[PaperTable.status] = PaperStatus.from(status).value
             }

@@ -19,8 +19,7 @@ class AuthenticationController
      *
      * @return The found user or null if the credentials are invalid
      */
-    fun authenticate(username: String, password: String): User? =
-            transaction(connection) {
+    fun authenticate(username: String, password: String): User? = transaction(connection) {
                 return@transaction UserDAO
                     .find {
                         (UserTable.username eq username) and (UserTable.password eq password)

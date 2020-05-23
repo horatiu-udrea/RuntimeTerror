@@ -21,10 +21,8 @@ class PaperReviewController
      * Get all the reviews made by the user or assigned to him and also the other reviews for the same paper
      * If the author is a PC member, he is not allowed to see the other reviews
      */
-    fun getReviews(userId: Int): List<PaperReview>
-    {
-        return getPCMemberReviews(userId)
-    }
+    fun getReviews(userId: Int): List<PaperReview> = getPCMemberReviews(userId)
+
 
     private fun getPCMemberReviews(userId: Int): List<PaperReview> = transaction(connection){
         val authoredPapers: List<Int> = PaperDAO

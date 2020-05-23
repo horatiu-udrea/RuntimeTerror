@@ -44,8 +44,7 @@ class PaperSubmissionController
         keywords: String,
         topics: String,
         authors: List<Author>
-    ) =
-        transaction(connection) {
+    ) = transaction(connection) {
             UserValidator.exists(userID)
 
             PaperSubmissionTable.insert{
@@ -73,15 +72,15 @@ class PaperSubmissionController
             }.value
         }
 
-    fun uploadFullPaper(documentPath: String, paperID: Int, userID: Int) =
-        transaction(connection) {
+    fun uploadFullPaper(documentPath: String, paperID: Int, userID: Int) = transaction(connection) {
+            UserValidator.exists(userID)
             PaperTable.update({PaperTable.id eq paperID}) {
                 it[PaperTable.documentPath] = documentPath
         }
     }
 
-    fun changeAbstract(userID: Int, paperID: Int, abstract: String) =
-        transaction (connection){
+    fun changeAbstract(userID: Int, paperID: Int, abstract: String) = transaction (connection){
+            UserValidator.exists(userID)
             PaperTable.update({PaperTable.id eq paperID}) {
                 it[PaperTable.abstract] = abstract
             }
