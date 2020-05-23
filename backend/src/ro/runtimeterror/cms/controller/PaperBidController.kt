@@ -22,6 +22,7 @@ class PaperBidController
      * If the user has not yet bid the paper, it is given as INDECISIVE
      */
     fun getPapers(userId: Int): List<PaperBid> = transaction(connection) {
+        UserValidator.exists(userId)
         return@transaction PaperDAO
             .all()
             .with(PaperDAO::authorIterable)

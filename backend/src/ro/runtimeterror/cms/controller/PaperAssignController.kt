@@ -50,7 +50,7 @@ class PaperAssignController
     fun getPCMembers(): List<User> = transaction(connection) {
             return@transaction UserTable
                     .select { UserTable.type eq UserType.PC_MEMBER.value}
-                    .map {user -> UserDAO.get(user[UserTable.id])}
+                    .map {user -> UserDAO[user[UserTable.id]] }
                     .toList()
         }
 

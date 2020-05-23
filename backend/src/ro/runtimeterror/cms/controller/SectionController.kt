@@ -8,7 +8,6 @@ import ro.runtimeterror.cms.database.daos.SectionDAO
 import ro.runtimeterror.cms.database.tables.SectionTable
 import ro.runtimeterror.cms.database.tables.UserSectionChoiceTable
 import ro.runtimeterror.cms.model.Section
-import kotlin.and
 
 class SectionController
 {

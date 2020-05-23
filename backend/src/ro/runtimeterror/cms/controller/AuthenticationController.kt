@@ -26,7 +26,6 @@ class AuthenticationController
                         (UserTable.username eq username) and (UserTable.password eq password)
                     }
                     .firstOrNull()
-
             }
 
 
@@ -50,23 +49,39 @@ class AuthenticationController
         email: String,
         webPage: String
     ) = transaction(connection) {
-//            Checks if the user exists in the database
+
+//        Suggests that the user has an account but hasn't activated it
+        if(
+            !UserTable.select {
+                (UserTable.email eq email) and
+                (UserTable.username eq username) and
+                (UserTable.name eq "") and
+                (UserTable.affiliation eq "")
+            }.empty()
+        ){
+            UserTable.insert {
+                it[UserTable.name] = name
+                it[UserTable.affiliation] = affiliation
+                it[UserTable.email] = email
+                it[UserTable.webPage] = webPage
+                it[validated] = true
+                it[type] = UserType.AUTHOR.value
+            }
+            return@transaction
+        }
+//            Checks if the username exists in the database
             if(
                 !UserTable.select {
                 UserTable.username eq username
                 }.empty()
-            ){
+            ) {
                 throw UserAlreadyExistsException("The user $username already exists!")
             }else if(
                 !UserTable.select {
-                    UserTable.email eq email
+                UserTable.username eq username
                 }.empty()
             ){
-                UserTable.insert {
-                    it[UserTable.name] = name
-                    it[UserTable.username] = username
-                    it[UserTable.password] = password
-                }
+                throw UserAlreadyExistsException("The email $email is already registered!")
             }
 
             UserTable.insert {
@@ -76,7 +91,7 @@ class AuthenticationController
                 it[UserTable.affiliation] = affiliation
                 it[UserTable.email] = email
                 it[UserTable.webPage] = webPage
-                it[validated] = false
+                it[validated] = true
                 it[type] = UserType.AUTHOR.value
             }
         }

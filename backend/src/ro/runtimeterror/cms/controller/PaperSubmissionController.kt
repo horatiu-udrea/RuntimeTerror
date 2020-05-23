@@ -3,7 +3,6 @@ package ro.runtimeterror.cms.controller
 import org.jetbrains.exposed.dao.load
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
-import ro.runtimeterror.cms.database.DatabaseSettings
 import ro.runtimeterror.cms.database.daos.PaperDAO
 import ro.runtimeterror.cms.database.tables.PaperSubmissionTable
 import ro.runtimeterror.cms.database.tables.PaperTable
@@ -13,7 +12,6 @@ import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.model.PaperStatus
 import ro.runtimeterror.cms.model.User
 import ro.runtimeterror.cms.model.validators.UserValidator
-import java.lang.RuntimeException
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
 
 class PaperSubmissionController

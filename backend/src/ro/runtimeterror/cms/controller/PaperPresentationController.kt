@@ -23,12 +23,15 @@ class PaperPresentationController
      * Get all accepted papers
      */
     fun getAcceptedPapers(): List<Paper> = transaction(connection) {
-        return@transaction PaperDAO.all().with(PaperDAO::authorIterable).filter {
-                it.paperStatus == PaperStatus.ACCEPTED
-        }.toList()
+        return@transaction PaperDAO
+            .all()
+            .with(PaperDAO::authorIterable)
+            .filter {
+                it.paperStatus == PaperStatus.ACCEPTED}
+            .toList()
     }
 
-    fun getAllPapersThatAreAssignedASection(): List<Paper> = transaction(connection) {
+    private fun getAllPapersThatAreAssignedASection(): List<Paper> = transaction(connection) {
         return@transaction SectionTable
             .selectAll()
             .map { PaperDAO.findById(it[SectionTable.paperId]!!)!!.load(PaperDAO::authorIterable)}
