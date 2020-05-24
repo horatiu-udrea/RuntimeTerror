@@ -7,6 +7,7 @@ import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.PaperDAO
+import ro.runtimeterror.cms.database.daos.withAuthors
 import ro.runtimeterror.cms.database.tables.BidPaperTable
 import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.model.PaperBidResult
@@ -25,14 +26,13 @@ class PaperBidController
         UserValidator.exists(userId)
         return@transaction PaperDAO
             .all()
-            .with(PaperDAO::authorIterable)
+            .map { withAuthors(it) }
             .map{
                 PaperBid(
                     it,
                     getBidResult(it.id.value, userId)
                 )
             }
-            .toList()
         }
 
     private fun getBidResult(paperID: Int, userID: Int): PaperBidResult = transaction(connection){
