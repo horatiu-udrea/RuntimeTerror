@@ -12,6 +12,7 @@ import ro.runtimeterror.cms.model.validators.UserValidator
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.PaperDAO
 import ro.runtimeterror.cms.database.daos.UserDAO
+import ro.runtimeterror.cms.database.daos.withAuthors
 import ro.runtimeterror.cms.model.UserReview
 
 class PaperReviewController
@@ -27,12 +28,11 @@ class PaperReviewController
     private fun getPCMemberReviews(userId: Int): List<PaperReview> = transaction(connection){
         val authoredPapers: List<Int> = PaperDAO
             .all()
-            .with(PaperDAO::authorIterable)
+            .map { withAuthors(it) }
             .filter{ userId in it.authors.map {user-> user.userId } }
             .map { it.paperId }
-            .toList()
-
-        return@transaction ReviewTable
+        TODO("Use row wrapping and dsl - https://github.com/JetBrains/Exposed/wiki/DAO#read-entity-with-a-join-to-another-table")
+        /*return@transaction ReviewTable
             .select{ReviewTable.userID eq userId}
             .filter { it[ReviewTable.paperID] !in authoredPapers }
             .map {
@@ -42,7 +42,7 @@ class PaperReviewController
                         Qualifier.from(it[ReviewTable.qualifier]),
                         getOtherReviews(userId, it[ReviewTable.paperID])
                     )
-            }
+            }*/
     }
 
     private fun getOtherReviews(userId: Int, paperID: Int): List<UserReview> = transaction(connection) {

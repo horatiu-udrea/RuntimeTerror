@@ -5,6 +5,7 @@ import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
 import io.ktor.features.CORS
+import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.StatusPages
 import io.ktor.http.HttpHeaders
@@ -28,6 +29,7 @@ data class UserSession(val id: Int, val type: UserType)
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false)
 {
+    install(CallLogging)
     install(CORS) {
         method(HttpMethod.Options)
         method(HttpMethod.Put)

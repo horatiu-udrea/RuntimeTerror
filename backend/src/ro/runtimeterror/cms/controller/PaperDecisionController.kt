@@ -10,6 +10,7 @@ import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.model.PaperStatus
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.PaperDAO
+import ro.runtimeterror.cms.database.daos.withAuthors
 import ro.runtimeterror.cms.database.tables.ReviewTable
 import ro.runtimeterror.cms.model.Paper
 
@@ -36,7 +37,7 @@ class PaperDecisionController
      *  else conflicting
      */
     fun getPapers(): List<PaperSuggestion> = transaction(connection){
-        val allPapers: List<Paper> = PaperDAO.all().with(PaperDAO::authorIterable).toList()
+        val allPapers: List<Paper> = PaperDAO.all().map { withAuthors(it) }
         return@transaction allPapers
             .map {
                 if(noAccepts(it.paperId)){

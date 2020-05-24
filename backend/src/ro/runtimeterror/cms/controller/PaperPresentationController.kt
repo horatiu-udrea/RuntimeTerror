@@ -8,6 +8,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.PaperDAO
 import ro.runtimeterror.cms.database.daos.UserDAO
+import ro.runtimeterror.cms.database.daos.withAuthors
 import ro.runtimeterror.cms.database.tables.PaperSubmissionTable
 import ro.runtimeterror.cms.database.tables.SectionTable
 import ro.runtimeterror.cms.model.Paper
@@ -25,17 +26,17 @@ class PaperPresentationController
     fun getAcceptedPapers(): List<Paper> = transaction(connection) {
         return@transaction PaperDAO
             .all()
-            .with(PaperDAO::authorIterable)
+            .map { withAuthors(it) }
             .filter {
                 it.paperStatus == PaperStatus.ACCEPTED}
-            .toList()
     }
 
     private fun getAllPapersThatAreAssignedASection(): List<Paper> = transaction(connection) {
-        return@transaction SectionTable
+        /*return@transaction SectionTable
             .selectAll()
             .map { PaperDAO.findById(it[SectionTable.paperId]!!)!!.load(PaperDAO::authorIterable)}
-            .toList()
+            .toList()*/
+        TODO("Use DSL here, too many non-null asserts")
     }
     /**
      * Get all accepted papers that are not assigned to a section
@@ -45,11 +46,12 @@ class PaperPresentationController
             .map { it.paperId }
             .toList()
 
-        return@transaction SectionTable
+        /*return@transaction SectionTable
             .selectAll()
             .filter{ it[SectionTable.paperId]  in papersAssigned }
             .map{PaperDAO.findById(it[SectionTable.paperId]!!)!!.load(PaperDAO::authorIterable)}
-            .toList()
+            .toList()*/
+        TODO("Use DSL here, too many non-null asserts")
     }
 
     /**

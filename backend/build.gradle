@@ -38,10 +38,10 @@ dependencies {
     implementation "io.ktor:ktor-jackson:$ktor_version"
     testImplementation "io.ktor:ktor-server-tests:$ktor_version"
     //Exposed
-    compile 'org.jetbrains.exposed:exposed-core:0.23.1'
-    compile 'org.jetbrains.exposed:exposed-dao:0.23.1'
-    compile 'org.jetbrains.exposed:exposed-jdbc:0.23.1'
-    compile 'org.jetbrains.exposed:exposed-jodatime:0.23.1'
+    compile "org.jetbrains.exposed:exposed-core:$exposed_version"
+    compile "org.jetbrains.exposed:exposed-dao:$exposed_version"
+    compile "org.jetbrains.exposed:exposed-jdbc:$exposed_version"
+    compile "org.jetbrains.exposed:exposed-jodatime:$exposed_version"
     //MySQL
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
     //Konfig

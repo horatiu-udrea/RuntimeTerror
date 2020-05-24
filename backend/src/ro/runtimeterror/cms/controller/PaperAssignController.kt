@@ -11,6 +11,7 @@ import ro.runtimeterror.cms.database.tables.BidPaperTable
 import ro.runtimeterror.cms.database.tables.ReviewTable
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
+import ro.runtimeterror.cms.database.daos.withAuthors
 import ro.runtimeterror.cms.exceptions.BidDoesNotExistException
 import ro.runtimeterror.cms.exceptions.NoPapersException
 import ro.runtimeterror.cms.model.*
@@ -27,8 +28,7 @@ class PaperAssignController
         transaction (connection){
             return@transaction PaperDAO
                     .all()
-                    .with(PaperDAO::authorIterable)
-                    .toList()
+                    .map { withAuthors(it) }
         }
 
     /**
