@@ -63,7 +63,7 @@ class AuthenticationController
                 it[UserTable.affiliation] = affiliation
                 it[UserTable.email] = email
                 it[UserTable.webPage] = webPage
-                it[validated] = true
+                it[validated] = false
                 it[type] = UserType.AUTHOR.value
             }
             return@transaction
@@ -90,7 +90,7 @@ class AuthenticationController
                 it[UserTable.affiliation] = affiliation
                 it[UserTable.email] = email
                 it[UserTable.webPage] = webPage
-                it[validated] = true
+                it[validated] = false
                 it[type] = UserType.AUTHOR.value
             }
         }
