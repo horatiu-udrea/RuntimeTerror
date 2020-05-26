@@ -39,7 +39,7 @@ class PaperReviewController
             .filter { it[ReviewTable.paperID] !in authoredPapers }
             .map {
                 PaperReview(
-                        PaperDAO.wrapRow(PaperTable.select { PaperTable.id eq ReviewTable.paperID }.first()),
+                        PaperDAO.wrapRow(PaperTable.select { PaperTable.id eq it[ReviewTable.paperID] }.first()),
                         it[ReviewTable.recommandation],
                         Qualifier.from(it[ReviewTable.qualifier]),
                         getOtherReviews(userId, it[ReviewTable.paperID])

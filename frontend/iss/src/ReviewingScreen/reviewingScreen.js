@@ -1,13 +1,9 @@
 import { HOST, PORT } from "../Globuls.js"
 
-function fillList(){
-    code = ""
-    for(i = 0; i < 40; i ++)
-        code += "<li value = '"+i+"'>"+"<div class='title'>EWRRT"+i+"</div><div class='content' style = 'display:none'><div><iframe src='http://www.bavtailor.com/wp-content/uploads/2018/10/Lorem-Ipsum.pdf' width='50%' height='300px'></iframe></div><div><textarea rows='10' cols='50'></textarea></div><div><button class='upButton'>UP</button><label>Grade: </label>            <select class='gradePuicker' name='Grade'><option value = '1'>1</option><option value = '2'>2</option><option value = '3'>3</option><option value = '4'>4</option><option value = '5'>5</option><option value = '6'>6</option><option value = '7'>7</option></select></div></div>"+"</li>";
-    $("#list").html(code);
-}
-
 $(document).ready(function () {
+
+    var papers = [];
+    var reviews = [];
 
     $.ajax({
         type: "GET",
@@ -16,16 +12,19 @@ $(document).ready(function () {
         dataType: "json",
 
         complete: function(data){
-            code = ""
-            $.each(data, function (indexInArray, valueOfElement) { 
-                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='title'>EWRRT"+i+"</div><div class='content' style = 'display:none'><div class='pdfDisplay'><iframe src='http://www.bavtailor.com/wp-content/uploads/2018/10/Lorem-Ipsum.pdf' width='50%' height='300px'></iframe></div><div class ='textInput'><textarea class='recommendationInput' rows='10' cols='50'></textarea></div><div class='buttons'><button class='upButton'>UP</button><label>Grade: </label><select class='gradePuicker' name='Grade'><option value = '1'>1</option><option value = '2'>2</option><option value = '3'>3</option><option value = '4'>4</option><option value = '5'>5</option><option value = '6'>6</option><option value = '7'>7</option></select></div></div>"+"</li>";
+            let code = "";
+            $.each(data.responseJSON, function (indexInArray, valueOfElemen) {
+                let value = valueOfElemen.paperDTO;
+                papers.push(value);
+                reviews.push(valueOfElemen);
+                code += "<li value = '"+value.paperId+"'>"+"<div class='title'>EWRRT"+indexInArray+"</div><div class='content' style = 'display:none'><div class='pdfDisplay'><iframe src='http://www.bavtailor.com/wp-content/uploads/2018/10/Lorem-Ipsum.pdf' width='50%' height='300px'></iframe></div><div class ='textInput'><textarea class='recommendationInput' rows='10' cols='50'></textarea></div><div class='buttons'><button class='upButton'>UP</button><label>Grade: </label><select class='gradePuicker' name='Grade'><option value = 1>1</option><option value = 2>2</option><option value = 3>3</option><option value = 4>4</option><option value = 5>5</option><option value = 6>6</option><option value = 7>7</option></select></div></div>"+"</li>";
                 $("#list").html(code);
             });
         }
-    }); //TODO add a display for previous review comments (after paper is reviewed?)
+    }); 
     
 
-    $("li").click(function (e) { 
+    $("#list").on("click", "li" , function (e) { 
         e.preventDefault();
         
         let content = $(this).children(':nth-child(2)'); 
@@ -35,23 +34,43 @@ $(document).ready(function () {
             content.css("display", "none");
     });
 
-    $(".content").click(function (e) { e.stopPropagation(); });
+    $("#list").on("click", "li > >" , function (e) { e.stopPropagation() });
 
-    $(".upButton").click(function (e) { 
+    $("#list").on("click", ".upButton" ,function (e) { 
         e.preventDefault();
-        
+
         $.ajax({
-            type: "POST",
+            type: "PUT",
             contentType: "application/json",
             url: HOST + PORT + "/paper/review",
             dataType: "json",
-            data: JSON.stringify({paperId: $(this).parent().parent().parent().val(), recommendation: $(this).parent().siblings('.textInput').children('.recommendationInput').val(), qualifier: $(this).siblings('.gradePicker').val()}),
+            data: JSON.stringify({ 
+                                recommendation: $(this).parents("li").find('.recommendationInput').val(), 
+                                paperId: $(this).parents("li").val(),
+                                qualifier: $(this).parents("li").find("select").val()
+                            }),
 
-            complete: function(data){}
+            complete: function(data){
+                    let code = "";
+                    
+                    reviews.forEach(item => {
+                        if(item.paperDTO.id == $(this).parents("li").val()){
+                            item.otherReviews.forEach(review =>{
+                                code += "<li><p>"+review.name+"</p><p>"+review.recommendation+"</p><p>"+review.qualifier+"</p></li>";   
+                            })
+                            $("#comments").html(code);
+                            $("#commentsDiv").css("display", "block");
+                            return;
+                        }
+                    });
+            }
         });
-
-        //I did not test this yet....
-        e.stopPropagation();
     });
+
+    $("#commentsDiv").click(function () {
+        $("#commentsDiv").css("display", "none");
+    })
+
+
 });
 
