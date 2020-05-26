@@ -13,11 +13,11 @@ import { HOST, PORT } from "../Globuls.js"
                 console.log(data.responseJSON);
                 if (data.statusText == "OK") {
                     list = data.responseJSON;
-                    htmlCode = "";
-                    for (i = 0; i < list.length; ++i) {
+                    let htmlCode = "";
+                    for (let i = 0; i < list.length; ++i) {
                         console.log(data.responseJSON[i].type);
 
-                        htmlCode += "<li> <input id = 'checkbox" + i + "'type = 'checkbox'>" + list[i].name + "</li>";
+                        htmlCode += "<li> <input id = 'checkbox" + i + "'type = 'checkbox'>" + list[i].name +"-"+list[i].type +  "</li>";
 
                     }
                     $("#listOfPapers").html(htmlCode);
@@ -32,7 +32,7 @@ import { HOST, PORT } from "../Globuls.js"
 
     function checkBoxes() {
 
-        for (i = 0; i < list.length; ++i) {
+        for (let i = 0; i < list.length; ++i) {
             if (document.getElementById("checkbox" + i).checked) {
                 console.log(list[i]);
                 $.ajax({

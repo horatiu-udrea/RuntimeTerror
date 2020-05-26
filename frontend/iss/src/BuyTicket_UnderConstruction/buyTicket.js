@@ -14,7 +14,6 @@ $(document).ready(function () {
         }
     });
 
-
     $("#paypalButton").click(function (e) {
         e.preventDefault();
 
