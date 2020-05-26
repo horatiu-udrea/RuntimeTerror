@@ -117,6 +117,7 @@ $(document).ready(function () {
                                     bidDate = dataConference.responseJSON.biddingDeadline
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
+<<<<<<< HEAD
                                     window.location.assign("../AuthorScreens/authorSubmit.html");
                                     //  switch (role | phase) {
                                     //     case 0 | 1:
@@ -190,6 +191,59 @@ $(document).ready(function () {
                                     //         window.location = "Nothing-to-do-here page....";
                                     //         break;
                                     // }
+=======
+                                    
+                                    if(role == 0){
+                                        if(phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                        else if(phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                        else if(phase == 3) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                        else window.location = "Nothing-to-do-here page....";
+                                    }
+
+                                    if(role == 1){
+                                        if(phase == 1) window.location = "../AuthorScreens/authorSubmit.html";
+                                        else if(phase == 2) window.location = "../AuthorScreens/authorUpload.html";
+                                        else if(phase == 3) window.location = "../AuthorScreens/authorImproveAndUpload.html";
+                                        else window.location = "Nothing-to-do-here page....";
+                                    }
+
+                                    //TODO in phase 3 ar trebui sa aiba voie doar authori care sunt si speakeri. need to look into this. Also, cum afecteaza sectiunile chestia asta?
+                                    //TODO Authors have a bit of a mess here... Because PcMembers can publish papers as well (with the exception of the chair and chair-juniors)
+                                    //this might turn into a mess. Tired andu suggests that we add role to the login (as a drop-down list) and use it as a criteria for both login
+                                    //if user has account, check role as well, if the role checks out all is good. That way we can give people the ability to go into author mode if they log i
+                                    //with the role, and prevent people from loggin in with roles that weren't assigned to them. 21.05.2020
+
+                                    if(role == 2){
+                                        if(phase == 2) {
+                                            if (today < bidDate) window.location = "../BiddingScreen/biddingScreen.html";
+                                            else window.location = "../ReviewingScreen/reviewingScreen.html";
+                                        }
+                                        else if(phase == 3) window.location = "ADD pcmember in phase 3 LINK HERE";
+                                        else window.location = "Nothing-to-do-here page....";
+                                    }
+
+                                    if(role == 3){
+                                        if(phase == 0) window.location = "../ConferenceScreens/changeDate.html";
+                                        else if(phase == 2) window.location = "../AssignToReviewerScreen/assignToReviewer.html";
+                                        else if(phase == 3) window.location = "ADD cochair in phase 3 LINK HERE";
+                                        else window.location = "Nothing-to-do-here page....";
+                                    } 
+
+                                    if(role == 4){
+                                        if(phase == 0) window.location = "../ConferenceScreens/changeDate.html";
+                                        else if(phase == 2) window.location = "../AssignToReviewerScreen/assignToReviewer.html";
+                                        else if(phase == 3) window.location = "ADD chair in phase 3 LINK HERE";
+                                        else window.location = "Nothing-to-do-here page....";
+                                    }
+
+                                    if(role == 5){
+                                        if(phase == 0) window.location = "../PcMemberPickScreen/pcMemberPickScreen.html";
+                                        else if(phase == 1) window.location = "-";
+                                        else if(phase == 2) window.location = "../AssignToReviewerScreen/assignToReviewer.html";
+                                        else if(phase == 3) window.location = "ADD scmember in phase 3 LINK HERE";
+                                        else window.location = "Nothing-to-do-here page....";
+                                    }
+>>>>>>> a78d02739fa30805ac679969d0c848743aa9ec56
 
                                 } else {
                                     alert("Can not gat conference details");

@@ -9,13 +9,21 @@ function fillList(){
 
 $(document).ready(function () {
 
-    $.get(HOST + PORT + "paper/decision", function (data) {
-        code = ""
-        $.each(data, function (indexInArray, valueOfElement) { 
-            code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='title'>EWRRT"+i+"</div><div class='content' style = 'display:none'><div class='pdfDisplay'><iframe src='http://www.bavtailor.com/wp-content/uploads/2018/10/Lorem-Ipsum.pdf' width='50%' height='300px'></iframe></div><div class ='textInput'><textarea class='recommendationInput' rows='10' cols='50'></textarea></div><div class='buttons'><button class='upButton'>UP</button><label>Grade: </label><select class='gradePuicker' name='Grade'><option value = '1'>1</option><option value = '2'>2</option><option value = '3'>3</option><option value = '4'>4</option><option value = '5'>5</option><option value = '6'>6</option><option value = '7'>7</option></select></div></div>"+"</li>";
-            $("#list").html(code);
-        });
-    });
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: HOST + PORT + "/paper/decision",
+        dataType: "json",
+
+        complete: function(data){
+            code = ""
+            $.each(data, function (indexInArray, valueOfElement) { 
+                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='title'>EWRRT"+i+"</div><div class='content' style = 'display:none'><div class='pdfDisplay'><iframe src='http://www.bavtailor.com/wp-content/uploads/2018/10/Lorem-Ipsum.pdf' width='50%' height='300px'></iframe></div><div class ='textInput'><textarea class='recommendationInput' rows='10' cols='50'></textarea></div><div class='buttons'><button class='upButton'>UP</button><label>Grade: </label><select class='gradePuicker' name='Grade'><option value = '1'>1</option><option value = '2'>2</option><option value = '3'>3</option><option value = '4'>4</option><option value = '5'>5</option><option value = '6'>6</option><option value = '7'>7</option></select></div></div>"+"</li>";
+                $("#list").html(code);
+            });
+        }
+    }); //TODO add a display for previous review comments (after paper is reviewed?)
+    
 
     $("li").click(function (e) { 
         e.preventDefault();
@@ -32,9 +40,16 @@ $(document).ready(function () {
     $(".upButton").click(function (e) { 
         e.preventDefault();
         
-        $.put(HOST + PORT + "/paper/review", {paperId= $(this).parent().parent().parent().val(), recommendation= $(this).parent().siblings('.textInput').children('.recommendationInput').val(), qualifier= $(this).siblings('.gradePicker').val()}, function(){
-            
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: HOST + PORT + "/paper/review",
+            dataType: "json",
+            data: JSON.stringify({paperId= $(this).parent().parent().parent().val(), recommendation= $(this).parent().siblings('.textInput').children('.recommendationInput').val(), qualifier= $(this).siblings('.gradePicker').val()}),
+
+            complete: function(data){}
         });
+
         //I did not test this yet....
         e.stopPropagation();
     });

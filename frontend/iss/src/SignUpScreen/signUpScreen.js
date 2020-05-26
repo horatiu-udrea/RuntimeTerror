@@ -1,6 +1,4 @@
-// import { HOST, PORT } from "../Globuls.js"
-const HOST = "http://localhost:"
-const PORT = "8080"
+import { HOST, PORT } from "../Globuls.js"
 
 var imageArray = ["#background4","#background1","#background2","#background3","#background4"];
 var currentImage = 1;
@@ -41,12 +39,12 @@ $(document).ready(function () {
                 type: "PUT",
                 url: HOST + PORT + "/authentication",
                 contentType: "application/json",
-                data: JSON.stringify({name:$("#nameField").val,
-                                      username:$("#usernameField").val,
-                                      password:$("#passwordField").val, 
-                                      affiliation:$("#affiliationField").val, 
-                                      email:$("#emailField").val, 
-                                      webpage:$("#webpageField").val}),
+                data: JSON.stringify({name:$("#nameField").val(),
+                                      username:$("#usernameField").val(),
+                                      password:$("#passwordField").val(), 
+                                      affiliation:$("#affiliationField").val(), 
+                                      email:$("#emailField").val(), 
+                                      webPage:$("#webpageField").val()}),
                 dataType: "json",
                 complete: function(data, status) {
                     console.log(data);
@@ -69,3 +67,5 @@ $(document).ready(function () {
             $("#errorMessage").text("");
     });
 });
+
+//TODO Email & url validation with regex disable button if stuff is invalid (duh)

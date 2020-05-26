@@ -1,21 +1,35 @@
 import { HOST, PORT } from "../Globuls.js"
 
 $(document).ready(function () {
-    $.get(HOST + PORT + "paper/assign", function (data) { //getPapers
-        code = ""
-        $.each(data, function (indexInArray, valueOfElement) { 
-            code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='paper'>"+valueOfElement.name+"</div>"+"</li>";
-            $("#paperList").html(code);
-        });
-    });
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: HOST + PORT + "paper/assign",
+        dataType: "json",
 
-    $.get(HOST + PORT + "member", function (data) { //getPC Members
-        code = ""
-        $.each(data, function (indexInArray, valueOfElement) { 
-            code += "<li value = '"+valueOfElement.userId+"'>"+"<div class='pcMember'>"+valueOfElement.name+"</div>"+"</li>";
-            $("#pcMemberList").html(code);
-        });
-    });
+        function (data) { //getPapers
+            code = ""
+            $.each(data, function (indexInArray, valueOfElement) { 
+                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='paper'>"+valueOfElement.name+"</div>"+"</li>";
+                $("#paperList").html(code);
+            });
+        }
+    })
+
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: HOST + PORT + "member",
+        dataType: "json",
+
+        function (data) { //getPapers
+            code = ""
+            $.each(data, function (indexInArray, valueOfElement) { 
+                code += "<li value = '"+valueOfElement.userId+"'>"+"<div class='pcMember'>"+valueOfElement.name+"</div>"+"</li>";
+                $("#pcMemberList").html(code);
+            });
+        }
+    })
 
     $(".paper, .pcMember").click(function (e) { 
         e.preventDefault();
@@ -36,9 +50,17 @@ $(document).ready(function () {
             let pcMember = this
             $(".paper").each(function (index, element) {
                 if($(this).css("border-color","cyan") && $(pcMember).css("border-color","cyan")){
-                    $.put(HOST + PORT + "paper/assign", {userId = $(pcMember).val(), paperId = $(this).val()}, function(){
-                        $(this).css("background-color","green");
-                    });
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json",
+                        url: HOST + PORT + "paper/assign",
+                        data: JSON.stringify({userId = $(pcMember).val(), paperId = $(this).val()}),
+                        dataType: "json",
+            
+                        complete: function(){
+                            $(this).css("background-color","green");
+                        }
+                    })
                 }
             });
         });
