@@ -1,7 +1,7 @@
 // import { HOST, PORT } from "../Globuls.js"
 const HOST = "http://localhost:"
 const PORT = "8080"
-
+let membersTypes= {0:"listener" , 1:"author", 2:"pc member", 3:"co chair", 4:"chair", 5:"pc member"}
 {
     let list = []
 
@@ -19,7 +19,7 @@ const PORT = "8080"
                     for (i = 0; i < list.length; ++i) {
                         console.log(data.responseJSON[i].type);
 
-                        htmlCode += "<li> <input id = 'checkbox" + i + "'type = 'checkbox'>" + list[i].name + "</li>";
+                        htmlCode += "<li> <input id = 'checkbox" + i + "'type = 'checkbox'>" + list[i].name + " with the role: "+ membersTypes[list[i].type] + "</li>";
 
                     }
                     $("#listOfPapers").html(htmlCode);
