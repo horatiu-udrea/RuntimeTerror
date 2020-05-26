@@ -119,6 +119,7 @@ $(document).ready(function () {
                                     console.log(role, phase);
                                     
                                     if(role == 0){
+<<<<<<< HEAD
                                         if(phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html"); // done
                                         else if(phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html"); // done
                                         else if(phase == 3) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html"); // done
@@ -130,6 +131,19 @@ $(document).ready(function () {
                                         else if(phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                         else if(phase == 3) window.location = "../AuthorScreens/authorImproveAndUpload.html";
                                         else window.location = "Nothing-to-do-here page....";
+=======
+                                        if(phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                        else if(phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                        else if(phase == 3) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                        else window.location.href = "Nothing-to-do-here page....";
+                                    }
+
+                                    if(role == 1){
+                                        if(phase == 1) window.location.href = "../AuthorScreens/authorSubmit.html";
+                                        else if(phase == 2) window.location.href = "../AuthorScreens/authorUpload.html";
+                                        else if(phase == 3) window.location.href = "../AuthorScreens/authorImproveAndUpload.html";
+                                        else window.location.href = "Nothing-to-do-here page....";
+>>>>>>> 997beaec8093e25851e19522c127c26631b7bc59
                                     }
 
                                     //TODO in phase 3 ar trebui sa aiba voie doar authori care sunt si speakeri. need to look into this. Also, cum afecteaza sectiunile chestia asta?
@@ -140,33 +154,33 @@ $(document).ready(function () {
 
                                     if(role == 2){
                                         if(phase == 2) {
-                                            if (today < bidDate) window.location = "../BiddingScreen/biddingScreen.html";
-                                            else window.location = "../ReviewingScreen/reviewingScreen.html";
+                                            if (today < bidDate) window.location.href = "../BiddingScreen/biddingScreen.html";
+                                            else window.location.href = "../ReviewingScreen/reviewingScreen.html";
                                         }
-                                        else if(phase == 3) window.location = "ADD pcmember in phase 3 LINK HERE";
-                                        else window.location = "Nothing-to-do-here page....";
+                                        else if(phase == 3) window.location.href = "ADD pcmember in phase 3 LINK HERE";
+                                        else window.location.href = "Nothing-to-do-here page....";
                                     }
 
                                     if(role == 3){
-                                        if(phase == 0) window.location = "../ConferenceScreens/changeDate.html";
-                                        else if(phase == 2) window.location = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if(phase == 3) window.location = "ADD cochair in phase 3 LINK HERE";
-                                        else window.location = "Nothing-to-do-here page....";
+                                        if(phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
+                                        else if(phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
+                                        else if(phase == 3) window.location.href = "ADD cochair in phase 3 LINK HERE";
+                                        else window.location.href = "Nothing-to-do-here page....";
                                     } 
 
                                     if(role == 4){
-                                        if(phase == 0) window.location = "../ConferenceScreens/changeDate.html";
-                                        else if(phase == 2) window.location = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if(phase == 3) window.location = "ADD chair in phase 3 LINK HERE";
-                                        else window.location = "Nothing-to-do-here page....";
+                                        if(phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
+                                        else if(phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
+                                        else if(phase == 3) window.location.href = "ADD chair in phase 3 LINK HERE";
+                                        else window.location.href = "Nothing-to-do-here page....";
                                     }
 
                                     if(role == 5){
-                                        if(phase == 0) window.location = "../PcMemberPickScreen/pcMemberPickScreen.html";
-                                        else if(phase == 1) window.location = "-";
-                                        else if(phase == 2) window.location = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if(phase == 3) window.location = "ADD scmember in phase 3 LINK HERE";
-                                        else window.location = "Nothing-to-do-here page....";
+                                        if(phase == 0) window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
+                                        else if(phase == 1) window.location.href = "-";
+                                        else if(phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
+                                        else if(phase == 3) window.location.href = "ADD scmember in phase 3 LINK HERE";
+                                        else window.location.href = "Nothing-to-do-here page....";
                                     }
 
                                 } else {

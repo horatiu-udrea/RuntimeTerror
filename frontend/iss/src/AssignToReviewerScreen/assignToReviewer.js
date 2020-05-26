@@ -4,11 +4,10 @@ $(document).ready(function () {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: HOST + PORT + "paper/assign",
+        url: HOST + PORT + "/paper/assign",
         dataType: "json",
-
-        function (data) { //getPapers
-            code = ""
+        complete:function (data) { //getPapers
+            let code = "";
             $.each(data, function (indexInArray, valueOfElement) { 
                 code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='paper'>"+valueOfElement.name+"</div>"+"</li>";
                 $("#paperList").html(code);
@@ -18,12 +17,12 @@ $(document).ready(function () {
 
     $.ajax({
         type: "GET",
-        contentType: "application/json",
-        url: HOST + PORT + "member",
+        contentType: "/application/json",
+        url: HOST + PORT + "/member",
         dataType: "json",
 
-        function (data) { //getPapers
-            code = ""
+        complete:function (data) { //getPcMemebers
+            let code = "";
             $.each(data, function (indexInArray, valueOfElement) { 
                 code += "<li value = '"+valueOfElement.userId+"'>"+"<div class='pcMember'>"+valueOfElement.name+"</div>"+"</li>";
                 $("#pcMemberList").html(code);
@@ -54,7 +53,7 @@ $(document).ready(function () {
                         type: "POST",
                         contentType: "application/json",
                         url: HOST + PORT + "paper/assign",
-                        data: JSON.stringify({userId = $(pcMember).val(), paperId = $(this).val()}),
+                        data: JSON.stringify({userId: $(pcMember).val(), paperId: $(this).val()}),
                         dataType: "json",
             
                         complete: function(){
