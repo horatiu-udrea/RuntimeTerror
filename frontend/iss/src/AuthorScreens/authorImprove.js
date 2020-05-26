@@ -36,7 +36,7 @@ $(document).ready(function () {
                     }
                 });
             } else {
-                alert("can not get papers for this author");
+                alert("can not get reviews for this author");
             }
 
             addRecommendations();
