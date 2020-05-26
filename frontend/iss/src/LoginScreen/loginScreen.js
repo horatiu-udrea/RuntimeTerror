@@ -119,7 +119,6 @@ $(document).ready(function () {
                                     console.log(role, phase);
                                     
                                     if(role == 0){
-<<<<<<< HEAD
                                         if(phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html"); // done
                                         else if(phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html"); // done
                                         else if(phase == 3) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html"); // done
@@ -128,22 +127,9 @@ $(document).ready(function () {
 
                                     if(role == 1){
                                         if(phase == 1) window.location = "../AuthorScreens/authorSubmit.html"; // needs test on server
-                                        else if(phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
+                                        else if(phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html"; // vezi to do din js cu phase part-ul
                                         else if(phase == 3) window.location = "../AuthorScreens/authorImproveAndUpload.html";
                                         else window.location = "Nothing-to-do-here page....";
-=======
-                                        if(phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                        else if(phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                        else if(phase == 3) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                        else window.location.href = "Nothing-to-do-here page....";
-                                    }
-
-                                    if(role == 1){
-                                        if(phase == 1) window.location.href = "../AuthorScreens/authorSubmit.html";
-                                        else if(phase == 2) window.location.href = "../AuthorScreens/authorUpload.html";
-                                        else if(phase == 3) window.location.href = "../AuthorScreens/authorImproveAndUpload.html";
-                                        else window.location.href = "Nothing-to-do-here page....";
->>>>>>> 997beaec8093e25851e19522c127c26631b7bc59
                                     }
 
                                     //TODO in phase 3 ar trebui sa aiba voie doar authori care sunt si speakeri. need to look into this. Also, cum afecteaza sectiunile chestia asta?
@@ -164,7 +150,7 @@ $(document).ready(function () {
                                     if(role == 3){
                                         if(phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
                                         else if(phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if(phase == 3) window.location.href = "ADD cochair in phase 3 LINK HERE";
+                                        else if(phase == 3) window.location.href = "../ConflictingDiscussion/conflictingDiscussion.html";
                                         else window.location.href = "Nothing-to-do-here page....";
                                     } 
 
