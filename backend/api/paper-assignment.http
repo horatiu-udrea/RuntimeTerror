@@ -19,5 +19,5 @@ Content-Type: application/json
 
 {
   "userId": 1,
-  "paperId": 1
+  "paperId": 2
 }

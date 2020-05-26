@@ -1,0 +1,8 @@
+### Get all accepted papers
+GET {{URL}}/paper/accepted
+
+### Get remaining papers
+GET {{URL}}/paper/remaining
+
+### Get remaining authors for paper
+GET {{URL}}/paper/remaining/1

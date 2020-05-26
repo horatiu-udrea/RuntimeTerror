@@ -1,3 +1,3 @@
 package ro.runtimeterror.cms.exceptions
 
-open class ConferenceDetailsNotSetException(message: String) : Exception(message)
+open class ConferenceDetailsNotSetException(message: String) : ProgramException(message)

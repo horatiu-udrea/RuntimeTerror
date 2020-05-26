@@ -4,7 +4,7 @@ import ro.runtimeterror.cms.model.PaperReview
 import ro.runtimeterror.cms.model.UserReview
 
 data class PaperReviewDTO(
-    val paperDTOWithId: PaperDTOWithId,
+    val paperDTO: PaperDTO,
     val recommendation: String,
     val qualifier: Int,
     val otherReviews: List<UserReviewDTO>
@@ -13,9 +13,15 @@ data class PaperReviewDTO(
 fun PaperReview.toDTO(): PaperReviewDTO
 {
     return PaperReviewDTO(
+<<<<<<< HEAD
         paper!!.toDTOWithId(),
         recommendation!!,
         qualifier!!.value,
+=======
+        paper.toDTO(),
+        recommendation,
+        qualifier.value,
+>>>>>>> befbefa8d02edc33918227c2bb4ccac6ef69586b
         otherReviews.map { review -> review.toDTO() })
 }
 

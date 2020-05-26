@@ -1,5 +1,6 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.dao.with
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -9,6 +10,7 @@ import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.model.PaperStatus
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.PaperDAO
+import ro.runtimeterror.cms.database.daos.withAuthors
 import ro.runtimeterror.cms.database.tables.ReviewTable
 import ro.runtimeterror.cms.model.Paper
 
@@ -20,8 +22,7 @@ class PaperDecisionController
     /**
      * Decide the status of a paper (accepted, rejected, conflicting)
      */
-    fun decide(paperID: Int, status: Int) =
-        transaction(connection) {
+    fun decide(paperID: Int, status: Int) = transaction(connection) {
             PaperTable.update({PaperTable.id eq paperID}) {
                 it[PaperTable.status] = PaperStatus.from(status).value
             }
@@ -36,7 +37,7 @@ class PaperDecisionController
      *  else conflicting
      */
     fun getPapers(): List<PaperSuggestion> = transaction(connection){
-        val allPapers: List<Paper> = PaperDAO.all().toList()
+        val allPapers: List<Paper> = PaperDAO.all().map { withAuthors(it) }
         return@transaction allPapers
             .map {
                 if(noAccepts(it.paperId)){

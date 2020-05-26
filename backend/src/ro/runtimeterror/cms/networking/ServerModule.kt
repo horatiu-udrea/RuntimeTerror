@@ -4,7 +4,14 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
+<<<<<<< HEAD
 import io.ktor.features.*
+=======
+import io.ktor.features.CORS
+import io.ktor.features.CallLogging
+import io.ktor.features.ContentNegotiation
+import io.ktor.features.StatusPages
+>>>>>>> befbefa8d02edc33918227c2bb4ccac6ef69586b
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
@@ -15,6 +22,7 @@ import io.ktor.sessions.SessionStorageMemory
 import io.ktor.sessions.Sessions
 import io.ktor.sessions.cookie
 import ro.runtimeterror.cms.Components
+import ro.runtimeterror.cms.exceptions.ProgramException
 import ro.runtimeterror.cms.exceptions.UnauthorizedException
 import ro.runtimeterror.cms.model.UserType
 import ro.runtimeterror.cms.networking.route.*
@@ -25,6 +33,7 @@ data class UserSession(val id: Int, val type: UserType)
 @kotlin.jvm.JvmOverloads
 fun Application.module(testing: Boolean = false)
 {
+    install(CallLogging)
     install(CORS) {
         method(HttpMethod.Options)
         method(HttpMethod.Post)
@@ -37,7 +46,10 @@ fun Application.module(testing: Boolean = false)
         header(HttpHeaders.AccessControlAllowOrigin)
         allowCredentials = true
         anyHost()
+<<<<<<< HEAD
         host("localhost:5500");
+=======
+>>>>>>> befbefa8d02edc33918227c2bb4ccac6ef69586b
     }
 
     install(ContentNegotiation) {
@@ -48,7 +60,10 @@ fun Application.module(testing: Boolean = false)
 
     install(StatusPages) {
         exception<UnauthorizedException> { exception ->
-            call.respond(HttpStatusCode.Unauthorized, mapOf("OK" to false, "error" to (exception.message ?: "")))
+            call.respond(HttpStatusCode.Unauthorized, mapOf("error" to (exception.message ?: "")))
+        }
+        exception<ProgramException> { exception ->
+            call.respond(HttpStatusCode.InternalServerError, mapOf("error" to (exception.message ?: "")))
         }
     }
 
@@ -67,6 +82,8 @@ fun Application.module(testing: Boolean = false)
         paperReviewRoute(Components.paperReviewController)
         paperAssignRoute(Components.paperAssignController)
         paperDecisionRoute(Components.paperDecisionController)
+        sectionRoute(Components.sectionController)
+        paperPresentationRoute(Components.paperPresentationController)
     }
 }
 

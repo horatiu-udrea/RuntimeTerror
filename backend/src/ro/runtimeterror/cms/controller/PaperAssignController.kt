@@ -1,5 +1,6 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.dao.with
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
@@ -10,6 +11,7 @@ import ro.runtimeterror.cms.database.tables.BidPaperTable
 import ro.runtimeterror.cms.database.tables.ReviewTable
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
+import ro.runtimeterror.cms.database.daos.withAuthors
 import ro.runtimeterror.cms.exceptions.BidDoesNotExistException
 import ro.runtimeterror.cms.exceptions.NoPapersException
 import ro.runtimeterror.cms.model.*
@@ -26,7 +28,7 @@ class PaperAssignController
         transaction (connection){
             return@transaction PaperDAO
                     .all()
-                    .toList()
+                    .map { withAuthors(it) }
         }
 
     /**
@@ -48,14 +50,13 @@ class PaperAssignController
     fun getPCMembers(): List<User> = transaction(connection) {
             return@transaction UserTable
                     .select { UserTable.type eq UserType.PC_MEMBER.value}
-                    .map {user -> UserDAO.get(user[UserTable.id])}
+                    .map {user -> UserDAO[user[UserTable.id]] }
                     .toList()
         }
 
     /**
      * Assign the paper to the pc member
      */
-//    TODO not sure about this, if I don't add the qualifier and the status, is it null or would it give an error?
     fun assign(paperID: Int, userID: Int) = transaction(connection) {
             PaperValidator.exists(paperID)
             UserValidator.exists(userID)

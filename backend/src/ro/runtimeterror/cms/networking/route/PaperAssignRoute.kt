@@ -35,7 +35,6 @@ fun Route.paperAssignRoute(paperAssignController: PaperAssignController)
         }
     }
     get("/member") {
-        authorize(UserType.CO_CHAIR)
         val members = paperAssignController.getPCMembers().map { user -> user.toMemberDTO() }
         call.respond(members)
     }
