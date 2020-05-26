@@ -117,78 +117,79 @@ $(document).ready(function () {
                                     bidDate = dataConference.responseJSON.biddingDeadline
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
-                                     switch (role | phase) {
-                                        case 0 | 1:
-                                            window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                            break;
-                                        case 0 | 2:
-                                            window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                            break;
-                                        case 0 | 3:
-                                            window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                            break;
+                                    window.location.assign("../AuthorScreens/authorSubmit.html");
+                                    //  switch (role | phase) {
+                                    //     case 0 | 1:
+                                    //         window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                    //         break;
+                                    //     case 0 | 2:
+                                    //         window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                    //         break;
+                                    //     case 0 | 3:
+                                    //         window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                    //         break;
 
-                                        case 1 | 1:
-                                            window.location = "../AuthorScreens/authorSubmit.html";
-                                            break;
-                                        case 1 | 2:
-                                            window.location = "../AuthorScreens/authorUpload.html";  //TODO  what's upload and what's submit?
-                                            break;
-                                        case 1 | 3:
-                                            window.location = "../AuthorScreens/authorImproveAndUpload.html";
-                                            break;//TODO in phase 3 ar trebui sa aiba voie doar authori care sunt si speakeri. need to look into this. Also, cum afecteaza sectiunile chestia asta?
+                                    //     case 1 | 1:
+                                    //         window.location.assign("../AuthorScreens/authorSubmit.html");
+                                    //         break;
+                                    //     case 1 | 2:
+                                    //         window.location = "../AuthorScreens/authorUpload.html";  //TODO  what's upload and what's submit?
+                                    //         break;
+                                    //     case 1 | 3:
+                                    //         window.location = "../AuthorScreens/authorImproveAndUpload.html";
+                                    //         break;//TODO in phase 3 ar trebui sa aiba voie doar authori care sunt si speakeri. need to look into this. Also, cum afecteaza sectiunile chestia asta?
 
-                                        //TODO Authors have a bit of a mess here... Because PcMembers can publish papers as well (with the exception of the chair and chair-juniors)
-                                        //this might turn into a mess. Tired andu suggests that we add role to the login (as a drop-down list) and use it as a criteria for both login
-                                        //if user has account, check role as well, if the role checks out all is good. That way we can give people the ability to go into author mode if they log i
-                                        //with the role, and prevent people from loggin in with roles that weren't assigned to them. 21.05.2020
+                                    //     //TODO Authors have a bit of a mess here... Because PcMembers can publish papers as well (with the exception of the chair and chair-juniors)
+                                    //     //this might turn into a mess. Tired andu suggests that we add role to the login (as a drop-down list) and use it as a criteria for both login
+                                    //     //if user has account, check role as well, if the role checks out all is good. That way we can give people the ability to go into author mode if they log i
+                                    //     //with the role, and prevent people from loggin in with roles that weren't assigned to them. 21.05.2020
 
-                                        case 2 | 2:
-                                            if (today < bidDate)
-                                                window.location = "../BiddingScreen/biddingScreen.html";
-                                            else
-                                                window.location = "../ReviewingScreen/reviewingScreen.html";
-                                            break;
-                                        case 2 | 3:
-                                            window.location = "ADD pcmember in phase 3 LINK HERE";
-                                            break;
+                                    //     case 2 | 2:
+                                    //         if (today < bidDate)
+                                    //             window.location = "../BiddingScreen/biddingScreen.html";
+                                    //         else
+                                    //             window.location = "../ReviewingScreen/reviewingScreen.html";
+                                    //         break;
+                                    //     case 2 | 3:
+                                    //         window.location = "ADD pcmember in phase 3 LINK HERE";
+                                    //         break;
 
-                                        case 3 | 0:
-                                            window.location = "../ConferenceScreens/changeDate.html";
-                                            break;
-                                        case 3 | 2:
-                                            window.location = "../AssignToReviewerScreen/assignToReviewer.html";
-                                            break;
-                                        case 3 | 3:
-                                            window.location = "ADD cochair in phase 3 LINK HERE";
-                                            break;
+                                    //     case 3 | 0:
+                                    //         window.location = "../ConferenceScreens/changeDate.html";
+                                    //         break;
+                                    //     case 3 | 2:
+                                    //         window.location = "../AssignToReviewerScreen/assignToReviewer.html";
+                                    //         break;
+                                    //     case 3 | 3:
+                                    //         window.location = "ADD cochair in phase 3 LINK HERE";
+                                    //         break;
 
-                                        case 4 | 0:
-                                            window.location = "../ConferenceScreens/changeDate.html";
-                                            break;
-                                        case 4 | 2:
-                                            window.location = "../AssignToReviewerScreen/assignToReviewer.html";
-                                            break;
-                                        case 4 | 3:
-                                            window.location = "ADD chair in phase 3 LINK HERE";
-                                            break;
+                                    //     case 4 | 0:
+                                    //         window.location = "../ConferenceScreens/changeDate.html";
+                                    //         break;
+                                    //     case 4 | 2:
+                                    //         window.location = "../AssignToReviewerScreen/assignToReviewer.html";
+                                    //         break;
+                                    //     case 4 | 3:
+                                    //         window.location = "ADD chair in phase 3 LINK HERE";
+                                    //         break;
 
-                                        case 5 | 0:
-                                            window.location = "../PcMemberPickScreen/pcMemberPickScreen.html";
-                                            break;
-                                        case 5 | 1:
-                                            window.location = "ADD scmember in phase 1 LINK HERE";
-                                            break;
-                                        case 5 | 2:
-                                            window.location = "ADD scmember in phase 2 LINK HERE";
-                                            break;
-                                        case 5 | 3:
-                                            window.location = "ADD scmember in phase 3 LINK HERE";
-                                            break;
-                                        default:
-                                            window.location = "Nothing-to-do-here page....";
-                                            break;
-                                    }
+                                    //     case 5 | 0:
+                                    //         window.location = "../PcMemberPickScreen/pcMemberPickScreen.html";
+                                    //         break;
+                                    //     case 5 | 1:
+                                    //         window.location = "ADD scmember in phase 1 LINK HERE";
+                                    //         break;
+                                    //     case 5 | 2:
+                                    //         window.location = "ADD scmember in phase 2 LINK HERE";
+                                    //         break;
+                                    //     case 5 | 3:
+                                    //         window.location = "ADD scmember in phase 3 LINK HERE";
+                                    //         break;
+                                    //     default:
+                                    //         window.location = "Nothing-to-do-here page....";
+                                    //         break;
+                                    // }
 
                                 } else {
                                     alert("Can not gat conference details");

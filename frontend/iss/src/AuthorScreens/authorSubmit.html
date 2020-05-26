@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Submit Paper</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="./authorSubmit.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- <script type="module" src ="../Globuls.js"></script> -->
+    <script  type="module" src="./authorSubmit.js"></script>
 
 </head>
 
@@ -20,7 +23,9 @@
     <br>
     Topics of the proposal: <input type="text" name="proposalTopics" id="proposalTopics" placeholder="topics of the proposal">
     <br>
-    Authors of the proposal: <input type="text" name="proposalAuthors" id="proposalAuthors" placeholder="authors of the proposal">
+    Authors of the proposal: <input type="text" name="proposalAuthorName" id="proposalAuthorName" placeholder="author's name ">
+    <input type="text" name="proposalAuthorEmail" id="proposalAuthorEmail" placeholder="author's email">
+    <input type="submit" name="addMoreAuthors" id="addMoreAuthors" value="Add more authors">
     <br>
     Description the proposal: <input type="text" name="proposalDescription" id="proposalDescription" placeholder="...description">
     <br>

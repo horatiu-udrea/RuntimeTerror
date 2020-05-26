@@ -4,14 +4,13 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
-<<<<<<< HEAD
+
 import io.ktor.features.*
-=======
+
 import io.ktor.features.CORS
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
 import io.ktor.features.StatusPages
->>>>>>> befbefa8d02edc33918227c2bb4ccac6ef69586b
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
@@ -46,10 +45,8 @@ fun Application.module(testing: Boolean = false)
         header(HttpHeaders.AccessControlAllowOrigin)
         allowCredentials = true
         anyHost()
-<<<<<<< HEAD
+
         host("localhost:5500");
-=======
->>>>>>> befbefa8d02edc33918227c2bb4ccac6ef69586b
     }
 
     install(ContentNegotiation) {
