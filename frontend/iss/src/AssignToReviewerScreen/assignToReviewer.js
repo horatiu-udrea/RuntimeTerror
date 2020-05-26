@@ -4,12 +4,13 @@ $(document).ready(function () {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: HOST + PORT + "/paper/assign",
+        url: HOST + PORT + "/paper/bid",
         dataType: "json",
         complete:function (data) { //getPapers
             let code = "";
-            $.each(data, function (indexInArray, valueOfElement) { 
-                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='paper'>"+valueOfElement.name+"</div>"+"</li>";
+            $.each(data.responseJSON, function (indexInArray, valueOfElement) { 
+                if (valueOfElement.bidResult == 1) return; //it's supposed to act like a continue
+                code += "<li value = '"+valueOfElement.paperId+"' class='paper'>"+"<div>"+valueOfElement.paper.name+"</div>"+"</li>";
                 $("#paperList").html(code);
             });
         }
@@ -23,17 +24,28 @@ $(document).ready(function () {
 
         complete:function (data) { //getPcMemebers
             let code = "";
-            $.each(data, function (indexInArray, valueOfElement) { 
-                code += "<li value = '"+valueOfElement.userId+"'>"+"<div class='pcMember'>"+valueOfElement.name+"</div>"+"</li>";
+            $.each(data.responseJSON, function (indexInArray, valueOfElement) { 
+                code += "<li value = '"+valueOfElement.userId+"' class='pcMember'>"+"<div>"+valueOfElement.name+"</div>"+"</li>";
                 $("#pcMemberList").html(code);
             });
         }
     })
 
-    $(".paper, .pcMember").click(function (e) { 
+    $("#pcMemberList").on("click", "li.pcMember", function (e) { 
+        e.preventDefault();
+        let q = $(this).css("border-color");
+        if($(this).css("border-color") == "rgba(0, 0, 0, 0)"){
+            $(this).css("border-color","cyan")
+        }
+        else{
+            $(this).css("border-color","transparent")
+        }
+    }); 
+
+    $("#paperList").on("click", "li.paper", function (e) { 
         e.preventDefault();
         
-        if($(this).css("border-color","transparent")){
+        if($(this).css("border-color") == "rgba(0, 0, 0, 0)"){
             $(this).css("border-color","cyan")
         }
         else{
@@ -48,16 +60,21 @@ $(document).ready(function () {
         $(".pcMember").each(function (index, element) {
             let pcMember = this
             $(".paper").each(function (index, element) {
-                if($(this).css("border-color","cyan") && $(pcMember).css("border-color","cyan")){
+                if($(this).css("border-color") == "rgb(0, 255, 255)" && $(pcMember).css("border-color") == "rgb(0, 255, 255)"){
+                    let paper = this;
+                    
                     $.ajax({
-                        type: "POST",
+                        type: "PUT",
                         contentType: "application/json",
-                        url: HOST + PORT + "paper/assign",
-                        data: JSON.stringify({userId: $(pcMember).val(), paperId: $(this).val()}),
+                        url: HOST + PORT + "/paper/assign",
+                        data: JSON.stringify({userId: $(pcMember).val(), paperId: $(paper).val()}),
                         dataType: "json",
             
                         complete: function(){
-                            $(this).css("background-color","green");
+                            console.log($(pcMember).val() + " " + $(paper).val());
+                        },
+                        error: function(data){
+                            console.log(data.responseJSON.error);
                         }
                     })
                 }
