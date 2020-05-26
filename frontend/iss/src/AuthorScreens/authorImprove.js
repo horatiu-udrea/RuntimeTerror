@@ -20,6 +20,37 @@ $(document).ready(function () {
             }
         }
     });
+    let recommendations = []
+
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: HOST + PORT + "/paper/review",
+        dataType: "json",
+
+        complete: function (dataPapers, statusText) {
+            if (dataPapers.statusText == "OK") {
+                dataPapers.responseJSON.forEach(element => {
+                    if (element.paperId == window.localStorage.getItem("selectedProposal")) {
+                        recommendations.push({rec: element.recommandation, mark: element.qualifier});
+                    }
+                });
+            } else {
+                alert("can not get papers for this author");
+            }
+
+            addRecommendations();
+        }
+    });
+    function addRecommendations(){
+        let formedRecomm = "<dl>";
+            recommendations.forEach(element => {
+                formedRecomm += "<dt>" + element.rec + "</dt><dd>" + element.mark + "</dt>"; 
+        });
+
+        formedRecomm += "</dl>";
+        document.getElementById("PaperReviews").innerHTML = formedRecomm;
+    }
 
     function addItem(paper) {
         let name = paper.name;

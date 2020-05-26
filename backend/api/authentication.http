@@ -3,13 +3,9 @@ POST {{URL}}/authentication/login
 Content-Type: application/json
 
 {
-<<<<<<< HEAD
-  "username": "Cami99",
-  "password": "Cami99"
-=======
+
   "username": "Ana99",
   "password": "Ana99"
->>>>>>> befbefa8d02edc33918227c2bb4ccac6ef69586b
 }
 
 ### Logout
