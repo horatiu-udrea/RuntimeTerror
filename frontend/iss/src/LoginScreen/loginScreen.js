@@ -114,22 +114,23 @@ $(document).ready(function () {
 
                             complete: function (dataConference, statusText) {
                                 if (dataConference.statusText == "OK") {
-                                    bidDate = dataConference.responseJSON.biddingDeadline
+                                    let split = dataConference.responseJSON.biddingDeadline.split("/");
+                                    bidDate = new Date(split[2]+"-"+split[1]+"-"+split[0]);
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
                                     
                                     if(role == 0){
-                                        if(phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html"); // done
-                                        else if(phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html"); // done
-                                        else if(phase == 3) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html"); // done
-                                        else window.location = "Nothing-to-do-here page....";
+                                        if(phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                        else if(phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                        else if(phase == 3) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                        else window.location.href = "Nothing-to-do-here page....";
                                     }
 
                                     if(role == 1){
-                                        if(phase == 1) window.location = "../AuthorScreens/authorSubmit.html"; // needs test on server
-                                        else if(phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html"; // vezi to do din js cu phase part-ul
-                                        else if(phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
-                                        else window.location = "Nothing-to-do-here page....";
+                                        if(phase == 1) window.location.href = "../AuthorScreens/authorSubmit.html";
+                                        else if(phase == 2) window.location.href = "../AuthorScreens/authorImproveAndUpload.html";
+                                        else if(phase == 3) window.location.href = "../AuthorScreens/authorImproveAndUpload.html";
+                                        else window.location.href = "Nothing-to-do-here page....";
                                     }
 
                                     //TODO in phase 3 ar trebui sa aiba voie doar authori care sunt si speakeri. need to look into this. Also, cum afecteaza sectiunile chestia asta?
