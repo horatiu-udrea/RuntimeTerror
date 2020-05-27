@@ -11,9 +11,9 @@ data class UserInformation(
     val type: Int,
     val affiliation: String,
     val email: String,
-    val webPage: String
+    val webPage: String,
+    val validated: Boolean
 )
-//TODO add validated field
 fun User.toUserInformation(): UserInformation
 {
     return UserInformation(
@@ -23,7 +23,8 @@ fun User.toUserInformation(): UserInformation
         type.value,
         affiliation,
         email,
-        webPage
+        webPage,
+        validated
     )
 }
 

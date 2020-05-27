@@ -13,6 +13,7 @@ import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.PaperDAO
 import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.daos.withAuthors
+import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.model.UserReview
 
 class PaperReviewController
@@ -20,29 +21,29 @@ class PaperReviewController
 
     /**
      * Get all the reviews made by the user or assigned to him and also the other reviews for the same paper
-     * If the author is a PC member, he is not allowed to see the other reviews
      */
     fun getReviews(userId: Int): List<PaperReview> = getPCMemberReviews(userId)
 
 
     private fun getPCMemberReviews(userId: Int): List<PaperReview> = transaction(connection){
-        val authoredPapers: List<Int> = PaperDAO
+        val authoredPapers = PaperDAO
             .all()
             .map { withAuthors(it) }
             .filter{ userId in it.authors.map {user-> user.userId } }
             .map { it.paperId }
-        TODO("Use row wrapping and dsl - https://github.com/JetBrains/Exposed/wiki/DAO#read-entity-with-a-join-to-another-table")
-        /*return@transaction ReviewTable
+            .toList()
+
+        return@transaction ReviewTable
             .select{ReviewTable.userID eq userId}
             .filter { it[ReviewTable.paperID] !in authoredPapers }
             .map {
                 PaperReview(
-                        PaperDAO.findById(it[ReviewTable.paperID])!!.load(PaperDAO::authorIterable),
+                        PaperDAO.wrapRow(PaperTable.select { PaperTable.id eq ReviewTable.paperID }.first()),
                         it[ReviewTable.recommandation],
                         Qualifier.from(it[ReviewTable.qualifier]),
                         getOtherReviews(userId, it[ReviewTable.paperID])
                     )
-            }*/
+            }
     }
 
     private fun getOtherReviews(userId: Int, paperID: Int): List<UserReview> = transaction(connection) {

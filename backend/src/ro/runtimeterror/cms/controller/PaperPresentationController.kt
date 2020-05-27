@@ -10,12 +10,11 @@ import ro.runtimeterror.cms.database.daos.PaperDAO
 import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.daos.withAuthors
 import ro.runtimeterror.cms.database.tables.PaperSubmissionTable
+import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.database.tables.SectionTable
 import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.model.PaperStatus
-import ro.runtimeterror.cms.model.Section
 import ro.runtimeterror.cms.model.User
-import java.nio.channels.SelectableChannel
 
 class PaperPresentationController
 {
@@ -36,22 +35,35 @@ class PaperPresentationController
             .selectAll()
             .map { PaperDAO.findById(it[SectionTable.paperId]!!)!!.load(PaperDAO::authorIterable)}
             .toList()*/
-        TODO("Use DSL here, too many non-null asserts")
+        return@transaction PaperDAO
+            .wrapRows(
+                SectionTable.innerJoin(PaperTable)
+                .select {
+                    PaperTable.id eq SectionTable.paperId
+                }
+            )
+            .toList()
     }
     /**
      * Get all accepted papers that are not assigned to a section
      */
     fun getRemainingPapers() : List<Paper> = transaction(connection) {
-        val papersAssigned: List<Int> = getAllPapersThatAreAssignedASection()
-            .map { it.paperId }
-            .toList()
+//        val papersAssigned: List<Int> = getAllPapersThatAreAssignedASection()
+//            .map { it.paperId }
+//            .toList()
 
         /*return@transaction SectionTable
             .selectAll()
             .filter{ it[SectionTable.paperId]  in papersAssigned }
             .map{PaperDAO.findById(it[SectionTable.paperId]!!)!!.load(PaperDAO::authorIterable)}
             .toList()*/
-        TODO("Use DSL here, too many non-null asserts")
+        return@transaction PaperDAO
+            .wrapRows(
+                SectionTable.innerJoin(PaperTable)
+                    .slice(PaperTable.columns)
+                    .select{PaperTable.id neq SectionTable.paperId}
+            )
+            .toList()
     }
 
     /**

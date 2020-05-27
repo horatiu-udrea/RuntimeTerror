@@ -85,5 +85,12 @@ fun Route.sectionRoute(sectionController: SectionController)
             sectionController.uploadPresentation(user.id, path)
             call.respond(HttpStatusCode.OK)
         }
+
+        get("review") { // Get reviews for the paper he is going to present
+            authorize(UserType.AUTHOR)
+            val user = userSession()
+            val reviews = sectionController.getReviews(user.id)
+            call.respond(reviews.map { review -> review.toDTO() })
+        }
     }
 }
