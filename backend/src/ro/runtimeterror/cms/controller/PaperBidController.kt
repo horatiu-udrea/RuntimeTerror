@@ -28,20 +28,20 @@ class PaperBidController
         return@transaction PaperDAO
             .all()
             .map { withAuthors(it) }
-            .map{
+            .map {
                 PaperBid(
                     it,
                     getBidResult(it.id.value, userId)
                 )
             }
-        }
+    }
 
-    private fun getBidResult(paperID: Int, userID: Int): PaperBidResult = transaction(connection){
-        return@transaction  PaperBidResult.from(
+    private fun getBidResult(paperID: Int, userID: Int): PaperBidResult = transaction(connection) {
+        return@transaction PaperBidResult.from(
             BidPaperTable
-                .select{(BidPaperTable.paperID eq paperID) and (BidPaperTable.userID eq userID)}
+                .select { (BidPaperTable.paperID eq paperID) and (BidPaperTable.userID eq userID) }
                 .map { it[BidPaperTable.paperBidResult] }
-                .firstOrNull()?:PaperBidResult.INDECISIVE.value
+                .firstOrNull() ?: PaperBidResult.INDECISIVE.value
         )
     }
 
@@ -49,20 +49,23 @@ class PaperBidController
      * User bids on the specified paper
      */
     fun bid(userID: Int, paperID: Int, bidResult: Int) = transaction(connection) {
-                PaperValidator.exists(paperID)
-                UserValidator.exists(userID)
-                if(UniquenessValidator.bidExists(userID, paperID)){
-                    BidPaperTable.insert {
-                        it[BidPaperTable.paperID] = paperID
-                        it[BidPaperTable.userID] = userID
-                        it[paperBidResult] = PaperBidResult.from(bidResult).value
-                    }
-                }else{
-                    BidPaperTable.update({(BidPaperTable.paperID eq paperID) and (BidPaperTable.userID eq userID)}) {
-                        it[paperBidResult] = PaperBidResult.from(bidResult).value
-                    }
-                }
-
+        PaperValidator.exists(paperID)
+        UserValidator.exists(userID)
+        if (UniquenessValidator.bidExists(userID, paperID))
+        {
+            BidPaperTable.insert {
+                it[BidPaperTable.paperID] = paperID
+                it[BidPaperTable.userID] = userID
+                it[paperBidResult] = PaperBidResult.from(bidResult).value
             }
+        }
+        else
+        {
+            BidPaperTable.update({ (BidPaperTable.paperID eq paperID) and (BidPaperTable.userID eq userID) }) {
+                it[paperBidResult] = PaperBidResult.from(bidResult).value
+            }
+        }
 
     }
+
+}
