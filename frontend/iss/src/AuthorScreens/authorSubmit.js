@@ -11,7 +11,7 @@ $(document).ready(function () {
         else {
             let cannot = false;
             authors.forEach(element => {
-                if(element.name == name && element.email == email){
+                if (element.name == name && element.email == email) {
                     cannot = true;
                 }
             });
@@ -29,7 +29,14 @@ $(document).ready(function () {
 
 
     $("#submitProposal").click(function () {
-
+        console.log({
+            name: $("#proposalName").val(),
+            field: $("#proposalFiels").val(),
+            keywords: $("#proposalKeywords").val(),
+            topics: $("#proposalTopics").val(),
+            authors: authors,
+            abstract: $('#proposalDescription').val()
+        });
         $.ajax({
             type: "POST",
             url: HOST + PORT + "/paper",
