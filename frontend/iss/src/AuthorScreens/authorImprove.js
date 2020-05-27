@@ -25,15 +25,16 @@ $(document).ready(function () {
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: HOST + PORT + "/paper/review",
+        url: HOST + PORT + "/section/review",
         dataType: "json",
 
         complete: function (dataPapers, statusText) {
+            console.log(dataPapers);
             if (dataPapers.statusText == "OK") {
                 dataPapers.responseJSON.forEach(element => {
-                    if (element.paperId == window.localStorage.getItem("selectedProposal")) {
-                        recommendations.push({rec: element.recommandation, mark: element.qualifier});
-                    }
+
+                    recommendations.push({from: element.name, rec: element.recommendation, mark: element.qualifier });
+
                 });
             } else {
                 alert("can not get reviews for this author");
@@ -42,10 +43,16 @@ $(document).ready(function () {
             addRecommendations();
         }
     });
-    function addRecommendations(){
+    function addRecommendations() {
         let formedRecomm = "<dl>";
-            recommendations.forEach(element => {
-                formedRecomm += "<dt>" + element.rec + "</dt><dd>" + element.mark + "</dt>"; 
+        recommendations.forEach(element => {
+            let recommendat = "";
+            if(element.rec == "") {
+                recommendat = "No recommandation "
+            }else {
+                recommendat = element.rec
+            }
+            formedRecomm += "<dt>" + recommendat + "</dt><dd>@From " + element.from + "-> " + element.mark + "</dt>";
         });
 
         formedRecomm += "</dl>";
@@ -75,18 +82,18 @@ $(document).ready(function () {
 
     }
     $("#uploadPaper").click(function () {
-      var form = $("#Upload")[0];
-      var files = new FormData(form);
+        var form = $("#Upload")[0];
+        var files = new FormData(form);
         $.ajax({
             type: "PUT",
             enctype: 'multipart/form-data',
             processData: false,  // Important!
             contentType: false,
             cache: false,
-            url: HOST + PORT + "/paper/full/" +  window.localStorage.getItem("selectedProposal"),
+            url: HOST + PORT + "/paper/full/" + window.localStorage.getItem("selectedProposal"),
             data: files,
             complete: function (dataPapers, statusText) {
-                if(dataPapers.statusText == "OK"){
+                if (dataPapers.statusText == "OK") {
                     alert("the files was uploaded");
                 } else {
                     alert("an error ocurred when uploading");

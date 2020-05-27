@@ -32,21 +32,21 @@ $(document).ready(function () {
         }
     });
 
-    
+
 
     function addDetailOnPaper(id) {
-        
+
         $.ajax({
             type: "GET",
             contentType: "application/json",
             url: HOST + PORT + "/paper/assign",
             dataType: "json",
-    
+
             complete: function (dataPapers, statusText) {
                 if (dataPapers.statusText == "OK") {
                     dataPapers.responseJSON.forEach(element => {
                         if (element.paperId == id) {
-                            
+
                             addDetailItem(element);
                         }
                     });
@@ -98,8 +98,40 @@ $(document).ready(function () {
 
     }
     $("#accept").click(function () {
+        $.ajax({
+            type: "PUT",
+            contentType: "application/json",
+            url: HOST + PORT + "/paper/decision",
+            dataType: "json",
+            data: JSON.stringify({ paperId: localStorage.getItem("selectedProposal"), status: 2 }),
+            complete: function (dataPapers, statusText) {
+                if (dataPapers.statusText == "OK") {
+                    location.reload();
+                    alert("this paper was accepted");
+                }
+                else {
+                    alert("you can not decide on this one");
+                }
+            }
+        });
     });
     $("#reject").click(function () {
+        $.ajax({
+            type: "PUT",
+            contentType: "application/json",
+            url: HOST + PORT + "/paper/decision",
+            dataType: "json",
+            data: JSON.stringify({ paperId: localStorage.getItem("selectedProposal"), status: 3 }),
+            complete: function (dataPapers, statusText) {
+                if (dataPapers.statusText == "OK") {
+                    location.reload();
+                    alert("this paper was rejected");
+                }
+                else {
+                    alert("you can not decide on this one");
+                }
+            }
+        });
     });
 
     let previousID = -1;
@@ -109,12 +141,19 @@ $(document).ready(function () {
     document.addEventListener('click', function (event) {
         try {
             document.getElementById(previousID).style = "font-family:'Times New Roman'; font-size:12px; color:black"
+            document.getElementById("accept").style.visibility = "hidden";
+            document.getElementById("reject").style.visibility = "hidden";
+            document.getElementById("paperDetails").innerHTML = "";
         } catch {
             console.log("nothing to undo");
+            document.getElementById("accept").style.visibility = "hidden";
+            document.getElementById("reject").style.visibility = "hidden";
+            document.getElementById("paperDetails").innerHTML = "";
         }
         if (event.target && event.target.getAttribute("class") == "proposalTitle") {
             document.getElementById(event.target.id).style = "font-family:'Courier New'; font-size:30px; color:blue"
-            console.log(event.target.id);
+            document.getElementById("accept").style.visibility = "visible";
+            document.getElementById("reject").style.visibility = "visible";
             keepInStore(event.target.id);
             addDetailOnPaper(event.target.id);
             previousID = event.target.id;
