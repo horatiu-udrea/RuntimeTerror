@@ -1,9 +1,9 @@
 package ro.runtimeterror.cms.model.validators
 
-import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
+import ro.runtimeterror.cms.database.tables.BidPaperTable
 import ro.runtimeterror.cms.database.tables.ReviewTable
 import ro.runtimeterror.cms.exceptions.PrimaryKeyAlreadyExistException
 
@@ -14,11 +14,17 @@ class UniquenessValidator {
                 if(
                     ReviewTable
                         .selectAll()
-                        .any { it[ReviewTable.paperID] == paperID && it[ReviewTable.userID] == paperID }
+                        .any { it[ReviewTable.paperID] == paperID && it[ReviewTable.userID] == userID }
                 ){
                     throw PrimaryKeyAlreadyExistException("Review Already Exists!")
                 }
             }
+        }
+
+        fun bidExists(userID: Int, paperID: Int): Boolean {
+                return BidPaperTable
+                    .selectAll()
+                    .any{it[BidPaperTable.userID] == userID && it[BidPaperTable.paperID] == paperID}
         }
     }
 }
