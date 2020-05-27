@@ -1,18 +1,14 @@
 package ro.runtimeterror.cms.database.tables
 
-import com.sun.jdi.IntegerValue
 import org.jetbrains.exposed.dao.id.IntIdTable
 
 object PaperTable : IntIdTable("Papers", "PK_PaperID")
 {
-    var userid = integer("User").references(UserTable.id)
     val name = varchar("name", 100)
+    val abstract = varchar("abstract", 500)
     val field = varchar("field", 100)
     val keywords = varchar("keywords", 100)
     val topics = varchar("topics", 100)
-    val authors = varchar("authors", 100)
     val documentPath = varchar("documentPath", 100)
-    val accepted = bool("accepted")
-    val conflicting = bool("conflicting")
-
+    val status = integer("status")
 }

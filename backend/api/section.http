@@ -1,0 +1,58 @@
+### Get all sections
+GET {{URL}}/section/
+
+### Choose section
+PUT {{URL}}/section/choice
+Content-Type: application/json
+
+{
+  "sectionId": 1
+}
+
+### Get presentation details
+GET {{URL}}/section/details
+
+### Upload presentaion
+POST {{URL}}/section/presentation
+Content-Type: multipart/form-data
+
+### Create section
+PUT {{URL}}/section
+Content-Type: application/json
+
+{
+  "name": "text",
+  "startTime": "text",
+  "endTime": "text"
+}
+
+### Choose section chair
+POST {{URL}}/section
+Content-Type: application/json
+
+{
+  "sectionId": 1,
+  "userId": 1
+}
+
+### Choose presenter for section
+PUT {{URL}}/section/presenter
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "paperId": 1,
+  "sectionId": 1
+}
+
+### Change room name
+POST {{URL}}/section/room
+Content-Type: application/json
+
+{
+  "sectionId": 1,
+  "roomName": "text"
+}
+
+### Get reviews for the paper he is going to present
+GET {{URL}}/section/review
