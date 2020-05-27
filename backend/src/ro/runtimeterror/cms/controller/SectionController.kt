@@ -8,6 +8,7 @@ import ro.runtimeterror.cms.database.daos.SectionDAO
 import ro.runtimeterror.cms.database.tables.SectionTable
 import ro.runtimeterror.cms.database.tables.UserSectionChoiceTable
 import ro.runtimeterror.cms.model.Section
+import ro.runtimeterror.cms.model.UserReview
 
 class SectionController
 {
@@ -83,4 +84,13 @@ class SectionController
         SectionTable.update ({ SectionTable.id eq sectionId }){
             it[SectionTable.roomName] = roomName
         }
+
+    /**
+     * Get all the reviews for the paper that the author is going to present
+     * If the author is a PC member, he is not allowed to see the reviews (return empty list)
+     */
+    fun getReviews(userId: Int): List<UserReview>
+    {
+        TODO("Not yet implemented")
+    }
 }
