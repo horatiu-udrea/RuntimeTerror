@@ -13,7 +13,6 @@ data class CreatePaperDTO(
     val topics: String,
     val authors: List<Author>,
     val abstract: String,
-    val documentPath: String,
     val status: Int
 )
 

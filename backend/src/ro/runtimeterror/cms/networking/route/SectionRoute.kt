@@ -81,7 +81,7 @@ fun Route.sectionRoute(sectionController: SectionController)
         post("/presentation") { // Upload presentation
             authorize(UserType.AUTHOR)
             val user = userSession()
-            val path = uploadFile()
+            val path = uploadFile(user.id)
             sectionController.uploadPresentation(user.id, path)
             call.respond(HttpStatusCode.OK)
         }

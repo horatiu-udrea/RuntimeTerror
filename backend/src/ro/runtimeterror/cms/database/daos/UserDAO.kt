@@ -18,7 +18,7 @@ class UserDAO(id: EntityID<Int>) : IntEntity(id), User
     override var email by UserTable.email
     override var webPage by UserTable.webPage
     override var validated by UserTable.validated
-    private var typeValue by UserTable.type
+    var typeValue by UserTable.type
 
     override val userId: Int
         get() = id.value
