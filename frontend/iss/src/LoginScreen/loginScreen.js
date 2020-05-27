@@ -119,6 +119,9 @@ $(document).ready(function () {
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
                                     
+                                    if (role == 2 && confirm("Would you like to log in as an Author?"))
+                                        role = 1;
+                                    
                                     if(role == 0){
                                         if(phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
                                         else if(phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
@@ -127,10 +130,10 @@ $(document).ready(function () {
                                     }
 
                                     if(role == 1){
-                                        if(phase == 1) window.location.href = "../AuthorScreens/authorSubmit.html";
-                                        else if(phase == 2) window.location.href = "../AuthorScreens/authorImproveAndUpload.html";
-                                        else if(phase == 3) window.location.href = "../AuthorScreens/authorImproveAndUpload.html";
-                                        else window.location.href = "Nothing-to-do-here page....";
+                                        if(phase == 1) window.location = "../AuthorScreens/authorSubmit.html"; 
+                                        else if(phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html"; 
+                                        else if(phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
+                                        else window.location = "Nothing-to-do-here page....";
                                     }
 
                                     //TODO in phase 3 ar trebui sa aiba voie doar authori care sunt si speakeri. need to look into this. Also, cum afecteaza sectiunile chestia asta?
@@ -153,7 +156,7 @@ $(document).ready(function () {
                                         else if(phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
                                         else if(phase == 3) window.location.href = "../ConflictingDiscussion/conflictingDiscussion.html";
                                         else window.location.href = "Nothing-to-do-here page....";
-                                    } 
+                                    } //TODO Pune conflicting discussion la co-chair si chair in phase 2
 
                                     if(role == 4){
                                         if(phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";

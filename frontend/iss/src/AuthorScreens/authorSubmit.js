@@ -23,6 +23,7 @@ $(document).ready(function () {
             document.getElementById("proposalAuthorName").value = "";
             document.getElementById("proposalAuthorEmail").value = "";
         }
+        $("#authorCount").text("Current number of authors added: "+authors.length);
         console.log(authors);
     });
 

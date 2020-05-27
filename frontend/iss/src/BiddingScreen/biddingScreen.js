@@ -9,8 +9,13 @@ function refreshList() {
         complete: function(data){
             let code = "";
             $.each(data.responseJSON, function (indexInArray, valueOfElement) { 
+                let bidColor = "yellow";
+                if(valueOfElement.bidResult == 3) bidColor = "red"
+                else if (valueOfElement.bidResult == 1) bidColor = "green"
+
+
                 valueOfElement = valueOfElement.paper;
-                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='title'>"+valueOfElement.name+"</div><div class='content' style = 'display:none'>"+valueOfElement.abstract+"<button class='upButton'>UP</button> <button class='middleButton'>MIDDLE</button> <button class='downButton'>DOWN</button> </div>"+"</li>";
+                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='title'>"+valueOfElement.name+"<div class='bid' style='background-color:"+bidColor+"'></div></div><div class='content' style = 'display:none'>"+valueOfElement.abstract+"<button class='upButton'>UP</button> <button class='middleButton'>MIDDLE</button> <button class='downButton'>DOWN</button> </div>"+"</li>";
                 $("#list").html(code);
             });
         }
@@ -23,10 +28,12 @@ function bidOnPaper(listItem, bid) {
         contentType: "application/json",
         url: HOST + PORT + "/paper/bid",
         dataType: "json",
-        data: JSON.stringify({paperId: listItem.paperId, bidResult: bid}),
-
-        complete: function(data){listItem.remove();}
+        data: JSON.stringify({paperId: listItem.value, bidResult: bid}),
     });
+
+    if(bid == 1) $(listItem).find("div.bid").css("background-color", "red"); 
+    else if(bid == 2) $(listItem).find("div.bid").css("background-color", "yellow");
+    else $(listItem).find("div.bid").css("background-color", "green"); 
 }
 
 $(document).ready(function () {
@@ -49,19 +56,19 @@ $(document).ready(function () {
     $("ul").on("click", ".upButton", function (e) { 
         e.preventDefault();
 
-        bidOnPaper($(this).parents("li"), 1);
+        bidOnPaper($(this).parents("li")[0], 1);
     });
 
     $("ul").on("click", ".middleButton", function (e) { 
         e.preventDefault();
         
-        bidOnPaper($(this).parents("li"), 2);
+        bidOnPaper($(this).parents("li")[0], 2);
     });
     
     $("ul").on("click", ".downButton", function (e) { 
         e.preventDefault();
         
-        bidOnPaper($(this).parents("li"), 3);
+        bidOnPaper($(this).parents("li")[0], 3);
     });
 });
 

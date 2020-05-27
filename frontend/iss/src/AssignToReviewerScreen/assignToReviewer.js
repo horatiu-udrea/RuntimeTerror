@@ -116,14 +116,7 @@ $(document).ready(function () {
                         contentType: "application/json",
                         url: HOST + PORT + "/paper/assign",
                         data: JSON.stringify({userId: $(pcMember).val(), paperId: $(paper).val()}),
-                        dataType: "json",
-            
-                        complete: function(){
-                            console.log($(pcMember).val() + " " + $(paper).val());
-                        },
-                        error: function(data){
-                            console.log(data.responseJSON.error);
-                        }
+                        dataType: "json"
                     })
                 }
             });
