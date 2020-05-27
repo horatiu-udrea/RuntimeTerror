@@ -88,6 +88,7 @@ class SectionController
     /**
      * Get all the reviews for the paper that the author is going to present
      * If the author is a PC member, he is not allowed to see the reviews (return empty list)
+     *  Throw an exception if the author is not assigned to a section
      */
     fun getReviews(userId: Int): List<UserReview>
     {
