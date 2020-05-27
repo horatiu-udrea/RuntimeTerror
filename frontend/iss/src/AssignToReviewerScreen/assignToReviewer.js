@@ -1,7 +1,49 @@
 import { HOST, PORT } from "../Globuls.js"
 
-$(document).ready(function () {
+const CYAN = "rgb(0, 255, 255)";
+const TRANSPARENT = "rgba(0, 0, 0, 0)";
+const RED = "rgb(255,0,0)";
 
+function markConflicts() {
+    
+    $("li").each(function () {
+        if($(this).css("border-color") != TRANSPARENT) $(this).css("border-color", CYAN);
+    })
+    $("#button").prop('disabled', false);
+
+    $("li.pcMember").each(function () {
+        if($(this).css("border-color") == TRANSPARENT) return;
+        
+        let member = this;
+        
+        $("li.paper").each(function() { 
+            if($(this).css("border-color") == TRANSPARENT) return;
+            
+            let paper = this;
+
+            $.ajax({                  
+                type: "POST",
+                contentType: "application/json",
+                url: HOST + PORT + "/paper/assign",
+                data: JSON.stringify({userId: $(member).val(), paperId: $(paper).val()}),
+                dataType: "json",
+
+                complete: function(data){
+                    if(data.responseJSON.bidResult == "REFUSE_TO_REVIEW") {
+                        $(paper).css("border-color", "red");
+                        $(member).css("border-color", "red");
+                        $("#button").prop('disabled', true);
+                    }
+                },
+                error: function(data){
+                    if(data.responseJSON.error == "The bid does not exist!") return;
+                }
+            })
+        });
+    })
+}
+
+function refreshLists() {
     $.ajax({
         type: "GET",
         contentType: "application/json",
@@ -10,8 +52,7 @@ $(document).ready(function () {
         complete:function (data) { //getPapers
             let code = "";
             $.each(data.responseJSON, function (indexInArray, valueOfElement) { 
-                if (valueOfElement.bidResult == 1) return; //TODO ask if this filter is needed
-                code += "<li value = '"+valueOfElement.paperId+"' class='paper'>"+"<div>"+valueOfElement.paper.name+"</div>"+"</li>";
+                code += "<li value = '"+valueOfElement.paper.paperId+"' class='paper'>"+"<div>"+valueOfElement.paper.name+"</div>"+"</li>";
                 $("#paperList").html(code);
             });
         }
@@ -31,71 +72,22 @@ $(document).ready(function () {
             });
         }
     })
+}
 
-    $("#pcMemberList").on("click", "li.pcMember", function (e) { 
+$(document).ready(function () {
+
+    refreshLists();
+
+    $("ul").on("click", "li", function (e) { 
         e.preventDefault();
-        let q = $(this).css("border-color");
-        if($(this).css("border-color") == "rgba(0, 0, 0, 0)"){
-            let good = true;
-            let member = this;
-
-            $("li.paper").each(function() {
-                $.ajax({
-                    type: "POST",
-                    contentType: "application/json",
-                    url: HOST + PORT + "/paper/assign",
-                    data: JSON.stringify({userId: $(member).parent().val(), paperId: $(this).val()}),
-                    dataType: "json",
         
-                    complete: function(data){
-                        if(data.responseJSON.bidResult < 2) {
-                            $(this).css("border-color", "red");
-                            $(member).parent().css("border-color", "red");
-                            good = false;
-                        }
-                    }
-                })
-            });
-
-            if(good == true) //I'm tired please don't judge
+        if($(this).css("border-color") == TRANSPARENT){
                 $(this).css("border-color","cyan")
         }
         else{
             $(this).css("border-color","transparent")
         }
-    }); 
-
-    $("#paperList").on("click", "li.paper", function (e) { 
-        e.preventDefault();
-        
-        if($(this).css("border-color") == "rgba(0, 0, 0, 0)"){
-            let good = true;
-            let paper = this;
-
-            $("li.pcMember").each(function() {
-                $.ajax({
-                    type: "POST",
-                    contentType: "application/json",
-                    url: HOST + PORT + "/paper/assign",
-                    data: JSON.stringify({userId: $(this).val(), paperId: $(paper).parent().val()}),
-                    dataType: "json",
-        
-                    complete: function(data){
-                        if(data.responseJSON.bidResult < 2) {
-                            $(this).css("border-color", "red");
-                            $(paper).parent().css("border-color", "red");
-                            good = false;
-                        }
-                    }
-                })
-            });
-
-            if(good == true) //I'm tired please don't judge
-                $(this).css("border-color","cyan")
-        }
-        else{
-            $(this).css("border-color","transparent")
-        }
+        markConflicts();
     }); //m-am gandit sa trag linii intre pc-memberii selectati si hartiile selectate la click, ca o animatie interesanta
         //https://stackoverflow.com/questions/19382872/how-to-connect-html-divs-with-lines
 
@@ -116,7 +108,7 @@ $(document).ready(function () {
         $(".pcMember").each(function (index, element) {
             let pcMember = this
             $(".paper").each(function (index, element) {
-                if($(this).css("border-color") == "rgb(0, 255, 255)" && $(pcMember).css("border-color") == "rgb(0, 255, 255)"){
+                if($(this).css("border-color") == CYAN && $(pcMember).css("border-color") == CYAN){
                     let paper = this;
                     
                     $.ajax({

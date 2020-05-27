@@ -114,7 +114,8 @@ $(document).ready(function () {
 
                             complete: function (dataConference, statusText) {
                                 if (dataConference.statusText == "OK") {
-                                    bidDate = dataConference.responseJSON.biddingDeadline
+                                    let split = dataConference.responseJSON.biddingDeadline.split("/");
+                                    bidDate = new Date(split[2]+"-"+split[1]+"-"+split[0]);
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
                                     
@@ -127,7 +128,7 @@ $(document).ready(function () {
 
                                     if(role == 1){
                                         if(phase == 1) window.location.href = "../AuthorScreens/authorSubmit.html";
-                                        else if(phase == 2) window.location.href = "../AuthorScreens/authorUpload.html";
+                                        else if(phase == 2) window.location.href = "../AuthorScreens/authorImproveAndUpload.html";
                                         else if(phase == 3) window.location.href = "../AuthorScreens/authorImproveAndUpload.html";
                                         else window.location.href = "Nothing-to-do-here page....";
                                     }
