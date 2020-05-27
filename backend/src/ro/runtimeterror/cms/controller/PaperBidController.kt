@@ -51,6 +51,7 @@ class PaperBidController
     fun bid(userID: Int, paperID: Int, bidResult: Int) = transaction(connection) {
         PaperValidator.exists(paperID)
         UserValidator.exists(userID)
+        UserValidator.pcMemberIsAuthor(userID, paperID)
         if (!UniquenessValidator.bidExists(userID, paperID))
         {
             BidPaperTable.insert {

@@ -63,13 +63,21 @@ class PaperReviewController
     fun review(userID: Int, paperID: Int, recommendation: String, qualifier: Int)= transaction(connection) {
             UserValidator.exists(userID)
             PaperValidator.exists(paperID)
-            UniquenessValidator.reviewExists(userID, paperID)
-            ReviewTable
+            if(!UniquenessValidator.reviewExists(userID, paperID)){
+                ReviewTable
                     .insert {
                         it[ReviewTable.userID] = userID
                         it[ReviewTable.paperID] = paperID
                         it[ReviewTable.qualifier] = Qualifier.from(qualifier).value
                         it[recommandation] = recommendation
                     }
+            }else{
+                ReviewTable
+                    .update({(ReviewTable.userID eq userID) and (ReviewTable.paperID eq paperID)}) {
+                        it[ReviewTable.qualifier] = Qualifier.from(qualifier).value
+                        it[recommandation] = recommendation
+                    }
+            }
+
         }
 }
