@@ -91,18 +91,24 @@ p{
     position: absolute;
     left:50%;
     top:50%;
-    transform: translate(50, 50);
-    width: 50%;
-    height: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 30%;
+    background-color: #8A8D91;
+    border-style: solid;
+    border-color: #C3BAAA;
+    border-width: 1px;
+    border-radius: 20px;
 }
 
 #alertBackground{
     position: absolute;
     width: 100%;
     height: 100%;
-    display:none;
+    z-index: 400;
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    top:0%;
+    left:0%;
 }
 
 .buttonDiv{
@@ -118,23 +124,31 @@ p{
     transition-property: border-color; 
     transition-duration: 0.5s;
     transition-timing-function: ease-out;
-    background-color: #EFF2C0;
+    background-color: transparent;
     border-radius: 20px;
-    border: solid 2px #EFF2C0;
+    border: solid 2px transparent;
 }
 
 .buttonDiv:hover{
     border-color: rgb(141, 238, 255);
 }
 
-#buttonYes{
-    position: absolute;
+#alertButtonYes{
     top:80%;
-    left:40%
+    left: 4%;
+    background-color: #DDDFDF;
 }
 
-#buttonNo{
-    position: absolute;
+#alertButtonNo{
     top:80%;
-    left:60%
+    left:60%;
+    background-color: #DDDFDF;
+}
+
+#alertMessage{
+    top:30%;
+    width: 70%;
+    font-size: large;
+    font-family: DejaVu Sans Mono;
+    color: black;
 }

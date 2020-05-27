@@ -24,13 +24,18 @@ function callAlert(message, messageYes, messageNo, actionYes, actionNo){
     $("#alertButtonNo").click(actionNo);
     $("#alertButtonYes").text(messageYes);
     $("#alertButtonNo").text(messageNo);
-    $("#alertBackground").css("display", "block");
+    $("#alertBackground").toggle();
 }
 
 $(document).ready(function () {
     let defaultLoginStripeHeight = $("#loginButtonStripe").height();
     let defaultSignUpStripeHeight = $("#signUpButtonStripe").height();
     let defaultTextBoxesHeight = $("#textboxesStripe").height();
+    $("#alertBackground").toggle();
+    $("#alertBackground").click(function () {
+        $("#alertBackground").toggle();
+    })
+
 
     //Login Button Animations
     $("#loginButtonStripe").mouseenter(function () {
@@ -128,8 +133,6 @@ $(document).ready(function () {
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
                                     
-                                    if (role == 2) callAlert("What would you like to log in as?", "Author", "PcMember", function () {role = 1;}, function () {});
-
                                     if(role == 0){
                                         if(phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
                                         else if(phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
@@ -151,18 +154,33 @@ $(document).ready(function () {
                                     //with the role, and prevent people from loggin in with roles that weren't assigned to them. 21.05.2020
 
                                     if(role == 2){
-                                        if(phase == 2) {
-                                            if (today < bidDate) window.location.href = "../BiddingScreen/biddingScreen.html";
-                                            else window.location.href = "../ReviewingScreen/reviewingScreen.html";
-                                        }
-                                        else if(phase == 3) window.location.href = "ADD pcmember in phase 3 LINK HERE";
-                                        else window.location.href = "Nothing-to-do-here page....";
+                                        callAlert("What would you like to log in as?", "Author", "PcMember", function () {
+                                            if(phase == 1) window.location = "../AuthorScreens/authorSubmit.html"; 
+                                            else if(phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html"; 
+                                            else if(phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
+                                            else window.location = "Nothing-to-do-here page....";
+                                        },
+                                        function () {
+                                            if(phase == 2) {
+                                                if (today < bidDate) window.location.href = "../BiddingScreen/biddingScreen.html";
+                                                else window.location.href = "../ReviewingScreen/reviewingScreen.html";
+                                            }
+                                            else if(phase == 3) window.location.href = "ADD pcmember in phase 3 LINK HERE";
+                                            else window.location.href = "Nothing-to-do-here page....";
+                                        });
                                     }
 
                                     if(role == 3){
                                         if(phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
-                                        else if(phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if(phase == 3) window.location.href = "../ConflictingDiscussion/conflictingDiscussion.html";
+                                        else if(phase == 2){
+                                            callAlert("Assign papers to reviewers, or deal with conflicting papers?", "Assign", "Conflicting", function () {
+                                                window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
+                                            },
+                                            function () {
+                                                window.location.href = "../ConflictingDiscussion/conflictingDiscussion.html";
+                                            });
+                                        } 
+                                        else if(phase == 3) {}
                                         else window.location.href = "Nothing-to-do-here page....";
                                     } //TODO Pune conflicting discussion la co-chair si chair in phase 2
 
