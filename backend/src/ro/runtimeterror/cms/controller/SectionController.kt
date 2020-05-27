@@ -5,10 +5,16 @@ import org.jetbrains.exposed.sql.transactions.transaction
 import org.joda.time.LocalDateTime
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.SectionDAO
+import ro.runtimeterror.cms.database.daos.UserDAO
+import ro.runtimeterror.cms.database.tables.ReviewTable
 import ro.runtimeterror.cms.database.tables.SectionTable
 import ro.runtimeterror.cms.database.tables.UserSectionChoiceTable
+import ro.runtimeterror.cms.database.tables.UserTable
+import ro.runtimeterror.cms.exceptions.NoSectionException
+import ro.runtimeterror.cms.model.Qualifier
 import ro.runtimeterror.cms.model.Section
 import ro.runtimeterror.cms.model.UserReview
+import ro.runtimeterror.cms.model.UserType
 
 class SectionController
 {
@@ -90,8 +96,36 @@ class SectionController
      * If the author is a PC member, he is not allowed to see the reviews (return empty list)
      *  Throw an exception if the author is not assigned to a section
      */
-    fun getReviews(userId: Int): List<UserReview>
-    {
-        TODO("Not yet implemented")
+    fun getReviews(userId: Int): List<UserReview> = transaction(connection) {
+        if(isPcMember(userId)){
+            return@transaction emptyList()
+        }
+        return@transaction SectionTable
+            .select{SectionTable.userId eq userId}
+            //Gets the paperID of the papers that the user is presenting
+            .mapNotNull{it[SectionTable.paperId]}
+            //Gets the reviews of the paper that the user is presenting (In our program every user only has one paper to review)
+            .map {
+                    paperID -> ReviewTable
+                        .select { ReviewTable.paperID eq paperID }
+                        .map {
+                            UserReview(UserDAO
+                                .wrapRow(
+                                    UserTable
+                                        .selectAll()
+                                        .first { user -> user[UserTable.id].value == it[ReviewTable.userID] }
+                                )
+                                , it[ReviewTable.recommandation]
+                                ,Qualifier.from(it[ReviewTable.qualifier]))
+                        }
+            }
+            .toList()
+            .firstOrNull()?: throw NoSectionException("The user is not assigned to any section")
+    }
+    private fun isPcMember(userId: Int): Boolean {
+        return UserTable
+            .select{UserTable.id eq userId}
+            .filter { it[UserTable.type] == UserType.PC_MEMBER.value }
+            .isNotEmpty()
     }
 }
