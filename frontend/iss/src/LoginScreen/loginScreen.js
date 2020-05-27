@@ -128,7 +128,7 @@ $(document).ready(function () {
                                     if(role == 1){
                                         if(phase == 1) window.location = "../AuthorScreens/authorSubmit.html"; // needs test on server
                                         else if(phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html"; // vezi to do din js cu phase part-ul
-                                        else if(phase == 3) window.location = "../AuthorScreens/authorImproveAndUpload.html";
+                                        else if(phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                         else window.location = "Nothing-to-do-here page....";
                                     }
 
