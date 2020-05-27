@@ -86,3 +86,55 @@ p{
     left: 50%;
     transform: translate(-50%);
 }
+
+#alertOuter{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(50, 50);
+    width: 50%;
+    height: 50%;
+}
+
+#alertBackground{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display:none;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.buttonDiv{
+    position: absolute;
+    /*clip-path: polygon(15% 0%, 100% 0, 85% 100%, 0% 100%);*/
+    width: 200px;
+    height: 18px;
+
+    font-family: DejaVu Sans Mono;
+    user-select: none;
+
+    /*border: solid rgb(167, 0, 0) 1px;  this adds a border on the top and bottom and top of the div.*/
+    transition-property: border-color; 
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+    background-color: #EFF2C0;
+    border-radius: 20px;
+    border: solid 2px #EFF2C0;
+}
+
+.buttonDiv:hover{
+    border-color: rgb(141, 238, 255);
+}
+
+#buttonYes{
+    position: absolute;
+    top:80%;
+    left:40%
+}
+
+#buttonNo{
+    position: absolute;
+    top:80%;
+    left:60%
+}

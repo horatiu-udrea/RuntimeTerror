@@ -15,7 +15,7 @@ function refreshList() {
 
 
                 valueOfElement = valueOfElement.paper;
-                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='title'>"+valueOfElement.name+"<div class='bid' style='background-color:"+bidColor+"'></div></div><div class='content' style = 'display:none'>"+valueOfElement.abstract+"<button class='upButton'>UP</button> <button class='middleButton'>MIDDLE</button> <button class='downButton'>DOWN</button> </div>"+"</li>";
+                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='title'><div class='bid' style='background-color:"+bidColor+"'></div><div class='titleContainer'>"+valueOfElement.name+"</div></div><div class='content' style = 'display:none'>"+valueOfElement.abstract+"<button class='upButton'>UP</button> <button class='middleButton'>MIDDLE</button> <button class='downButton'>DOWN</button> </div>"+"</li>";
                 $("#list").html(code);
             });
         }
@@ -31,7 +31,7 @@ function bidOnPaper(listItem, bid) {
         data: JSON.stringify({paperId: listItem.value, bidResult: bid}),
     });
 
-    if(bid == 1) $(listItem).find("div.bid").css("background-color", "red"); 
+    if(bid == 3) $(listItem).find("div.bid").css("background-color", "red"); 
     else if(bid == 2) $(listItem).find("div.bid").css("background-color", "yellow");
     else $(listItem).find("div.bid").css("background-color", "green"); 
 }

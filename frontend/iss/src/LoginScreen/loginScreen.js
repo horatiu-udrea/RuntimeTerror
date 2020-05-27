@@ -18,6 +18,15 @@ function resetToDefaultAnimated(d1, d2, d3) {
     });
 }
 
+function callAlert(message, messageYes, messageNo, actionYes, actionNo){
+    $("#alertMessage").text(message);   
+    $("#alertButtonYes").click(actionYes);
+    $("#alertButtonNo").click(actionNo);
+    $("#alertButtonYes").text(messageYes);
+    $("#alertButtonNo").text(messageNo);
+    $("#alertBackground").css("display", "block");
+}
+
 $(document).ready(function () {
     let defaultLoginStripeHeight = $("#loginButtonStripe").height();
     let defaultSignUpStripeHeight = $("#signUpButtonStripe").height();
@@ -119,9 +128,8 @@ $(document).ready(function () {
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
                                     
-                                    if (role == 2 && confirm("Would you like to log in as an Author?"))
-                                        role = 1;
-                                    
+                                    if (role == 2) callAlert("What would you like to log in as?", "Author", "PcMember", function () {role = 1;}, function () {});
+
                                     if(role == 0){
                                         if(phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
                                         else if(phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
