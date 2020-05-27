@@ -1,6 +1,3 @@
 package ro.runtimeterror.cms.exceptions
 
-class UnauthorizedException(message: String) : ProgramException(message)
-{
-
-}
+open class UnauthorizedException(message: String) : ProgramException(message)
