@@ -151,7 +151,7 @@ $(document).ready(function () {
                                     if(role == 3){
                                         if(phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
                                         else if(phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if(phase == 3) window.location.href = "ADD cochair in phase 3 LINK HERE";
+                                        else if(phase == 3) window.location.href = "../ConflictingDiscussion/conflictingDiscussion.html";
                                         else window.location.href = "Nothing-to-do-here page....";
                                     } 
 

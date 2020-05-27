@@ -53,3 +53,6 @@ Content-Type: application/json
   "sectionId": 1,
   "roomName": "text"
 }
+
+### Get reviews for the paper he is going to present
+GET {{URL}}/section/review
