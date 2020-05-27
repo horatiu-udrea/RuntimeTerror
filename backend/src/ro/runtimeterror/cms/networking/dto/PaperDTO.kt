@@ -6,7 +6,7 @@ import ro.runtimeterror.cms.model.toAuthor
 
 data class AbstractDTO(val paperId: Int, val abstract: String)
 
-data class PaperDTO(
+data class CreatePaperDTO(
     val name: String,
     val field: String,
     val keywords: String,
@@ -17,7 +17,7 @@ data class PaperDTO(
     val status: Int
 )
 
-data class PaperDTOWithId(
+data class PaperDTO(
     val paperId: Int,
     val name: String,
     val field: String,
@@ -29,25 +29,11 @@ data class PaperDTOWithId(
     val status: Int
 )
 
+fun List<Paper>.toDTO(): List<PaperDTO> = map { paper -> paper.toDTO() }
+
 fun Paper.toDTO(): PaperDTO
 {
     return PaperDTO(
-        name,
-        field,
-        keywords,
-        topics,
-        authors.map { user -> user.toAuthor() },
-        abstract,
-        documentPath,
-        paperStatus.value
-    )
-}
-
-fun List<Paper>.toDTO(): List<PaperDTOWithId> = map { paper -> paper.toDTOWithId() }
-
-fun Paper.toDTOWithId(): PaperDTOWithId
-{
-    return PaperDTOWithId(
         paperId,
         name,
         field,
