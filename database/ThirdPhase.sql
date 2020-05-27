@@ -89,14 +89,14 @@ Abstracts and Papers:
 -- 8 entries in the Papers and Papers submission table
 -- all of them will have the abstracts and the document path for the full paper
  */
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru medicina', 'medicinaAbstract', 'medicina', 'medicina, software', 'medicina Topic', './files/mediPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('AiPaper', 'ITAbstract', 'ai', 'ai, artificial intelligence', 'ai Topic', './files/aiPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru masini', 'masiniAbstract', 'masini', 'masini, software', 'masini Topic', './files/masPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('MPPPaper', 'MPPAbstract', 'mpp', 'mpp, sdi', 'mpp Topic', './files/mppPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('Fuzzy systems', 'fuzzyAbstract', 'fuzzy systems', 'fuzzy systems, fuzzy logic, software', 'fuzzy Topic', './files/fuzzyPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('ISSPaper', 'ISSAbstract', 'iss', 'iss, software engineering', 'iss Topic', './files/issPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('Car parking soft', 'carAbstract', 'software, cars, car', 'medicina, software', 'car Topic', './files/carPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('WEBPaper', 'WEBAbstract', 'web', 'web, web programming', 'web Topic', './files/webPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru medicina', 'medicinaAbstract', 'medicina', 'medicina, software', 'medicina Topic', 'files/mediPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('AiPaper', 'ITAbstract', 'ai', 'ai, artificial intelligence', 'ai Topic', 'files/aiPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru masini', 'masiniAbstract', 'masini', 'masini, software', 'masini Topic', 'files/masPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('MPPPaper', 'MPPAbstract', 'mpp', 'mpp, sdi', 'mpp Topic', 'files/mppPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('Fuzzy systems', 'fuzzyAbstract', 'fuzzy systems', 'fuzzy systems, fuzzy logic, software', 'fuzzy Topic', 'files/fuzzyPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('ISSPaper', 'ISSAbstract', 'iss', 'iss, software engineering', 'iss Topic', 'files/issPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('Car parking soft', 'carAbstract', 'software, cars, car', 'medicina, software', 'car Topic', 'files/carPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('WEBPaper', 'WEBAbstract', 'web', 'web, web programming', 'web Topic', 'files/webPaper.pdf', 1);
 
 INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (1, 22) ON DUPLICATE KEY UPDATE fk_userid = 22;
 INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (2, 23) ON DUPLICATE KEY UPDATE fk_userid = 23;
@@ -269,11 +269,11 @@ UPDATE papers SET status = 2 WHERE pk_paperid = 8;
 -- all the users will specify the sections that they would like to attend and based on that the room name
 -- will be assigned
  */
-INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (7, 22, 1, 'MedSec', './files/med.pptx', '2020-09-01 16:00:00', '2020-09-01 18:00:00', '');
-INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (8, 23, 2, 'AISec', './files/ai.pptx', '2020-09-02 12:00:00', '2020-09-02 20:00:00', '');
-INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (9, 20, 4, 'MPPSec', './files/mpp.pptx', '2020-09-01 16:00:00', '2020-09-01 20:00:00', '');
-INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (10, 17, 7, 'CarSec', './files/car.pptx', '2020-09-03 12:00:00', '2020-09-03 18:00:00', '');
-INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (12, 11, 8, 'WebSec', './files/web.pptx', '2020-09-03 16:00:00', '2020-09-03 20:00:00', '');
+INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (7, 22, 1, 'MedSec', 'files/med.pptx', '2020-09-01 16:00:00', '2020-09-01 18:00:00', '');
+INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (8, 23, 2, 'AISec', 'files/ai.pptx', '2020-09-02 12:00:00', '2020-09-02 20:00:00', '');
+INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (9, 20, 4, 'MPPSec', 'files/mpp.pptx', '2020-09-01 16:00:00', '2020-09-01 20:00:00', '');
+INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (10, 17, 7, 'CarSec', 'files/car.pptx', '2020-09-03 12:00:00', '2020-09-03 18:00:00', '');
+INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (12, 11, 8, 'WebSec', 'files/web.pptx', '2020-09-03 16:00:00', '2020-09-03 20:00:00', '');
 
 /*
 -- Now that all the sections are created we need to make all the users select the section they would like to attend
