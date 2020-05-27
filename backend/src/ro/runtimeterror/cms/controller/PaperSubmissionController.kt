@@ -54,10 +54,8 @@ class PaperSubmissionController
         UserValidator.exists(userID)
 
         val newPaperId = addPaperAndGetID(name, abstract, field, keywords, topics)
-        PaperSubmissionTable.insert {
-            it[this@insert.paperID] = newPaperId
-            it[this@insert.userID] = userID
-        }
+        markAsAuthor(userID, newPaperId)
+
         authors.forEach { author ->
             val user = UserDAO.find { UserTable.email eq author.email }.firstOrNull() ?: UserDAO.new {
                 this@new.name = author.name
@@ -69,10 +67,15 @@ class PaperSubmissionController
                 this@new.validated = false
                 this@new.typeValue = UserType.AUTHOR.value
             }
-            PaperSubmissionTable.insert {
-                it[this@insert.paperID] = newPaperId
-                it[this@insert.userID] = user.id.value
-            }
+            markAsAuthor(user.id.value, newPaperId)
+        }
+    }
+
+    private fun markAsAuthor(userID: Int, newPaperId: Int)
+    {
+        PaperSubmissionTable.insert {
+            it[this@insert.paperID] = newPaperId
+            it[this@insert.userID] = userID
         }
     }
 
