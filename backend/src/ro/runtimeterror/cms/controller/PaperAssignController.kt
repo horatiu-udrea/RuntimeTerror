@@ -63,6 +63,8 @@ class PaperAssignController
             ReviewTable.insert {
                 it[ReviewTable.userID] = userID
                 it[ReviewTable.paperID] = paperID
+                it[ReviewTable.recommandation] = ""
+                it[ReviewTable.qualifier] = Qualifier.NOT_YET_REVIEWED.value
             }
         }
 }

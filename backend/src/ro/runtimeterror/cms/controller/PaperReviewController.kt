@@ -1,7 +1,5 @@
 package ro.runtimeterror.cms.controller
 
-import org.jetbrains.exposed.dao.load
-import org.jetbrains.exposed.dao.with
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import ro.runtimeterror.cms.database.tables.ReviewTable
@@ -15,6 +13,7 @@ import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.daos.withAuthors
 import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.model.UserReview
+import ro.runtimeterror.cms.model.validators.UniquenessValidator
 
 class PaperReviewController
 {
@@ -64,6 +63,7 @@ class PaperReviewController
     fun review(userID: Int, paperID: Int, recommendation: String, qualifier: Int)= transaction(connection) {
             UserValidator.exists(userID)
             PaperValidator.exists(paperID)
+            UniquenessValidator.reviewExists(userID, paperID)
             ReviewTable
                     .insert {
                         it[ReviewTable.userID] = userID

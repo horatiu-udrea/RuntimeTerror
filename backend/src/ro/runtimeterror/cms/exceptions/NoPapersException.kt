@@ -1,5 +1,3 @@
 package ro.runtimeterror.cms.exceptions
 
-class NoPapersException(message: String) : ProgramException(message) {
-
-}
+open class NoPapersException(message: String) : ProgramException(message)
