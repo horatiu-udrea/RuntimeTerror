@@ -2,23 +2,32 @@ $(document).ready(function () {
 
     $("#createConference").click(function (e) {
 
-        $.post("http://localhost:8080/conference", {
-            name: $("#conferenceName").val(),
-            currentPhase: $("#conferenceCurrentPhase").val(),
-            startDate: $("#conferenceStartDate").val(),
-            endDate: $("#conferenceEndDate").val(),
-            submissionDeadline: $("#conferenceSubmissionDeadline").val(),
-            proposalDeadline: $("#conferenceProposalsDeadline").val(),
-            biddingDeadline: $("#conferenceBiddingDealine").val(),
-            submitPaperEarly: $("#conferenceEarlySubmissions").val()
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: HOST + PORT + "/conference",
+            dataType: "json",
+            data: JSON.stringify({
+                name: $("#conferenceName").val(),
+                currentPhase: $("#conferenceCurrentPhase").val(),
+                startDate: $("#conferenceStartDate").val(),
+                endDate: $("#conferenceEndDate").val(),
+                submissionDeadline: $("#conferenceSubmissionDeadline").val(),
+                proposalDeadline: $("#conferenceProposalsDeadline").val(),
+                biddingDeadline: $("#conferenceBiddingDealine").val(),
+                submitPaperEarly: $("#conferenceEarlySubmissions").val()
+            }),
+            complete: function(data){
+                if (data.statusText == "OK"){
+                    alert("successfully created conference");
+                    window.location = "to be decided";
+                } else {
+                    alert("conference was not created");
+                }
 
-        })
-            .done(function () {
-                //Nu stiu exact aici cum vine faza, dar for now...
-                window.location = "ADD HOME LINK HERE";
-            })
-            .fail(function (error) {
-                $("input[type=text]").val = error.responseText;
-            });
+            }
+
+        });
+           
     });
 });
