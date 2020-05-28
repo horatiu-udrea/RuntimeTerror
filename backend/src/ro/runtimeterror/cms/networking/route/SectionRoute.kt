@@ -10,10 +10,16 @@ import ro.runtimeterror.cms.controller.SectionController
 import ro.runtimeterror.cms.model.UserType
 import ro.runtimeterror.cms.networking.authorize
 import ro.runtimeterror.cms.networking.dto.CreateSectionDTO
+import ro.runtimeterror.cms.networking.dto.SectionDTO
 import ro.runtimeterror.cms.networking.dto.dateTimeFormatter
 import ro.runtimeterror.cms.networking.dto.toDTO
 import ro.runtimeterror.cms.networking.uploadFile
 import ro.runtimeterror.cms.networking.userSession
+import kotlin.math.absoluteValue
+
+data class SectionId(val sectionId: Int)
+
+data class SectionChairChoice(val sectionId: Int, val userId: Int)
 
 fun Route.sectionRoute(sectionController: SectionController)
 {
@@ -27,7 +33,6 @@ fun Route.sectionRoute(sectionController: SectionController)
 
         put("/choice") {
             // Choose section
-            data class SectionId(val sectionId: Int)
             authorize(UserType.AUTHOR)
             val user = userSession()
             val sectionIdDTO = call.receive<SectionId>()
@@ -43,11 +48,11 @@ fun Route.sectionRoute(sectionController: SectionController)
                 LocalDateTime.parse(startTime, dateTimeFormatter),
                 LocalDateTime.parse(endTime, dateTimeFormatter)
             )
+            call.respond(HttpStatusCode.OK)
         }
 
         post {
             // Choose section chair
-            data class SectionChairChoice(val sectionId: Int, val userId: Int)
             authorize(UserType.ADMIN)
             val (sectionId, userId) = call.receive<SectionChairChoice>()
             sectionController.chooseSectionChair(sectionId, userId)

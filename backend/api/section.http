@@ -6,7 +6,7 @@ PUT {{URL}}/section/choice
 Content-Type: application/json
 
 {
-  "sectionId": 1
+  "sectionId": 2
 }
 
 ### Get presentation details
@@ -22,8 +22,8 @@ Content-Type: application/json
 
 {
   "name": "text",
-  "startTime": "text",
-  "endTime": "text"
+  "startTime": "10/10/2010",
+  "endTime": "12/12/2010"
 }
 
 ### Choose section chair
@@ -31,7 +31,7 @@ POST {{URL}}/section
 Content-Type: application/json
 
 {
-  "sectionId": 1,
+  "sectionId": 2,
   "userId": 1
 }
 
@@ -42,7 +42,7 @@ Content-Type: application/json
 {
   "userId": 1,
   "paperId": 1,
-  "sectionId": 1
+  "sectionId": 2
 }
 
 ### Change room name

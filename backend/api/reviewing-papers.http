@@ -6,9 +6,7 @@ PUT {{URL}}/paper/review
 Content-Type: application/json
 
 {
-  "paperId": 1,
+  "paperId": 2,
   "recommendation": "text",
-  "qualifier": 1
+  "qualifier": 3
 }
-
-###
