@@ -37,7 +37,7 @@ class PaperReviewController
             .filter { it[ReviewTable.paperID] !in authoredPapers }
             .map {
                 PaperReview(
-                        PaperDAO.wrapRow(PaperTable.select { PaperTable.id eq ReviewTable.paperID }.first()),
+                        PaperDAO.wrapRow(PaperTable.select { PaperTable.id eq it[ReviewTable.paperID] }.first()),
                         it[ReviewTable.recommandation],
                         Qualifier.from(it[ReviewTable.qualifier]),
                         getOtherReviews(userId, it[ReviewTable.paperID])
@@ -48,7 +48,9 @@ class PaperReviewController
     private fun getOtherReviews(userId: Int, paperID: Int): List<UserReview> = transaction(connection) {
         return@transaction ReviewTable.select {
             (ReviewTable.paperID eq paperID) and (ReviewTable.userID eq userId)
-        }.map {
+        }
+            .filter { it[ReviewTable.userID] != userId }
+            .map {
             UserReview(
                     UserDAO.findById(it[ReviewTable.userID])!!,
                     it[ReviewTable.recommandation],
@@ -63,6 +65,7 @@ class PaperReviewController
     fun review(userID: Int, paperID: Int, recommendation: String, qualifier: Int)= transaction(connection) {
             UserValidator.exists(userID)
             PaperValidator.exists(paperID)
+            PaperValidator.checkPcMemberAssigned(userID, paperID)
             if(!UniquenessValidator.reviewExists(userID, paperID)){
                 ReviewTable
                     .insert {

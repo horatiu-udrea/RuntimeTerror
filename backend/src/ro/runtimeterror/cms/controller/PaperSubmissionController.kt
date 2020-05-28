@@ -52,12 +52,13 @@ class PaperSubmissionController
         authors: List<Author>
     ) = transaction(connection) {
         UserValidator.exists(userID)
+        UserValidator.authorValidated(userID)
 
         val newPaperId = addPaperAndGetID(name, abstract, field, keywords, topics)
         markAsAuthor(userID, newPaperId)
 
         authors.forEach { author ->
-            val user = UserDAO.find { UserTable.email eq author.email }.firstOrNull() ?: UserDAO.new {
+            val user = UserDAO.find { UserTable.email eq author.email }.firstOrNull() ?:UserDAO.new {
                 this@new.name = author.name
                 this@new.username = ""
                 this@new.password = ""
@@ -73,6 +74,7 @@ class PaperSubmissionController
 
     private fun markAsAuthor(userID: Int, newPaperId: Int)
     {
+
         PaperSubmissionTable.insert {
             it[this@insert.paperID] = newPaperId
             it[this@insert.userID] = userID
@@ -88,8 +90,8 @@ class PaperSubmissionController
                 newPaper[PaperTable.field] = field
                 newPaper[PaperTable.keywords] = keywords
                 newPaper[PaperTable.topics] = topics
-                newPaper[PaperTable.documentPath] = ""
-                newPaper[PaperTable.status] = PaperStatus.UNDECIDED.value
+                newPaper[documentPath] = ""
+                newPaper[status] = PaperStatus.UNDECIDED.value
             }.value
         }
 
