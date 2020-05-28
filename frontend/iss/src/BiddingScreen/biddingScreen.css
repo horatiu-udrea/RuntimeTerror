@@ -1,0 +1,123 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+
+    font-family: DejaVu Sans Mono;
+    overflow: hidden;
+}
+
+div.bid{
+    width: 10px;
+    height: 10px;
+    border-radius: 80%;
+    display: inline-block;
+}
+
+div.titleContainer{
+    display: inline-block;
+    padding-left: 4px;
+} 
+
+ul{
+    position: absolute;
+    list-style-type: none;
+    overflow: scroll;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    left: 35%;
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    display:none;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+li{
+    text-align: center;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: rgba(100, 148, 237, 0.384);
+    border-width: 2px;
+    background-color: rgba(94, 176, 191, 0.212);
+    width: 20%;
+    margin-bottom: 10px;
+}
+
+.buttonContainer{
+    display: flex;
+    flex-direction: row;
+    border-top: solid;
+    border-color: rgba(100, 148, 237, 0.384);
+    border-width: 2px;
+}
+
+.downButton{
+    width:33%;
+    border-bottom-right-radius: 20px;
+    border-style: none;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.521);
+}
+
+.middleButton{
+    width:34%;
+    border-style: none;
+    border-left: solid;
+    border-right: solid;
+    border-color: rgba(100, 148, 237, 0.384);
+    border-width: 2px;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.521);
+}
+
+.upButton{
+    width:33%;
+    border-bottom-left-radius: 20px;
+    border-style: none;
+    background-color: transparent;
+    color: rgba(0, 0, 0, 0.521);
+}
+
+.titleContainer{
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.521);
+}
+
+div.backgroundPiece{
+    border-style: solid;
+    border-width: 2px;
+    z-index: -1;
+    position: absolute;
+}
+
+div.backgroundSphere{
+    border-radius: 80%;
+}
+
+div.backgroundTilted20{
+    transform: rotate(20deg);
+}
+
+div.backgroundTilted20{
+    transform: rotate(50deg);
+}
+
+div.backgroundTilted20{
+    transform: rotate(80deg);
+}
+
+div.backgroundStar{
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+div.backgroundQuestionMark{
+    clip-path: polygon(22% 21%, 49% 9%, 72% 10%, 86% 26%, 84% 57%, 68% 71%, 71% 92%, 55% 96%, 50% 74%, 55% 60%, 70% 45%, 68% 28%, 55% 24%, 32% 35%);
+}

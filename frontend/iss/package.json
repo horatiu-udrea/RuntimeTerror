@@ -23,7 +23,10 @@
     "webpack-cli": "^3.3.11",
     "write-file-webpack-plugin": "^4.5.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
+  },
   "author": "",
   "license": "ISC"
 }

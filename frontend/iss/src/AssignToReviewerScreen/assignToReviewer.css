@@ -1,0 +1,94 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    user-select: none;
+    background-color: rgba(4, 15, 22, 0.726);
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+li{
+    border-style: solid;
+    border-width: 2px;
+    border-color: transparent;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 100px;
+    transition: border-color 0.2s;
+}
+
+line{
+    transition: opacity 0.2s;
+}
+
+ul{
+    list-style: none;
+    font-family: DejaVu Sans Mono;
+    color: rgba(255, 255, 255, 0.651);
+}
+
+#pcMemberList{
+    --text-align: right;
+    position: absolute;
+    top:5%;
+    height: 90%;
+    z-index: 3;
+    width: 150px;
+    left: -6%;
+}
+
+#paperList{
+    position: absolute;
+    top:5%;
+    height: 90%;
+    z-index: 3;
+    width: 150px;
+    left: 25%;
+}
+
+.strip{
+    top:0%;
+    position: absolute;
+    height: 100%;
+}
+
+.bigStrip{
+    width: 20%;
+    background-color: #212529;
+}
+
+.medStrip{
+    width: 3%;
+    background-color: #343A40;
+}
+
+.smallStrip{
+    width: 1%;
+    background-color: #495057;
+}   
+
+#button{
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    border-radius: 80%;
+    border-style: solid;
+    border-color: rgba(255, 217, 0, 0.705);
+    background-color: rgba(255, 217, 0, 0.425);
+    font-family: DejaVu Sans Mono;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    z-index: 10;
+    left: 46%;
+    outline: none;
+    -webkit-transition: background-color 500ms linear;
+    
+}
+#button:active{
+    background-color: gold;
+}

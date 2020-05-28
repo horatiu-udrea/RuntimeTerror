@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.application.install
+
+import io.ktor.features.*
+
 import io.ktor.features.CORS
 import io.ktor.features.CallLogging
 import io.ktor.features.ContentNegotiation
@@ -35,6 +38,8 @@ fun Application.module(testing: Boolean = false)
     install(CallLogging)
     install(CORS) {
         method(HttpMethod.Options)
+        method(HttpMethod.Post)
+        method(HttpMethod.Get)
         method(HttpMethod.Put)
         method(HttpMethod.Delete)
         method(HttpMethod.Patch)
@@ -43,6 +48,8 @@ fun Application.module(testing: Boolean = false)
         header(HttpHeaders.AccessControlAllowOrigin)
         allowCredentials = true
         anyHost()
+
+        host("localhost:5500");
     }
 
     install(ContentNegotiation) {
