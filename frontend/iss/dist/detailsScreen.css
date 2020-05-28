@@ -55,6 +55,14 @@ html,body{
     left:50%;
     top:90%;
     transform: translateX(-50%);
+    transition-property: color, text-decoration-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+#link:hover{
+    color: orange;
+    text-decoration-color: white;
 }
 
 #contentContainer{
