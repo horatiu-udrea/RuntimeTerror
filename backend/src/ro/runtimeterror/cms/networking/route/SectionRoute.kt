@@ -17,6 +17,10 @@ import ro.runtimeterror.cms.networking.uploadFile
 import ro.runtimeterror.cms.networking.userSession
 import kotlin.math.absoluteValue
 
+data class SectionId(val sectionId: Int)
+
+data class SectionChairChoice(val sectionId: Int, val userId: Int)
+
 fun Route.sectionRoute(sectionController: SectionController)
 {
     route("/section") {
@@ -29,10 +33,8 @@ fun Route.sectionRoute(sectionController: SectionController)
 
         put("/choice") {
             // Choose section
-            data class SectionId(val sectionId: Int)
             authorize(UserType.AUTHOR)
             val user = userSession()
-            //todo @horatiu serilization problem nu stiu ce
             val sectionIdDTO = call.receive<SectionId>()
             sectionController.userSectionChoice(user.id, sectionIdDTO.sectionId)
             call.respond(HttpStatusCode.OK)
@@ -51,7 +53,6 @@ fun Route.sectionRoute(sectionController: SectionController)
 
         post {
             // Choose section chair
-            data class SectionChairChoice(val sectionId: Int, val userId: Int)
             authorize(UserType.ADMIN)
             val (sectionId, userId) = call.receive<SectionChairChoice>()
             sectionController.chooseSectionChair(sectionId, userId)
