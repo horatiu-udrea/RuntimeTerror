@@ -5,6 +5,7 @@ import io.ktor.application.call
 import io.ktor.sessions.clear
 import io.ktor.sessions.get
 import io.ktor.sessions.sessions
+import io.ktor.sessions.set
 import io.ktor.util.pipeline.PipelineContext
 import ro.runtimeterror.cms.networking.UserSession
 
@@ -18,6 +19,10 @@ class CookieSessionManager : SessionManager
     override fun clearUserSession(context: PipelineContext<*, ApplicationCall>)
     {
         context.call.sessions.clear<UserSession>()
+    }
+
+    override fun setUserSession(context: PipelineContext<*, ApplicationCall>, userSession: UserSession) {
+        context.call.sessions.set<UserSession>(userSession)
     }
 
 }

@@ -6,18 +6,17 @@ import org.jetbrains.exposed.sql.update
 import ro.runtimeterror.cms.database.DatabaseSettings
 import ro.runtimeterror.cms.database.tables.ConferenceTable
 import ro.runtimeterror.cms.model.Conference
-import java.lang.RuntimeException
+import ro.runtimeterror.cms.exceptions.ConferenceDetailsNotSetException
+import ro.runtimeterror.cms.database.DatabaseSettings.connection
 
 class ConferenceController
 {
     /**
      * Conference details
      */
-    fun getConferenceDetails(): Conference
-    {
-            var conference: Conference? = null
-            transaction(DatabaseSettings.connection){
-                conference = ConferenceTable
+    fun getConferenceDetails(): Conference =
+            transaction(connection){
+                return@transaction ConferenceTable
                     .selectAll()
                     .map {
                         Conference(
@@ -30,17 +29,15 @@ class ConferenceController
                             it[ConferenceTable.submitPaperEarly],
                             it[ConferenceTable.currentPhase]
                         )
-                    }.first()
+                    }.firstOrNull()?:throw ConferenceDetailsNotSetException(
+                    "The details for the conference have not been set"
+                )
             }
-        return conference?:throw RuntimeException("Conference information is null!")
-    }
 
     /**
      * Modify conference details
      */
-    fun changeConferenceInformation(conferenceInformation: Conference)
-    {
-        transaction(DatabaseSettings.connection){
+    fun changeConferenceInformation(conferenceInformation: Conference) = transaction(connection){
             ConferenceTable.update {
                 it[name] = conferenceInformation.name
                 it[endDate] = conferenceInformation.endDate
@@ -52,7 +49,6 @@ class ConferenceController
                 it[currentPhase] = conferenceInformation.currentPhase
             }
         }
-    }
 
 //    fun getPhase(): Int
 //    {

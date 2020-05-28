@@ -6,8 +6,8 @@ POST {{URL}}/paper/assign
 Content-Type: application/json
 
 {
-  "paperId": 1,
-  "userId": 1
+  "paperId": 6,
+  "userId": 10
 }
 
 ### Get all PC members
@@ -18,6 +18,6 @@ PUT {{URL}}/paper/assign
 Content-Type: application/json
 
 {
-  "userId": 1,
-  "paperId": 1
+  "userId": 10,
+  "paperId": 6
 }

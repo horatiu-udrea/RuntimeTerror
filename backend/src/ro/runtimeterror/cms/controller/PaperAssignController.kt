@@ -4,77 +4,64 @@ import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
-import ro.runtimeterror.cms.database.DatabaseSettings
+import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.PaperDAO
 import ro.runtimeterror.cms.database.daos.UserDAO
+import ro.runtimeterror.cms.database.daos.withAuthors
 import ro.runtimeterror.cms.database.tables.BidPaperTable
 import ro.runtimeterror.cms.database.tables.ReviewTable
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.*
 import ro.runtimeterror.cms.model.validators.PaperValidator
 import ro.runtimeterror.cms.model.validators.UserValidator
-import java.lang.RuntimeException
 
 class PaperAssignController
 {
     /**
      * Retrieve all papers
      */
-    fun getPapers(): List<Paper>
-    {
-        val listOfPapers: MutableList<Paper> = ArrayList<Paper>()
-        transaction (DatabaseSettings.connection){
-            PaperDAO
-                    .all()
-                    .forEach {paper -> listOfPapers += paper }
+    fun getPapers(): List<Paper> =
+        transaction(connection) {
+            return@transaction PaperDAO
+                .all()
+                .map { withAuthors(it) }
         }
-        return listOfPapers
-    }
 
     /**
      * Get the bidding result of the pc m,ember on the paper
      */
-    fun getBidResult(paperId: Int, userId: Int): PaperBidResult
-    {
-        var bidResult: Int? = null
-        transaction(DatabaseSettings.connection) {
-            bidResult = BidPaperTable
-                    .select{((BidPaperTable.paperID eq paperId) and (BidPaperTable.userID eq userId))}
-                    .map {it[BidPaperTable.paperBidResult]}
-                    .first()
+    fun getBidResult(paperId: Int, userId: Int): PaperBidResult =
+        transaction(connection) {
+            return@transaction PaperBidResult.from(
+                BidPaperTable
+                    .select { ((BidPaperTable.paperID eq paperId) and (BidPaperTable.userID eq userId)) }
+                    .map { it[BidPaperTable.paperBidResult] }
+                    .firstOrNull() ?: return@transaction PaperBidResult.INDECISIVE
+            )
         }
-        return PaperBidResult.from(bidResult?:throw RuntimeException("Problem in getBidResult at PaperAssignController"))
-    }
 
     /**
      * Get all PC Members
      */
-    fun getPCMembers(): List<User>
-    {
-        var users: List<User> = ArrayList()
-        transaction(DatabaseSettings.connection) {
-            users = UserTable
-                    .select { UserTable.type eq UserType.PC_MEMBER.value}
-                    .map {user -> UserDAO.get(user[UserTable.id])}
-                    .toList()
-        }
-        return users
+    fun getPCMembers(): List<User> = transaction(connection) {
+        return@transaction UserTable
+            .select { UserTable.type eq UserType.PC_MEMBER.value }
+            .map { user -> UserDAO[user[UserTable.id]] }
+            .toList()
     }
 
     /**
      * Assign the paper to the pc member
      */
-//    TODO not sure about this, if I don't add the qualifier and the status, is it null or would it give an error?
-    fun assign(paperID: Int, userID: Int)
-    {
+    fun assign(paperID: Int, userID: Int) = transaction(connection) {
         PaperValidator.exists(paperID)
         UserValidator.exists(userID)
-        transaction(DatabaseSettings.connection) {
-            ReviewTable.insert {
-                it[ReviewTable.userID] = userID
-                it[ReviewTable.paperID] = paperID
-            }
+        UserValidator.pcMemberIsAuthor(userID, paperID)
+        ReviewTable.insert {
+            it[ReviewTable.userID] = userID
+            it[ReviewTable.paperID] = paperID
+            it[recommandation] = ""
+            it[qualifier] = Qualifier.NOT_YET_REVIEWED.value
         }
     }
-
 }

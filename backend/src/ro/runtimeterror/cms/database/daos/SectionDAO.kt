@@ -12,6 +12,7 @@ class SectionDAO(id: EntityID<Int>) : IntEntity(id), Section
 
     override var roomName by SectionTable.roomName
     override var user by UserDAO optionalReferencedOn SectionTable.userId
+    override var paper by PaperDAO optionalReferencedOn SectionTable.paperId
     override var name by SectionTable.name
     override var startTime by SectionTable.startTime
     override var endTime by SectionTable.endTime

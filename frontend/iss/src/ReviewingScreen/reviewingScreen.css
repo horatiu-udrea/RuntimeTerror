@@ -1,0 +1,144 @@
+html,body{
+    overflow: hidden;
+    margin: 0%;
+    padding: 0%;
+    height: 100%;
+    width: 100%;
+}
+
+img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0%;
+    margin: 0%;
+}
+
+ul{
+    overflow: scroll;
+    height: 100%;
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 32%;
+    padding-right: 32%;
+}
+
+li{
+    text-align: center;
+    list-style: none;
+    margin-bottom: 2px;
+}
+
+li>div.title{
+    background-color: gainsboro;
+    color:black;
+    font-family: DejaVu Sans Mono;
+}
+
+li>div.content{
+    background-color: #474848;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}
+
+iframe{
+    width: 100%;
+    -ms-zoom: 100%;
+    border-style: none;
+}
+
+textarea{
+    resize: none;
+    border-style: none;
+    width: 99%;
+}
+
+::-webkit-scrollbar {
+    display:none;
+}
+
+#commentsDiv{
+    position: absolute;
+    left: 30%;
+    top: 30%;
+    height: 40%;
+    width: 40%;
+    background-color: rgb(165, 165, 165);
+    border-width: 3px;
+    border-color: rgb(138, 138, 138);
+    border-style: solid;
+    display:none;
+    font-family: DejaVu Sans Mono;
+}
+
+.strip{
+    height: 100%;
+    background-color: #2E2F2F;
+}
+
+#backgroundSupport{
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    left:25%;
+    z-index: -1;
+    background-color: transparent;
+}
+
+#contentStrip{
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    left:30%;
+    z-index: -1;
+    background-color: #212529;
+}
+
+#leftStrip{
+    position: absolute;
+
+    width: 5%;
+    left: 0%;
+    background-color: #343A40;
+}
+
+#rightStrip{
+    position: absolute;
+
+    width: 5%;
+    left: 95%;
+    background-color: #343A40;
+}
+
+#leftStrip1{
+    position: absolute;
+
+    width: 2.5%;
+    left: -12%;
+    background-color: #495057;
+}
+
+#rightStrip1{
+    position: absolute;
+
+    width: 2.5%;
+    left: 107%;
+    background-color: #495057;
+}
+
+div.buttons{
+    position: absolute;
+    top:94%;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+label{
+    color: black;
+    font-family: DejaVu Sans Mono;
+}
