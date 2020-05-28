@@ -10,10 +10,12 @@ import ro.runtimeterror.cms.controller.SectionController
 import ro.runtimeterror.cms.model.UserType
 import ro.runtimeterror.cms.networking.authorize
 import ro.runtimeterror.cms.networking.dto.CreateSectionDTO
+import ro.runtimeterror.cms.networking.dto.SectionDTO
 import ro.runtimeterror.cms.networking.dto.dateTimeFormatter
 import ro.runtimeterror.cms.networking.dto.toDTO
 import ro.runtimeterror.cms.networking.uploadFile
 import ro.runtimeterror.cms.networking.userSession
+import kotlin.math.absoluteValue
 
 fun Route.sectionRoute(sectionController: SectionController)
 {
@@ -30,6 +32,7 @@ fun Route.sectionRoute(sectionController: SectionController)
             data class SectionId(val sectionId: Int)
             authorize(UserType.AUTHOR)
             val user = userSession()
+            //todo @horatiu serilization problem nu stiu ce
             val sectionIdDTO = call.receive<SectionId>()
             sectionController.userSectionChoice(user.id, sectionIdDTO.sectionId)
             call.respond(HttpStatusCode.OK)
@@ -43,6 +46,7 @@ fun Route.sectionRoute(sectionController: SectionController)
                 LocalDateTime.parse(startTime, dateTimeFormatter),
                 LocalDateTime.parse(endTime, dateTimeFormatter)
             )
+            call.respond(HttpStatusCode.OK)
         }
 
         post {

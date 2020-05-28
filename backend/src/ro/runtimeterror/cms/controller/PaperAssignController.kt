@@ -56,11 +56,12 @@ class PaperAssignController
     fun assign(paperID: Int, userID: Int) = transaction(connection) {
         PaperValidator.exists(paperID)
         UserValidator.exists(userID)
+        UserValidator.pcMemberIsAuthor(userID, paperID)
         ReviewTable.insert {
             it[ReviewTable.userID] = userID
             it[ReviewTable.paperID] = paperID
-            it[ReviewTable.recommandation] = ""
-            it[ReviewTable.qualifier] = Qualifier.NOT_YET_REVIEWED.value
+            it[recommandation] = ""
+            it[qualifier] = Qualifier.NOT_YET_REVIEWED.value
         }
     }
 }

@@ -9,16 +9,10 @@ import ro.runtimeterror.cms.exceptions.PrimaryKeyAlreadyExistException
 
 class UniquenessValidator {
     companion object{
-        fun reviewExists(userID: Int, paperID: Int){
-            transaction(connection) {
-                if(
-                    ReviewTable
+        fun reviewExists(userID: Int, paperID: Int): Boolean = transaction(connection) {
+                    return@transaction ReviewTable
                         .selectAll()
                         .any { it[ReviewTable.paperID] == paperID && it[ReviewTable.userID] == userID }
-                ){
-                    throw PrimaryKeyAlreadyExistException("Review Already Exists!")
-                }
-            }
         }
 
         fun bidExists(userID: Int, paperID: Int): Boolean {
