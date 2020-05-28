@@ -17,6 +17,7 @@ $(document).ready(function () {
         dataType: "json",
 
         complete: function (data, statusText) {
+            console.log(data)
             if (data.statusText == "OK") {
                 name = data.responseJSON.name;
                 phase = data.responseJSON.currentPhase;
@@ -26,14 +27,14 @@ $(document).ready(function () {
                 proposalDeadline = data.responseJSON.proposalDeadline
                 biddingDeaedline = data.responseJSON.biddingDeadline
                 submitEarly = data.responseJSON.submitPaperEarly
-                document.getElementById("conference Details").innerHTML = "The name of the conference is  " + name + "<br>" +
+                document.getElementById("conferenceDetails").innerHTML = "The name of the conference is  " + name + "<br>" +
                     "current phase : " + phase + "<br>" +
                     "start date : " + startDate + "<br>" +
                     "end date : " + endDate + "<br>" +
                     "submissions deadline : " + submisstiondeadline + "<br>" +
                     "proposals deadline : " + proposalDeadline + "<br>" +
                     "bidding deadline : " + biddingDeaedline + "<br>" +
-                    "allows early submissions : " + submitEarly + "<br> :)";
+                    "allows early submissions : " + submitEarly + ":)<br> ";
             } else {
                 alert("can not get details of the conference");
             }
@@ -44,25 +45,44 @@ $(document).ready(function () {
 
 
     $("#changeDateConference").click(function () {
+
+        if($("#changeConferenceSubmissionsDeadline").val() != ""){
+            let submisstion = $("#changeConferenceSubmissionsDeadline").val().replace(/-/g, "/").split("/").reverse();
+            submisstiondeadline = submisstion[0] + "/" + submisstion[1] + "/" + submisstion[2];
+        } 
+        if($("#changeConferenceProposalsDeadline").val() != ""){
+            let proposal = $("#changeConferenceProposalsDeadline").val().replace(/-/g, "/").split("/").reverse();
+            proposalDeadline = proposal[0] + "/" + proposal[1] + "/" + proposal[2];
+        }
+        if($("#changeConferenceBiddingDeadline").val() != "") {
+            let bidding = $("#changeConferenceBiddingDeadline").val().replace(/-/g, "/").split("/").reverse();
+            biddingDeaedline =  bidding[0] + "/" + bidding[1] + "/" + bidding[2];
+        }
+        
+        
+       console.log(submisstiondeadline, biddingDeaedline, proposalDeadline);
+        
+     
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: HOST + PORT + "/conference/changeDate",
+            url: HOST + PORT + "/conference",
             dataType: "json",
             data: JSON.stringify({
                 name: name,
                 currentPhase:phase,
                 startDate: startDate,
                 endDate:endDate,
-                submissionDeadline: $("#conferenceSubmissionDeadline").val() == "" ? submissionDeadline :  $("#conferenceSubmissionDeadline").val(),
-                proposalDeadline: $("#conferenceProposalsDeadline").val() == "" ? proposalDeadline : $("#conferenceProposalsDeadline").val(),
-                biddingDeadline: $("#conferenceBiddingDealine").val() == "" ? biddingDeaedline :  $("#conferenceBiddingDealine").val(),
+                submissionDeadline: submisstiondeadline,
+                proposalDeadline: proposalDeadline,
+                biddingDeadline: biddingDeaedline,
                 submitPaperEarly: submitEarly
                 
             }),
             complete: function (data) {
                 if (data.statusText == "OK") {
                     alert("the date was changed");
+                    location.reload();
                 } else {
                     alert("the date was not changed");
                 }
