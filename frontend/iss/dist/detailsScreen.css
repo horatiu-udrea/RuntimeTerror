@@ -1,0 +1,88 @@
+
+
+html,body{
+    height: 100%;
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+    overflow: hidden;
+}
+
+
+#middleVid{
+    position: absolute;
+    left:10%;
+    height: 100%;
+    width: 100%;
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+    z-index: -1;
+}
+
+#dimmer{
+    position: absolute;
+    left:10%;
+    height: 100%;
+    width: 100%;
+    clip-path: polygon(9.3% 45.2%, 9.4% 54.8%, 100% 0%, 100% 100%);
+    z-index: 0;
+    background-color: rgba(0, 0, 0, 0.568);
+}
+
+#topVid{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    clip-path: polygon(0% 0%, 100% 0%, 0% 50%);
+    z-index: -1;
+}
+
+
+#bottomVid{
+    position: absolute;
+    height: 100%;
+    left: -10%;
+    width: 100%;
+    clip-path: polygon(0% 50%, 0% 100%, 100% 100%);
+    z-index: -1;
+}
+
+#link{
+    position: absolute;
+    font-family: "Arial Black", Gadget, sans-serif;
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: orange;
+    left:50%;
+    top:90%;
+    transform: translateX(-50%);
+}
+
+#contentContainer{
+    height: 50%;
+    width: 35%;
+    background-color: transparent;
+    top:25%;
+    left:65%;
+    position: absolute;
+}
+
+#title{
+    position: absolute;
+    font-family: "Lucida Console", Monaco, monospace;
+    color: rgb(255, 255, 255);
+    left:0%;
+    top:2%;
+    font-size: larger;
+    text-decoration: underline;
+    text-decoration-color: orange;
+}
+
+.content{
+    position: absolute;
+    font-family: "Lucida Console", Monaco, monospace;
+    color: white;
+}
+
+#dates{
+    font-size: smaller;
+}

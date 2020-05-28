@@ -15,13 +15,13 @@ function refreshList() {
 
 
                 valueOfElement = valueOfElement.paper;
-                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='title'><div class='bid' style='background-color:"+bidColor+"'></div><div class='titleContainer'>"+valueOfElement.name+"</div></div><div class='content' style = 'display:none'>"+valueOfElement.abstract+"<button class='upButton'>UP</button> <button class='middleButton'>MIDDLE</button> <button class='downButton'>DOWN</button> </div>"+"</li>";
+                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='title'><div class='bid' style='background-color:"+bidColor+"'></div><div class='titleContainer'>"+valueOfElement.name+"</div></div><div class='content' style = 'display:none'><div class='container'><div>"+valueOfElement.abstract+"</div><div class='buttonContainer'><button class='upButton'>UP</button> <button class='middleButton'>MIDDLE</button> <button class='downButton'>DOWN</button></div></div></div>"+"</li>";
                 $("#list").html(code);
             });
         }
     });
 }
-
+ 
 function bidOnPaper(listItem, bid) {
     $.ajax({
         type: "PUT",

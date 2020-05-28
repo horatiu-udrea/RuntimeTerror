@@ -147,12 +147,6 @@ $(document).ready(function () {
                                         else window.location = "Nothing-to-do-here page....";
                                     }
 
-                                    //TODO in phase 3 ar trebui sa aiba voie doar authori care sunt si speakeri. need to look into this. Also, cum afecteaza sectiunile chestia asta?
-                                    //TODO Authors have a bit of a mess here... Because PcMembers can publish papers as well (with the exception of the chair and chair-juniors)
-                                    //this might turn into a mess. Tired andu suggests that we add role to the login (as a drop-down list) and use it as a criteria for both login
-                                    //if user has account, check role as well, if the role checks out all is good. That way we can give people the ability to go into author mode if they log i
-                                    //with the role, and prevent people from loggin in with roles that weren't assigned to them. 21.05.2020
-
                                     if(role == 2){
                                         callAlert("What would you like to log in as?", "Author", "PcMember", function () {
                                             if(phase == 1) window.location = "../AuthorScreens/authorSubmit.html"; 

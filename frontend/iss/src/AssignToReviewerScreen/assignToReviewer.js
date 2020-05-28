@@ -1,23 +1,46 @@
 import { HOST, PORT } from "../Globuls.js"
 
 const CYAN = "rgb(0, 255, 255)";
-const TRANSPARENT = "rgba(0, 0, 0, 0)";
 const RED = "rgb(255,0,0)";
+
+let paperClicked = {};
+let memberClicked = {};
+
+function drawLine(svg, listItem1, listItem2, color){
+    let code = svg.html();
+    let pos1 = $(listItem1).offset();
+    let pos2 = $(listItem2).offset();
+    let width1 = parseInt($(listItem1).css("width"));
+    let height1 = parseInt($(listItem1).css("height")) / 2;
+    let height2 = parseInt($(listItem2).css("height")) / 2;
+    
+    code += "<line x1='"+(pos1.left + width1 + 2)+"' y1='"+(pos1.top + height1)+"' x2='"+(pos2.left + 1)+"' y2='"+(pos2.top + height2)+"' style='stroke:"+color+";stroke-width:2' />";
+    svg.html(code);
+}
 
 function markConflicts() {
     
-    $("li").each(function () {
-        if($(this).css("border-color") != TRANSPARENT) $(this).css("border-color", CYAN);
+    $("#svg").html("");
+    $("li.pcMember").each(function () {
+        if(memberClicked[$(this).val()] == false) return;
+        $(this).css("border-color", CYAN);
+        let member = this;
+        
+        $("li.paper").each(function () {
+            if(paperClicked[$(this).val()]== false) return;
+            $(this).css("border-color", CYAN);
+            drawLine($("#svg"), this, member, CYAN);
+        })
     })
     $("#button").prop('disabled', false);
 
     $("li.pcMember").each(function () {
-        if($(this).css("border-color") == TRANSPARENT) return;
+        if(memberClicked[$(this).val()] == false) return;
         
         let member = this;
         
         $("li.paper").each(function() { 
-            if($(this).css("border-color") == TRANSPARENT) return;
+            if(paperClicked[$(this).val()]== false) return;
             
             let paper = this;
 
@@ -33,6 +56,7 @@ function markConflicts() {
                         $(paper).css("border-color", "red");
                         $(member).css("border-color", "red");
                         $("#button").prop('disabled', true);
+                        drawLine($("#svg"), paper, member, RED);
                     }
                 },
                 error: function(data){
@@ -53,8 +77,16 @@ function refreshLists() {
             let code = "";
             $.each(data.responseJSON, function (indexInArray, valueOfElement) { 
                 code += "<li value = '"+valueOfElement.paper.paperId+"' class='paper'>"+"<div>"+valueOfElement.paper.name+"</div>"+"</li>";
-                $("#paperList").html(code);
+                paperClicked[valueOfElement.paper.paperId] = false;
             });
+            $("#paperList").html(code);
+            
+            var body = document.body,
+                html = document.documentElement;
+
+            var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight );
+            $(".strip").css("height", height);
+            $("#button").css("top", height / 2 - 35);
         }
     })
 
@@ -68,8 +100,9 @@ function refreshLists() {
             let code = "";
             $.each(data.responseJSON, function (indexInArray, valueOfElement) { 
                 code += "<li value = '"+valueOfElement.userId+"' class='pcMember'>"+"<div>"+valueOfElement.name+"</div>"+"</li>";
-                $("#pcMemberList").html(code);
+                memberClicked[valueOfElement.userId] = false;
             });
+            $("#pcMemberList").html(code);
         }
     })
 }
@@ -78,18 +111,33 @@ $(document).ready(function () {
 
     refreshLists();
 
-    $("ul").on("click", "li", function (e) { 
+    $("#pcMemberList").on("click", "li", function (e) { 
         e.preventDefault();
         
-        if($(this).css("border-color") == TRANSPARENT){
+        if(memberClicked[$(this).val()] != true){
                 $(this).css("border-color","cyan")
+                memberClicked[$(this).val()] = true;
         }
         else{
             $(this).css("border-color","transparent")
+            memberClicked[$(this).val()] = false;
         }
         markConflicts();
-    }); //m-am gandit sa trag linii intre pc-memberii selectati si hartiile selectate la click, ca o animatie interesanta
-        //https://stackoverflow.com/questions/19382872/how-to-connect-html-divs-with-lines
+    }); 
+
+    $("#paperList").on("click", "li", function (e) { 
+        e.preventDefault();
+        
+        if(paperClicked[$(this).val()] != true){
+                $(this).css("border-color","cyan")
+                paperClicked[$(this).val()] = true;
+        }
+        else{
+            $(this).css("border-color","transparent")
+            paperClicked[$(this).val()] = false;
+        }
+        markConflicts();
+    }); 
 
     $("#button").click(function (e) { 
         e.preventDefault();
@@ -102,8 +150,6 @@ $(document).ready(function () {
             }
         })
         if(exit) return;
-        //TODO If you've got time here's an idea. You might be able to ignore anything that wasn't marked with a red
-        //border, and still send valid messages
 
         $(".pcMember").each(function (index, element) {
             let pcMember = this
