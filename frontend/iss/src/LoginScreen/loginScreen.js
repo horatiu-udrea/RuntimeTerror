@@ -1,5 +1,13 @@
 import { HOST, PORT } from "../Globuls.js"
 
+// TODO Execute this in every page before executing ajax calls in order to send cookies to server
+$.ajaxSetup({
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    }
+});
+
 function stopAllAnimations() {
     $("#loginButtonStripe").stop();
     $("#textboxesStripe").stop();
