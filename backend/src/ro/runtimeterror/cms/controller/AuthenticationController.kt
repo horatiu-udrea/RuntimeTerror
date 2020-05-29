@@ -72,13 +72,13 @@ class AuthenticationController
         }
         if (existingUser.username == "")
         {
-            UserTable.update {
-                it[UserTable.name] = name
-                it[UserTable.affiliation] = affiliation
-                it[UserTable.username] = username
-                it[UserTable.webPage] = webPage
-                it[validated] = false
-                it[type] = UserType.AUTHOR.value
+            existingUser.apply {
+                this@apply.name = name
+                this@apply.affiliation = affiliation
+                this@apply.username = username
+                this@apply.webPage = webPage
+                this@apply.validated = false
+                this@apply.type = UserType.AUTHOR
             }
             return@transaction
         }
