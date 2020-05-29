@@ -96,13 +96,13 @@ Abstracts and Papers:
 -- 4 of them will also have the document path for the full paper
  */
 INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru medicina', 'medicinaAbstract', 'medicina', 'medicina, software', 'medicina Topic', '', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('AiPaper', 'ITAbstract', 'ai', 'ai, artificial intelligence', 'ai Topic', 'files/aiPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('AiPaper', 'ITAbstract', 'ai', 'ai, artificial intelligence', 'ai Topic', 'aiPaper.pdf', 1);
 INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru masini', 'masiniAbstract', 'masini', 'masini, software', 'masini Topic', '', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('MPPPaper', 'MPPAbstract', 'mpp', 'mpp, sdi', 'mpp Topic', 'files/mppPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('MPPPaper', 'MPPAbstract', 'mpp', 'mpp, sdi', 'mpp Topic', 'mppPaper.pdf', 1);
 INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('Fuzzy systems', 'fuzzyAbstract', 'fuzzy systems', 'fuzzy systems, fuzzy logic, software', 'fuzzy Topic', '', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('ISSPaper', 'ISSAbstract', 'iss', 'iss, software engineering', 'iss Topic', 'files/issPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('ISSPaper', 'ISSAbstract', 'iss', 'iss, software engineering', 'iss Topic', 'issPaper.pdf', 1);
 INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('Car parking soft', 'carAbstract', 'software, cars, car', 'medicina, software', 'car Topic', '', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('WEBPaper', 'WEBAbstract', 'web', 'web, web programming', 'web Topic', 'files/webPaper.pdf', 1);
+INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('WEBPaper', 'WEBAbstract', 'web', 'web, web programming', 'web Topic', 'webPaper.pdf', 1);
 
 INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (1, 22) ON DUPLICATE KEY UPDATE fk_userid = 22;
 INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (2, 23) ON DUPLICATE KEY UPDATE fk_userid = 23;
@@ -150,7 +150,9 @@ INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 8,
 INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 2, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
 INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 4, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
 INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 6, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+/* pc member cannot bid on his own paper
 INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 8, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+ */
 INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 2, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
 INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 4, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
 INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 6, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
