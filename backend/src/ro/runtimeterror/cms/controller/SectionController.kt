@@ -17,6 +17,7 @@ import ro.runtimeterror.cms.model.Qualifier
 import ro.runtimeterror.cms.model.Section
 import ro.runtimeterror.cms.model.UserReview
 import ro.runtimeterror.cms.model.UserType
+import ro.runtimeterror.cms.model.validators.UserSectionValidator
 
 class SectionController {
     /**
@@ -54,6 +55,7 @@ class SectionController {
      */
     fun userSectionChoice(userId: Int, sectionId: Int) = transaction(connection) {
         //TODO check if this already exists
+        UserSectionValidator.exists(userId, sectionId)
         UserSectionChoiceTable.insert {
             it[userID] = userId
             it[sectionID] = sectionId
@@ -81,7 +83,7 @@ class SectionController {
      */
     fun chooseSectionChair(sectionId: Int, userId: Int) = transaction(connection) {
         SectionTable.update({ SectionTable.id eq sectionId }) {
-            it[SectionTable.sessionChair] = userId
+            it[sessionChair] = userId
         }
     }
 
