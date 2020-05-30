@@ -273,7 +273,6 @@ INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presenta
 INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (8, 23, 2, 'AISec', 'ai.pptx', '2020-09-02 12:00:00', '2020-09-02 20:00:00', '');
 INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (9, 20, 4, 'MPPSec', 'mpp.pptx', '2020-09-01 16:00:00', '2020-09-01 20:00:00', '');
 INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (10, 17, 7, 'CarSec', 'car.pptx', '2020-09-03 12:00:00', '2020-09-03 18:00:00', '');
-INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (12, 11, 8, 'WebSec', 'web.pptx', '2020-09-03 16:00:00', '2020-09-03 20:00:00', '');
 
 /*
 -- Now that all the sections are created we need to make all the users select the section they would like to attend
