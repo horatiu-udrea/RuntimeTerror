@@ -54,7 +54,6 @@ class SectionController {
      * User chose to participate in this section
      */
     fun userSectionChoice(userId: Int, sectionId: Int) = transaction(connection) {
-        //TODO check if this already exists
         UserSectionValidator.exists(userId, sectionId)
         UserSectionChoiceTable.insert {
             it[userID] = userId
