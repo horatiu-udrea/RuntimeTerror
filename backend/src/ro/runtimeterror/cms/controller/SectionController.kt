@@ -1,5 +1,7 @@
 package ro.runtimeterror.cms.controller
 
+import org.jetbrains.exposed.dao.load
+import org.jetbrains.exposed.dao.with
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.joda.time.LocalDateTime
@@ -51,6 +53,7 @@ class SectionController {
      * User chose to participate in this section
      */
     fun userSectionChoice(userId: Int, sectionId: Int) = transaction(connection) {
+        //TODO check if this already exists
         UserSectionChoiceTable.insert {
             it[userID] = userId
             it[sectionID] = sectionId
@@ -61,10 +64,15 @@ class SectionController {
      * Create a section
      */
     fun createSection(name: String, startTime: LocalDateTime, endTime: LocalDateTime) = transaction(connection) {
-        SectionTable.insert {
-            it[roomName] = name
-            it[SectionTable.startTime] = startTime.toDateTime()
-            it[SectionTable.endTime] = endTime.toDateTime()
+        SectionDAO.new {
+            this@new.roomName = ""
+            this@new.user = null
+            this@new.paperId = null
+            this@new.name = name
+            this@new.startTime = startTime.toDateTime()
+            this@new.endTime = endTime.toDateTime()
+            this@new.presentationDocumentPath = ""
+            this@new.sessionChair = null
         }
     }
 
@@ -73,7 +81,7 @@ class SectionController {
      */
     fun chooseSectionChair(sectionId: Int, userId: Int) = transaction(connection) {
         SectionTable.update({ SectionTable.id eq sectionId }) {
-            it[SectionTable.userId] = userId
+            it[SectionTable.sessionChair] = userId
         }
     }
 

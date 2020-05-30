@@ -10,6 +10,7 @@ import ro.runtimeterror.cms.exceptions.ProgramException
 import ro.runtimeterror.cms.model.UserType
 import ro.runtimeterror.cms.networking.authorize
 import ro.runtimeterror.cms.networking.dto.toDTO
+import ro.runtimeterror.cms.networking.dto.toUserInformation
 
 fun Route.paperPresentationRoute(paperPresentationController: PaperPresentationController)
 {
@@ -28,7 +29,8 @@ fun Route.paperPresentationRoute(paperPresentationController: PaperPresentationC
             get("/{paperId}") {  // Get remaining authors for paper
                 authorize(UserType.ADMIN)
                 val paperId = call.parameters["paperId"]?.toInt() ?: throw ProgramException("Specify the paper id")
-                paperPresentationController.getRemainingAuthors(paperId)
+                val remainingAuthors = paperPresentationController.getRemainingAuthors(paperId)
+                call.respond(remainingAuthors.map { author -> author.toUserInformation() })
             }
         }
     }

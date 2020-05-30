@@ -1,5 +1,13 @@
 import { HOST, PORT } from "../Globuls.js"
 
+// TODO Execute this in every page before executing ajax calls in order to send cookies to server
+$.ajaxSetup({
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    }
+});
+
 function stopAllAnimations() {
     $("#loginButtonStripe").stop();
     $("#textboxesStripe").stop();
@@ -181,7 +189,7 @@ $(document).ready(function () {
                                     if(role == 4){
                                         if(phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
                                         else if(phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if(phase == 3) window.location.href = "../ChangeReviewer/ChangeReviewer.html";
+                                        else if(phase == 3) window.location.href = "ADD chair in phase 3 LINK HERE";
                                         else window.location.href = "Nothing-to-do-here page....";
                                     }
 

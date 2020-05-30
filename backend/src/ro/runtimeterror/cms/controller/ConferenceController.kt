@@ -15,24 +15,24 @@ class ConferenceController
      * Conference details
      */
     fun getConferenceDetails(): Conference =
-            transaction(connection){
-                return@transaction ConferenceTable
-                    .selectAll()
-                    .map {
-                        Conference(
-                            it[ConferenceTable.name],
-                            it[ConferenceTable.startDate],
-                            it[ConferenceTable.endDate],
-                            it[ConferenceTable.submissionDeadline],
-                            it[ConferenceTable.proposalDeadline],
-                            it[ConferenceTable.biddingDeadline],
-                            it[ConferenceTable.submitPaperEarly],
-                            it[ConferenceTable.currentPhase]
-                        )
-                    }.firstOrNull()?:throw ConferenceDetailsNotSetException(
-                    "The details for the conference have not been set"
-                )
-            }
+        transaction(connection){
+            return@transaction ConferenceTable
+                .selectAll()
+                .map {
+                    Conference(
+                        it[ConferenceTable.name],
+                        it[ConferenceTable.startDate],
+                        it[ConferenceTable.endDate],
+                        it[ConferenceTable.submissionDeadline],
+                        it[ConferenceTable.proposalDeadline],
+                        it[ConferenceTable.biddingDeadline],
+                        it[ConferenceTable.submitPaperEarly],
+                        it[ConferenceTable.currentPhase]
+                    )
+                }.firstOrNull()?:throw ConferenceDetailsNotSetException(
+                "The details for the conference have not been set"
+            )
+        }
 
     /**
      * Modify conference details

@@ -31,8 +31,8 @@ POST {{URL}}/section
 Content-Type: application/json
 
 {
-  "sectionId": 2,
-  "userId": 1
+  "sectionId": 1,
+  "userId": 7
 }
 
 ### Choose presenter for section
@@ -40,9 +40,9 @@ PUT {{URL}}/section/presenter
 Content-Type: application/json
 
 {
-  "userId": 1,
+  "userId": 22,
   "paperId": 1,
-  "sectionId": 2
+  "sectionId": 1
 }
 
 ### Change room name
