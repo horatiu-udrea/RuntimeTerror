@@ -1,4 +1,12 @@
 import { HOST, PORT } from "../Globuls.js"
+
+$.ajaxSetup({
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    }
+});
+
 function refreshList() {
     $.ajax({
         type: "GET",

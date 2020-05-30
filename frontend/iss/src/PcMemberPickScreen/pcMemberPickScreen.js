@@ -1,5 +1,12 @@
 import { HOST, PORT } from "../Globuls.js"
 
+$.ajaxSetup({
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    }
+});
+
 {
     let list = []
 

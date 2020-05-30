@@ -1,3 +1,11 @@
+$.ajaxSetup({
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    }
+});
+
+
 $(document).ready(function () {
 
     $("#createConference").click(function (e) {

@@ -1,5 +1,12 @@
 import { HOST, PORT } from "../Globuls.js"
 
+$.ajaxSetup({
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    }
+});
+
 const CYAN = "rgb(0, 255, 255)";
 const RED = "rgb(255,0,0)";
 

@@ -36,6 +36,7 @@ function callAlert(message, messageYes, messageNo, actionYes, actionNo){
 }
 
 $(document).ready(function () {
+    
     let defaultLoginStripeHeight = $("#loginButtonStripe").height();
     let defaultSignUpStripeHeight = $("#signUpButtonStripe").height();
     let defaultTextBoxesHeight = $("#textboxesStripe").height();
