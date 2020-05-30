@@ -5,9 +5,9 @@ import org.joda.time.DateTime
 interface Section
 {
     val sectionId: Int
-    val sessionChair: User?
-    val user: User?
-    val paper: Paper?
+    val sessionChair: Int?
+    val user: Int?
+    val paperId: Int?
     val name: String
     val presentationDocumentPath: String
     val startTime: DateTime

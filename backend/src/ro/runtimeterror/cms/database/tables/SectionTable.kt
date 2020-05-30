@@ -5,7 +5,7 @@ import org.jetbrains.exposed.sql.jodatime.datetime
 
 object SectionTable : IntIdTable("Sections", "PK_SectionID")
 {
-    val sessionChair = reference("FK_SessionChair", UserTable.id).nullable()
+    val sessionChair = integer("FK_SessionChair").references(UserTable.id).nullable()
     val userId = integer("FK_UserID").references(UserTable.id).nullable()
     val paperId =integer("FK_PaperID").references(PaperTable.id).nullable()
     val name = varchar("name", 100).default("")

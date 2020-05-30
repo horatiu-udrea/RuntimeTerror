@@ -10,20 +10,22 @@ data class SectionDTO(
     val presentationDocumentPath: String,
     val startTime: String,
     val endTime: String,
-    val roomName: String
+    val roomName: String,
+    val paperId: Int?
 )
 
 fun Section.toDTO(): SectionDTO
 {
     return SectionDTO(
         sectionId,
-        sessionChair?.userId,
-        user?.userId,
+        sessionChair,
+        user,
         name,
         presentationDocumentPath,
         startTime.toString(dateTimeFormatter),
         endTime.toString(dateTimeFormatter),
-        roomName
+        roomName,
+        paperId
     )
 }
 

@@ -18,8 +18,9 @@ import ro.runtimeterror.cms.networking.userSession
 import kotlin.math.absoluteValue
 
 data class SectionId(val sectionId: Int)
-
 data class SectionChairChoice(val sectionId: Int, val userId: Int)
+data class SectionPresenterChoice(val userId: Int, val paperId: Int, val sectionId: Int)
+data class SectionRoomName(val sectionId: Int, val roomName: String)
 
 fun Route.sectionRoute(sectionController: SectionController)
 {
@@ -61,7 +62,6 @@ fun Route.sectionRoute(sectionController: SectionController)
 
         put("/presenter") {
             // Choose presenter for section
-            data class SectionPresenterChoice(val userId: Int, val paperId: Int, val sectionId: Int)
             authorize(UserType.ADMIN)
             val (userId, paperId, sectionId) = call.receive<SectionPresenterChoice>()
             sectionController.chooseSectionPresenter(userId, paperId, sectionId)
@@ -69,7 +69,6 @@ fun Route.sectionRoute(sectionController: SectionController)
         }
         post("/room") {
             // Change room name
-            data class SectionRoomName(val sectionId: Int, val roomName: String)
             authorize(UserType.ADMIN)
             val (sectionId, roomName) = call.receive<SectionRoomName>()
             sectionController.changeSectionRoom(sectionId, roomName)
