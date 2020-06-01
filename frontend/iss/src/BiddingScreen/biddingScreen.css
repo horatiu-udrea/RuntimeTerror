@@ -3,121 +3,124 @@ html,body{
     padding: 0;
     height: 100%;
     width: 100%;
-
-    font-family: DejaVu Sans Mono;
+    background-color: rgb(44, 44, 44);
     overflow: hidden;
 }
 
-div.bid{
-    width: 10px;
-    height: 10px;
-    border-radius: 80%;
-    display: inline-block;
+div.container{
+    height: 150px;
+    width: 200px;
+    transform: translateY(-50%);
+    background-color: transparent;
 }
 
-div.titleContainer{
-    display: inline-block;
-    padding-left: 4px;
-} 
+div.banner,
+div.content{
+    height: 150px;
+    width: 240px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div.banner{
+    --glowColor: greenyellow;
+    position: absolute;
+    background-color: rgb(29, 29, 29);
+    text-align: center;
+    box-shadow:0px 16px 20px 5px rgb(0, 0, 0); 
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(65, 65, 65);
+
+    height: 151px;
+    width: 241px; /*this is here, because of a shitty border that showed up*/
+
+    transition-property: background-color box-shadow top color;
+    transition-timing-function: ease-out;
+    transition-duration: 0.2s;
+    z-index: 4;
+
+    
+}
+
+div.content{
+    position: absolute;
+    top: 50%;
+    background-color: whitesmoke;
+
+    transition: top 0.2s ease-out;
+    z-index: 1;
+}
+
+div.container:hover > div.banner{
+    top:0%;
+    background-color: var(--glowColor);
+    box-shadow:0 0 60px 30px var(--glowColor); 
+    color:whitesmoke;
+    font-family: 'Times New Roman', Times, serif;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div.container:hover > div.content{
+    top:100%;
+    box-shadow:0px 16px 20px 5px rgb(0, 0, 0); 
+}
+
+div.buttonContainer{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 20%;
+    top:70%;
+}
+
+
+button.button{
+    background-color: transparent;
+    border: 1px dotted black;
+    height: 100%;
+    width: 25%;
+    outline:0;
+
+    transition-property: border-color color;
+    transition-timing-function: linear;
+    transition-duration: 0.2s;
+}
+
+button:hover{
+    border-color: cornflowerblue;
+    color: cornflowerblue;
+}
+
+p.text{
+    margin:10px; 
+    height: 65%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: smaller;
+}
 
 ul{
+    top:0%;
+    height: 220%;
+    left: -43%;
+    width: 40%;
     position: absolute;
-    list-style-type: none;
-    overflow: scroll;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    left: 35%;
+
+    transform: rotate(-90deg);
+    transform-origin: right top;
+
     overflow: scroll;
 }
 
 ::-webkit-scrollbar {
-    display:none;
-}
-
-.container{
-    display: flex;
-    flex-direction: column;
+    display: none;
 }
 
 li{
-    text-align: center;
-    border-radius: 20px;
-    border-style: solid;
-    border-color: rgba(100, 148, 237, 0.384);
-    border-width: 2px;
-    background-color: rgba(94, 176, 191, 0.212);
-    width: 20%;
-    margin-bottom: 10px;
-}
-
-.buttonContainer{
-    display: flex;
-    flex-direction: row;
-    border-top: solid;
-    border-color: rgba(100, 148, 237, 0.384);
-    border-width: 2px;
-}
-
-.downButton{
-    width:33%;
-    border-bottom-right-radius: 20px;
-    border-style: none;
-    background-color: transparent;
-    color: rgba(0, 0, 0, 0.521);
-}
-
-.middleButton{
-    width:34%;
-    border-style: none;
-    border-left: solid;
-    border-right: solid;
-    border-color: rgba(100, 148, 237, 0.384);
-    border-width: 2px;
-    background-color: transparent;
-    color: rgba(0, 0, 0, 0.521);
-}
-
-.upButton{
-    width:33%;
-    border-bottom-left-radius: 20px;
-    border-style: none;
-    background-color: transparent;
-    color: rgba(0, 0, 0, 0.521);
-}
-
-.titleContainer{
-    font-weight: bold;
-    color: rgba(0, 0, 0, 0.521);
-}
-
-div.backgroundPiece{
-    border-style: solid;
-    border-width: 2px;
-    z-index: -1;
-    position: absolute;
-}
-
-div.backgroundSphere{
-    border-radius: 80%;
-}
-
-div.backgroundTilted20{
-    transform: rotate(20deg);
-}
-
-div.backgroundTilted20{
-    transform: rotate(50deg);
-}
-
-div.backgroundTilted20{
-    transform: rotate(80deg);
-}
-
-div.backgroundStar{
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-
-div.backgroundQuestionMark{
-    clip-path: polygon(22% 21%, 49% 9%, 72% 10%, 86% 26%, 84% 57%, 68% 71%, 71% 92%, 55% 96%, 50% 74%, 55% 60%, 70% 45%, 68% 28%, 55% 24%, 32% 35%);
+    transform: rotate(90deg);
+    transform-origin: right top;
+    margin-bottom: 230px;
+    margin-right: 55%;
 }
