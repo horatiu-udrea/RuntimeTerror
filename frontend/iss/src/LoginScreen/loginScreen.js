@@ -26,8 +26,8 @@ function resetToDefaultAnimated(d1, d2, d3) {
     });
 }
 
-function callAlert(message, messageYes, messageNo, actionYes, actionNo){
-    $("#alertMessage").text(message);   
+function callAlert(message, messageYes, messageNo, actionYes, actionNo) {
+    $("#alertMessage").text(message);
     $("#alertButtonYes").click(actionYes);
     $("#alertButtonNo").click(actionNo);
     $("#alertButtonYes").text(messageYes);
@@ -36,7 +36,7 @@ function callAlert(message, messageYes, messageNo, actionYes, actionNo){
 }
 
 $(document).ready(function () {
-    
+
     let defaultLoginStripeHeight = $("#loginButtonStripe").height();
     let defaultSignUpStripeHeight = $("#signUpButtonStripe").height();
     let defaultTextBoxesHeight = $("#textboxesStripe").height();
@@ -85,8 +85,8 @@ $(document).ready(function () {
 
     //Login Button Click
     $("#loginButtonStripe").click(function () {
-        const username = $("#usernameInput").val();
-        const password = $("#passwordInput").val();
+        let username = $("#usernameInput").val();
+        let password = $("#passwordInput").val();
         // const User =
 
         $.ajax({
@@ -99,6 +99,7 @@ $(document).ready(function () {
             complete: function (data, statusText) {
                 console.log(data, statusText)
                 if (data.statusText == "OK") {
+                    localStorage.setItem("user", username);
                     donePost(data);
                 } else {
                     failPost(data);
@@ -126,7 +127,7 @@ $(document).ready(function () {
 
                 complete: function (dataUser, statusText) {
                     console.log(dataUser)
-                    if (dataUser.statusText == "OK") {
+                    if (dataUser.statusText == "OK" || dataUser.statusText == "success") {
                         role = dataUser.responseJSON.type
                         console.log(dataUser.responseJSON.type)
                         $.ajax({
@@ -138,68 +139,68 @@ $(document).ready(function () {
                             complete: function (dataConference, statusText) {
                                 if (dataConference.statusText == "OK") {
                                     let split = dataConference.responseJSON.biddingDeadline.split("/");
-                                    bidDate = new Date(split[2]+"-"+split[1]+"-"+split[0]);
+                                    bidDate = new Date(split[2] + "-" + split[1] + "-" + split[0]);
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
-                                    
-                                    if(role == 0){
-                                        if(phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                        else if(phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                        else if(phase == 3) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+
+                                    if (role == 0) {
+                                        if (phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                        else if (phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
+                                        else if (phase == 3) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
                                         else window.location.href = "Nothing-to-do-here page....";
                                     }
 
-                                    if(role == 1){
-                                        if(phase == 1) window.location = "../AuthorScreens/authorSubmit.html"; 
-                                        else if(phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html"; 
-                                        else if(phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
+                                    if (role == 1) {
+                                        if (phase == 1) window.location = "../AuthorScreens/authorSubmit.html";
+                                        else if (phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
+                                        else if (phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                         else window.location = "Nothing-to-do-here page....";
                                     }
 
-                                    if(role == 2){
+                                    if (role == 2) {
                                         callAlert("What would you like to log in as?", "Author", "PcMember", function () {
-                                            if(phase == 1) window.location = "../AuthorScreens/authorSubmit.html"; 
-                                            else if(phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html"; 
-                                            else if(phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
+                                            if (phase == 1) window.location = "../AuthorScreens/authorSubmit.html";
+                                            else if (phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
+                                            else if (phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                             else window.location = "Nothing-to-do-here page....";
                                         },
-                                        function () {
-                                            if(phase == 2) {
-                                                if (today < bidDate) window.location.href = "../BiddingScreen/biddingScreen.html";
-                                                else window.location.href = "../ReviewingScreen/reviewingScreen.html";
-                                            }
-                                            else if(phase == 3) window.location.href = "ADD pcmember in phase 3 LINK HERE";
-                                            else window.location.href = "Nothing-to-do-here page....";
-                                        });
+                                            function () {
+                                                if (phase == 2) {
+                                                    if (today < bidDate) window.location.href = "../BiddingScreen/biddingScreen.html";
+                                                    else window.location.href = "../ReviewingScreen/reviewingScreen.html";
+                                                }
+                                                else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
+                                                else window.location.href = "Nothing-to-do-here page....";
+                                            });
                                     }
 
-                                    if(role == 3){
-                                        if(phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
-                                        else if(phase == 2){
+                                    if (role == 3) {
+                                        if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
+                                        else if (phase == 2) {
                                             callAlert("Assign papers to reviewers, or deal with conflicting papers?", "Assign", "Conflicting", function () {
                                                 window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
                                             },
-                                            function () {
-                                                window.location.href = "../ConflictingDiscussion/conflictingDiscussion.html";
-                                            });
-                                        } 
-                                        else if(phase == 3) {}
+                                                function () {
+                                                    window.location.href = "../ConflictingDiscussion/conflictingDiscussion.html";
+                                                });
+                                        }
+                                        else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
                                         else window.location.href = "Nothing-to-do-here page....";
                                     } //TODO Pune conflicting discussion la co-chair si chair in phase 2
 
-                                    if(role == 4){
-                                        if(phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
-                                        else if(phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if(phase == 3) window.location.href = "ADD chair in phase 3 LINK HERE";
+                                    if (role == 4) {
+                                        if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
+                                        else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
+                                        else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
                                         else window.location.href = "Nothing-to-do-here page....";
                                     }
 
-                                    if(role == 5){
-                                        if(phase == 0) window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
-                                        else if(phase == 1) window.location.href = "-";
-                                        else if(phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if(phase == 3) window.location.href = "ADD scmember in phase 3 LINK HERE";
-                                        else window.location.href = "Nothing-to-do-here page....";
+                                    if (role == 5) {
+                                        if (phase == 0) window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
+                                        else if (phase == 1) window.location.href = "-";
+                                        else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
+                                        else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
+                                        else window.location.href = "";
                                     }
 
                                 } else {
@@ -223,7 +224,7 @@ $(document).ready(function () {
                 // console.log(role, bidDate, phase);
 
             });
-        
+
         }
     });
 })
