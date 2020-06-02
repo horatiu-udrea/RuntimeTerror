@@ -199,7 +199,7 @@ $(document).ready(function () {
                                         if (phase == 0) window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
                                         else if (phase == 1) window.location.href = "-";
                                         else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
+                                        else if (phase == 3) window.location.href = "../CreateSection/createSection.html";
                                         else window.location.href = "";
                                     }
 
