@@ -1,4 +1,4 @@
 ECHO OFF
-echo ### starting server on port 5500
+echo ##builing app
 call live-server --host=localhost --port=5500 --open=dist
 

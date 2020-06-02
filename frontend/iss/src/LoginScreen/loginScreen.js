@@ -26,8 +26,8 @@ function resetToDefaultAnimated(d1, d2, d3) {
     });
 }
 
-function callAlert(message, messageYes, messageNo, actionYes, actionNo) {
-    $("#alertMessage").text(message);
+function callAlert(message, messageYes, messageNo, actionYes, actionNo){
+    $("#alertMessage").text(message);   
     $("#alertButtonYes").click(actionYes);
     $("#alertButtonNo").click(actionNo);
     $("#alertButtonYes").text(messageYes);
@@ -36,7 +36,7 @@ function callAlert(message, messageYes, messageNo, actionYes, actionNo) {
 }
 
 $(document).ready(function () {
-
+    
     let defaultLoginStripeHeight = $("#loginButtonStripe").height();
     let defaultSignUpStripeHeight = $("#signUpButtonStripe").height();
     let defaultTextBoxesHeight = $("#textboxesStripe").height();
@@ -85,8 +85,8 @@ $(document).ready(function () {
 
     //Login Button Click
     $("#loginButtonStripe").click(function () {
-        let username = $("#usernameInput").val();
-        let password = $("#passwordInput").val();
+        const username = $("#usernameInput").val();
+        const password = $("#passwordInput").val();
         // const User =
 
         $.ajax({
@@ -127,7 +127,7 @@ $(document).ready(function () {
 
                 complete: function (dataUser, statusText) {
                     console.log(dataUser)
-                    if (dataUser.statusText == "OK" || dataUser.statusText == "success") {
+                    if (dataUser.statusText == "OK") {
                         role = dataUser.responseJSON.type
                         console.log(dataUser.responseJSON.type)
                         $.ajax({
@@ -139,7 +139,7 @@ $(document).ready(function () {
                             complete: function (dataConference, statusText) {
                                 if (dataConference.statusText == "OK") {
                                     let split = dataConference.responseJSON.biddingDeadline.split("/");
-                                    bidDate = new Date(split[2] + "-" + split[1] + "-" + split[0]);
+                                    bidDate = new Date(split[2]+"-"+split[1]+"-"+split[0]);
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
 
