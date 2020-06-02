@@ -74,16 +74,16 @@ class SectionController {
     /**
      * Create a section
      */
-    fun createSection(name: String, startTime: LocalDateTime, endTime: LocalDateTime) = transaction(connection) {
+    fun createSection(sessionChairId: Int, userId: Int, name: String, startTime: LocalDateTime, endTime: LocalDateTime, roomName: String, paperId: Int) = transaction(connection) {
         SectionDAO.new {
-            this@new.roomName = ""
-            this@new.userId = null
-            this@new.paperId = null
+            this@new.roomName = roomName
+            this@new.userId = userId
+            this@new.paperId = paperId
             this@new.name = name
             this@new.startTime = startTime.toDateTime()
             this@new.endTime = endTime.toDateTime()
             this@new.presentationDocumentPath = ""
-            this@new.sessionChairId = null
+            this@new.sessionChairId = sessionChairId
         }
     }
 
