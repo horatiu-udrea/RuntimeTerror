@@ -13,9 +13,9 @@ class SectionDAO(id: EntityID<Int>) : IntEntity(id), Section
     companion object : IntEntityClass<SectionDAO>(SectionTable)
 
     override var roomName by SectionTable.roomName
-    override var sessionChair by SectionTable.sessionChair
-    override var user by SectionTable.userId
-    override var paperId by SectionTable.paperId
+    var sessionChairId by SectionTable.sessionChair
+    var userId by SectionTable.userId
+    var paperId by SectionTable.paperId
     override var name by SectionTable.name
     override var startTime by SectionTable.startTime
     override var endTime by SectionTable.endTime
@@ -23,4 +23,8 @@ class SectionDAO(id: EntityID<Int>) : IntEntity(id), Section
 
     override val sectionId: Int
         get() = id.value
+
+    override var sessionChair: String = ""
+    override var user: String = ""
+    override var paper: String = ""
 }

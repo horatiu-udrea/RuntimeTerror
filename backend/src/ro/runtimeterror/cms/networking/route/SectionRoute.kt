@@ -27,7 +27,6 @@ fun Route.sectionRoute(sectionController: SectionController)
     route("/section") {
 
         get { // Get all sections
-            authorize(UserType.AUTHOR)
             val sections = sectionController.getAllSections()
             call.respond(sections.map { section -> section.toDTO() })
         }

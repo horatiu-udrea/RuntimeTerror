@@ -3,16 +3,12 @@ package ro.runtimeterror.cms.database.daos
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
 import ro.runtimeterror.cms.database.tables.PaperSubmissionTable
 import ro.runtimeterror.cms.database.tables.PaperTable
-import ro.runtimeterror.cms.database.tables.SectionTable
 import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.model.PaperStatus
-import ro.runtimeterror.cms.model.Section
 import ro.runtimeterror.cms.model.User
 
 class PaperDAO(id: EntityID<Int>) : IntEntity(id), Paper
