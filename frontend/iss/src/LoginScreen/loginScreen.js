@@ -147,14 +147,14 @@ $(document).ready(function () {
                                         if (phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
                                         else if (phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
                                         else if (phase == 3) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                        else window.location.href = "Nothing-to-do-here page....";
+                                        else window.location.href = "../unavailable/unavailable.html";
                                     }
 
                                     if (role == 1) {
                                         if (phase == 1) window.location = "../AuthorScreens/authorSubmit.html";
                                         else if (phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                         else if (phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
-                                        else window.location = "Nothing-to-do-here page....";
+                                        else window.location = "../unavailable/unavailable.html";
                                     }
 
                                     if (role == 2) {
@@ -162,7 +162,7 @@ $(document).ready(function () {
                                             if (phase == 1) window.location = "../AuthorScreens/authorSubmit.html";
                                             else if (phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                             else if (phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
-                                            else window.location = "Nothing-to-do-here page....";
+                                            else window.location = "../unavailable/unavailable.html";
                                         },
                                             function () {
                                                 if (phase == 2) {
@@ -170,7 +170,7 @@ $(document).ready(function () {
                                                     else window.location.href = "../ReviewingScreen/reviewingScreen.html";
                                                 }
                                                 else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
-                                                else window.location.href = "Nothing-to-do-here page....";
+                                                else window.location.href = "../unavailable/unavailable.html";
                                             });
                                     }
 
@@ -185,22 +185,22 @@ $(document).ready(function () {
                                                 });
                                         }
                                         else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
-                                        else window.location.href = "Nothing-to-do-here page....";
+                                        else window.location.href = "../unavailable/unavailable.html";
                                     } //TODO Pune conflicting discussion la co-chair si chair in phase 2
 
                                     if (role == 4) {
                                         if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
                                         else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
                                         else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
-                                        else window.location.href = "Nothing-to-do-here page....";
+                                        else window.location.href =  "../unavailable/unavailable.html";
                                     }
 
                                     if (role == 5) {
                                         if (phase == 0) window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
-                                        else if (phase == 1) window.location.href = "-";
+                                        else if (phase == 1) window.location.href = "../unavailable/unavailable.html";
                                         else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
                                         else if (phase == 3) window.location.href = "../CreateSection/createSection.html";
-                                        else window.location.href = "";
+                                        else window.location.href = "../unavailable/unavailable.html";
                                     }
 
                                 } else {

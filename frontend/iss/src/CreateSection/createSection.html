@@ -13,13 +13,25 @@
 
 <body style="background-color: #FAF3DD;">
 
-    Section Name: <input type="text" name="ConferenceName" id="conferenceName" placeholder="conference name">
+    Section Name: <input type="text" name="ConferenceName" id="conferenceName" placeholder="section name">
+   <br>
+   Room Name: <input type="text" name="RoomName" id="roomName" placeholder="room name">
    <br>
     Start time:<input type="date" id="conferenceStartDate" name="trip-start">
     <br>
     End Time: <input type="date" id="conferenceEndDate" name="trip-start">
    
     <br>
+    <select id="chairs" name = "Select a chair member">
+        <option selected = "selected"> Select a chair member</option>
+       </select><br>
+       <select id="papers" name = "Select a paper">
+        <option selected = "selected"> Select a paper</option>
+       </select><br>
+       <span id="paperDetails"></span>
+       <select id="author" name = "Select an author">
+        <option selected = "selected"> Select an author</option>
+       </select><br>
     <input type="submit" name="createConference" id="createConference" value="Create Section">
 </body>
 
