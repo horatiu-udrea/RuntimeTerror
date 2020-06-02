@@ -66,7 +66,6 @@ $(document).ready(function () {
                             + "<br>")
                     })
                 });
-                console.log(inSelect);
                 fillPapersAndDetails(inSelect);
             }
         }
