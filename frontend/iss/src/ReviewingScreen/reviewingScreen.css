@@ -31,9 +31,10 @@ li{
 }
 
 li>div.title{
-    background-color: gainsboro;
-    color:black;
+    background-color: transparent;
+    color:white;
     font-family: DejaVu Sans Mono;
+    border-bottom: solid red 1px;
 }
 
 li>div.content{
@@ -42,18 +43,54 @@ li>div.content{
     flex-direction: column;
     text-align: center;
     position: relative;
+    border-bottom: solid red 1px;
 }
 
 iframe{
+    height: 0px;
     width: 100%;
-    -ms-zoom: 100%;
     border-style: none;
+    overflow: hidden;
 }
 
 textarea{
+    height: 0px;
     resize: none;
     border-style: none;
-    width: 99%;
+    width: 100%;
+    opacity: 1;
+}
+
+div.buttons{
+    position: absolute;
+    top:94%;
+    left:50%;
+    transform: translateX(-50%);
+}
+
+textarea, iframe, li>div.content{
+    transition-property: height, opacity;
+    transition-timing-function: ease-out;
+    transition-duration: 0.3s;
+    display: block;
+    padding:0;
+}
+select, button, label{
+    transition-property: height, opacity;
+    transition-delay: 0.2s;
+    transition-timing-function: ease-out;
+    transition-duration: 0.2s;
+    opacity: 0;
+    height: 0px;
+}
+
+select, button{
+    border: solid 1px #dddddd;
+    background-color: #eeeeee;
+    color: #212529;
+    cursor: pointer;
+    border-radius: 5px;
+    user-select: none;
 }
 
 ::-webkit-scrollbar {
@@ -129,13 +166,6 @@ textarea{
     width: 2.5%;
     left: 107%;
     background-color: #495057;
-}
-
-div.buttons{
-    position: absolute;
-    top:94%;
-    left:50%;
-    transform: translateX(-50%);
 }
 
 label{

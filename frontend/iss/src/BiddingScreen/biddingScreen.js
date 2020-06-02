@@ -1,4 +1,12 @@
 import { HOST, PORT } from "../Globuls.js"
+
+$.ajaxSetup({
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    }
+});
+
 function refreshList() {
     $.ajax({
         type: "GET",
@@ -11,13 +19,13 @@ function refreshList() {
             $.each(data.responseJSON, function (indexInArray, valueOfElement) { 
                 let bidColor = "yellow";
                 if(valueOfElement.bidResult == 3) bidColor = "red"
-                else if (valueOfElement.bidResult == 1) bidColor = "green"
-
+                else if (valueOfElement.bidResult == 1) bidColor = "lime"
 
                 valueOfElement = valueOfElement.paper;
-                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class='title'><div class='bid' style='background-color:"+bidColor+"'></div><div class='titleContainer'>"+valueOfElement.name+"</div></div><div class='content' style = 'display:none'><div class='container'><div>"+valueOfElement.abstract+"</div><div class='buttonContainer'><button class='upButton'>UP</button> <button class='middleButton'>MIDDLE</button> <button class='downButton'>DOWN</button></div></div></div>"+"</li>";
-                $("#list").html(code);
+                code += "<li value = '"+valueOfElement.paperId+"'>"+"<div class=container><div class='banner' style='--glowColor:"+bidColor+"' ><h2 style='position:absolute; top:35%; left:50%; transform: translate(-50%, -50%);'>"+valueOfElement.name+"</h2></div><div class='content'><p class='text'>"+valueOfElement.abstract+" </p><div class='buttonContainer'><button class='button upButton'>Yes</button><button class='button middleButton'>Maybe</button><button class='button downButton'>No</button></div></div></div>" 
             });
+            
+            $("#list").html(code);
         }
     });
 }
@@ -31,27 +39,14 @@ function bidOnPaper(listItem, bid) {
         data: JSON.stringify({paperId: listItem.value, bidResult: bid}),
     });
 
-    if(bid == 3) $(listItem).find("div.bid").css("background-color", "red"); 
-    else if(bid == 2) $(listItem).find("div.bid").css("background-color", "yellow");
-    else $(listItem).find("div.bid").css("background-color", "green"); 
+    if(bid == 3) $(listItem).find("div.banner").css("cssText","--glowColor: red"); 
+    else if(bid == 2) $(listItem).find("div.banner").css("cssText","--glowColor: yellow");
+    else $(listItem).find("div.banner").css("cssText","--glowColor: lime");
 }
 
 $(document).ready(function () {
     
     refreshList();
-
-    $("ul").on("click", "li", function (e) { 
-        e.preventDefault();
-        
-        let content = $(this).children(':nth-child(2)'); 
-        if(content.css("display") == "none")
-            content.css("display", "block");
-        else
-            content.css("display", "none");
-    });
-    $("ul").on("click", "div.content", function (e) { 
-        e.stopPropagation();
-    });
 
     $("ul").on("click", ".upButton", function (e) { 
         e.preventDefault();

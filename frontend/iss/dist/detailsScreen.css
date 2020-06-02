@@ -94,3 +94,13 @@ html,body{
 #dates{
     font-size: smaller;
 }
+#sectionDetails{
+    position: absolute;
+    font-family: "Lucida Console", Monaco, monospace;
+    color: rgb(255, 255, 255);
+    left:20%;
+    top:40%;
+    font-size: larger;
+    text-decoration: underline;
+    text-decoration-color: orange;
+}

@@ -1,5 +1,12 @@
 import { HOST, PORT } from "../Globuls.js"
 
+$.ajaxSetup({
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    }
+});
+
 var imageArray = ["#background4","#background1","#background2","#background3","#background4"];
 var currentImage = 1;
 
@@ -36,28 +43,56 @@ $(document).ready(function () {
                 let value = valueOfElemen.paperDTO;
                 papers.push(value);
                 reviews.push(valueOfElemen);
-                code += "<li value = '"+value.paperId+"'>"+"<div class='title'>"+value.name+"</div><div class='content' style = 'display:none'><div class='pdfDisplay'><iframe src='http://www.bavtailor.com/wp-content/uploads/2018/10/Lorem-Ipsum.pdf' width='50%' height='300px'></iframe></div><div class ='textInput'><textarea class='recommendationInput' rows='10' cols='50'></textarea></div><div class='buttons'><button class='upButton'>Submit</button><label> Grade: </label><select class='gradePuicker' name='Grade'><option value = 1>1</option><option value = 2>2</option><option value = 3>3</option><option value = 4>4</option><option value = 5>5</option><option value = 6>6</option><option value = 7>7</option></select></div></div>"+"</li>";
+
+                code += "<li value = '"+value.paperId+"'>"+"<div class='title'>"+value.name+"</div><div class='content' height='0'><div class='pdfDisplay'><iframe src='"+HOST+PORT+"/document/"+value.documentPath+"' width='50%' scrolling='no'></iframe></div><div class ='textInput'><textarea class='recommendationInput' rows='10' cols='50'></textarea></div><div class='buttons'><button class='upButton'>Submit</button><select class='gradePuicker' name='Grade'><option value = 0 disabled selected>Grade</option><option value = 1>1</option><option value = 2>2</option><option value = 3>3</option><option value = 4>4</option><option value = 5>5</option><option value = 6>6</option><option value = 7>7</option></select></div></div>"+"</li>";
                 $("#list").html(code);
             });
         }
     }); 
     
-
+    
     $("#list").on("click", "li" , function (e) { 
         e.preventDefault();
         
-        let content = $(this).children(':nth-child(2)'); 
-        if(content.css("display") == "none")
-            content.css("display", "block");
-        else
-            content.css("display", "none");
+        let content = $(this).find('.content');
+        let iframe = $(this).find('iframe');
+        let textarea = $(this).find('textarea');
+        let button = $(this).find('button');
+        let select = $(this).find('select');
+        let label = $(this).find('label');
+
+        console.log(content.css("height"));
+
+        if(content.css("height") == "0px"){
+            content.css("height", "350"); //I need to be beaten with a stick for the mess I've made : /
+            iframe.css("height", "200");
+            textarea.css("height", "150");
+            select.css("height", "initial");
+            select.css("opacity", "1");
+            label.css("opacity", "1");
+            button.css("height", "initial");
+            button.css("opacity", "1");
+        }
+        else{
+            content.css("height", "0");
+            iframe.css("height", "0");
+            textarea.css("height", "0");
+            select.css("height", "0");
+            button.css("height", "0");
+            button.css("opacity", "0");
+            select.css("opacity", "0");
+            label.css("opacity", "0");
+        }
     });
+    
 
     $("#list").on("click", "li > >" , function (e) { e.stopPropagation() });
 
     $("#list").on("click", ".upButton" ,function (e) { 
         e.preventDefault();
         let button = this;
+
+        if ($(this).parents("li").find("select").val() == 0) return;
 
         $.ajax({
             type: "PUT",

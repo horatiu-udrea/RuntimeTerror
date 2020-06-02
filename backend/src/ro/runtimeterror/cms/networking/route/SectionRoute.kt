@@ -78,7 +78,7 @@ fun Route.sectionRoute(sectionController: SectionController) {
         }
 
         get("/details") { // Get presentation details
-            authorize(UserType.AUTHOR)
+            //authorize(UserType.AUTHOR) this guy can also be a PC member that logs in as author.
             val user = userSession()
             val section = sectionController.getSectionDetails(user.id)
             if (section == null) call.respond(HttpStatusCode.NotFound)
