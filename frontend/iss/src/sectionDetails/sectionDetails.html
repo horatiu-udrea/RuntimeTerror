@@ -11,12 +11,38 @@
 
         #box {
             position: absolute;
-            background-color: #e7e7e7;
-            color: black;
-            opacity: 0.7;
+            background-color: transparent;
+            color: rgb(255, 255, 255);
+            opacity: 1;
             margin-left: 45%;
             margin-top: 20%;
+            z-index:2;
+            width: 50%;
+            height: 50%;
+        }
+        #box::after{
+            content:' ';
+            position: absolute;
+            background-color: #000000;
+            opacity: 0.2;
+            top:-50%;
+            left:-50%;
+            height: 200%;
+            width: 200%;
+            z-index: -1;
+            clip-path: polygon(0% 50%, 50% 100%, 100% 50%, 50% 0%);
+        }
 
+        #box::before{
+            content:' ';
+            position: absolute;
+            background-color: #000000;
+            opacity: 0.2;
+            top:-25%;
+            left:-25%;
+            height: 150%;
+            width: 150%;
+            z-index: -1;
         }
 
         .mySlides1 {
