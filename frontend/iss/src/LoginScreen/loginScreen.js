@@ -158,12 +158,13 @@ $(document).ready(function () {
                                     }
 
                                     if (role == 2) {
-                                        callAlert("What would you like to log in as?", "Author", "PcMember", function () {
+                                        callAlert("What would you like to log in as?", "Author", "PcMember",
+                                            function () {
                                             if (phase == 1) window.location = "../AuthorScreens/authorSubmit.html";
                                             else if (phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                             else if (phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                             else window.location = "../unavailable/unavailable.html";
-                                        },
+                                            },
                                             function () {
                                                 if (phase == 2) {
                                                     if (today < bidDate) window.location.href = "../BiddingScreen/biddingScreen.html";
@@ -171,22 +172,25 @@ $(document).ready(function () {
                                                 }
                                                 else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
                                                 else window.location.href = "../unavailable/unavailable.html";
-                                            });
+                                            }
+                                        );
                                     }
 
                                     if (role == 3) {
                                         if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
                                         else if (phase == 2) {
-                                            callAlert("Assign papers to reviewers, or deal with conflicting papers?", "Assign", "Conflicting", function () {
-                                                window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                            },
+                                            callAlert("Assign papers to reviewers, or deal with conflicting papers?", "Assign", "Conflicting", 
+                                                function () {
+                                                    window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
+                                                },
                                                 function () {
                                                     window.location.href = "../ConflictingDiscussion/conflictingDiscussion.html";
-                                                });
+                                                }
+                                            );
                                         }
                                         else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
                                         else window.location.href = "../unavailable/unavailable.html";
-                                    } //TODO Pune conflicting discussion la co-chair si chair in phase 2
+                                    } 
 
                                     if (role == 4) {
                                         if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
@@ -196,10 +200,24 @@ $(document).ready(function () {
                                     }
 
                                     if (role == 5) {
-                                        if (phase == 0) window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
-                                        else if (phase == 1) window.location.href = "../unavailable/unavailable.html";
-                                        else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if (phase == 3) window.location.href = "../CreateSection/createSection.html";
+                                        if (phase == 0) callAlert("Change Conference details or pick pc members?", "Change details", "Pick members", 
+                                            function () {
+                                                window.location.href = "../ConferenceScreens/changeDate.html";
+                                            },
+                                            function () {
+                                                window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
+                                            }
+                                        );
+                                        else if (phase == 1) window.location.href = "../ConferenceScreens/changeDate.html";
+                                        else if (phase == 2) window.location.href = "../ConferenceScreens/changeDate.html";
+                                        else if (phase == 3) callAlert("Change Conference details or create sections?", "Change details", "Pick members", 
+                                            function () {
+                                                window.location.href = "../ConferenceScreens/changeDate.html";
+                                            },
+                                            function () {
+                                                window.location.href = "../CreateSection/createSection.html";
+                                            }
+                                        );
                                         else window.location.href = "../unavailable/unavailable.html";
                                     }
 

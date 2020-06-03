@@ -65,7 +65,10 @@ $(document).ready(function () {
             let bidding = $("#changeConferenceBiddingDeadline").val().replace(/-/g, "/").split("/").reverse();
             biddingDeaedline =  bidding[0] + "/" + bidding[1] + "/" + bidding[2];
         }
-        
+        //Andu added some shit here, sowwy.
+        if($("#phaseSelect").children("option:selected").val() != "Phase") {
+            phase = $("#phaseSelect").children("option:selected").val();
+        }
         
        console.log(submisstiondeadline, biddingDeaedline, proposalDeadline);
         

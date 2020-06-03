@@ -11,38 +11,62 @@
 
         #box {
             position: absolute;
-            background-color: transparent;
-            color: rgb(255, 255, 255);
-            opacity: 1;
-            margin-left: 45%;
-            margin-top: 20%;
-            z-index:2;
+            left:50%;
+            transform: translateX(-50%);
+
+            box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+            background-color: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(5px);
+            
             width: 50%;
-            height: 50%;
-        }
-        #box::after{
-            content:' ';
-            position: absolute;
-            background-color: #000000;
-            opacity: 0.2;
-            top:-50%;
-            left:-50%;
-            height: 200%;
-            width: 200%;
-            z-index: -1;
-            clip-path: polygon(0% 50%, 50% 100%, 100% 50%, 50% 0%);
+            height: 100%;
+            clip-path: polygon(0% 100%, 90% 100%, 100% 0%, 10% 0%);
+        
+            z-index:2;
+
+            text-align: center;
         }
 
-        #box::before{
-            content:' ';
+        #innerBox{
             position: absolute;
-            background-color: #000000;
-            opacity: 0.2;
-            top:-25%;
-            left:-25%;
-            height: 150%;
-            width: 150%;
-            z-index: -1;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            color:white;
+            font-family: "Arial Black", Gadget, sans-serif;
+            font-size: large;
+        }
+
+        #rightStripe{
+            position: absolute;
+            left:83%;
+
+            top:-10%;
+            width: 10%;
+            height: 200%;
+            transform: rotate(6.2deg);
+
+            background-color: rgb(255, 255, 255);
+        }
+
+        #leftStripe{
+            position: absolute;
+            left:10%;
+
+            top:-10%;
+            width: 0.5%;
+            height: 200%;
+            transform: rotate(6.2deg);
+
+            background-color: orange;
+        }
+
+        @keyframes animation{
+            40%{width: 0%;}
+        }
+
+        .animuu{
+            animation: animation 0.4s;
         }
 
         .mySlides1 {
@@ -102,28 +126,27 @@
 
     <div class="slideshow-container">
         <div class="mySlides1">
-            <img src="../../../resources/img_mountains_wide.jpg" style="width:100%">
+            <img src="../../../resources/Details1.jpg" style="width:100%">
         </div>
 
         <div class="mySlides1">
-            <img src="../../../resources/img_mountains_wide.jpg" style="width:100%">
+            <img src="../../../resources/Details3.jpg" style="width:100%">
         </div>
 
         <div class="mySlides1">
-            <img src="../../../resources/img_mountains_wide.jpg" style="width:100%">
+            <img src="../../../resources/Details2.jpg" style="width:100%">
         </div>
 
         <a class="prev" >&#10094;</a>
         <a class="next">&#10095;</a>
     </div>
 
-    <span class="label other" id="box">
-        Otherjfbcbaef;c
-        esr<br>
-        fgr<br>
-        dfasr<br>
-        dg<br>
-        rsfg<br>
+    <div id='rightStripe'></div>
+    <div id='leftStripe'></div> 
+
+    <span id="box">
+        <div id="innerBox"></div>
+
     </span>
     <script type ="module">
         import {HOST, PORT} from "../Globuls.js";
@@ -131,8 +154,16 @@
         let idx = 0;
         var slideId = ["mySlides1"]
         let info = [];
-        $.ajax({
 
+        $(".prev")
+        .on("click", function(){
+            $("#box").addClass('animuu');
+        })
+        $("#box").on("animationend", function(){
+            $("#box").removeClass('animuu');
+        });
+
+        $.ajax({
             type: "GET",
             contentType: "application/json",
             url: HOST + PORT + "/section",
@@ -170,10 +201,18 @@
             if (n > x.length) { slideIndex[no] = 1 }
             if (n < 1) { slideIndex[no] = x.length }
             for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
+                $(x[i]).fadeOut(500);
             }
-            x[slideIndex[no] - 1].style.display = "block";
-            document.getElementById("box").innerHTML = info[idx].value; 
+            $(x[slideIndex[no] - 1]).fadeIn(500);
+
+            
+            $("#box").addClass('animuu');document.getElementById("innerBox").innerHTML = info[idx].value;
+            $("#box").on("animationend", function(){
+                $("#box").removeClass('animuu');
+            });
+
+
+            
             idx = (idx + n) % info.length;
             if(idx == -1) idx = info.length-1;
             if(idx == info.length-1) idx = 0;
