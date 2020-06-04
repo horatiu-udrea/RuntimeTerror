@@ -18,8 +18,8 @@ $(document).ready(function () {
             document.getElementById("uploadProposal").style.visibility = "hidden";
         }
         if (phase == 3) {
-            document.getElementById("improveProposal").style.visibility = "hidden";
-            document.getElementById("uploadProposal").value = "Upload Doc for presentation"
+            document.getElementById("improveProposal").style.visibility = "visible";
+            document.getElementById("uploadProposal").value = "Upload Doc for presentation";
         }
     }
 

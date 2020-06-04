@@ -198,6 +198,7 @@ $(document).ready(function () {
                                     }
 
                                     if (role == 5) {
+                                        //add ref to update conf deets conf, change phase
                                         if (phase == 0) window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
                                         else if (phase == 1) window.location.href = "../unavailable/unavailable.html"; // change accounts.
                                         else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
