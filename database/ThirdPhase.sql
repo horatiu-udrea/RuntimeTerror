@@ -23,7 +23,6 @@ DELETE FROM conference;
 DELETE FROM reviews;
 DELETE FROM bidpapers;
 DELETE FROM papersubmissions;
-DELETE FROM usersectionchoices;
 DELETE FROM sections;
 DELETE FROM papers;
 DELETE FROM users;
@@ -32,19 +31,19 @@ ALTER TABLE papers AUTO_INCREMENT = 1;
 ALTER TABLE sections AUTO_INCREMENT = 1;
 
 /* The conference */
-INSERT INTO cms.conference (name, currentphase, startdate, enddate, submissiondeadline, proposaldeadline, biddingdeadline, submitpaperearly) VALUES ('Oracle Java One', 3, '2020-09-01 14:00:00', '2020-09-03 20:00:00', '2020-08-01 22:00:00', '2020-08-15 22:00:00', '2020-08-20 22:00:00', 1);
+INSERT INTO CMS.conference (name, currentphase, startdate, enddate, submissiondeadline, proposaldeadline, biddingdeadline, submitpaperearly) VALUES ('Oracle Java One', 3, '2020-09-01 14:00:00', '2020-09-03 20:00:00', '2020-08-01 22:00:00', '2020-08-15 22:00:00', '2020-08-20 22:00:00', 1);
 
 /*
 Steering committee members:
 -- One of them logged into their account and in their respective UI
 -- created the Conference
  */
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Jamil Zaitouny', 'Jamil99', 'Jamil99', 'ubb Cluj', 'JZ99@gmail.com', 'JZweb.com', 1, 5);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Horatiu Udrea', 'Hori99', 'Hori99', 'ubb Cluj', 'HI99@gmail.com', 'Horiweb.com', 1, 5);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Camelia Zalum', 'Cami99', 'Cami99', 'ubb Cluj', 'CI99@gmail.com', 'Camiweb.com', 1, 5);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Florin Ureche Undo', 'Undo99', 'Undo99', 'ubb Cluj', 'UO99@gmail.com', 'Undoweb.com', 1, 5);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Alina Zsok', 'Alina99', 'Alina99', 'ubb Cluj', 'AA99@gmail.com', 'Alinaweb.com', 1, 5);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Razvan Toma', 'Razvi99', 'Razvi99', 'ubb Cluj', 'RI99@gmail.com', 'Razviweb.com', 1, 5);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Jamil Zaitouny', 'Jamil99', 'Jamil99', 'ubb Cluj', 'JZ99@gmail.com', 'JZweb.com', 1, 5);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Horatiu Udrea', 'Hori99', 'Hori99', 'ubb Cluj', 'HI99@gmail.com', 'Horiweb.com', 1, 5);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Camelia Zalum', 'Cami99', 'Cami99', 'ubb Cluj', 'CI99@gmail.com', 'Camiweb.com', 1, 5);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Florin Ureche Undo', 'Undo99', 'Undo99', 'ubb Cluj', 'UO99@gmail.com', 'Undoweb.com', 1, 5);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Alina Zsok', 'Alina99', 'Alina99', 'ubb Cluj', 'AA99@gmail.com', 'Alinaweb.com', 1, 5);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Razvan Toma', 'Razvi99', 'Razvi99', 'ubb Cluj', 'RI99@gmail.com', 'Razviweb.com', 1, 5);
 
 
 /*
@@ -53,18 +52,18 @@ Program committee members:
 -- 1 Co chair
 -- 1 chair
  */
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad Ungureanu', 'Vlad99', 'Vlad99', 'ubb Cluj', 'VU99@gmail.com', 'Vladweb.com', 1, 2);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Razvan Zoltan', 'Zoli99', 'Zoli99', 'ubb Cluj', 'RZ99@gmail.com', 'Zoliweb.com', 1, 2);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei Suciu', 'Andrei99', 'Andrei99', 'ubb Cluj', 'AS99@gmail.com', 'Andreiweb.com', 1, 2);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei Andrei', 'Andreii99', 'Andreii99', 'ubb Cluj', 'AAA99@gmail.com', 'Andreiiweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad Ungureanu', 'Vlad99', 'Vlad99', 'ubb Cluj', 'VU99@gmail.com', 'Vladweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Razvan Zoltan', 'Zoli99', 'Zoli99', 'ubb Cluj', 'RZ99@gmail.com', 'Zoliweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei Suciu', 'Andrei99', 'Andrei99', 'ubb Cluj', 'AS99@gmail.com', 'Andreiweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei Andrei', 'Andreii99', 'Andreii99', 'ubb Cluj', 'AAA99@gmail.com', 'Andreiiweb.com', 1, 2);
 
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad ZUngureanu', 'ZVlad99', 'ZVlad99', 'ubb Cluj', 'ZVU99@gmail.com', 'Vladweb.com', 1, 2);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Razvan ZZoltan', 'ZZoli99', 'ZZoli99', 'ubb Cluj', 'ZRZ99@gmail.com', 'Zoliweb.com', 1, 2);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei ZSuciu', 'ZAndrei99', 'ZAndrei99', 'ubb Cluj', 'ZAS99@gmail.com', 'Andreiweb.com', 1, 2);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei ZAndrei', 'ZAndreii99', 'ZAndreii99', 'ubb Cluj', 'ZAA99@gmail.com', 'Andreiiweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad ZUngureanu', 'ZVlad99', 'ZVlad99', 'ubb Cluj', 'ZVU99@gmail.com', 'Vladweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Razvan ZZoltan', 'ZZoli99', 'ZZoli99', 'ubb Cluj', 'ZRZ99@gmail.com', 'Zoliweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei ZSuciu', 'ZAndrei99', 'ZAndrei99', 'ubb Cluj', 'ZAS99@gmail.com', 'Andreiweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei ZAndrei', 'ZAndreii99', 'ZAndreii99', 'ubb Cluj', 'ZAA99@gmail.com', 'Andreiiweb.com', 1, 2);
 
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Antoniu Stan', 'Toni99', 'Toni99', 'ubb Cluj', 'TS99@gmail.com', 'Toniweb.com', 1, 3);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Darius Ternovan', 'Darius99', 'Darius99', 'ubb Cluj', 'DT99@gmail.com', 'Dariusweb.com', 1, 4);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Antoniu Stan', 'Toni99', 'Toni99', 'ubb Cluj', 'TS99@gmail.com', 'Toniweb.com', 1, 3);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Darius Ternovan', 'Darius99', 'Darius99', 'ubb Cluj', 'DT99@gmail.com', 'Dariusweb.com', 1, 4);
 
 /*
 Authors:
@@ -76,36 +75,36 @@ Authors:
 -- (because we set the conference to be special and to allow the authors to submit the full paper early)
  */
 
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Mihai Berechet', 'Mihai99', 'Mihai99', 'Cambridge', 'MB99@gmail.com', 'Mihaiweb.com', 1, 1);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Corina Mihai', 'Corina99', 'Corina99', 'ubb Cluj', 'CM99@gmail.com', 'Corinaweb.com', 1, 1);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad Enache', 'VladE99', 'VladE99', 'poli Bucuresti', 'VE99@gmail.com', 'Vladeweb.com', 1, 1);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Ana Enache', 'Ana99', 'Ana99', 'ubb Cluj', 'AE99@gmail.com', 'Anaweb.com', 1, 1);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Diana Sirbu', 'Diana99', 'Diana99', '-', 'DS99@gmail.com', 'Dianaweb.com', 1, 1);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Bianca Berlea', 'Bianca99', 'Bianca99', 'poli Bucuresti', 'BB99@gmail.com', 'Biancaweb.com', 1, 1);
-INSERT INTO cms.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Bianca Caluian', 'BiancaC99', 'BiancaC99', 'ubb Cluj', 'BC99@gmail.com', 'BiancaCweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Mihai Berechet', 'Mihai99', 'Mihai99', 'Cambridge', 'MB99@gmail.com', 'Mihaiweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Corina Mihai', 'Corina99', 'Corina99', 'ubb Cluj', 'CM99@gmail.com', 'Corinaweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad Enache', 'VladE99', 'VladE99', 'poli Bucuresti', 'VE99@gmail.com', 'Vladeweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Ana Enache', 'Ana99', 'Ana99', 'ubb Cluj', 'AE99@gmail.com', 'Anaweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Diana Sirbu', 'Diana99', 'Diana99', '-', 'DS99@gmail.com', 'Dianaweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Bianca Berlea', 'Bianca99', 'Bianca99', 'poli Bucuresti', 'BB99@gmail.com', 'Biancaweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Bianca Caluian', 'BiancaC99', 'BiancaC99', 'ubb Cluj', 'BC99@gmail.com', 'BiancaCweb.com', 1, 1);
 
 /*
 Abstracts and Papers:
 -- 8 entries in the Papers and Papers submission table
 -- all of them will have the abstracts and the document path for the full paper
  */
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru medicina', 'medicinaAbstract', 'medicina', 'medicina, software', 'medicina Topic', 'mediPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('AiPaper', 'ITAbstract', 'ai', 'ai, artificial intelligence', 'ai Topic', 'aiPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru masini', 'masiniAbstract', 'masini', 'masini, software', 'masini Topic', 'masPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('MPPPaper', 'MPPAbstract', 'mpp', 'mpp, sdi', 'mpp Topic', 'mppPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('Fuzzy systems', 'fuzzyAbstract', 'fuzzy systems', 'fuzzy systems, fuzzy logic, software', 'fuzzy Topic', 'fuzzyPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('ISSPaper', 'ISSAbstract', 'iss', 'iss, software engineering', 'iss Topic', 'issPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('Car parking soft', 'carAbstract', 'software, cars, car', 'medicina, software', 'car Topic', 'carPaper.pdf', 1);
-INSERT INTO cms.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('WEBPaper', 'WEBAbstract', 'web', 'web, web programming', 'web Topic', 'webPaper.pdf', 1);
+INSERT INTO CMS.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru medicina', 'medicinaAbstract', 'medicina', 'medicina, software', 'medicina Topic', 'mediPaper.pdf', 1);
+INSERT INTO CMS.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('AiPaper', 'ITAbstract', 'ai', 'ai, artificial intelligence', 'ai Topic', 'aiPaper.pdf', 1);
+INSERT INTO CMS.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru masini', 'masiniAbstract', 'masini', 'masini, software', 'masini Topic', 'masPaper.pdf', 1);
+INSERT INTO CMS.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('MPPPaper', 'MPPAbstract', 'mpp', 'mpp, sdi', 'mpp Topic', 'mppPaper.pdf', 1);
+INSERT INTO CMS.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('Fuzzy systems', 'fuzzyAbstract', 'fuzzy systems', 'fuzzy systems, fuzzy logic, software', 'fuzzy Topic', 'fuzzyPaper.pdf', 1);
+INSERT INTO CMS.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('ISSPaper', 'ISSAbstract', 'iss', 'iss, software engineering', 'iss Topic', 'issPaper.pdf', 1);
+INSERT INTO CMS.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('Car parking soft', 'carAbstract', 'software, cars, car', 'medicina, software', 'car Topic', 'carPaper.pdf', 1);
+INSERT INTO CMS.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('WEBPaper', 'WEBAbstract', 'web', 'web, web programming', 'web Topic', 'webPaper.pdf', 1);
 
-INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (1, 22) ON DUPLICATE KEY UPDATE fk_userid = 22;
-INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (2, 23) ON DUPLICATE KEY UPDATE fk_userid = 23;
-INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (3, 21) ON DUPLICATE KEY UPDATE fk_userid = 21;
-INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (4, 20) ON DUPLICATE KEY UPDATE fk_userid = 20;
-INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (5, 19) ON DUPLICATE KEY UPDATE fk_userid = 19;
-INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (6, 18) ON DUPLICATE KEY UPDATE fk_userid = 18;
-INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (7, 17) ON DUPLICATE KEY UPDATE fk_userid = 17;
-INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (8, 11) ON DUPLICATE KEY UPDATE fk_userid = 11;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (1, 22) ON DUPLICATE KEY UPDATE fk_userid = 22;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (2, 23) ON DUPLICATE KEY UPDATE fk_userid = 23;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (3, 21) ON DUPLICATE KEY UPDATE fk_userid = 21;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (4, 20) ON DUPLICATE KEY UPDATE fk_userid = 20;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (5, 19) ON DUPLICATE KEY UPDATE fk_userid = 19;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (6, 18) ON DUPLICATE KEY UPDATE fk_userid = 18;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (7, 17) ON DUPLICATE KEY UPDATE fk_userid = 17;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (8, 11) ON DUPLICATE KEY UPDATE fk_userid = 11;
 
 
 /*
@@ -119,99 +118,99 @@ INSERT INTO cms.papersubmissions (fk_paperid, fk_userid) VALUES (8, 11) ON DUPLI
  -- For the seventh paper, 4 will bid "Pleased to review"/1, 4 "Indecisive"/2 and 0 "Refuse to Review"/3
  -- For the eighth paper, 8 will bid "Pleased to review"/1, 0 "Indecisive"/2 and 0 "Refuse to Review"/3
 
-SELECT paperbidresult one FROM cms.bidpapers WHERE fk_paperid=2;
-SELECT paperbidresult two FROM cms.bidpapers WHERE fk_paperid=4;
-SELECT paperbidresult three FROM cms.bidpapers WHERE fk_paperid=6;
-SELECT paperbidresult four FROM cms.bidpapers WHERE fk_paperid=8;
-SELECT paperbidresult five FROM cms.bidpapers WHERE fk_paperid=1;
-SELECT paperbidresult six FROM cms.bidpapers WHERE fk_paperid=3;
-SELECT paperbidresult seven FROM cms.bidpapers WHERE fk_paperid=5;
-SELECT paperbidresult eight FROM cms.bidpapers WHERE fk_paperid=7;
+SELECT paperbidresult one FROM CMS.bidpapers WHERE fk_paperid=2;
+SELECT paperbidresult two FROM CMS.bidpapers WHERE fk_paperid=4;
+SELECT paperbidresult three FROM CMS.bidpapers WHERE fk_paperid=6;
+SELECT paperbidresult four FROM CMS.bidpapers WHERE fk_paperid=8;
+SELECT paperbidresult five FROM CMS.bidpapers WHERE fk_paperid=1;
+SELECT paperbidresult six FROM CMS.bidpapers WHERE fk_paperid=3;
+SELECT paperbidresult seven FROM CMS.bidpapers WHERE fk_paperid=5;
+SELECT paperbidresult eight FROM CMS.bidpapers WHERE fk_paperid=7;
 
 
  */
 
 /* First reviewer all papers*/
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 2, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 4, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 6, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 8, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 1, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 3, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 5, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 2, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 4, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 6, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 8, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 1, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 3, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 5, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (7, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
 /* Second reviewer all papers*/
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 2, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 4, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 6, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 8, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 1, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 3, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 5, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 2, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 4, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 6, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 8, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 1, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 3, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 5, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (8, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
 /* Third reviewer all papers */
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 2, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 4, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 6, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 8, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 1, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 3, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 5, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 2, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 4, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 6, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 8, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 1, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 3, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 5, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (9, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
 /* Forth reviewer all papers*/
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 2, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 4, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 6, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 8, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 1, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 3, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 5, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 2, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 4, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 6, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 8, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 1, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 3, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 5, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (10, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
 
 /* Fifth reviewer all papers */
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 2, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 4, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 6, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 2, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 4, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 6, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
 
 /*
 -- 11 pc member that submitted paper 8
--- INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 8, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+-- INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 8, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
 */
 
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 1, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 3, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 5, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 1, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 3, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 5, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (11, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
 
 /* Sixth reviewer all papers */
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 2, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 4, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 6, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 8, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 1, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 3, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 5, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 2, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 4, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 6, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 8, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 1, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 3, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 5, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (12, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
 
 /* Seventh reviewer all papers */
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 2, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 4, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 6, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 8, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 1, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 3, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 5, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 2, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 4, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 6, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 8, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 1, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 3, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 5, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (13, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
 
 /* Eight reviewer all papers */
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 2, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 4, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 6, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 8, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 1, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 3, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 5, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
-INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 2, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 4, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 6, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 8, 2) ON DUPLICATE KEY UPDATE paperbidresult = 2;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 1, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 3, 3) ON DUPLICATE KEY UPDATE paperbidresult = 3;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 5, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
+INSERT INTO CMS.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 7, 1) ON DUPLICATE KEY UPDATE paperbidresult = 1;
 
 /*
  We have 8 PC members so if each paper has 2 reviewers (a convention only for this file) we can have 4 papers
@@ -223,29 +222,29 @@ INSERT INTO cms.bidpapers (fk_userid, fk_paperid, paperbidresult) VALUES (14, 7,
  -- For the fourth paper we will not have the reviewrs assigned yet
 
  Second scenario 2 papers are conflicting and 2 papers don't have any reviewers assigned yet
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (7, 2, 'meh', 1) ON DUPLICATE KEY UPDATE qualifier = 1;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (8, 2, 'git gud', 7) ON DUPLICATE KEY UPDATE qualifier = 7;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (9, 4, '', 6) ON DUPLICATE KEY UPDATE qualifier = 6;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (10, 4, 'do more research', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (7, 2, 'meh', 1) ON DUPLICATE KEY UPDATE qualifier = 1;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (8, 2, 'git gud', 7) ON DUPLICATE KEY UPDATE qualifier = 7;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (9, 4, '', 6) ON DUPLICATE KEY UPDATE qualifier = 6;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (10, 4, 'do more research', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
  */
 
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (7, 1, 'good job mate', 1) ON DUPLICATE KEY UPDATE qualifier = 1;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (8, 1, 'nooow this is a paper', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (7, 2, 'meh', 3) ON DUPLICATE KEY UPDATE qualifier = 3;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (8, 2, 'git gud', 4) ON DUPLICATE KEY UPDATE qualifier = 4;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (9, 3, 'meh', 3) ON DUPLICATE KEY UPDATE qualifier = 3;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (10, 3, 'do more research', 5) ON DUPLICATE KEY UPDATE qualifier = 5;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (9, 4, 'nice', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (10, 4, 'meh', 3) ON DUPLICATE KEY UPDATE qualifier = 3;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (7, 1, 'good job mate', 1) ON DUPLICATE KEY UPDATE qualifier = 1;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (8, 1, 'nooow this is a paper', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (7, 2, 'meh', 3) ON DUPLICATE KEY UPDATE qualifier = 3;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (8, 2, 'git gud', 4) ON DUPLICATE KEY UPDATE qualifier = 4;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (9, 3, 'meh', 3) ON DUPLICATE KEY UPDATE qualifier = 3;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (10, 3, 'do more research', 5) ON DUPLICATE KEY UPDATE qualifier = 5;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (9, 4, 'nice', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (10, 4, 'meh', 3) ON DUPLICATE KEY UPDATE qualifier = 3;
 
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (11, 5, 'bad', 5) ON DUPLICATE KEY UPDATE qualifier = 5;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (12, 5, 'bad', 5) ON DUPLICATE KEY UPDATE qualifier = 5;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (11, 6, 'bad', 5) ON DUPLICATE KEY UPDATE qualifier = 5;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (12, 6, 'really bad', 6) ON DUPLICATE KEY UPDATE qualifier = 6;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (13, 7, 'good', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (14, 7, 'nice', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (13, 8, 'good', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
-INSERT INTO cms.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (14, 8, 'nice', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (11, 5, 'bad', 5) ON DUPLICATE KEY UPDATE qualifier = 5;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (12, 5, 'bad', 5) ON DUPLICATE KEY UPDATE qualifier = 5;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (11, 6, 'bad', 5) ON DUPLICATE KEY UPDATE qualifier = 5;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (12, 6, 'really bad', 6) ON DUPLICATE KEY UPDATE qualifier = 6;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (13, 7, 'good', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (14, 7, 'nice', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (13, 8, 'good', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
+INSERT INTO CMS.reviews (fk_userid, fk_paperid, recommandation, qualifier) VALUES (14, 8, 'nice', 2) ON DUPLICATE KEY UPDATE qualifier = 2;
 
 
 
@@ -269,37 +268,8 @@ UPDATE papers SET status = 2 WHERE pk_paperid = 8;
 -- all the users will specify the sections that they would like to attend and based on that the room name
 -- will be assigned
  */
-INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (7, 22, 1, 'MedSec', 'med.pptx', '2020-09-01 16:00:00', '2020-09-01 18:00:00', '');
-INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (8, 23, 2, 'AISec', 'ai.pptx', '2020-09-02 12:00:00', '2020-09-02 20:00:00', '');
-INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (9, 20, 4, 'MPPSec', 'mpp.pptx', '2020-09-01 16:00:00', '2020-09-01 20:00:00', '');
-INSERT INTO cms.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (10, 17, 7, 'CarSec', 'car.pptx', '2020-09-03 12:00:00', '2020-09-03 18:00:00', '');
+INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (7, 22, 1, 'MedSec', 'med.pptx', '2020-09-01 16:00:00', '2020-09-01 18:00:00', '');
+INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (8, 23, 2, 'AISec', 'ai.pptx', '2020-09-02 12:00:00', '2020-09-02 20:00:00', '');
+INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (9, 20, 4, 'MPPSec', 'mpp.pptx', '2020-09-01 16:00:00', '2020-09-01 20:00:00', '');
+INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (10, 17, 7, 'CarSec', 'car.pptx', '2020-09-03 12:00:00', '2020-09-03 18:00:00', '');
 
-/*
--- Now that all the sections are created we need to make all the users select the section they would like to attend
- */
-
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (1, 7);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (2, 8);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (3, 9);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (4, 10);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (1, 12);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (2, 13);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (2, 14);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (3, 15);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (3, 16);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (1, 17);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (2, 18);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (3, 19);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (4, 20);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (1, 22);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (2, 23);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (3, 14);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (4, 15);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (4, 16);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (2, 7);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (3, 8);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (4, 9);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (4, 11);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (2, 12);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (3, 13);
-INSERT INTO cms.usersectionchoices (fk_sectionid, fk_userid) VALUES (4, 14);
