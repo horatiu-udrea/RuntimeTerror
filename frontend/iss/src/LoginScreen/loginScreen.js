@@ -200,17 +200,17 @@ $(document).ready(function () {
                                     if (role == 5) {
                                         if (phase == 0) callAlert("Change Conference details or pick pc members?", "Change details", "Pick members", 
                                             function () {
-                                                window.location.href = "../ConferenceScreens/changeDate.html";
+                                                window.location.href = "../ConferenceScreens/createConference.html";
                                             },
                                             function () {
                                                 window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
                                             }
                                         );
-                                        else if (phase == 1) window.location.href = "../ConferenceScreens/changeDate.html";
-                                        else if (phase == 2) window.location.href = "../ConferenceScreens/changeDate.html";
+                                        else if (phase == 1) window.location.href = "../ConferenceScreens/createConference.html";
+                                        else if (phase == 2) window.location.href = "../ConferenceScreens/createConference.html";
                                         else if (phase == 3) callAlert("Change Conference details or create sections?", "Change details", "Pick members", 
                                             function () {
-                                                window.location.href = "../ConferenceScreens/changeDate.html";
+                                                window.location.href = "../ConferenceScreens/createConference.html";
                                             },
                                             function () {
                                                 window.location.href = "../CreateSection/createSection.html";
