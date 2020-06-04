@@ -170,7 +170,6 @@ $(document).ready(function () {
                                                     if (today < bidDate) window.location.href = "../BiddingScreen/biddingScreen.html";
                                                     else window.location.href = "../ReviewingScreen/reviewingScreen.html";
                                                 }
-                                                else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
                                                 else window.location.href = "../unavailable/unavailable.html";
                                             }
                                         );
@@ -188,14 +187,12 @@ $(document).ready(function () {
                                                 }
                                             );
                                         }
-                                        else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
                                         else window.location.href = "../unavailable/unavailable.html";
                                     } 
 
                                     if (role == 4) {
                                         if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
                                         else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
                                         else window.location.href =  "../unavailable/unavailable.html";
                                     }
 
