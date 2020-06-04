@@ -69,7 +69,7 @@ $(document).ready(function () {
         formedRecomm += "</dl>";
         document.getElementById("PaperReviews").innerHTML = formedRecomm;
     }
-    $("#uploadPaper").click(function () {
+    $("#submitProposal").click(function () {
         $.ajax({
             type: "PUT",
             url: HOST + PORT + "/paper",
@@ -130,7 +130,22 @@ $(document).ready(function () {
             }
         });
     });
-
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
+           
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
+    });
 });
 
     // console.log(window.localStorage.getItem("selectedProposal"));

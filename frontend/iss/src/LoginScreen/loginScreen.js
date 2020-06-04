@@ -206,7 +206,7 @@ $(document).ready(function () {
                                     }
 
                                 } else {
-                                    alert("Can not gat conference details");
+                                    alert("Can not get conference details");
                                 }
                             },
 
