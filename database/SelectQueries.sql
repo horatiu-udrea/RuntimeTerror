@@ -5,7 +5,7 @@ Useful select queries
 /*
 Select the name and submit paper early as text
 */
-SELECT currentphase, name,
+SELECT currentphase AS CurrentPhase, name AS ConferenceName,
        IF(submitpaperearly = 0, 'Authors cannot upload their full paper with their paper abstract.',
           'Authors can upload their full paper with their paper abstract.') AS ConferenceType
 FROM conference;
@@ -13,7 +13,7 @@ FROM conference;
 /*
 Select everything from the bidpapers table and display besides the user id, the username, password and type
 */
-SELECT U.username, p.name AS PaperName,
+SELECT U.username AS Username, p.name AS PaperName,
 CASE
     WHEN paperbidresult = 1 THEN 'Pleased to Review'
     WHEN paperbidresult = 2 THEN 'Indecisive'
@@ -39,14 +39,14 @@ FROM papers;
 /*
 Select username and paper name from the paper submissions table
 */
-SELECT username, p.name AS PaperName FROM papersubmissions
+SELECT username AS Username, p.name AS PaperName FROM papersubmissions
 INNER JOIN users ON papersubmissions.fk_userid = users.pk_userid
 INNER JOIN papers p on papersubmissions.fk_paperid = p.pk_paperid;
 
 /*
 Select username, paper and qualifier
 */
-SELECT username, p.name AS PaperName,
+SELECT username AS Username, p.name AS PaperName,
 CASE
     WHEN qualifier = 0 THEN 'Not Yet Reviewed'
     WHEN qualifier = 1 THEN 'Strong Accept'
@@ -70,7 +70,6 @@ INNER JOIN users u on sections.fk_userid = u.pk_userid
 INNER JOIN papers p on sections.fk_paperid = p.pk_paperid
 INNER JOIN users a on sections.fk_sessionchair = a.pk_userid;
 
-
 /*
 Select the name, username and password for certain actors
 -- 1 - Author
@@ -79,12 +78,12 @@ Select the name, username and password for certain actors
 -- 4 - Chair
 -- 5 - Steering Committee
 */
-SELECT name, username, password,
+SELECT name AS Name, username AS Username, password AS Password,
 CASE
     WHEN type = 1 THEN 'Author'
     WHEN type = 2 THEN 'Program Committee'
     WHEN type = 3 THEN 'Co Chair'
     WHEN type = 4 THEN 'Chair'
     WHEN type = 5 THEN 'Steering Committee'
-END AS type
+END AS Type
 FROM users;
