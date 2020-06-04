@@ -1,5 +1,13 @@
 import { HOST, PORT } from "../Globuls.js"
-
+$.ajaxSetup({
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    }
+});
+// change screens and put enabeling buttons
+// phase1 : submit, improve
+// phase2 : ... diagrama http trello
 $(document).ready(function () {
     let authors = []
     $("#addMoreAuthors").click(function () {

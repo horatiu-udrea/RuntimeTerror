@@ -5,7 +5,9 @@ $.ajaxSetup({
         withCredentials: true
     }
 });
-
+// change to ph3: upload presentation ( new stuff ) iff has section + section details
+// change to ph1: abstract(description) + paper(pdf)
+// ph2 = ph1 + see reviews ( no reviews = no improve )
 $(document).ready(function () {
 
     let data = []
@@ -40,11 +42,12 @@ $(document).ready(function () {
             if (dataPapers.statusText == "OK") {
                 dataPapers.responseJSON.forEach(element => {
 
-                    recommendations.push({from: element.name, rec: element.recommendation, mark: element.qualifier });
+                    recommendations.push({ from: element.name, rec: element.recommendation, mark: element.qualifier });
 
                 });
             } else {
                 alert("can not get reviews for this author");
+                window.location = "./authorImproveAndUpdate.html";
             }
 
             addRecommendations();
@@ -54,9 +57,10 @@ $(document).ready(function () {
         let formedRecomm = "<dl>";
         recommendations.forEach(element => {
             let recommendat = "";
-            if(element.rec == "") {
+            if (element.rec == "") {
                 recommendat = "No recommandation "
-            }else {
+                window.location = "./authorImproveAndUpdate.html";
+            } else {
                 recommendat = element.rec
             }
             formedRecomm += "<dt>" + recommendat + "</dt><dd>@From " + element.from + "-> " + element.mark + "</dt>";
@@ -65,7 +69,25 @@ $(document).ready(function () {
         formedRecomm += "</dl>";
         document.getElementById("PaperReviews").innerHTML = formedRecomm;
     }
+    $("#uploadPaper").click(function () {
+        $.ajax({
+            type: "PUT",
+            url: HOST + PORT + "/paper",
+            contentType: "application/json",
+            data: JSON.stringify({
+                paperId:localStorage.getItem("selectedProposal"),
+                abstract: $('#proposalDescription').val()
+            }),
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    alert("improval was successfully done");
 
+                } else {
+                    alert("fail");
+                }
+            }
+        })
+    });
     function addItem(paper) {
         let name = paper.name;
         let field = paper.field;

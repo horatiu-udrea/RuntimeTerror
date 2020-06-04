@@ -9,6 +9,7 @@ $.ajaxSetup({
 
 {
     let list = []
+    let membersTypes= {0:"listener" , 1:"author", 2:"pc member", 3:"co chair", 4:"chair", 5:"pc member"}
 
     function fillList() {
         $.ajax({

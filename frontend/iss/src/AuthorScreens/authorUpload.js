@@ -1,5 +1,4 @@
 import { HOST, PORT } from "../Globuls.js"
-
 $.ajaxSetup({
     crossDomain: true,
     xhrFields: {
@@ -51,25 +50,74 @@ $(document).ready(function () {
         document.getElementById("PaperDetails").innerHTML = toBePrinted;
 
     }
-    $("#uploadPaper").click(function () {
-      var form = $("#Upload")[0];
-      var files = new FormData(form);
+    console.log(localStorage.getItem("phase"));
+    if (localStorage.getItem("phase") == 3) {
+        console.log("some stuff")
         $.ajax({
-            type: "PUT",
-            enctype: 'multipart/form-data',
-            processData: false,  // Important!
-            contentType: false,
-            cache: false,
-            url: HOST + PORT + "/paper/full/" +  window.localStorage.getItem("selectedProposal"),
-            data: files,
+            type: "GET",
+            contentType: "application/json",
+            url: HOST + PORT + "/section/details",
+            dataType: "json",
+
             complete: function (dataPapers, statusText) {
-                if(dataPapers.statusText == "OK"){
-                    alert("the files was uploaded");
+                console.log(dataPapers);
+                if (dataPapers.statusText == "OK") {
+                    let toWrite = " Name of the Section : " + dataPapers.responseJSON.name + "<br>" +
+                        "Start time: " + dataPapers.responseJSON.startTime +
+                        "<br>End time: " + dataPapers.responseJSON.endTime +
+                        "<br>Room name : " + dataPapers.responseJSON.roomName + "<br><br>";
+
+                    document.getElementById("SectionDetails").innerHTML = toWrite;
                 } else {
-                    alert("an error ocurred when uploading");
+                    alert("Sorry, this proposal was not selected");
+                    window.location = "./authorImproveAndUpdate";
+
                 }
             }
         });
+    }
+    $("#uploadPaper").click(function () {
+        var form = $("#Upload")[0];
+        var files = new FormData(form);
+        if (localStorage.getItem("phase") == 2) {
+
+
+            $.ajax({
+                type: "PUT",
+                enctype: 'multipart/form-data',
+                processData: false,  // Important!
+                contentType: false,
+                cache: false,
+                url: HOST + PORT + "/paper/full/" + window.localStorage.getItem("selectedProposal"),
+                data: files,
+                complete: function (dataPapers, statusText) {
+                    if (dataPapers.statusText == "OK") {
+                        alert("the files was uploaded");
+                    } else {
+                        alert("an error ocurred when uploading");
+                    }
+                }
+            });
+        } else {
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                processData: false,  // Important!
+                contentType: false,
+                cache: false,
+                url: HOST + PORT + "/section/presentation",
+                data: files,
+                complete: function (dataPapers, statusText) {
+                    if (dataPapers.statusText == "OK") {
+                        alert("the files was uploaded");
+                    } else {
+                        alert("an error ocurred when uploading");
+                    }
+                }
+            });
+        }
+
     });
 
 });

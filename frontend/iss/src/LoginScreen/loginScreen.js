@@ -142,7 +142,7 @@ $(document).ready(function () {
                                     bidDate = new Date(split[2]+"-"+split[1]+"-"+split[0]);
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
-
+                                    localStorage.setItem("phase", phase);
                                     if (role == 0) {
                                         if (phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
                                         else if (phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
@@ -159,7 +159,8 @@ $(document).ready(function () {
 
                                     if (role == 2) {
                                         callAlert("What would you like to log in as?", "Author", "PcMember", function () {
-                                            if (phase == 1) window.location = "../AuthorScreens/authorSubmit.html";
+                                            
+                                            if (phase == 1) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                             else if (phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                             else if (phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                             else window.location = "../unavailable/unavailable.html";
@@ -168,12 +169,13 @@ $(document).ready(function () {
                                                 if (phase == 2) {
                                                     if (today < bidDate) window.location.href = "../BiddingScreen/biddingScreen.html";
                                                     else window.location.href = "../ReviewingScreen/reviewingScreen.html";
+                                                    // modify grades
                                                 }
                                                 else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
                                                 else window.location.href = "../unavailable/unavailable.html";
                                             });
                                     }
-
+// oricine cu role > 3 poate schimba datele
                                     if (role == 3) {
                                         if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
                                         else if (phase == 2) {
@@ -186,7 +188,7 @@ $(document).ready(function () {
                                         }
                                         else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
                                         else window.location.href = "../unavailable/unavailable.html";
-                                    } //TODO Pune conflicting discussion la co-chair si chair in phase 2
+                                    }
 
                                     if (role == 4) {
                                         if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
@@ -197,7 +199,7 @@ $(document).ready(function () {
 
                                     if (role == 5) {
                                         if (phase == 0) window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
-                                        else if (phase == 1) window.location.href = "../unavailable/unavailable.html";
+                                        else if (phase == 1) window.location.href = "../unavailable/unavailable.html"; // change accounts.
                                         else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
                                         else if (phase == 3) window.location.href = "../CreateSection/createSection.html";
                                         else window.location.href = "../unavailable/unavailable.html";

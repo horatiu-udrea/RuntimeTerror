@@ -8,6 +8,15 @@ $.ajaxSetup({
 });
 
 $(document).ready(function () {
+    let phase = localStorage.getItem("phase");
+    if (phase == 1){
+        document.getElementById("improveProposal").style.visibility = "hidden";
+    }else {
+        document.getElementById("addProposal").style.visibility = "hidden";
+        if(phase == 3){
+            document.getElementById("improveProposal").style.visibility = "hidden";
+        }
+    }
 
     $.ajax({
         type: "GET",
