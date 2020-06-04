@@ -143,12 +143,6 @@ $(document).ready(function () {
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
                                     localStorage.setItem("phase", phase);
-                                    if (role == 0) {
-                                        if (phase == 1) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                        else if (phase == 2) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                        else if (phase == 3) window.location.assign("../BuyTicket_UnderConstruction/buyTicket.html");
-                                        else window.location.href = "../unavailable/unavailable.html";
-                                    }
 
                                     if (role == 1) {
                                         if (phase == 1) window.location = "../AuthorScreens/authorSubmit.html";
