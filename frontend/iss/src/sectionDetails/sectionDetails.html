@@ -4,6 +4,9 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        Create Section
+    </title>
     <style>
         * {
             box-sizing: border-box
@@ -176,12 +179,12 @@
 
                         info.push({
                             id: element.sectionId, value: ("Name " + element.name +
-                                "<br>Session Chair name " + element.sessionChairName +
-                                "<br>Presenter Name " + element.userId +
+                                "<br>Session Chair name " + element.sessionChair +
+                                "<br>Presenter Name " + element.user +
                                 "<br> Start time " + element.startTime +
                                 "<br> End Time " + element.endTime +
                                 "<br> Room Name " + element.roomName +
-                                + "<br>")
+                                + "<br>") // add paper
                         })
                     });
                 }

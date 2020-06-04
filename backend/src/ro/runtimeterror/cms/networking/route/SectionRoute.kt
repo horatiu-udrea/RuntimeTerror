@@ -5,29 +5,26 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
+import org.jetbrains.exposed.sql.exposedLogger
 import org.joda.time.LocalDateTime
 import ro.runtimeterror.cms.controller.SectionController
 import ro.runtimeterror.cms.model.UserType
 import ro.runtimeterror.cms.networking.authorize
 import ro.runtimeterror.cms.networking.dto.CreateSectionDTO
-import ro.runtimeterror.cms.networking.dto.SectionDTO
 import ro.runtimeterror.cms.networking.dto.dateTimeFormatter
 import ro.runtimeterror.cms.networking.dto.toDTO
 import ro.runtimeterror.cms.networking.uploadFile
 import ro.runtimeterror.cms.networking.userSession
-import kotlin.math.absoluteValue
 
 data class SectionId(val sectionId: Int)
 data class SectionChairChoice(val sectionId: Int, val userId: Int)
 data class SectionPresenterChoice(val userId: Int, val paperId: Int, val sectionId: Int)
 data class SectionRoomName(val sectionId: Int, val roomName: String)
 
-fun Route.sectionRoute(sectionController: SectionController)
-{
+fun Route.sectionRoute(sectionController: SectionController) {
     route("/section") {
 
         get { // Get all sections
-           authorize(UserType.AUTHOR)
             val sections = sectionController.getAllSections()
             call.respond(sections.map { section -> section.toDTO() })
         }
@@ -35,6 +32,7 @@ fun Route.sectionRoute(sectionController: SectionController)
         put("/choice") {
             // Choose section
             authorize(UserType.AUTHOR)
+            exposedLogger.trace("Deprecated API")
             val user = userSession()
             val sectionIdDTO = call.receive<SectionId>()
             sectionController.userSectionChoice(user.id, sectionIdDTO.sectionId)
@@ -43,11 +41,15 @@ fun Route.sectionRoute(sectionController: SectionController)
 
         put { // Create section
             authorize(UserType.ADMIN)
-            val (name, startTime, endTime) = call.receive<CreateSectionDTO>()
+            val (sessionChairId, userId, name, startTime, endTime, roomName, paperId) = call.receive<CreateSectionDTO>()
             sectionController.createSection(
-                name,
-                LocalDateTime.parse(startTime, dateTimeFormatter),
-                LocalDateTime.parse(endTime, dateTimeFormatter)
+                    sessionChairId,
+                    userId,
+                    name,
+                    LocalDateTime.parse(startTime, dateTimeFormatter),
+                    LocalDateTime.parse(endTime, dateTimeFormatter),
+                    roomName,
+                    paperId
             )
             call.respond(HttpStatusCode.OK)
         }
@@ -76,7 +78,7 @@ fun Route.sectionRoute(sectionController: SectionController)
         }
 
         get("/details") { // Get presentation details
-            //authorize(UserType.AUTHOR) this guy can also be a PC member that logs in as author.
+            authorize(UserType.AUTHOR)
             val user = userSession()
             val section = sectionController.getSectionDetails(user.id)
             if (section == null) call.respond(HttpStatusCode.NotFound)

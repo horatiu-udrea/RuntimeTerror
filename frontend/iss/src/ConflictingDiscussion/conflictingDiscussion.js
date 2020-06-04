@@ -39,7 +39,7 @@ $(document).ready(function () {
         }
     });
 
-
+// dont show conflicts, show all - let decision to be accept/ reject/ conflict
 
     function addDetailOnPaper(id) {
 
@@ -140,7 +140,24 @@ $(document).ready(function () {
             }
         });
     });
-
+    $("#conflict").click(function () {
+        $.ajax({
+            type: "PUT",
+            contentType: "application/json",
+            url: HOST + PORT + "/paper/decision",
+            dataType: "json",
+            data: JSON.stringify({ paperId: localStorage.getItem("selectedProposal"), status: 4 }),
+            complete: function (dataPapers, statusText) {
+                if (dataPapers.statusText == "OK") {
+                    location.reload();
+                    alert("this paper was rejected");
+                }
+                else {
+                    alert("you can not decide on this one");
+                }
+            }
+        });
+    });
     let previousID = -1;
     function keepInStore(title) {
         window.localStorage.setItem("selectedProposal", title);
@@ -150,17 +167,20 @@ $(document).ready(function () {
             document.getElementById(previousID).style = "font-family:'Times New Roman'; font-size:12px; color:black"
             document.getElementById("accept").style.visibility = "hidden";
             document.getElementById("reject").style.visibility = "hidden";
+            document.getElementById("conflict").style.visibility = "hidden";
             document.getElementById("paperDetails").innerHTML = "";
         } catch {
             console.log("nothing to undo");
             document.getElementById("accept").style.visibility = "hidden";
             document.getElementById("reject").style.visibility = "hidden";
+            document.getElementById("conflict").style.visibility = "hidden";
             document.getElementById("paperDetails").innerHTML = "";
         }
         if (event.target && event.target.getAttribute("class") == "proposalTitle") {
             document.getElementById(event.target.id).style = "font-family:'Courier New'; font-size:30px; color:blue"
             document.getElementById("accept").style.visibility = "visible";
             document.getElementById("reject").style.visibility = "visible";
+            document.getElementById("conflict").style.visibility = "visible";
             keepInStore(event.target.id);
             addDetailOnPaper(event.target.id);
             previousID = event.target.id;

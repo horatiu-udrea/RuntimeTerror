@@ -1,22 +1,21 @@
 package ro.runtimeterror.cms.controller
 
-import org.jetbrains.exposed.dao.load
-import org.jetbrains.exposed.dao.with
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.update
 import org.joda.time.LocalDateTime
 import ro.runtimeterror.cms.database.DatabaseSettings.connection
 import ro.runtimeterror.cms.database.daos.SectionDAO
 import ro.runtimeterror.cms.database.daos.UserDAO
-import ro.runtimeterror.cms.database.tables.ReviewTable
-import ro.runtimeterror.cms.database.tables.SectionTable
-import ro.runtimeterror.cms.database.tables.UserSectionChoiceTable
-import ro.runtimeterror.cms.database.tables.UserTable
+import ro.runtimeterror.cms.database.tables.*
 import ro.runtimeterror.cms.exceptions.NoSectionException
 import ro.runtimeterror.cms.model.Qualifier
 import ro.runtimeterror.cms.model.Section
 import ro.runtimeterror.cms.model.UserReview
 import ro.runtimeterror.cms.model.UserType
+import ro.runtimeterror.cms.model.validators.UserSectionValidator
 
 class SectionController {
     /**
@@ -24,9 +23,9 @@ class SectionController {
      */
     fun getSectionDetails(userId: Int): Section? = transaction(connection) {
         return@transaction SectionTable
-            .select { SectionTable.userId eq userId }
-            .map { SectionDAO.findById(it[SectionTable.id]) }
-            .firstOrNull()
+                .select { SectionTable.userId eq userId }
+                .map { SectionDAO.findById(it[SectionTable.id]) }
+                .firstOrNull()
     }
 
     /**
@@ -34,18 +33,30 @@ class SectionController {
      */
     fun uploadPresentation(userId: Int, path: String) = transaction(connection) {
         SectionTable
-            .update({ SectionTable.userId eq userId }) {
-                it[presentationDocumentPath] = path
-            }
+                .update({ SectionTable.userId eq userId }) {
+                    it[presentationDocumentPath] = path
+                }
     }
 
     /**
      * Get all sections of the conference
      */
     fun getAllSections(): List<Section> = transaction(connection) {
-        return@transaction SectionDAO
-            .all()
-            .toList()
+        val sections = SectionDAO
+                .all()
+                .toList()
+        sections.forEach { section ->
+            section.user = UserTable.slice(UserTable.name)
+                    .select { UserTable.id eq section.userId }
+                    .single()[UserTable.name]
+            section.sessionChair = UserTable.slice(UserTable.name)
+                    .select { UserTable.id eq section.sessionChairId }
+                    .single()[UserTable.name]
+            section.paper = PaperTable.slice(PaperTable.name)
+                    .select { PaperTable.id eq section.paperId }
+                    .single()[PaperTable.name]
+        }
+        return@transaction sections
     }
 
 
@@ -53,7 +64,7 @@ class SectionController {
      * User chose to participate in this section
      */
     fun userSectionChoice(userId: Int, sectionId: Int) = transaction(connection) {
-        //TODO check if this already exists
+        UserSectionValidator.exists(userId, sectionId)
         UserSectionChoiceTable.insert {
             it[userID] = userId
             it[sectionID] = sectionId
@@ -63,16 +74,16 @@ class SectionController {
     /**
      * Create a section
      */
-    fun createSection(name: String, startTime: LocalDateTime, endTime: LocalDateTime) = transaction(connection) {
+    fun createSection(sessionChairId: Int, userId: Int, name: String, startTime: LocalDateTime, endTime: LocalDateTime, roomName: String, paperId: Int) = transaction(connection) {
         SectionDAO.new {
-            this@new.roomName = ""
-            this@new.user = null
-            this@new.paperId = null
+            this@new.roomName = roomName
+            this@new.userId = userId
+            this@new.paperId = paperId
             this@new.name = name
             this@new.startTime = startTime.toDateTime()
             this@new.endTime = endTime.toDateTime()
             this@new.presentationDocumentPath = ""
-            this@new.sessionChair = null
+            this@new.sessionChairId = sessionChairId
         }
     }
 
@@ -81,7 +92,7 @@ class SectionController {
      */
     fun chooseSectionChair(sectionId: Int, userId: Int) = transaction(connection) {
         SectionTable.update({ SectionTable.id eq sectionId }) {
-            it[SectionTable.sessionChair] = userId
+            it[sessionChair] = userId
         }
     }
 
@@ -90,10 +101,10 @@ class SectionController {
      */
     fun chooseSectionPresenter(userId: Int, paperId: Int, sectionId: Int) = transaction(connection) {
         SectionTable
-            .update({ SectionTable.id eq sectionId }) {
-                it[SectionTable.paperId] = paperId
-                it[SectionTable.userId] = userId
-            }
+                .update({ SectionTable.id eq sectionId }) {
+                    it[SectionTable.paperId] = paperId
+                    it[SectionTable.userId] = userId
+                }
     }
 
     /**
@@ -115,32 +126,33 @@ class SectionController {
             return@transaction emptyList()
         }
         return@transaction SectionTable
-            .select { SectionTable.userId eq userId }
-            //Gets the paperID of the papers that the user is presenting
-            .mapNotNull { it[SectionTable.paperId] }
-            //Gets the reviews of the paper that the user is presenting (In our program every user only has one paper to review)
-            .map { paperID ->
-                ReviewTable
-                    .select { ReviewTable.paperID eq paperID }
-                    .map {
-                        UserReview(UserDAO
-                            .wrapRow(
-                                UserTable
-                                    .selectAll()
-                                    .first { user -> user[UserTable.id].value == it[ReviewTable.userID] }
-                            )
-                            , it[ReviewTable.recommandation]
-                            , Qualifier.from(it[ReviewTable.qualifier]))
-                    }
-            }
-            .toList()
-            .firstOrNull() ?: throw NoSectionException("The user is not assigned to any section")
+                .select { SectionTable.userId eq userId }
+                //Gets the paperID of the papers that the user is presenting
+                .mapNotNull { it[SectionTable.paperId] }
+                //Gets the reviews of the paper that the user is presenting (In our program every user only has one paper to review)
+                .map { paperID ->
+                    ReviewTable
+                            .select { ReviewTable.paperID eq paperID }
+                            .map {
+                                UserReview(UserDAO
+                                        .wrapRow(
+                                                UserTable
+                                                        .selectAll()
+                                                        .first { user -> user[UserTable.id].value == it[ReviewTable.userID] }
+                                        )
+                                        , it[ReviewTable.recommandation]
+                                        , Qualifier.from(it[ReviewTable.qualifier]))
+                            }
+                }
+                .toList()
+                .firstOrNull()
+                ?: throw NoSectionException("The user is not assigned to any section")
     }
 
     private fun isPcMember(userId: Int): Boolean = transaction(connection) {
         return@transaction UserTable
-            .select { UserTable.id eq userId }
-            .filter { it[UserTable.type] == UserType.PC_MEMBER.value }
-            .isNotEmpty()
+                .select { UserTable.id eq userId }
+                .filter { it[UserTable.type] == UserType.PC_MEMBER.value }
+                .isNotEmpty()
     }
 }

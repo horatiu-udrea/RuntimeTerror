@@ -49,21 +49,36 @@ $(document).ready(function () {
     });
 
 
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
 
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
+    });
 
     $("#changeDateConference").click(function () {
 
-        if($("#changeConferenceSubmissionsDeadline").val() != ""){
+        if ($("#changeConferenceSubmissionsDeadline").val() != "") {
             let submisstion = $("#changeConferenceSubmissionsDeadline").val().replace(/-/g, "/").split("/").reverse();
             submisstiondeadline = submisstion[0] + "/" + submisstion[1] + "/" + submisstion[2];
-        } 
-        if($("#changeConferenceProposalsDeadline").val() != ""){
+        }
+        if ($("#changeConferenceProposalsDeadline").val() != "") {
             let proposal = $("#changeConferenceProposalsDeadline").val().replace(/-/g, "/").split("/").reverse();
             proposalDeadline = proposal[0] + "/" + proposal[1] + "/" + proposal[2];
         }
-        if($("#changeConferenceBiddingDeadline").val() != "") {
+        if ($("#changeConferenceBiddingDeadline").val() != "") {
             let bidding = $("#changeConferenceBiddingDeadline").val().replace(/-/g, "/").split("/").reverse();
-            biddingDeaedline =  bidding[0] + "/" + bidding[1] + "/" + bidding[2];
+            biddingDeaedline = bidding[0] + "/" + bidding[1] + "/" + bidding[2];
         }
         //Andu added some shit here, sowwy.
         if($("#phaseSelect").children("option:selected").val() != "Phase") {
@@ -80,14 +95,14 @@ $(document).ready(function () {
             dataType: "json",
             data: JSON.stringify({
                 name: name,
-                currentPhase:phase,
+                currentPhase: phase,
                 startDate: startDate,
-                endDate:endDate,
+                endDate: endDate,
                 submissionDeadline: submisstiondeadline,
                 proposalDeadline: proposalDeadline,
                 biddingDeadline: biddingDeaedline,
                 submitPaperEarly: submitEarly
-                
+
             }),
             complete: function (data) {
                 if (data.statusText == "OK") {

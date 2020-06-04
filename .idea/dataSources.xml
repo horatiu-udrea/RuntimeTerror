@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="cms@localhost" uuid="48bc8f0a-ccf9-407b-9126-18f22723aa91">
+    <data-source source="LOCAL" name="MySQL@localhost" uuid="45a192e9-2ad8-4ff9-8fef-5a1247dc1f9b">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/cms</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="cms@localhost [2]" uuid="413a7181-0c5b-479c-8628-fd736a87538c">
-      <driver-ref>mysql.8</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/cms</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/CMS</jdbc-url>
     </data-source>
   </component>
 </project>
