@@ -17,11 +17,11 @@ let webpackConfig = {
         path: path.resolve(__dirname, ""),
     },
     resolve: {
-        extensions: ['.js', '.ts']
+        extensions: ['.js', '.ts', '.css']
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: '.\\dist\\index.html'
+            template: '.\\index.html'
         }),
         new WriteFilePlugin(),
         new wpack.ProvidePlugin({

@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="detailsScreen.js" type="module"></script>
+        <link rel="stylesheet" href="detailsScreen.css">
+    </head>
+    <body>
+
+        <video id="topVid" autoplay loop>
+            <source src="resources/topSide.mp4" type="video/mp4">
+        </video>
+        <video id="middleVid" autoplay loop>
+            <source src="resources/rightSide.mp4" type="video/mp4">
+        </video>
+        <video id="bottomVid" autoplay loop>
+            <source src="resources/bottomSide.mp4" type="video/mp4">
+        </video>
+
+        <h1><a id="link" href="../src/LoginScreen/loginScreen.html"> Get Involved </a></h1>
+        <div id="dimmer"></div>
+        <div id="contentContainer">
+            <label id="title" style="left: 5%;">Currently</label>
+            <label id="name" class="content" style="top:15%; left:10%">Start Date: </label>
+            <label id="dates" class="content" style="top:90%; left:50%; transform:translateX(-50%);">Dates</label>
+            <a href="./src/sectionDetails/sectionDetails.html" id="sectionDetails">See sections details</a>
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
