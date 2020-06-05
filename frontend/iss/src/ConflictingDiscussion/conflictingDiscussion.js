@@ -21,12 +21,12 @@ $(document).ready(function () {
                     alert("no papers to be shown");
                 } else {
                     dataPapers.responseJSON.forEach(element => {
-                        if (element.status == 4) {
+                        
                             data.push(element);
-                        }
+                        
                     });
                     if (data.length == 0) {
-                        alert("there are no conflicting papers");
+                        alert("there are no  papers to be shown");
                     } else {
                         console.log(data);
                         addAllProposals(data);

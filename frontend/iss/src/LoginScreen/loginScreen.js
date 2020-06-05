@@ -111,7 +111,7 @@ $(document).ready(function () {
             if (error.statusText == "OK") {
                 donePost(error);
             }
-            alert("failed");
+            alert("Could Not Login");
         };
         function donePost(data) {
             // alert("done");
@@ -172,7 +172,7 @@ $(document).ready(function () {
                                     if (role == 3) {
                                         if (phase == 0) window.location.href = "../ConferenceScreens/createConference.html";
                                         else if (phase == 2) {
-                                            callAlert("Assign papers to reviewers, or deal with conflicting papers?", "Assign", "Conflicting", function () {
+                                            callAlert("Assign papers to reviewers, or deal with conflicting papers?", "Assign", "paper final decision", function () {
                                                 window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
                                             },
                                                 function () {
