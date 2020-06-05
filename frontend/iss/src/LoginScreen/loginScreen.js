@@ -170,7 +170,7 @@ $(document).ready(function () {
                                     }
                                     // oricine cu role > 3 poate schimba datele
                                     if (role == 3) {
-                                        if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
+                                        if (phase == 0) window.location.href = "../ConferenceScreens/createConference.html";
                                         else if (phase == 2) {
                                             callAlert("Assign papers to reviewers, or deal with conflicting papers?", "Assign", "Conflicting", function () {
                                                 window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
