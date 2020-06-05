@@ -57,10 +57,10 @@ INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, va
 INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei Suciu', 'Andrei99', 'Andrei99', 'ubb Cluj', 'AS99@gmail.com', 'Andreiweb.com', 1, 2);
 INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei Andrei', 'Andreii99', 'Andreii99', 'ubb Cluj', 'AAA99@gmail.com', 'Andreiiweb.com', 1, 2);
 
-INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('George Andreescu', 'ZVlad99', 'ZVlad99', 'ubb Cluj', 'ZVU99@gmail.com', 'Vladweb.com', 1, 2);
-INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Matei Papa', 'ZZoli99', 'ZZoli99', 'ubb Cluj', 'ZRZ99@gmail.com', 'Zoliweb.com', 1, 2);
-INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Natan Tiutiu', 'ZAndrei99', 'ZAndrei99', 'ubb Cluj', 'ZAS99@gmail.com', 'Andreiweb.com', 1, 2);
-INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Matei Popescu', 'ZAndreii99', 'ZAndreii99', 'ubb Cluj', 'ZAA99@gmail.com', 'Andreiiweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('George Andreescu', 'George99', 'George99', 'ubb Cluj', 'ZVU99@gmail.com', 'Vladweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Matei Papa', 'Matei99', 'Matei99', 'ubb Cluj', 'ZRZ99@gmail.com', 'Zoliweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Natan Tiutiu', 'Natan99', 'Natan99', 'ubb Cluj', 'ZAS99@gmail.com', 'Andreiweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Matei Popescu', 'ZMatei99', 'ZMatei99', 'ubb Cluj', 'ZAA99@gmail.com', 'Andreiiweb.com', 1, 2);
 
 INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Antoniu Stan', 'Toni99', 'Toni99', 'ubb Cluj', 'TS99@gmail.com', 'Toniweb.com', 1, 3);
 INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Darius Ternovan', 'Darius99', 'Darius99', 'ubb Cluj', 'DT99@gmail.com', 'Dariusweb.com', 1, 4);
