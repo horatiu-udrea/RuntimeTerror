@@ -25,7 +25,17 @@ class SectionController {
         return@transaction SectionTable
                 .select { SectionTable.userId eq userId }
                 .map { SectionDAO.findById(it[SectionTable.id]) }
-                .firstOrNull()
+                .firstOrNull()?.also { section ->
+                    section.user = UserTable.slice(UserTable.name)
+                            .select { UserTable.id eq section.userId }
+                            .single()[UserTable.name]
+                    section.sessionChair = UserTable.slice(UserTable.name)
+                            .select { UserTable.id eq section.sessionChairId }
+                            .single()[UserTable.name]
+                    section.paper = PaperTable.slice(PaperTable.name)
+                            .select { PaperTable.id eq section.paperId }
+                            .single()[PaperTable.name]
+                }
     }
 
     /**
