@@ -127,7 +127,7 @@ $(document).ready(function () {
     $("#uploadPaper").click(function () {
         var form = $("#Upload")[0];
         var files = new FormData(form);
-        if (localStorage.getItem("phase") == 2) {
+        if (localStorage.getItem("phase") != 3) {
 
 
             $.ajax({
