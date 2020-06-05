@@ -8,6 +8,7 @@ interface Section
     val sessionChair: String
     val user: String
     val paper: String
+    val paperId: Int?
     val name: String
     val presentationDocumentPath: String
     val startTime: DateTime
