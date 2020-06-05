@@ -20,7 +20,7 @@ $(document).ready(function () {
         complete: function (dataPapers, statusText) {
             if (dataPapers.statusText == "OK") {
                 dataPapers.responseJSON.forEach(element => {
-                    if (element.paperId == window.localStorage.getItem("selectedProposal")) {
+                    if (element.paperId == window.localStorage.getItem("selectedProposalId")) {
                         addItem(element);
                     }
                 });
@@ -53,6 +53,27 @@ $(document).ready(function () {
             addRecommendations();
         }
     });
+    $("#uploadPaper").click(function () {
+        var form = $("#Upload")[0];
+        var files = new FormData(form);
+
+        $.ajax({
+            type: "PUT",
+            enctype: 'multipart/form-data',
+            processData: false,  // Important!
+            contentType: false,
+            cache: false,
+            url: HOST + PORT + "/paper/full/" + window.localStorage.getItem("selectedProposalId"),
+            data: files,
+            complete: function (dataPapers, statusText) {
+                if (dataPapers.statusText == "OK") {
+                    alert("the files was uploaded");
+                } else {
+                    alert("an error ocurred when uploading");
+                }
+            }
+        });
+    });
     function addRecommendations() {
         let formedRecomm = "<dl>";
         recommendations.forEach(element => {
@@ -75,7 +96,7 @@ $(document).ready(function () {
             url: HOST + PORT + "/paper",
             contentType: "application/json",
             data: JSON.stringify({
-                paperId:localStorage.getItem("selectedProposal"),
+                paperId: localStorage.getItem("selectedProposal"),
                 abstract: $('#proposalDescription').val()
             }),
             complete: function (data) {
@@ -135,7 +156,7 @@ $(document).ready(function () {
             type: "POST",
             url: HOST + PORT + "/authentication/logout",
             contentType: "application/json",
-           
+
             complete: function (data) {
                 if (data.statusText == "OK") {
                     localStorage.clear();

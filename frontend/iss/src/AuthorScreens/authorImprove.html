@@ -12,14 +12,29 @@
 </head>
 
 <body style="background-color: #FAF3DD;">
-    <span id="PaperDetails"></span>
+    <!-- <span id="PaperDetails"></span> -->
+    <h1 id ="title">
+        
+    </h1>
+    <script>
+        document.getElementById("title").innerHTML = localStorage.getItem("selectedProposal");
+    </script>
+    Reviews for this paper are: 
+    <br>
     <span id="PaperReviews"></span>
    <br>
-    Description the proposal: <input type="text" name="proposalDescription" id="proposalDescription" placeholder="...description">
-    <br>
-    <br>
+    Improve the description of this proposal: <input type="text" name="proposalDescription" id="proposalDescription" placeholder="...description">
+    
     <input type="submit" name="submitProposal" id="submitProposal" value="Improve Proposal">
+<br><br>
 
+    Upload the document for this paper :
+    <form id="Upload">
+        <input type="file" name="upload" accept="application/pdf,application/vnd.ms-excel" />
+    </form>
+<br>
+    <input type="submit" id="uploadPaper" value="Upload!" /><br>
+    <div class="ribbonButton" id="logout" name="logout" value="Logout">Logout</div>
     <!-- Upload the document for this paper :
     <form id="Upload">
         <input type="file" name="upload" accept="application/pdf,application/vnd.ms-excel" />

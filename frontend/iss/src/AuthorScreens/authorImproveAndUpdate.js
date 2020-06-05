@@ -24,49 +24,45 @@ $(document).ready(function () {
         }
     }
 
-    $.ajax({
-        type: "GET",
-        contentType: "application/json",
-        url: HOST + PORT + "/conference",
-        dataType: "json",
 
-        complete: function (dataConference, statusText) {
-            if (dataConference.statusText == "OK") {
-                console.log(dataConference)
-                let phase = dataConference.responseJSON.currentPhase;
-                if (phase == 2) {
-                    // TODO :  enable or diable buttons by phase
-                }
-            } else {
-
-            }
-        }
-    });
     let data = []
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: HOST + PORT + "/paper",
+        url: HOST + PORT + "/section/details",
         dataType: "json",
 
         complete: function (dataPapers, statusText) {
             if (dataPapers.statusText == "OK") {
+                console.log(dataPapers.responseJSON);
                 if (dataPapers.responseJSON.length == 0) {
-                    document.getElementById("proposalTitle").value = "There are no papers to be improved or updated";
+                    document.getElementById("proposalTitle").value = "Sorry, Your paper was not selected...";
                     document.getElementById("improveProposal").style.visibility = "hidden";
                     document.getElementById("uploadProposal").style.visibility = "hidden";
                 } else {
                     data = dataPapers.responseJSON;
-                    addAllProposals(data);
+                    addItem(data.name, data.paperId);
+                    addSectionDetails(dataPapers.responseJSON);
 
                 }
             } else {
-                alert("can not get papers for this author");
+                alert("Sorry, Your paper was not selected...");
             }
         }
     });
+    function addSectionDetails(data) {
+        let toWrite = " Name of the Section : " + data.name + "<br>" +
+            "Start time: " + data.startTime +
+            "<br>End time: " + data.endTime +
+            "<br>Section Chair: " + data.sessionChair +
+            "<br>Room name : " + data.roomName + "<br><br>";
+
+        document.getElementById("SectionDetails").innerHTML = toWrite;
+    }
 
     function addItem(proposalTitle, id) {
+        localStorage.setItem("selectedProposal", proposalTitle);
+        console.log(id);
         var ul = document.getElementById("authorProposals");
         var candidate = document.getElementById("proposalTitle");
         var li = document.createElement("li");
@@ -90,13 +86,6 @@ $(document).ready(function () {
         })
     }
 
-    function addAllProposals(data) {
-        for (let i in data) {
-            console.log(data[i]);
-            addItem(data[i].name, data[i].paperId);
-        }
-
-    }
     var previousID = -1;
 
     $("#addProposal").click(function () {
@@ -109,7 +98,7 @@ $(document).ready(function () {
         location.href = "./authorUpload.html";
     });
     function keepInStore(title) {
-        window.localStorage.setItem("selectedProposal", title);
+        window.localStorage.setItem("selectedProposalId", title);
     }
     $("#logout").click(function () {
         $.ajax({
