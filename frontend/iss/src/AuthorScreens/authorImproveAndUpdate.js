@@ -110,12 +110,22 @@ $(document).ready(function () {
     function keepInStore(title) {
         window.localStorage.setItem("selectedProposalId", title);
     }
+    $.ajax({
+        type: "get",
+        url: HOST + PORT + "/authentication",
+        contentType: "application/json",
+       
+        complete: function (data) {
+            $("#username").text(data.responseJSON.name)
+        }
+    })
+    
     $("#logout").click(function () {
         $.ajax({
             type: "POST",
             url: HOST + PORT + "/authentication/logout",
             contentType: "application/json",
-
+           
             complete: function (data) {
                 if (data.statusText == "OK") {
                     localStorage.clear();
@@ -125,5 +135,11 @@ $(document).ready(function () {
                 }
             }
         })
+    });
+
+    $("#back").click(function () {
+        
+        window.location = "../../dist/index.html";
+
     });
 });

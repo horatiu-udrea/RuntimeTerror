@@ -10,6 +10,16 @@ $.ajaxSetup({
 // phase2 : ... diagrama http trello
 $(document).ready(function () {
     let authors = []
+    $.ajax({
+        type: "get",
+        url: HOST + PORT + "/authentication",
+        contentType: "application/json",
+       
+        complete: function (data) {
+            $("#username").text(data.responseJSON.name)
+        }
+    })
+    
     $("#logout").click(function () {
         $.ajax({
             type: "POST",
@@ -26,6 +36,13 @@ $(document).ready(function () {
             }
         })
     });
+
+    $("#back").click(function () {
+        
+        window.location = "/authorImproveAndUpdate.html";
+
+    });
+
     $("#addMoreAuthors").click(function () {
         let name = document.getElementById("proposalAuthorName").value;
         let email = document.getElementById("proposalAuthorEmail").value;

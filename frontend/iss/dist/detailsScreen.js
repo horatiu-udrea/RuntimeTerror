@@ -63,7 +63,7 @@ $(document).ready(function () {
         
                     if (role == 2) {
                         $("#link").click(function (e) {
-                            e.preventDefault();
+                        e.preventDefault();
                         
                         callAlert("Check your papers or review other ones?", "Author", "PcMember", 
                         function () {
