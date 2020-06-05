@@ -164,10 +164,10 @@ $(document).ready(function () {
                                                     else window.location.href = "../ReviewingScreen/reviewingScreen.html";
                                                     // modify grades
                                                 }
-                                                else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
+                                                
                                                 else window.location.href = "../unavailable/unavailable.html";
                                             });
-                                    }
+                                        }
 // oricine cu role > 3 poate schimba datele
                                     if (role == 3) {
                                         if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
@@ -179,22 +179,36 @@ $(document).ready(function () {
                                                     window.location.href = "../ConflictingDiscussion/conflictingDiscussion.html";
                                                 });
                                         }
-                                        else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
+                                        
                                         else window.location.href = "../unavailable/unavailable.html";
                                     }
 
                                     if (role == 4) {
                                         if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
                                         else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if (phase == 3 && localStorage.getItem("choosed")!== localStorage.getItem("user")) window.location.href = "../SectionScreen/sectionScreen.html";
+                                        
                                         else window.location.href =  "../unavailable/unavailable.html";
                                     }
 
                                     if (role == 5) {
-                                        if (phase == 0) window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
-                                        else if (phase == 1) window.location.href = "../unavailable/unavailable.html"; // change accounts.
-                                        else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        else if (phase == 3) window.location.href = "../CreateSection/createSection.html";
+                                        if (phase == 0)
+                                        callAlert("Pick Pc members or update conference?", "Pick members", "Update Conference", 
+                                        function () {
+                                            window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
+                                        },
+                                        function () {
+                                            window.location.href = "../ConferenceScreens/CreateConference.html"
+                                        });
+                                        else if (phase == 1) window.location.href = "../ConferenceScreens/CreateConference.html"; // change accounts.
+                                        else if (phase == 2) window.location.href = "../ConferenceScreens/CreateConference.html";
+                                        else if (phase == 3)
+                                        callAlert("Create sections or update conference?", "Create Sections", "Update Conference", 
+                                        function () {
+                                            window.location.href = window.location.href = "../CreateSection/createSection.html";
+                                        },
+                                        function () {
+                                            window.location.href = "../ConferenceScreens/CreateConference.html"
+                                        });
                                         else window.location.href = "../unavailable/unavailable.html";
                                     }
 

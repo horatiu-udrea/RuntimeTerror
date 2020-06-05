@@ -1,0 +1,65 @@
+.ribbonButton{
+    position: relative;
+    height: 40px;
+    width: 300px;
+
+    background-color: rgb(83, 83, 255);
+    
+    text-align: center;
+    color: whitesmoke;
+    font-family: "Arial Black", Gadget, sans-serif;
+    /* transition: background-color 0.2s ease; */
+}
+.ribbonButton::after{
+    position: absolute;
+    content: '';
+    background-color: rgb(65, 65, 196);
+    height: 40px;
+    width: 70px;
+
+    left: 90%;
+    top:20%;
+
+    clip-path: polygon(0% 80%, 0% 100%, 40% 80%);
+    /* transition: background-color 0.2s ease; */
+}
+
+.ribbonButton::before{
+    position: absolute;
+    content: '';
+    background-color: rgb(86, 86, 207);
+    height: 40px;
+    width: 70px;
+
+    left: 90%;
+    top:20%;
+
+    clip-path: polygon(0% 80%, 0% 100%, 100% 100%, 70% 50%, 100% 0%, 41% 0%, 41% 80%);
+    
+    /* transition: background-color 0.2s ease; */
+}
+
+.ribbonButton:hover{
+    background-color: rgb(112, 112, 253);
+}
+
+.ribbonButton:hover::after{
+    background-color: rgb(71, 71, 196);
+}
+
+.ribbonButton:hover::before{
+    background-color: rgb(102, 102, 202);
+}
+
+.columnDisplay{
+    display: flex;
+    flex-direction: column;
+}
+
+.columnDisplay>*{
+    margin-top: 30px;    
+}
+
+.proposalTitle{
+
+}

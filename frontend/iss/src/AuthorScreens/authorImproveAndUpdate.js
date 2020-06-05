@@ -20,6 +20,7 @@ $(document).ready(function () {
         if (phase == 3) {
             document.getElementById("improveProposal").style.visibility = "visible";
             document.getElementById("uploadProposal").value = "Upload Doc for presentation";
+            document.getElementById("addProposal").style.visibility = "hidden";
         }
     }
 
@@ -71,8 +72,22 @@ $(document).ready(function () {
         var li = document.createElement("li");
         li.setAttribute('id', id);
         li.setAttribute('class', "proposalTitle");
+        li.setAttribute('style', "font-size: x-large; text-align:center; color: rgb(255, 214, 29); font-family: 'Arial Black', Gadget, sans-serif; list-style: none;");
         li.appendChild(document.createTextNode(proposalTitle));
         ul.appendChild(li);
+
+        li.addEventListener('click', function (event) {
+            try {
+                document.getElementById(previousID).style = "font-size: x-large; text-align:center; color: gold; font-family: 'Arial Black', Gadget, sans-serif; list-style: none;"
+            } catch {
+                console.log("nothing to undo");
+            }
+            if (event.target && event.target.getAttribute("class") == "proposalTitle") {
+                document.getElementById(event.target.id).style = "font-size: x-large; text-align:center; color: white; font-family: 'Arial Black', Gadget, sans-serif; list-style: none;"
+                keepInStore(event.target.id);
+                previousID = event.target.id;
+            }
+        })
     }
 
     function addAllProposals(data) {
@@ -112,16 +127,4 @@ $(document).ready(function () {
             }
         })
     });
-    document.addEventListener('click', function (event) {
-        try {
-            document.getElementById(previousID).style = "font-family:'Times New Roman'; font-size:12px; color:black"
-        } catch {
-            console.log("nothing to undo");
-        }
-        if (event.target && event.target.getAttribute("class") == "proposalTitle") {
-            document.getElementById(event.target.id).style = "font-family:'Courier New'; font-size:30px; color:blue"
-            keepInStore(event.target.id);
-            previousID = event.target.id;
-        }
-    })
 });

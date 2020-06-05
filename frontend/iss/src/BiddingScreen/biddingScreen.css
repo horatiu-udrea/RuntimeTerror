@@ -79,7 +79,7 @@ div.buttonContainer{
 
 button.button{
     background-color: transparent;
-    border: 1px dotted black;
+    border: 1px dashed black;
     height: 100%;
     width: 25%;
     outline:0;

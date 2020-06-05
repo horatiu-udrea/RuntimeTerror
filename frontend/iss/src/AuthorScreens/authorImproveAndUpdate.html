@@ -7,21 +7,26 @@
     <title>Author
         Improve and Update</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="authors.css">
+
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="./authorImproveAndUpdate.js" type="module"></script>
 
 </head>
 
 <body style="background-color: #FAF3DD;">
-    <ul id="authorProposals">
-        <span id="proposalTitle"></span>
-    </ul>
-    <input type="submit" id="addProposal" name="addProposal" value="Add New Proposal">
-    <input type="submit" id="improveProposal" name="improveProposal" value="Improve Proposal">
-    <input type="submit" id="uploadProposal" name="uploadProposal" value="Upload doc for Proposal">
-    <br>
-    <input type="submit" id="logout" name="logout" value="Logout">
     
+    <div class="columnDisplay" style="left: 50%; transform: translateX(-50%); position: absolute;">
+        <ul id="authorProposals" style="z-index:10; list-style: none;">
+            <span id="proposalTitle"></span>
+        </ul>
+    
+        <div class="ribbonButton" type="submit" id="addProposal" name="addProposal" value="Add New Proposal">Add New Proposal</div>
+        <div class="ribbonButton" type="submit" id="improveProposal" name="improveProposal" value="Improve Proposal">Improve Proposal</div>
+        <div class="ribbonButton" type="submit" id="uploadProposal" name="uploadProposal" value="Upload doc for Proposal">Upload doc for Proposal</div>
+        <div class="ribbonButton" id="logout" name="logout" value="Logout">Logout</div>
+    </div>
 </body>
 
 </html>
