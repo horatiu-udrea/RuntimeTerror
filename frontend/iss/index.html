@@ -1,29 +1,34 @@
 <html>
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="./dist/detailsScreen.js" type="module"></script>
-        <link rel="stylesheet" href="./dist/detailsScreen.css">
-    </head>
-    <body>
-        
-        <video id="topVid" autoplay loop>
-            <source src="./dist/resources/topSide.mp4" type="video/mp4">
-        </video>
-        <video id="middleVid" autoplay loop>
-            <source src="./dist/resources/rightSide.mp4" type="video/mp4">
-        </video>
-        <video id="bottomVid" autoplay loop>
-            <source src="./dist/resources/bottomSide.mp4" type="video/mp4">
-        </video>
 
-        <h1><a id="link" href="./src/LoginScreen/loginScreen.html"> Enter Platform </a></h1>
-        <div id="dimmer"></div>
-        <div id="contentContainer">
-            <label id="title" style="left: 5%;">Currently</label>
-            <label id="name" class="content">Start Date: </label>
-            <label id="dates" class="content">Dates</label>
-            <p id="sectionsLink"><a href="./src/sectionDetails/sectionDetails.html" id="sectionDetails"><font class="dashFont">-</font>Sections<font class="dashFont">-</font></a></p>
-        </div>
-        <script src="./dist/index.js"></script>
-    </body>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="./dist/detailsScreen.js" type="module"></script>
+    <link rel="stylesheet" href="./dist/detailsScreen.css">
+</head>
+
+<body>
+
+    <video id="topVid" autoplay loop>
+        <source src="./dist/resources/topSide.mp4" type="video/mp4">
+    </video>
+    <video id="middleVid" autoplay loop>
+        <source src="./dist/resources/rightSide.mp4" type="video/mp4">
+    </video>
+    <video id="bottomVid" autoplay loop>
+        <source src="./dist/resources/bottomSide.mp4" type="video/mp4">
+    </video>
+
+    <h1><a id="link" href="./src/LoginScreen/loginScreen.html"> Enter Platform </a></h1>
+    <div id="dimmer"></div>
+    <div id="contentContainer">
+        <label id="title" style="left: 5%;">Currently</label>
+        <label id="name" class="content">Start Date: </label>
+        <label id="dates" class="content">Dates</label>
+        <p id="sectionsLink"><a href="./src/sectionDetails/sectionDetails.html" id="sectionDetails">
+                <font class="dashFont">-</font>Sections<font class="dashFont">-</font>
+            </a></p>
+    </div>
+    <script src="./dist/index.js"></script>
+</body>
+
 </html>
