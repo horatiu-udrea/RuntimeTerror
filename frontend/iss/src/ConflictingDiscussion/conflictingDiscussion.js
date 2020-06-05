@@ -21,12 +21,12 @@ $(document).ready(function () {
                     alert("no papers to be shown");
                 } else {
                     dataPapers.responseJSON.forEach(element => {
-                        if (element.status == 4) {
+                        
                             data.push(element);
-                        }
+                        
                     });
                     if (data.length == 0) {
-                        alert("there are no conflicting papers");
+                        alert("there are no  papers to be shown");
                     } else {
                         console.log(data);
                         addAllProposals(data);
@@ -164,20 +164,23 @@ $(document).ready(function () {
     }
     document.addEventListener('click', function (event) {
         try {
-            document.getElementById(previousID).style = "font-family:'Times New Roman'; font-size:12px; color:black"
+            document.getElementById(previousID).style = "font-family:'Times New Roman'; color:black; text-decoration: none;"
             document.getElementById("accept").style.visibility = "hidden";
             document.getElementById("reject").style.visibility = "hidden";
             document.getElementById("conflict").style.visibility = "hidden";
+            document.getElementById("deets").style.visibility="hidden";
             document.getElementById("paperDetails").innerHTML = "";
         } catch {
             console.log("nothing to undo");
             document.getElementById("accept").style.visibility = "hidden";
             document.getElementById("reject").style.visibility = "hidden";
             document.getElementById("conflict").style.visibility = "hidden";
+            document.getElementById("deets").style.visibility="hidden";
             document.getElementById("paperDetails").innerHTML = "";
         }
         if (event.target && event.target.getAttribute("class") == "proposalTitle") {
-            document.getElementById(event.target.id).style = "font-family:'Courier New'; font-size:30px; color:blue"
+            document.getElementById("deets").style.visibility="visible";
+            document.getElementById(event.target.id).style = "font-family:'Courier New'; color:blue; text-decoration: underline;"
             document.getElementById("accept").style.visibility = "visible";
             document.getElementById("reject").style.visibility = "visible";
             document.getElementById("conflict").style.visibility = "visible";
@@ -186,4 +189,53 @@ $(document).ready(function () {
             previousID = event.target.id;
         }
     })
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
+
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
+    });
+
+    $.ajax({
+        type: "get",
+        url: HOST + PORT + "/authentication",
+        contentType: "application/json",
+        
+        complete: function (data) {
+            $("#username").text(data.responseJSON.name)
+        }
+    })
+    
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
+           
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
+    });
+
+    $("#back").click(function () {
+        
+        window.location = "../../dist/index.html";
+
+    });
 });

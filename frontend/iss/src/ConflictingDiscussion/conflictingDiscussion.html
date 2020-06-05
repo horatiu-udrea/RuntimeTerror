@@ -8,18 +8,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="./conflictingDiscussion.js" type="module"></script>
+    <link rel="stylesheet" href="conflictingDiscussion.css">
 
 </head>
 
 <body style="background-color: #FAF3DD;">
-    <ul id="conflictingDiscussion">
-        <span id="proposalTitle"></span>
-    </ul>
-    <span id="paperDetails"></span>
+    <div id="cssDesignList">
+        <ul id="conflictingDiscussion">
+            <span id="proposalTitle"></span>
+        </ul>
+    </div>
+    <div id="deets" class = "fade-in">
+        <span id="paperDetails"></span>
 
-    <input type="submit" value ="ACCEPT" id ="accept" style="visibility: hidden;">
-    <input type="submit" value ="REJECT" id ="reject" style="visibility: hidden;">
-    <input type="submit" value ="CONFLICTING" id ="conflict" style="visibility: hidden;">
+        <input type="submit" value="ACCEPT" id="accept" style="visibility: hidden;">
+        <input type="submit" value="REJECT" id="reject" style="visibility: hidden;">
+        <input type="submit" value="CONFLICTING" id="conflict" style="visibility: hidden;">
+    </div>
+    <br>
+    <div id="changeconf">
+    <a href="../ConferenceScreens/createConference.html" id="link">Change Conference Details</a>
+</div>
+<div id="userButtons">
+    <label id="username">Placeholder Name: </label> 
+    <input type="submit" id="logout" name="logout" value="Logout">
+    <input type="submit" id="back" name="back" value="back">
+</div>
 </body>
 
 </html>

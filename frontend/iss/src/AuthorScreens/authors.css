@@ -1,0 +1,369 @@
+.ribbonButton{
+    position: relative;
+    height: 40px;
+    width: 300px;
+
+    background-color: rgb(83, 83, 255);
+    
+    text-align: center;
+    color: whitesmoke;
+    font-family: "Arial Black", Gadget, sans-serif;
+    /* transition: background-color 0.2s ease; */
+}
+.ribbonButton::after{
+    position: absolute;
+    content: '';
+    background-color: rgb(65, 65, 196);
+    height: 40px;
+    width: 70px;
+
+    left: 90%;
+    top:20%;
+
+    clip-path: polygon(0% 80%, 0% 100%, 40% 80%);
+    /* transition: background-color 0.2s ease; */
+}
+
+.ribbonButton::before{
+    position: absolute;
+    content: '';
+    background-color: rgb(86, 86, 207);
+    height: 40px;
+    width: 70px;
+
+    left: 90%;
+    top:20%;
+
+    clip-path: polygon(0% 80%, 0% 100%, 100% 100%, 70% 50%, 100% 0%, 41% 0%, 41% 80%);
+    
+    /* transition: background-color 0.2s ease; */
+}
+
+.ribbonButton:hover{
+    background-color: rgb(112, 112, 253);
+}
+
+.ribbonButton:hover::after{
+    background-color: rgb(71, 71, 196);
+}
+
+.ribbonButton:hover::before{
+    background-color: rgb(102, 102, 202);
+}
+
+.columnDisplay{
+    display: flex;
+    flex-direction: column;
+}
+
+.columnDisplay>*{
+    margin-top: 30px;    
+}
+
+#userButtons{
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    left: 0%;
+    top: 90%;
+
+    border-top: 2px solid white;
+    border-spacing: 3px;
+
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+
+    width: 430px;
+    height: 40px;
+
+    clip-path: polygon(0% 0%, 0% 100%, 90% 100%, 100% 0%);
+
+    color:rgb(0, 0, 0);
+    font-family: "Lucida Console", Monaco, monospace;
+} 
+#userButtons>*{
+    border: none;
+}
+#username{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+#logout{
+    position: absolute;
+    left: 40%;
+    width: 23%;
+    top:50%;
+    height: 100%;
+    transform: translateY(-50%);
+    clip-path: polygon(40% 0%, 0% 100%, 60% 100%, 100% 0%);
+    background-color: orange;
+    color:rgb(0, 0, 0);
+    font-family: "Arial Black", Gadget, sans-serif;
+}
+
+#back{
+    position: absolute;
+    left:65%;
+    top:50%;
+    height: 100%;
+    transform: translateY(-50%);
+    width: 23%;
+    clip-path: polygon(40% 0%, 0% 100%, 60% 100%, 100% 0%);
+    background-color: orange;
+    color:rgb(0, 0, 0);
+    font-family: "Arial Black", Gadget, sans-serif;
+}
+
+#submit{
+  
+        background: url("../../resources/paper2.jpg") no-repeat  ;
+        /* background-position:; */
+        background-size: cover;
+       
+        padding: 0;
+        overflow: hidden;
+    
+}
+#styleSubmit {
+    
+        position: absolute;
+        opacity: 1;
+        margin-top: 160px;
+        margin-left: 18%;
+        font-size: 20px;
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-weight: bolder;
+    
+}
+
+.styleTextField{
+    border-radius: 10%;
+    border-style: outset;
+    height: 20px;
+    width: 230px;
+    opacity: 0.7;
+
+}
+
+
+#addMoreAuthors{
+    position: absolute;
+    margin-top: -1%;
+    margin-left:10%;
+    height: 40px;
+    width: 100px;
+    border-radius: 10%;
+    background-color: #b99362;
+    font-weight:bolder;
+    opacity: 0.85;
+}
+#addMoreAuthors {
+    transition-duration: 0.4s;
+  }
+  
+  #addMoreAuthors:hover {
+    background-color: rgb(240, 166, 28); /* Green */
+    color: white;
+  }
+
+  
+#submitProposal{
+    position: absolute;
+    margin-top: 42%;
+    margin-left:55%;
+    height: 40px;
+    width: 200px;
+    border-radius: 10%;
+    background-color: #b99362;
+    font-weight:bolder;
+    opacity: 0.85;
+}
+#submitProposal {
+    transition-duration: 0.4s;
+  }
+  
+  #submitProposal:hover {
+    background-color: rgb(240, 166, 28); /* Green */
+    color: white;
+  }
+
+  #authorsDeets { 
+      position: absolute;
+      margin-top: 10%;
+      margin-left: 110%;
+      width: 300px;
+  }
+
+  
+#main{
+  
+    background: url("../../resources/book.jpg") no-repeat  ;
+    /* background-position:; */
+    background-size: cover;
+   
+    padding: 0;
+    overflow: hidden;
+
+}
+
+#styleMain {
+    /* position: absolute; */
+    opacity: 1;
+    text-align: center;
+    /* margin-top: 160px; */
+    /* margin-left: 18%; */
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+}
+
+#uploadBack{
+  
+    background: url("../../resources/upload.jpg") no-repeat  ;
+    /* background-position:; */
+    background-size: cover;
+   
+    padding: 0;
+    overflow: hidden;
+
+}
+#styleUpload {
+    /* position: absolute; */
+    opacity: 1;
+    text-align: center;
+    margin-top: 8%;
+    /* margin-left: 8%; */
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+}
+
+#textfiled {
+    background-color: rgba(169, 169, 169, 0.7);
+    /* opacity: 0.8  */
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 27%;
+    text-align: center;
+}
+
+
+#uploadPaper{
+    position: absolute;
+    margin-top: 40%;
+    margin-left: 42%;
+    /* margin-top: 20%; */
+    color: black;
+    height: 160px;
+    width: 198px;
+    border-radius: 10%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+    font-size: 20px;
+    /* background-color: #a9a9a9;
+    opacity: 0.8; */
+    transition-duration: 0.4s;
+    height: 30px;
+    font-weight: bolder;
+}
+
+#uploadPaper:hover {
+    background-color: #ee7e34;
+    color: black;
+    font-weight: bolder;
+  }
+
+  #styleImprove {
+    opacity: 1;
+    text-align: left;
+    /* margin-top: 160px; */
+    margin-left: 3%;
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+  }
+  
+  #improveOnRight {
+    opacity: 1;
+    text-align: left;
+    /* position: absolute; */
+    margin-top: -20%;
+    margin-left: 50%;
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+  }
+  #improveMain {
+    background: url("../../resources/wall.jpg") no-repeat  ;
+    /* background-position:; */
+    background-size: cover;
+   
+    padding: 0;
+    overflow: hidden;
+  }
+
+  
+#improvetextfiled {
+    background-color: rgba(169, 169, 169, 0.8);
+    /* opacity: 0.8  */
+    height: 84%;
+    width: 98%;
+    position: absolute;
+    /* margin-top: 3%; */
+    /* margin-left: 27%; */
+    text-align: center;
+}
+  #improve{
+    position: absolute;
+    margin-top: 3%; 
+    margin-left: -20%;
+    /* margin-top: 20%; */
+    color: black;
+    height: 160px;
+    width: 198px;
+    border-radius: 10%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+    font-size: 20px;
+    /* background-color: #a9a9a9;
+    opacity: 0.8; */
+    transition-duration: 0.4s;
+    height: 30px;
+    font-weight: bolder;
+}
+
+#improve:hover {
+    background-color: #ee7e34;
+    color: black;
+    font-weight: bolder;
+  }
+  
+  
+#upload{
+    /* position: absolute; */
+    /* margin-top: 3%;  */
+    /* margin-left: -10%; */
+    /* margin-top: 20%; */
+    color: black;
+    height: 160px;
+    width: 198px;
+    border-radius: 10%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+    font-size: 20px;
+    /* background-color: #a9a9a9;
+    opacity: 0.8; */
+    transition-duration: 0.4s;
+    height: 30px;
+    font-weight: bolder;
+}
+
+#upload:hover {
+    background-color: #ee7e34;
+    color: black;
+    font-weight: bolder;
+  }

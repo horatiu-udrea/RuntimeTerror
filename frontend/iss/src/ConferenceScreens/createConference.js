@@ -32,7 +32,7 @@ $(document).ready(function () {
                 biddingDeadline = data.responseJSON.biddingDeadline;
                 submitPaperEarly = data.responseJSON.submitPaperEarly;
             } else {
-                alert("can not get conference");
+                alert("Can not get conference");
             }
 
         }
@@ -88,10 +88,10 @@ $(document).ready(function () {
             }),
             complete: function (data) {
                 if (data.statusText == "OK") {
-                    alert("successfully created conference");
+                    alert("Successfully updated conference");
                     // window.location = "to be decided";
                 } else {
-                    alert("conference was not created");
+                    alert("conference was not updated");
                 }
 
             }
@@ -99,20 +99,36 @@ $(document).ready(function () {
         });
 
     });
+    $.ajax({
+        type: "get",
+        url: HOST + PORT + "/authentication",
+        contentType: "application/json",
+        
+        complete: function (data) {
+            $("#username").text(data.responseJSON.name)
+        }
+    })
+    
     $("#logout").click(function () {
         $.ajax({
             type: "POST",
             url: HOST + PORT + "/authentication/logout",
             contentType: "application/json",
-
+           
             complete: function (data) {
                 if (data.statusText == "OK") {
                     localStorage.clear();
                     window.location = "../../dist/index.html";
                 } else {
-                    alert("fail");
+                    alert("Could not complete action.");
                 }
             }
         })
     });
+
+    $("#back").click(function () {
+        
+        window.location = "../../dist/index.html";
+
+    }); 
 });

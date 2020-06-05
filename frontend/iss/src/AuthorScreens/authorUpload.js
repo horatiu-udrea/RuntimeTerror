@@ -7,6 +7,38 @@ $.ajaxSetup({
 });
 
 $(document).ready(function () {
+    $.ajax({
+        type: "get",
+        url: HOST + PORT + "/authentication",
+        contentType: "application/json",
+       
+        complete: function (data) {
+            $("#username").text(data.responseJSON.name)
+        }
+    })
+    
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
+           
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
+    });
+
+    $("#back").click(function () {
+        
+        window.location = "./authorImproveAndUpdate.html";
+
+    });
 
     let data = []
     $.ajax({
@@ -18,7 +50,7 @@ $(document).ready(function () {
         complete: function (dataPapers, statusText) {
             if (dataPapers.statusText == "OK") {
                 dataPapers.responseJSON.forEach(element => {
-                    if (element.paperId == window.localStorage.getItem("selectedProposal")) {
+                    if (element.paperId == window.localStorage.getItem("selectedProposalId")) {
                         addItem(element);
                     }
                 });
@@ -95,7 +127,7 @@ $(document).ready(function () {
     $("#uploadPaper").click(function () {
         var form = $("#Upload")[0];
         var files = new FormData(form);
-        if (localStorage.getItem("phase") == 2) {
+        if (localStorage.getItem("phase") != 3) {
 
 
             $.ajax({
@@ -104,7 +136,7 @@ $(document).ready(function () {
                 processData: false,  // Important!
                 contentType: false,
                 cache: false,
-                url: HOST + PORT + "/paper/full/" + window.localStorage.getItem("selectedProposal"),
+                url: HOST + PORT + "/paper/full/" + window.localStorage.getItem("selectedProposalId"),
                 data: files,
                 complete: function (dataPapers, statusText) {
                     if (dataPapers.statusText == "OK") {
@@ -112,6 +144,7 @@ $(document).ready(function () {
                     } else {
                         alert("an error ocurred when uploading");
                     }
+                    console.log(dataPapers);
                 }
             });
         } else {

@@ -1,0 +1,63 @@
+body {
+    background: url("../../resources/New_York.jpg") no-repeat center;
+    background-size: cover;
+   
+    padding: 0;
+    overflow: hidden;
+}
+
+#userButtons{
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    left: 0%;
+    top: 90%;
+
+    border-top: 2px solid white;
+    border-spacing: 3px;
+
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+
+    width: 430px;
+    height: 40px;
+
+    clip-path: polygon(0% 0%, 0% 100%, 90% 100%, 100% 0%);
+
+    color:rgb(0, 0, 0);
+    font-family: "Lucida Console", Monaco, monospace;
+} 
+#userButtons>*{
+    border: none;
+}
+#username{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+#logout{
+    position: absolute;
+    left: 40%;
+    width: 23%;
+    top:50%;
+    height: 100%;
+    transform: translateY(-50%);
+    clip-path: polygon(40% 0%, 0% 100%, 60% 100%, 100% 0%);
+    background-color: orange;
+    color:rgb(0, 0, 0);
+    font-family: "Arial Black", Gadget, sans-serif;
+}
+
+#back{
+    position: absolute;
+    left:65%;
+    top:50%; 
+    height: 100%;
+    transform: translateY(-50%);
+    width: 23%;
+    clip-path: polygon(40% 0%, 0% 100%, 60% 100%, 100% 0%);
+    background-color: orange;
+    color:rgb(0, 0, 0);
+    font-family: "Arial Black", Gadget, sans-serif;
+}

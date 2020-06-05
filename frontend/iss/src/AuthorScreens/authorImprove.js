@@ -9,6 +9,39 @@ $.ajaxSetup({
 // change to ph1: abstract(description) + paper(pdf)
 // ph2 = ph1 + see reviews ( no reviews = no improve )
 $(document).ready(function () {
+    $.ajax({
+        type: "get",
+        url: HOST + PORT + "/authentication",
+        contentType: "application/json",
+       
+        complete: function (data) {
+            $("#username").text(data.responseJSON.name)
+        }
+    })
+    
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
+           
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
+    });
+
+    $("#back").click(function () {
+        
+        window.location = "./authorImproveAndUpdate.html";
+
+    });
+
 
     let data = []
     $.ajax({
@@ -20,7 +53,7 @@ $(document).ready(function () {
         complete: function (dataPapers, statusText) {
             if (dataPapers.statusText == "OK") {
                 dataPapers.responseJSON.forEach(element => {
-                    if (element.paperId == window.localStorage.getItem("selectedProposal")) {
+                    if (element.paperId == window.localStorage.getItem("selectedProposalId")) {
                         addItem(element);
                     }
                 });
@@ -53,6 +86,27 @@ $(document).ready(function () {
             addRecommendations();
         }
     });
+    $("#upload").click(function () {
+        var form = $("#Upload")[0];
+        var files = new FormData(form);
+
+        $.ajax({
+            type: "PUT",
+            enctype: 'multipart/form-data',
+            processData: false,  // Important!
+            contentType: false,
+            cache: false,
+            url: HOST + PORT + "/paper/full/" + window.localStorage.getItem("selectedProposalId"),
+            data: files,
+            complete: function (dataPapers, statusText) {
+                if (dataPapers.statusText == "OK") {
+                    alert("the files was uploaded");
+                } else {
+                    alert("an error ocurred when uploading");
+                }
+            }
+        });
+    });
     function addRecommendations() {
         let formedRecomm = "<dl>";
         recommendations.forEach(element => {
@@ -69,19 +123,19 @@ $(document).ready(function () {
         formedRecomm += "</dl>";
         document.getElementById("PaperReviews").innerHTML = formedRecomm;
     }
-    $("#submitProposal").click(function () {
+    $("#improve").click(function () {
         $.ajax({
             type: "PUT",
             url: HOST + PORT + "/paper",
             contentType: "application/json",
             data: JSON.stringify({
-                paperId:localStorage.getItem("selectedProposal"),
+                paperId: localStorage.getItem("selectedProposalId"),
                 abstract: $('#proposalDescription').val()
             }),
             complete: function (data) {
                 if (data.statusText == "OK") {
                     alert("improval was successfully done");
-
+                    location.reload();
                 } else {
                     alert("fail");
                 }
@@ -119,17 +173,28 @@ $(document).ready(function () {
             processData: false,  // Important!
             contentType: false,
             cache: false,
-            url: HOST + PORT + "/paper/full/" + window.localStorage.getItem("selectedProposal"),
+            url: HOST + PORT + "/paper/full/" + window.localStorage.getItem("selectedProposalId"),
             data: files,
             complete: function (dataPapers, statusText) {
                 if (dataPapers.statusText == "OK") {
                     alert("the files was uploaded");
+                    location.reload();
                 } else {
                     alert("an error ocurred when uploading");
                 }
             }
         });
     });
+    $.ajax({
+        type: "get",
+        url: HOST + PORT + "/authentication",
+        contentType: "application/json",
+       
+        complete: function (data) {
+            $("#username").text(data.responseJSON.name)
+        }
+    })
+    
     $("#logout").click(function () {
         $.ajax({
             type: "POST",
@@ -145,6 +210,12 @@ $(document).ready(function () {
                 }
             }
         })
+    });
+
+    $("#back").click(function () {
+        
+        window.location = "./authorImproveAndUpdate.html";
+
     });
 });
 

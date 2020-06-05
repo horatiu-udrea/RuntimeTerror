@@ -49,7 +49,6 @@ $(document).ready(function () {
                 complete: function(data, status) {
                     console.log(data);
                     if(data.statusText == "OK") {
-                        alert("wait untill a PC Member validates your account");
                         window.location = "../LoginScreen/loginScreen.html";
                     }else {
                         alert("invalid request");
@@ -67,5 +66,3 @@ $(document).ready(function () {
             $("#errorMessage").text("");
     });
 });
-
-//TODO Email & url validation with regex disable button if stuff is invalid (duh)

@@ -7,21 +7,34 @@
     <title>Author
         Improve and Update</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="authors.css">
+
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="./authorImproveAndUpdate.js" type="module"></script>
 
 </head>
 
-<body style="background-color: #FAF3DD;">
-    <ul id="authorProposals">
-        <span id="proposalTitle"></span>
-    </ul>
-    <input type="submit" id="addProposal" name="addProposal" value="Add New Proposal">
-    <input type="submit" id="improveProposal" name="improveProposal" value="Improve Proposal">
-    <input type="submit" id="uploadProposal" name="uploadProposal" value="Upload doc for Proposal">
-    <br>
-    <input type="submit" id="logout" name="logout" value="Logout">
-    
+<body id="main" style="background-color: #FAF3DD;">
+
+    <div class="columnDisplay" style="left: 50%; transform: translateX(-50%); position: absolute;">
+        <div id="styleMain">
+            <ul id="authorProposals" style="z-index:10; list-style: none;">
+                <span id="proposalTitle"></span>
+            </ul>
+            <span id="SectionDetails"></span>
+        </div>
+        <div class="ribbonButton" type="submit" id="addProposal" name="addProposal" value="Add New Proposal">Submit Paper</div>
+        <div class="ribbonButton" type="submit" id="improveProposal" name="improveProposal" value="Improve Proposal">
+            Improve Proposal</div>
+        <div class="ribbonButton" type="submit" id="uploadProposal" name="uploadProposal"
+            value="Upload doc for Proposal">Upload doc for Proposal</div>
+    </div>
+    <div id="userButtons">
+        <label id="username">Placeholder Name: </label>
+        <input type="submit" id="logout" name="logout" value="Logout">
+        <input type="submit" id="back" name="back" value="back">
+    </div>
 </body>
 
 </html>
