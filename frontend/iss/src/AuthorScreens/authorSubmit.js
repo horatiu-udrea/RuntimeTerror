@@ -60,6 +60,11 @@ $(document).ready(function () {
                 alert("you can  not include the same author twice");
             } else {
                 authors.push({ name: name, email: email });
+                let toType = "";
+                authors.forEach(element => {
+                    toType += "Added Author " + element.name + " " + element.email + "<br>";
+                });
+                document.getElementById("authorsDeets").innerHTML = toType;
             }
             document.getElementById("proposalAuthorName").value = "";
             document.getElementById("proposalAuthorEmail").value = "";

@@ -36,7 +36,7 @@ $(document).ready(function () {
 
     $("#back").click(function () {
         
-        window.location = "/authorImproveAndUpdate.html";
+        window.location = "./authorImproveAndUpdate.html";
 
     });
 
@@ -50,7 +50,7 @@ $(document).ready(function () {
         complete: function (dataPapers, statusText) {
             if (dataPapers.statusText == "OK") {
                 dataPapers.responseJSON.forEach(element => {
-                    if (element.paperId == window.localStorage.getItem("selectedProposal")) {
+                    if (element.paperId == window.localStorage.getItem("selectedProposalId")) {
                         addItem(element);
                     }
                 });

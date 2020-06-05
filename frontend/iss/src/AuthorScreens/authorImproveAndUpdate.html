@@ -15,22 +15,27 @@
 
 </head>
 
-<body style="background-color: #FAF3DD;">
-    
+<body id="main" style="background-color: #FAF3DD;">
+
     <div class="columnDisplay" style="left: 50%; transform: translateX(-50%); position: absolute;">
-        <ul id="authorProposals" style="z-index:10; list-style: none;">
-            <span id="proposalTitle"></span>
-        </ul>
-        <span id="SectionDetails"></span>
-        <div class="ribbonButton" type="submit" id="addProposal" name="addProposal" value="Add New Proposal">Add New Proposal</div>
-        <div class="ribbonButton" type="submit" id="improveProposal" name="improveProposal" value="Improve Proposal">Improve Proposal</div>
-        <div class="ribbonButton" type="submit" id="uploadProposal" name="uploadProposal" value="Upload doc for Proposal">Upload doc for Proposal</div>
+        <div id="styleMain">
+            <ul id="authorProposals" style="z-index:10; list-style: none;">
+                <span id="proposalTitle"></span>
+            </ul>
+            <span id="SectionDetails"></span>
+        </div>
+        <div class="ribbonButton" type="submit" id="addProposal" name="addProposal" value="Add New Proposal">Add New
+            Proposal</div>
+        <div class="ribbonButton" type="submit" id="improveProposal" name="improveProposal" value="Improve Proposal">
+            Improve Proposal</div>
+        <div class="ribbonButton" type="submit" id="uploadProposal" name="uploadProposal"
+            value="Upload doc for Proposal">Upload doc for Proposal</div>
     </div>
     <div id="userButtons">
-        <label id="username">Placeholder Name: </label> 
+        <label id="username">Placeholder Name: </label>
         <input type="submit" id="logout" name="logout" value="Logout">
         <input type="submit" id="back" name="back" value="back">
-</div>
+    </div>
 </body>
 
 </html>

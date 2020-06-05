@@ -38,7 +38,7 @@ $(document).ready(function () {
 
     $("#back").click(function () {
         
-        window.location = "/authorImproveAndUpdate.html";
+        window.location = "./authorImproveAndUpdate.html";
 
     });
 
@@ -86,7 +86,7 @@ $(document).ready(function () {
             addRecommendations();
         }
     });
-    $("#uploadPaper").click(function () {
+    $("#upload").click(function () {
         var form = $("#Upload")[0];
         var files = new FormData(form);
 
@@ -123,7 +123,7 @@ $(document).ready(function () {
         formedRecomm += "</dl>";
         document.getElementById("PaperReviews").innerHTML = formedRecomm;
     }
-    $("#submitProposal").click(function () {
+    $("#improve").click(function () {
         $.ajax({
             type: "PUT",
             url: HOST + PORT + "/paper",
