@@ -42,7 +42,6 @@ $(document).ready(function () {
             document.getElementById("improveProposal").style.visibility = "hidden";
             document.getElementById("uploadProposal").style.visibility = "hidden";
             document.getElementById("SectionDetails").style.visibility = "hidden";
-            document.getElementById("improveProposal").style.visibility = "visible";
             document.getElementById("uploadProposal").innerHTML = "Upload Doc for presentation";
             document.getElementById("addProposal").style.visibility = "hidden";
             document.getElementById("SectionDetails").style.visibility = "visible";
@@ -51,7 +50,7 @@ $(document).ready(function () {
             var li = document.createElement("li");
             li.setAttribute('id', -1);
             li.setAttribute('class', "proposalTitle");
-            li.setAttribute('style', "font-size: x-large; text-align:center; color: rgb(255, 214, 29); font-family: 'Arial Black', Gadget, sans-serif; list-style: none;");
+            li.setAttribute('style', "font-size: x-large; text-align:center; color:black; font-family: 'Arial Black', Gadget, sans-serif; list-style: none;");
             li.appendChild(document.createTextNode("You can not do anything in this phase"));
             ul.appendChild(li);
         }

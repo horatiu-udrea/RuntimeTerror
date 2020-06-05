@@ -136,7 +136,7 @@ $(document).ready(function () {
                 processData: false,  // Important!
                 contentType: false,
                 cache: false,
-                url: HOST + PORT + "/paper/full/" + window.localStorage.getItem("selectedProposal"),
+                url: HOST + PORT + "/paper/full/" + window.localStorage.getItem("selectedProposalId"),
                 data: files,
                 complete: function (dataPapers, statusText) {
                     if (dataPapers.statusText == "OK") {
@@ -144,6 +144,7 @@ $(document).ready(function () {
                     } else {
                         alert("an error ocurred when uploading");
                     }
+                    console.log(dataPapers);
                 }
             });
         } else {
