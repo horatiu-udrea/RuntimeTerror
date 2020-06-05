@@ -15,7 +15,7 @@ class SectionDAO(id: EntityID<Int>) : IntEntity(id), Section
     override var roomName by SectionTable.roomName
     var sessionChairId by SectionTable.sessionChair
     var userId by SectionTable.userId
-    var paperId by SectionTable.paperId
+    override var paperId by SectionTable.paperId
     override var name by SectionTable.name
     override var startTime by SectionTable.startTime
     override var endTime by SectionTable.endTime

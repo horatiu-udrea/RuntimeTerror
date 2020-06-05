@@ -1,5 +1,7 @@
-body{
-    max-width: 50%;
-    margin: auto;
-    background-color: #FAF3DD;
+body {
+    background: url("../../resources/New_York.jpg") no-repeat center;
+    background-size: cover;
+   
+    padding: 0;
+    overflow: hidden;
 }
