@@ -23,7 +23,8 @@ Content-Type: application/json
 {
   "name": "text",
   "startTime": "10/10/2010",
-  "endTime": "12/12/2010"
+  "endTime": "12/12/2010",
+  "roomName" : "r1"
 }
 
 ### Choose section chair

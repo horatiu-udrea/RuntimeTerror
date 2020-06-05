@@ -110,9 +110,26 @@ $(document).ready(function () {
                         console.log("fail");
                     }
                 }
-            
+
             })
+        });
+        // console.log(checkedReviewers)
+
+    })
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
+
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
     });
-    // console.log(checkedReviewers)
-})
 });

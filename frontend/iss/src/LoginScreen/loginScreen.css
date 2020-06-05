@@ -24,10 +24,6 @@ body,html{
     clip-path: polygon(50% 100%, 100% var(--lowerTrianglePoint), 100% 0, 0 0, 0 var(--lowerTrianglePoint));
 }
 
-.clickableStripe{
-
-}
-
 .stripeText{
     position: absolute;
     bottom: 6%;
@@ -49,7 +45,7 @@ body,html{
     user-select: none;
 }
 
-input[type=text]{
+input[type=text],input[type=password]{
     background-color: transparent;
     border-style: none;
     border-bottom: solid red 1px;
@@ -65,7 +61,7 @@ input[type=text]{
     height: 6%;
 }
 
-input[type=text]:focus {
+input[type=text]:focus,input[type=password]:focus {
     outline:none;
 }
 

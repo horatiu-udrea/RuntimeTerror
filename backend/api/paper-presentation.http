@@ -5,4 +5,4 @@ GET {{URL}}/paper/accepted
 GET {{URL}}/paper/remaining
 
 ### Get remaining authors for paper
-GET {{URL}}/paper/remaining/1
+GET {{URL}}/paper/remaining/8

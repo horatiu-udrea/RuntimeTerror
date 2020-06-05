@@ -3,7 +3,7 @@ Useful select queries
 */
 
 /*
-Select the name and submit paper early as text
+CONFERENCE
 */
 SELECT currentphase AS CurrentPhase, name AS ConferenceName,
        IF(submitpaperearly = 0, 'Authors cannot upload their full paper with their paper abstract.',
@@ -11,7 +11,7 @@ SELECT currentphase AS CurrentPhase, name AS ConferenceName,
 FROM conference;
 
 /*
-Select everything from the bidpapers table and display besides the user id, the username, password and type
+BID PAPERS
 */
 SELECT U.username AS Username, p.name AS PaperName,
 CASE
@@ -25,26 +25,37 @@ INNER JOIN papers p on bidpapers.fk_paperid = p.pk_paperid;
 
 
 /*
-Select name and status from papers table
+PAPERS
 */
-SELECT name AS PaperName,
+SELECT papers.name AS PaperName, username AS UserName,
 CASE
-    WHEN status = 1 THEN 'Undecided'
-    WHEN status = 2 THEN 'Accepted'
-    WHEN status = 3 THEN 'Rejected'
-    WHEN status = 4 THEN 'Conflicting'
+    WHEN papers.status = 1 THEN 'Undecided'
+    WHEN papers.status = 2 THEN 'Accepted'
+    WHEN papers.status = 3 THEN 'Rejected'
+    WHEN papers.status = 4 THEN 'Conflicting'
 END AS Status
-FROM papers;
+FROM papers
+INNER JOIN papersubmissions p on papers.pk_paperid = p.fk_paperid
+INNER JOIN users u on p.fk_userid = u.pk_userid;
 
 /*
-Select username and paper name from the paper submissions table
+SECTIONS
+*/
+
+SELECT a.username AS SessionChair, u.username AS AuthorUsername, p.name AS PaperName, sections.name AS SectionName FROM sections
+INNER JOIN users u on sections.fk_userid = u.pk_userid
+INNER JOIN papers p on sections.fk_paperid = p.pk_paperid
+INNER JOIN users a on sections.fk_sessionchair = a.pk_userid;
+
+/*
+PAPER SUBMISSIONS
 */
 SELECT username AS Username, p.name AS PaperName FROM papersubmissions
 INNER JOIN users ON papersubmissions.fk_userid = users.pk_userid
 INNER JOIN papers p on papersubmissions.fk_paperid = p.pk_paperid;
 
 /*
-Select username, paper and qualifier
+REVIEWS
 */
 SELECT username AS Username, p.name AS PaperName,
 CASE
@@ -61,16 +72,10 @@ FROM reviews
 INNER JOIN users u on reviews.fk_userid = u.pk_userid
 INNER JOIN papers p on reviews.fk_paperid = p.pk_paperid;
 
-/*
-Select username, paper name and the name of the section
-*/
 
-SELECT a.username AS SessionChair, u.username AS AuthorUsername, p.name AS PaperName, sections.name AS SectionName FROM sections
-INNER JOIN users u on sections.fk_userid = u.pk_userid
-INNER JOIN papers p on sections.fk_paperid = p.pk_paperid
-INNER JOIN users a on sections.fk_sessionchair = a.pk_userid;
 
 /*
+USERS
 Select the name, username and password for certain actors
 -- 1 - Author
 -- 2 - Program Committee

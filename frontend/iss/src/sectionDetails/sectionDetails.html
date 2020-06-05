@@ -4,6 +4,9 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        Create Section
+    </title>
     <style>
         * {
             box-sizing: border-box
@@ -11,12 +14,62 @@
 
         #box {
             position: absolute;
-            background-color: #e7e7e7;
-            color: black;
-            opacity: 0.7;
-            margin-left: 45%;
-            margin-top: 20%;
+            left:50%;
+            transform: translateX(-50%);
 
+            box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+            background-color: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(5px);
+            
+            width: 50%;
+            height: 100%;
+            clip-path: polygon(0% 100%, 90% 100%, 100% 0%, 10% 0%);
+        
+            z-index:2;
+
+            text-align: center;
+        }
+
+        #innerBox{
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            color:white;
+            font-family: "Arial Black", Gadget, sans-serif;
+            font-size: large;
+        }
+
+        #rightStripe{
+            position: absolute;
+            left:83%;
+
+            top:-10%;
+            width: 10%;
+            height: 200%;
+            transform: rotate(6.2deg);
+
+            background-color: rgb(255, 255, 255);
+        }
+
+        #leftStripe{
+            position: absolute;
+            left:10%;
+
+            top:-10%;
+            width: 0.5%;
+            height: 200%;
+            transform: rotate(6.2deg);
+
+            background-color: orange;
+        }
+
+        @keyframes animation{
+            40%{width: 0%;}
+        }
+
+        .animuu{
+            animation: animation 0.4s;
         }
 
         .mySlides1 {
@@ -76,28 +129,27 @@
 
     <div class="slideshow-container">
         <div class="mySlides1">
-            <img src="../../../resources/img_mountains_wide.jpg" style="width:100%">
+            <img src="../../../resources/Details1.jpg" style="width:100%">
         </div>
 
         <div class="mySlides1">
-            <img src="../../../resources/img_mountains_wide.jpg" style="width:100%">
+            <img src="../../../resources/Details3.jpg" style="width:100%">
         </div>
 
         <div class="mySlides1">
-            <img src="../../../resources/img_mountains_wide.jpg" style="width:100%">
+            <img src="../../../resources/Details2.jpg" style="width:100%">
         </div>
 
         <a class="prev" >&#10094;</a>
         <a class="next">&#10095;</a>
     </div>
 
-    <span class="label other" id="box">
-        Otherjfbcbaef;c
-        esr<br>
-        fgr<br>
-        dfasr<br>
-        dg<br>
-        rsfg<br>
+    <div id='rightStripe'></div>
+    <div id='leftStripe'></div> 
+
+    <span id="box">
+        <div id="innerBox"></div>
+
     </span>
     <script type ="module">
         import {HOST, PORT} from "../Globuls.js";
@@ -105,8 +157,16 @@
         let idx = 0;
         var slideId = ["mySlides1"]
         let info = [];
-        $.ajax({
 
+        $(".prev")
+        .on("click", function(){
+            $("#box").addClass('animuu');
+        })
+        $("#box").on("animationend", function(){
+            $("#box").removeClass('animuu');
+        });
+
+        $.ajax({
             type: "GET",
             contentType: "application/json",
             url: HOST + PORT + "/section",
@@ -119,12 +179,12 @@
 
                         info.push({
                             id: element.sectionId, value: ("Name " + element.name +
-                                "<br>Session Chair name " + element.sessionChairName +
-                                "<br>Presenter Name " + element.userId +
+                                "<br>Session Chair name " + element.sessionChair +
+                                "<br>Presenter Name " + element.user +
                                 "<br> Start time " + element.startTime +
                                 "<br> End Time " + element.endTime +
                                 "<br> Room Name " + element.roomName +
-                                + "<br>")
+                                + "<br>") // add paper
                         })
                     });
                 }
@@ -144,10 +204,18 @@
             if (n > x.length) { slideIndex[no] = 1 }
             if (n < 1) { slideIndex[no] = x.length }
             for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
+                $(x[i]).fadeOut(500);
             }
-            x[slideIndex[no] - 1].style.display = "block";
-            document.getElementById("box").innerHTML = info[idx].value; 
+            $(x[slideIndex[no] - 1]).fadeIn(500);
+
+            
+            $("#box").addClass('animuu');document.getElementById("innerBox").innerHTML = info[idx].value;
+            $("#box").on("animationend", function(){
+                $("#box").removeClass('animuu');
+            });
+
+
+            
             idx = (idx + n) % info.length;
             if(idx == -1) idx = info.length-1;
             if(idx == info.length-1) idx = 0;

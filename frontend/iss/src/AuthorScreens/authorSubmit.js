@@ -1,7 +1,31 @@
 import { HOST, PORT } from "../Globuls.js"
-
+$.ajaxSetup({
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    }
+});
+// change screens and put enabeling buttons
+// phase1 : submit, improve
+// phase2 : ... diagrama http trello
 $(document).ready(function () {
     let authors = []
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
+           
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
+    });
     $("#addMoreAuthors").click(function () {
         let name = document.getElementById("proposalAuthorName").value;
         let email = document.getElementById("proposalAuthorEmail").value;
