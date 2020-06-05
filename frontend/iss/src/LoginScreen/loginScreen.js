@@ -25,8 +25,8 @@ function resetToDefaultAnimated(d1, d2, d3) {
     });
 }
 
-function callAlert(message, messageYes, messageNo, actionYes, actionNo){
-    $("#alertMessage").text(message);   
+function callAlert(message, messageYes, messageNo, actionYes, actionNo) {
+    $("#alertMessage").text(message);
     $("#alertButtonYes").click(actionYes);
     $("#alertButtonNo").click(actionNo);
     $("#alertButtonYes").text(messageYes);
@@ -35,7 +35,7 @@ function callAlert(message, messageYes, messageNo, actionYes, actionNo){
 }
 
 $(document).ready(function () {
-    
+
     let defaultLoginStripeHeight = $("#loginButtonStripe").height();
     let defaultSignUpStripeHeight = $("#signUpButtonStripe").height();
     let defaultTextBoxesHeight = $("#textboxesStripe").height();
@@ -138,7 +138,7 @@ $(document).ready(function () {
                             complete: function (dataConference, statusText) {
                                 if (dataConference.statusText == "OK") {
                                     let split = dataConference.responseJSON.biddingDeadline.split("/");
-                                    bidDate = new Date(split[2]+"-"+split[1]+"-"+split[0]);
+                                    bidDate = new Date(split[2] + "-" + split[1] + "-" + split[0]);
                                     phase = dataConference.responseJSON.currentPhase;
                                     console.log(role, phase);
                                     localStorage.setItem("phase", phase);
@@ -152,7 +152,7 @@ $(document).ready(function () {
 
                                     if (role == 2) {
                                         callAlert("What would you like to log in as?", "Author", "PcMember", function () {
-                                            
+
                                             if (phase == 1) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                             else if (phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                             else if (phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
@@ -164,13 +164,13 @@ $(document).ready(function () {
                                                     else window.location.href = "../ReviewingScreen/reviewingScreen.html";
                                                     // modify grades
                                                 }
-                                                
+
                                                 else window.location.href = "../unavailable/unavailable.html";
                                             });
-                                        }
-// oricine cu role > 3 poate schimba datele
+                                    }
+                                    // oricine cu role > 3 poate schimba datele
                                     if (role == 3) {
-                                        if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
+                                        if (phase == 0) window.location.href = "../ConferenceScreens/createConference.html";
                                         else if (phase == 2) {
                                             callAlert("Assign papers to reviewers, or deal with conflicting papers?", "Assign", "Conflicting", function () {
                                                 window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
@@ -179,36 +179,37 @@ $(document).ready(function () {
                                                     window.location.href = "../ConflictingDiscussion/conflictingDiscussion.html";
                                                 });
                                         }
-                                        
+
                                         else window.location.href = "../unavailable/unavailable.html";
                                     }
 
                                     if (role == 4) {
                                         if (phase == 0) window.location.href = "../ConferenceScreens/changeDate.html";
                                         else if (phase == 2) window.location.href = "../AssignToReviewerScreen/assignToReviewer.html";
-                                        
-                                        else window.location.href =  "../unavailable/unavailable.html";
+
+                                        else window.location.href = "../unavailable/unavailable.html";
                                     }
 
                                     if (role == 5) {
                                         if (phase == 0)
-                                        callAlert("Pick Pc members or update conference?", "Pick members", "Update Conference", 
-                                        function () {
-                                            window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
-                                        },
-                                        function () {
-                                            window.location.href = "../ConferenceScreens/CreateConference.html"
-                                        });
+                                            callAlert("Pick Pc members or update conference?", "Pick members", "Update Conference",
+                                                function () {
+                                                    window.location.href = "../PcMemberPickScreen/pcMemberPickScreen.html";
+                                                },
+                                                function () {
+                                                    window.location.href = "../ConferenceScreens/CreateConference.html"
+                                                });
                                         else if (phase == 1) window.location.href = "../ConferenceScreens/CreateConference.html"; // change accounts.
                                         else if (phase == 2) window.location.href = "../ConferenceScreens/CreateConference.html";
-                                        else if (phase == 3)
-                                        callAlert("Create sections or update conference?", "Create Sections", "Update Conference", 
-                                        function () {
-                                            window.location.href = window.location.href = "../CreateSection/createSection.html";
-                                        },
-                                        function () {
-                                            window.location.href = "../ConferenceScreens/CreateConference.html"
-                                        });
+                                        else if (phase == 3) {
+                                            callAlert("Create sections or update conference?", "Create Sections", "Update Conference",
+                                                function () {
+                                                    window.location.href = window.location.href = "../CreateSection/createSection.html";
+                                                },
+                                                function () {
+                                                    window.location.href = "../ConferenceScreens/CreateConference.html"
+                                                });
+                                        }
                                         else window.location.href = "../unavailable/unavailable.html";
                                     }
 

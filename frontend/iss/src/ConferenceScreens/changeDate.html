@@ -8,27 +8,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="./changeDate.js" type="module"></script>
+    <link rel="stylesheet" href="changeDate.css">
 
 </head>
 
 <body style="background-color: #FAF3DD;">
     <!-- Print out conference details here -->
+    <div id="textfiled">
+        <div id="cn">
+            <span id="conferenceDetails"></span>
 
-    <span id="conferenceDetails"></span>
+            <br>
+            Change Submissions Dealdline : <input type="date" class="styleTextField"
+                id="changeConferenceSubmissionsDeadline" name="trip-start">
+            <br>
+            <br>
+            Change Proposals Deadline: <input type="date" class="styleTextField" id="changeConferenceProposalsDeadline"
+                name="trip-start">
+            <br>
+            <br>
+            Change Bidding Deadline : <input type="date" class="styleTextField" id="changeConferenceBiddingDeadline"
+                name="trip-start">
+            <br>
+            <br>
+            <input type="submit" name="chnageDateConference" class="styleTextField" id="changeDateConference"
+                value="Change date">
+            <br>
+            <br>
+            <!--Andu added some shit here, sowwy-->
+            Change Phase : <select id="phaseSelect" class="styleTextField">
+                <option value="Phase" disabled selected>Phase</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+            <br>
+            <br>
+            <input type="submit" class="styleTextField" name="chnageDateConference" id="changeDateConference"
+                value="Change phase">
+            <br>
+            <br>
+        </div>
+    </div>
+    <input type="submit" id="logout" name="logout" value="Logout">
 
-
-    Change Submissions Dealdline : <input type="date" id="changeConferenceSubmissionsDeadline" name="trip-start">
-    <br>
-    Change Proposals Deadline: <input type="date" id="changeConferenceProposalsDeadline" name="trip-start">
-    <br>
-    Change Bidding Deadline : <input type="date" id="changeConferenceBiddingDeadline" name="trip-start">
-    <br>
-    <input type="submit" name="chnageDateConference" id="changeDateConference" value="Change date">
-    
-    <!--Andu added some shit here, sowwy-->
-    Change Phase : <select id="phaseSelect"><option value="Phase" disabled selected>Phase</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-    <br>
-    <input type="submit" name="chnageDateConference" id="changeDateConference" value="Change date">
 </body>
 
 </html>

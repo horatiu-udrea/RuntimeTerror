@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="./createConference.js" type="module"></script>
+    <link rel="stylesheet" href="createConference.css">
 
 </head>
 <!-- Conferences should have : 
@@ -21,28 +22,43 @@
         8. submit paper early - bool -->
 
 <body style="background-color: #FAF3DD;">
-
-    Conference Name: <input type="text" name="ConferenceName" id="conferenceName" placeholder="conference name">
-    <br>
-    Coneference Current Phase: <input type="text" name="ConferenceCurrentPhase" id="conferenceCurrentPhase" placeholder="conference current phase">
-    <br>
-    Start Date:<input type="date" id="conferenceStartDate" name="trip-start">
-    <br>
-    End Date: <input type="date" id="conferenceEndDate" name="trip-start">
-    <br>
-    Submissions Dealdline : <input type="date" id="conferenceSubmissionsDeadline" name="trip-start">
-    <br>
-    Proposals Deadline: <input type="date" id="conferenceProposalsDeadline" name="trip-start">
-    <br>
-    Bidding Deadline : <input type="date" id="conferenceBiddingDeadline" name="trip-start">
-    <br>
-    Allow Early Paper Submission: <select id="coneferenceEarlySubmissions">
-        <option value="yes">Yes</option>
-        <option value="no">NO</option>
-    </select>
-    <br>
+    <div id="textfiled">
+        <div id="cn">
+            Conference Name: <input type="text" name="ConferenceName" id="conferenceName" class="styleTextField"
+                placeholder="conference name">
+            <br>
+            <br>
+            Coneference Current Phase: <input type="text" name="ConferenceCurrentPhase" class="styleTextField"
+                id="conferenceCurrentPhase" placeholder="conference current phase">
+            <br>
+            <br>
+            Start Date:<input type="date" id="conferenceStartDate" class="styleTextField" name="trip-start">
+            <br> <br>
+            End Date: <input type="date" id="conferenceEndDate" class="styleTextField" name="trip-start">
+            <br>
+            <br>
+            Submissions Dealdline : <input type="date" class="styleTextField" id="conferenceSubmissionsDeadline"
+                name="trip-start">
+            <br>
+            <br>
+            Proposals Deadline: <input type="date" class="styleTextField" id="conferenceProposalsDeadline"
+                name="trip-start">
+            <br>
+            <br>
+            Bidding Deadline : <input type="date" class="styleTextField" id="conferenceBiddingDeadline"
+                name="trip-start">
+            <br>
+            <br>
+            Allow Early Paper Submission: <select id="coneferenceEarlySubmissions" class="styleTextField">
+                <option value="yes">Yes</option>
+                <option value="no">NO</option>
+            </select>
+            <br>
+        </div>
+    </div>
+    <div id="changeconf">
     <input type="submit" name="createConference" id="createConference" value="Update Conference"><br>
-    
+    </div>
     <input type="submit" id="logout" name="logout" value="Logout">
 </body>
 

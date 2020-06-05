@@ -1,0 +1,129 @@
+body {
+    background: url("../../resources/home.jpg") no-repeat center;
+    background-size: cover;
+   
+    padding: 0;
+    overflow: hidden;
+}
+#cssDesignList {
+    background-color: #A9A9A9;
+    position: absolute;
+    height: 70%;
+    width: 30%;
+    opacity: 0.8;
+    margin-top: 50px;
+    margin-left: 50px;
+    font-size: 30px;
+
+    text-shadow: black;
+    /* tex */
+}
+
+
+#deets {
+    background-color: #A9A9A9;
+    position: absolute;
+    height: 70%;
+    width: 30%;
+    opacity: 0.8;
+    margin-top: 50px;
+    margin-left: 800px;
+    font-size: 20px;
+    visibility: hidden;
+    text-shadow: black;
+    transition: opacity 2s;
+    transition-timing-function: ease-in;
+    
+}
+#deets #paperDetails{
+    position: absolute;
+    margin-top: 10%;
+    text-align: center;
+}
+
+
+#deets #accept{
+    position: absolute;
+    margin-top: 90%;
+    margin-left:40px;
+    text-align: center;
+}
+
+#deets #reject{
+    position: absolute;
+    margin-top: 90%;
+    margin-left: 140px;
+    text-align: center;
+}
+
+#deets #conflict{
+    position: absolute;
+    margin-top: 90%;
+    margin-left: 240px;
+    text-align: center;
+}
+
+#deets .fade-in {
+	opacity: 0.8;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+    animation-duration: 2s;
+    
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0.8;
+	}
+}
+#changeconf {
+    position: absolute;
+    margin-top: 30%;
+    margin-left: 34.15%;
+    font-size: 30px;
+    width: 360px;
+    height: 100px;
+    text-align: center;
+
+    background-color: darkgrey;
+    opacity: 0.8;
+}
+#changeconf #link{
+    position: absolute;
+    margin-top: 30px;
+    margin-left: -160px;
+    color: black;
+    border-radius: 10%;
+}
+#logout{
+    position: absolute;
+    margin-top: 38%;
+    margin-left:44%;
+    height: 50px;
+    width: 100px;
+    border-radius: 10%;
+    background-color: #a9a9a9;
+    font:bold;
+    opacity: 0.85;
+}
+#logout {
+    transition-duration: 0.4s;
+  }
+  
+  #logout:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+  
+#changeconf {
+    transition-duration: 0.4s;
+  }
+  
+  #changeconf:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
