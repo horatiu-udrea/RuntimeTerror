@@ -8,6 +8,20 @@ $.ajaxSetup({
 });
 
 $(document).ready(function () {
+    let phase = localStorage.getItem("phase");
+    if (phase == 1) {
+        document.getElementById("improveProposal").style.visibility = "hidden";
+    } else {
+        if (phase == 2) {
+            document.getElementById("addProposal").style.visibility = "hidden";
+            document.getElementById("improveProposal").style.visibility = "hidden";
+            document.getElementById("uploadProposal").style.visibility = "hidden";
+        }
+        if (phase == 3) {
+            document.getElementById("improveProposal").style.visibility = "visible";
+            document.getElementById("uploadProposal").value = "Upload Doc for presentation";
+        }
+    }
 
     $.ajax({
         type: "GET",
@@ -43,7 +57,7 @@ $(document).ready(function () {
                 } else {
                     data = dataPapers.responseJSON;
                     addAllProposals(data);
-                    
+
                 }
             } else {
                 alert("can not get papers for this author");
@@ -68,7 +82,7 @@ $(document).ready(function () {
         }
 
     }
-     var previousID = -1;
+    var previousID = -1;
 
     $("#addProposal").click(function () {
         location.href = "./authorSubmit.html";
@@ -82,7 +96,22 @@ $(document).ready(function () {
     function keepInStore(title) {
         window.localStorage.setItem("selectedProposal", title);
     }
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
 
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
+    });
     document.addEventListener('click', function (event) {
         try {
             document.getElementById(previousID).style = "font-family:'Times New Roman'; font-size:12px; color:black"

@@ -116,19 +116,24 @@ $(document).ready(function () {
         let start = bidding[0] + "/" + bidding[1] + "/" + bidding[2];
         let endformat = $("#conferenceEndDate").val().replace(/-/g, "/").split("/").reverse();
         let end = endformat[0] + "/" + endformat[1] + "/" + endformat[2];
-
+        // console.log(document.getElementById("author").value)
         $.ajax({
             type: "PUT",
             contentType: "application/json",
             url: HOST + PORT + "/section",
             dataType: "json",
             data: JSON.stringify({
+                sessionChairId: document.getElementById("chairs").value,
+                userId: document.getElementById("author").value,
                 name: $("#conferenceName").val(),
                 startTime: start,
                 endTime: end,
+                roomName: document.getElementById("roomName").value,
+                paperId: document.getElementById("papers").value,
 
             }),
             complete: function (data) {
+                
                 if (data.statusText == "OK") {
                     alert("successfully created Section");
                     window.location = "../../dist/index.html";
@@ -140,5 +145,21 @@ $(document).ready(function () {
 
         });
 
+    });
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
+
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
     });
 });

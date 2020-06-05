@@ -16,6 +16,7 @@ fun Route.paperPresentationRoute(paperPresentationController: PaperPresentationC
 {
     route("/paper") {
         get("/accepted") {
+            authorize(UserType.ADMIN)
             val papers = paperPresentationController.getAcceptedPapers()
             call.respond(papers.toDTO())
         }
