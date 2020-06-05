@@ -52,7 +52,7 @@ $(document).ready(function () {
     });
 
 
-    $("#submitProposal").click(function () {
+    $("#submitProposal").click(function () { //TODO Validate input
         console.log({
             name: $("#proposalName").val(),
             field: $("#proposalFiels").val(),
@@ -61,27 +61,42 @@ $(document).ready(function () {
             authors: authors,
             abstract: $('#proposalDescription').val()
         });
-        $.ajax({
-            type: "POST",
-            url: HOST + PORT + "/paper",
-            contentType: "application/json",
-            data: JSON.stringify({
-                name: $("#proposalName").val(),
-                field: $("#proposalFiels").val(),
-                keywords: $("#proposalKeywords").val(),
-                topics: $("#proposalTopics").val(),
-                authors: authors,
-                abstract: $('#proposalDescription').val()
-            }),
-            complete: function (data) {
-                if (data.statusText == "OK") {
-                    alert("submission was successfully introduced");
 
-                } else {
-                    alert("fail");
+        var notEmptyArguments = true;
+        if ($("#proposalName").val() === "" && 
+            $("#proposalFiels").val() === "" && 
+            $("#proposalKeywords").val() === "" && 
+            $("#proposalTopics").val() === "" && 
+            authors.length === 0 && 
+            $('#proposalDescription').val() === "") {
+            notEmptyArguments = false;
+        }
+        if (notEmptyArguments) {
+
+            $.ajax({
+                type: "POST",
+                url: HOST + PORT + "/paper",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    name: $("#proposalName").val(),
+                    field: $("#proposalFiels").val(),
+                    keywords: $("#proposalKeywords").val(),
+                    topics: $("#proposalTopics").val(),
+                    authors: authors,
+                    abstract: $('#proposalDescription').val()
+                }),
+                complete: function (data) {
+                    if (data.statusText == "OK") {
+                        alert("submission was successfully introduced");
+
+                    } else {
+                        alert("fail");
+                    }
                 }
-            }
-        })
-
+            })
+        }
+        else{
+            alert("Fill all fields.")
+        }
     });
 });
