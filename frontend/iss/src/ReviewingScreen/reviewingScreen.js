@@ -43,9 +43,26 @@ $(document).ready(function () {
                 let value = valueOfElemen.paperDTO;
                 papers.push(value);
                 reviews.push(valueOfElemen);
+                //Status 4 = conflicting
+                    let li = document.createElement("li");
+                    li.innerHTML = "<div class='title'>"+value.name+"</div><div class='content' height='0'><div class='pdfDisplay'><iframe src='"+HOST+PORT+"/document/"+value.documentPath+"' width='50%' scrolling='no'></iframe></div><div class ='textInput'><textarea class='recommendationInput' rows='10' cols='50'></textarea></div><div class='buttons'><button class='upButton'>Submit</button><select class='gradePuicker' name='Grade'><option value = 0 disabled selected>Grade</option><option value = 1>1</option><option value = 2>2</option><option value = 3>3</option><option value = 4>4</option><option value = 5>5</option><option value = 6>6</option><option value = 7>7</option></select></div></div>";
+                    li.setAttribute("value", value.paperId)
 
-                code += "<li value = '"+value.paperId+"'>"+"<div class='title'>"+value.name+"</div><div class='content' height='0'><div class='pdfDisplay'><iframe src='"+HOST+PORT+"/document/"+value.documentPath+"' width='50%' scrolling='no'></iframe></div><div class ='textInput'><textarea class='recommendationInput' rows='10' cols='50'></textarea></div><div class='buttons'><button class='upButton'>Submit</button><select class='gradePuicker' name='Grade'><option value = 0 disabled selected>Grade</option><option value = 1>1</option><option value = 2>2</option><option value = 3>3</option><option value = 4>4</option><option value = 5>5</option><option value = 6>6</option><option value = 7>7</option></select></div></div>"+"</li>";
-                $("#list").html(code);
+                    if(valueOfElemen.qualifier == 0){
+                        $(li).find("div.content").css("border-bottom","solid yellow 1px");
+                        $(li).find("div.title").css("border-bottom","solid yellow 1px");
+                    }
+                    else{
+                        $(li).find("div.content").css("border-bottom","solid lime 1px");
+                        $(li).find("div.title").css("border-bottom","solid lime 1px");
+                    }
+
+                    if(value.status == 4){
+                        $(li).find("div.content").css("border-bottom","solid red 1px");
+                        $(li).find("div.title").css("border-bottom","solid red 1px");
+                    }
+
+                document.getElementById("list").appendChild(li);
             });
         }
     }); 
@@ -129,6 +146,37 @@ $(document).ready(function () {
         $("#commentsDiv").css("display", "none");
     })
 
+    $.ajax({
+        type: "get",
+        url: HOST + PORT + "/authentication",
+        contentType: "application/json",
+        
+        complete: function (data) {
+            $("#username").text(data.responseJSON.name)
+        }
+    })
+    
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
+           
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
+    });
 
+    $("#back").click(function () {
+        
+        window.location = "../../dist/index.html";
+
+    });
 });
 

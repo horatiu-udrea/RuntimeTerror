@@ -39,7 +39,7 @@ $(document).ready(function () {
 
     $("#back").click(function () {
         
-        window.location = "/authorImproveAndUpdate.html";
+        window.location = "./authorImproveAndUpdate.html";
 
     });
 

@@ -38,30 +38,6 @@ body{
 
 }
 
-
-#logout{
-    position: absolute;
-    margin-top: 19%;
-    margin-left:81%;
-    height: 95px;
-    width: 100px;
-    border-radius: 10%;
-    background-color: #a9a9a9;
-    border-radius: 10%;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: bolder;
-    font-size: 20px;
-    opacity: 0.85;
-    /* fon */
-}
-#logout {
-    transition-duration: 0.4s;
-  }
-  
-  #logout:hover {
-    background-color: #a9a9a9; /* Green */
-    color: white;
-  }
   
 #createConference {
     transition-duration: 0.4s;
@@ -88,3 +64,60 @@ body{
     /* background-color: #a9a9a9;
     opacity: 0.8; */
 }
+
+#userButtons{
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  left: 0%;
+  top: 90%;
+
+  border-top: 2px solid white;
+  border-spacing: 3px;
+
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+  background-color: rgba(255, 255, 255, .15);
+  backdrop-filter: blur(5px);
+
+  width: 430px;
+  height: 40px;
+
+  clip-path: polygon(0% 0%, 0% 100%, 90% 100%, 100% 0%);
+
+  color:rgb(0, 0, 0);
+  font-family: "Lucida Console", Monaco, monospace;
+} 
+#userButtons>*{
+  border: none;
+}
+#username{
+  position: absolute;
+  top:50%;
+  transform: translateY(-50%);
+}
+#logout{
+  position: absolute;
+  left: 40%;
+  width: 23%;
+  top:50%;
+  height: 100%;
+  transform: translateY(-50%);
+  clip-path: polygon(40% 0%, 0% 100%, 60% 100%, 100% 0%);
+  background-color: orange;
+  color:rgb(0, 0, 0);
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+
+#back{
+  position: absolute;
+  left:65%;
+  top:50%;
+  height: 100%;
+  transform: translateY(-50%);
+  width: 23%;
+  clip-path: polygon(40% 0%, 0% 100%, 60% 100%, 100% 0%);
+  background-color: orange;
+  color:rgb(0, 0, 0);
+  font-family: "Arial Black", Gadget, sans-serif;
+}
+

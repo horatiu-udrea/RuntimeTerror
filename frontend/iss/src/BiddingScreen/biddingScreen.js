@@ -65,5 +65,38 @@ $(document).ready(function () {
         
         bidOnPaper($(this).parents("li")[0], 3);
     });
+
+    $.ajax({
+        type: "get",
+        url: HOST + PORT + "/authentication",
+        contentType: "application/json",
+        
+        complete: function (data) {
+            $("#username").text(data.responseJSON.name)
+        }
+    })
+    
+    $("#logout").click(function () {
+        $.ajax({
+            type: "POST",
+            url: HOST + PORT + "/authentication/logout",
+            contentType: "application/json",
+           
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    localStorage.clear();
+                    window.location = "../../dist/index.html";
+                } else {
+                    alert("fail");
+                }
+            }
+        })
+    });
+
+    $("#back").click(function () {
+        
+        window.location = "../../dist/index.html";
+
+    });
 });
 
