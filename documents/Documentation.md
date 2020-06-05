@@ -3,7 +3,7 @@
 
 ---
 
-# Short presentation
+# Requirements
 
 The objective of the Conference Management System is to automate the management of information for a scientific conference and simplify the processes related to it.  
 
@@ -16,26 +16,50 @@ These include, but are not limited to:
 
 # Stages of implementing the application
 
-### Requirements elicitation
-1. Getting familiar with the requirement and the new team
-1. Creating the **Use Case Diagram**
-1. Writing the [Software Requirements Specification](SRS.md) document
-### Analysis
-1. Creating the **Class Diagram**
-1. Creating the **Sequence Diagrams**
-### System design
-1. Choosing the implementation **languages** and **frameworks**
-1. Creating the **Architecture Diagram**
-### Object design
-1. Refining the **Class diagram**
-1. Creating the **Database Diagram**
-1. Creating **wireframes** for the UI
-### Implementation
-1. Implementing the **database**
-1. Implementing the **ORM**
-1. Implementing the **HTTP API**
-1. Implementing the **Controllers**
-1. Implementing the **UI**
-### Testing
-1. **Integration testing** with API calls
-1. **System testing** using the UI
+### 1. Requirements elicitation
+- Getting familiar with the requirement and the new team
+- Creating the **Use Case Diagram**
+- Writing the [Software Requirements Specification](SRS.md) document
+### 2. Analysis
+- Creating the **Class Diagram**
+- Creating the **Sequence Diagrams**
+### 3. System design
+- Choosing the implementation **languages** and **frameworks**
+- Creating the **Architecture Diagram**
+### 4. Object design
+- Refining the **Class diagram**
+- Creating the **Database Diagram**
+- Creating **wireframes** for the UI
+### 5. Implementation
+- Implementing the **database**
+- Implementing the **ORM**
+- Implementing the **HTTP API**
+- Implementing the **Controllers**
+- Implementing the **UI**
+### 6. Testing
+- **Integration testing** with API calls
+- **System testing** using the UI
+
+# Tools and technologies used
+
+- **Diagrams:** [Visual Paradigm](https://www.visual-paradigm.com/), [draw.io](http://draw.io)
+- **Frontend:**
+    - Languages: [HTML](https://en.wikipedia.org/wiki/HTML), 
+    [CSS](https://ro.wikipedia.org/wiki/Cascading_Style_Sheets), 
+    [JavaScript](https://ro.wikipedia.org/wiki/JavaScript), 
+    [jQuery](https://jquery.com/)
+    - Tools: [Node.js](https://nodejs.org/), [Webpack](https://webpack.js.org/)
+    - Editor: [Visual Studio Code](https://code.visualstudio.com/)
+- **Backend:**  
+    - Language: [Kotlin](https://kotlinlang.org/)
+    - ORM: [Exposed](https://github.com/JetBrains/Exposed)
+    - Server: [Ktor](https://ktor.io/)
+    - Editor: [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+- **Database:** [MySQL](https://www.mysql.com/), [DataGrip](https://www.jetbrains.com/datagrip/)
+- **Others:** [Trello](https://trello.com/), [Git](https://git-scm.com/), [GitHub](https://github.com/)
+
+# Diagrams
+_See [images](images)._
+
+# Help
+_See [manual](Manual.md)._
