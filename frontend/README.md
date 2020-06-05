@@ -1,10 +1,8 @@
-# Requirements:
-- install npm from : https://www.npmjs.com/get-npm
+## Requirements:
+Install [npm](https://www.npmjs.com/get-npm)
 
+## Configuration:
+In `frontend/iss` execute `install.bat`
 
-# Installation guides:
-- in folder frontend/iss click on install.bat file
-
-
-# Run guide:
-- in folder frontend/iss click on start.bat file
+## Running the frontend server:
+In `frontend/iss` execute `start.bat`

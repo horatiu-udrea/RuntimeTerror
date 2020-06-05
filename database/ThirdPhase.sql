@@ -23,7 +23,6 @@ DELETE FROM conference;
 DELETE FROM reviews;
 DELETE FROM bidpapers;
 DELETE FROM papersubmissions;
-DELETE FROM usersectionchoices;
 DELETE FROM sections;
 DELETE FROM papers;
 DELETE FROM users;
@@ -58,10 +57,10 @@ INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, va
 INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei Suciu', 'Andrei99', 'Andrei99', 'ubb Cluj', 'AS99@gmail.com', 'Andreiweb.com', 1, 2);
 INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei Andrei', 'Andreii99', 'Andreii99', 'ubb Cluj', 'AAA99@gmail.com', 'Andreiiweb.com', 1, 2);
 
-INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad ZUngureanu', 'ZVlad99', 'ZVlad99', 'ubb Cluj', 'ZVU99@gmail.com', 'Vladweb.com', 1, 2);
-INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Razvan ZZoltan', 'ZZoli99', 'ZZoli99', 'ubb Cluj', 'ZRZ99@gmail.com', 'Zoliweb.com', 1, 2);
-INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei ZSuciu', 'ZAndrei99', 'ZAndrei99', 'ubb Cluj', 'ZAS99@gmail.com', 'Andreiweb.com', 1, 2);
-INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Andrei ZAndrei', 'ZAndreii99', 'ZAndreii99', 'ubb Cluj', 'ZAA99@gmail.com', 'Andreiiweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('George Andreescu', 'ZVlad99', 'ZVlad99', 'ubb Cluj', 'ZVU99@gmail.com', 'Vladweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Matei Papa', 'ZZoli99', 'ZZoli99', 'ubb Cluj', 'ZRZ99@gmail.com', 'Zoliweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Natan Tiutiu', 'ZAndrei99', 'ZAndrei99', 'ubb Cluj', 'ZAS99@gmail.com', 'Andreiweb.com', 1, 2);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Matei Popescu', 'ZAndreii99', 'ZAndreii99', 'ubb Cluj', 'ZAA99@gmail.com', 'Andreiiweb.com', 1, 2);
 
 INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Antoniu Stan', 'Toni99', 'Toni99', 'ubb Cluj', 'TS99@gmail.com', 'Toniweb.com', 1, 3);
 INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Darius Ternovan', 'Darius99', 'Darius99', 'ubb Cluj', 'DT99@gmail.com', 'Dariusweb.com', 1, 4);
@@ -74,6 +73,7 @@ Authors:
 -- 2 of them submitted only abstract
 -- 1 of them submitted abstract + full paper
 -- (because we set the conference to be special and to allow the authors to submit the full paper early)
+-- Add 12 authors
  */
 
 INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Mihai Berechet', 'Mihai99', 'Mihai99', 'Cambridge', 'MB99@gmail.com', 'Mihaiweb.com', 1, 1);
@@ -84,9 +84,24 @@ INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, va
 INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Bianca Berlea', 'Bianca99', 'Bianca99', 'poli Bucuresti', 'BB99@gmail.com', 'Biancaweb.com', 1, 1);
 INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Bianca Caluian', 'BiancaC99', 'BiancaC99', 'ubb Cluj', 'BC99@gmail.com', 'BiancaCweb.com', 1, 1);
 
+-- another 12 authors
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Mihai Georgescu', 'ZMihai99', 'ZMihai99', 'Cambridge', 'ZMB99@gmail.com', 'Mihaiweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Corina Ionescu', 'ZCorina99', 'ZCorina99', 'ubb Cluj', 'ZCM99@gmail.com', 'Corinaweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad Georgescu', 'ZVladE99', 'ZVladE99', 'poli Bucuresti', 'ZVE99@gmail.com', 'Vladeweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Ana Georgescu', 'ZAna99', 'ZAna99', 'ubb Cluj', 'ZAE99@gmail.com', 'Anaweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Diana Ionescu', 'ZDiana99', 'ZDiana99', '-', 'ZDS99@gmail.com', 'Dianaweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Bianca Andrei', 'ZBianca99', 'ZBianca99', 'poli Bucuresti', 'ZBB99@gmail.com', 'Biancaweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Bianca Tanase', 'ZBiancaC99', 'ZBiancaC99', 'ubb Cluj', 'ZBC99@gmail.com', 'BiancaCweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Mihai Berechet', 'ZZMihai99', 'ZZMihai99', 'Cambridge', 'ZZMB99@gmail.com', 'Mihaiweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Corina Georgescu', 'ZZCorina99', 'ZZCorina99', 'ubb Cluj', 'ZZCM99@gmail.com', 'Corinaweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Vlad Grecu', 'ZZVladE99', 'ZZVladE99', 'poli Bucuresti', 'ZZVE99@gmail.com', 'Vladeweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Ana Stan', 'ZZAna99', 'ZZAna99', 'ubb Cluj', 'ZZAE99@gmail.com', 'Anaweb.com', 1, 1);
+INSERT INTO CMS.users (name, username, password, affiliation, email, webpage, validated, type) VALUES ('Diana Serian', 'ZZDiana99', 'ZZDiana99', '-', 'ZZDS99@gmail.com', 'Dianaweb.com', 1, 1);
+
+
 /*
 Abstracts and Papers:
--- 8 entries in the Papers and Papers submission table
+-- 8 entries in the Papers and 20 entries in the Papers submission table (each paper will have at least 2 authors)
 -- all of them will have the abstracts and the document path for the full paper
  */
 INSERT INTO CMS.papers (name, abstract, field, keywords, topics, documentpath, status) VALUES ('soft pentru medicina', 'medicinaAbstract', 'medicina', 'medicina, software', 'medicina Topic', 'mediPaper.pdf', 1);
@@ -107,6 +122,19 @@ INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (6, 18) ON DUPLI
 INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (7, 17) ON DUPLICATE KEY UPDATE fk_userid = 17;
 INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (8, 11) ON DUPLICATE KEY UPDATE fk_userid = 11;
 
+-- added 12 paper submissions
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (1, 25) ON DUPLICATE KEY UPDATE fk_userid = 25;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (2, 26) ON DUPLICATE KEY UPDATE fk_userid = 26;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (3, 27) ON DUPLICATE KEY UPDATE fk_userid = 27;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (4, 28) ON DUPLICATE KEY UPDATE fk_userid = 28;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (5, 29) ON DUPLICATE KEY UPDATE fk_userid = 29;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (6, 30) ON DUPLICATE KEY UPDATE fk_userid = 30;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (7, 31) ON DUPLICATE KEY UPDATE fk_userid = 31;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (8, 32) ON DUPLICATE KEY UPDATE fk_userid = 32;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (1, 33) ON DUPLICATE KEY UPDATE fk_userid = 33;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (2, 34) ON DUPLICATE KEY UPDATE fk_userid = 34;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (3, 35) ON DUPLICATE KEY UPDATE fk_userid = 35;
+INSERT INTO CMS.papersubmissions (fk_paperid, fk_userid) VALUES (4, 24) ON DUPLICATE KEY UPDATE fk_userid = 24;
 
 /*
  Our 8 PC Members will bid for the 4 papers that we have so far
@@ -274,6 +302,3 @@ INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presenta
 INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (9, 20, 4, 'MPPSec', 'mpp.pptx', '2020-09-01 16:00:00', '2020-09-01 20:00:00', '');
 INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (10, 17, 7, 'CarSec', 'car.pptx', '2020-09-03 12:00:00', '2020-09-03 18:00:00', '');
 
-/*
--- Now that all the sections are created we need to make all the users select the section they would like to attend
- */

@@ -11,7 +11,8 @@ data class SectionDTO(
         val startTime: String,
         val endTime: String,
         val roomName: String,
-        val paper: String
+        val paper: String,
+        val paperId: Int
 )
 
 fun Section.toDTO(): SectionDTO {
@@ -24,7 +25,8 @@ fun Section.toDTO(): SectionDTO {
             startTime.toString(dateTimeFormatter),
             endTime.toString(dateTimeFormatter),
             roomName,
-            paper
+            paper,
+            paperId!!
     )
 }
 
