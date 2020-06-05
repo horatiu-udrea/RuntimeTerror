@@ -67,5 +67,3 @@ $(document).ready(function () {
             $("#errorMessage").text("");
     });
 });
-
-//TODO Email & url validation with regex disable button if stuff is invalid (duh)
