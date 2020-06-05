@@ -8,6 +8,7 @@ Useful links:
  - [Frontend](frontend)
  - [Backend](backend)
  - [Database](database)
+ - [API](backend/api)
 
 # How to use the project
 Open the root folder in [IntelliJ IDEA](https://www.jetbrains.com/idea/) and make use of the run configurations.
