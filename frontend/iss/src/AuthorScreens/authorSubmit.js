@@ -70,7 +70,7 @@ $(document).ready(function () {
             authors.length === 0 && 
             $('#proposalDescription').val() === "") {
             notEmptyArguments = false;
-        }
+        } 
         if (notEmptyArguments) {
 
             $.ajax({

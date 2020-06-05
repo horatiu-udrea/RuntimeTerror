@@ -144,7 +144,7 @@ $(document).ready(function () {
                                     localStorage.setItem("phase", phase);
 
                                     if (role == 1) {
-                                        if (phase == 1) window.location = "../AuthorScreens/authorSubmit.html";
+                                        if (phase == 1) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                         else if (phase == 2) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                         else if (phase == 3) window.location = "../AuthorScreens/authorImproveAndUpdate.html";
                                         else window.location = "../unavailable/unavailable.html";

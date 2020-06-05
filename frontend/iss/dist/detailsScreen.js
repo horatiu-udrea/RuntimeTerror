@@ -1,7 +1,26 @@
 import {HOST, PORT} from "../src/Globuls.js"
 
+$.ajaxSetup({
+    crossDomain: true,
+    xhrFields: {
+        withCredentials: true
+    }
+});
+
+
+function callAlert(message, messageYes, messageNo, actionYes, actionNo){
+    $("#alertMessage").text(message);   
+    $("#alertButtonYes").click(actionYes);
+    $("#alertButtonNo").click(actionNo);
+    $("#alertButtonYes").text(messageYes);
+    $("#alertButtonNo").text(messageNo);
+    $("#alertBackground").toggle();
+}
+
 $(document).ready(function () {
     let phase = 0;
+
+    $("#alertBackground").toggle();
 
     $.ajax({
         type: "GET",
@@ -32,76 +51,90 @@ $(document).ready(function () {
                 contentType: "application/json",
                 url: HOST + PORT + "/authentication",
                 dataType: "json",
-                success: function (data) {
+                complete: function (data) {
                     let role = data.responseJSON.type;
         
                     if (role == 1) {
-                        if (phase == 1) $("#link").attr("../src/AuthorScreens/authorSubmit.html");
-                        else if (phase == 2) $("#link").attr("../src/AuthorScreens/authorImproveAndUpdate.html");
-                        else if (phase == 3) $("#link").attr("../src/AuthorScreens/authorImproveAndUpdate.html");
-                        else $("#link").attr("../src/unavailable/unavailable.html");
+                        if (phase == 1) $("#link").attr("href", "../src/AuthorScreens/authorSubmit.html");
+                        else if (phase == 2) $("#link").attr("href", "../src/AuthorScreens/authorImproveAndUpdate.html");
+                        else if (phase == 3) $("#link").attr("href", "../src/AuthorScreens/authorImproveAndUpdate.html");
+                        else $("#link").attr("href", "../src/unavailable/unavailable.html");
                     }
         
                     if (role == 2) {
-                        callAlert("What would you like to log in as?", "Author", "PcMember", function () {
+                        $("#link").click(function (e) {
+                            e.preventDefault();
+                        
+                        callAlert("Check your papers or review other ones?", "Author", "PcMember", 
+                        function () {
                             
-                            if (phase == 1) $("#link").attr("../src/AuthorScreens/authorImproveAndUpdate.html");
-                            else if (phase == 2) $("#link").attr("../src/AuthorScreens/authorImproveAndUpdate.html");
-                            else if (phase == 3) $("#link").attr("../src/AuthorScreens/authorImproveAndUpdate.html");
-                            else $("#link").attr("../src/unavailable/unavailable.html");
+                            if (phase == 1) window.location.href = "../src/AuthorScreens/authorImproveAndUpdate.html";
+                            else if (phase == 2) window.location.href = "../src/AuthorScreens/authorImproveAndUpdate.html";
+                            else if (phase == 3) window.location.href = "../src/AuthorScreens/authorImproveAndUpdate.html";
+                            else window.location.href = "../src/unavailable/unavailable.html";
                         },
                             function () {
                                 if (phase == 2) {
-                                    if (today < bidDate) $("#link").attr("../src/BiddingScreen/biddingScreen.html");
-                                    else $("#link").attr("../src/ReviewingScreen/reviewingScreen.html");
+                                    if (today < bidDate) window.location.href =  "../src/BiddingScreen/biddingScreen.html";
+                                    else window.location.href =  "../src/ReviewingScreen/reviewingScreen.html";
                                     // modify grades
                                 }
                                 
-                                else $("#link").attr("../src/unavailable/unavailable.html");
+                                else window.location.href =  "../src/unavailable/unavailable.html";
                             });
+                        });
                         }
 
                     if (role == 3) {
-                        if (phase == 0) $("#link").attr("../src/ConferenceScreens/changeDate.html");
+                        if (phase == 0) $("#link").attr("href", "../src/ConferenceScreens/changeDate.html");
                         else if (phase == 2) {
+                            $("#link").click(function (e) {
+                                e.preventDefault();
                             callAlert("Assign papers to reviewers, or deal with conflicting papers?", "Assign", "Conflicting", function () {
-                                $("#link").attr("../src/AssignToReviewerScreen/assignToReviewer.html");
+                                window.location.href =  "../src/AssignToReviewerScreen/assignToReviewer.html";
                             },
                                 function () {
-                                    $("#link").attr("../src/ConflictingDiscussion/conflictingDiscussion.html");
+                                    window.location.href =  "../src/ConflictingDiscussion/conflictingDiscussion.html";
                                 });
+                            })
                         }
                         
-                        else $("#link").attr("../src/unavailable/unavailable.html");
+                        else $("#link").attr("href", "../src/unavailable/unavailable.html");
                     }
         
                     if (role == 4) {
-                        if (phase == 0) $("#link").attr("../src/ConferenceScreens/changeDate.html");
-                        else if (phase == 2) $("#link").attr("../src/AssignToReviewerScreen/assignToReviewer.html");
+                        if (phase == 0) $("#link").attr("href", "../src/ConferenceScreens/changeDate.html");
+                        else if (phase == 2) $("#link").attr("href", "../src/AssignToReviewerScreen/assignToReviewer.html");
                         
                         else $("#link").attr( "../src/unavailable/unavailable.html");
                     }
         
                     if (role == 5) {
                         if (phase == 0)
+                        $("#link").click(function (e) {
+                            e.preventDefault();
                         callAlert("Pick Pc members or update conference?", "Pick members", "Update Conference", 
                         function () {
-                            $("#link").attr("../src/PcMemberPickScreen/pcMemberPickScreen.html");
+                            window.location.href =  "../src/PcMemberPickScreen/pcMemberPickScreen.html";
                         },
                         function () {
-                            $("#link").attr("../src/ConferenceScreens/CreateConference.html")
+                            window.location.href =  "../src/ConferenceScreens/CreateConference.html"
                         });
-                        else if (phase == 1) $("#link").attr("../src/ConferenceScreens/CreateConference.html"); // change accounts.
-                        else if (phase == 2) $("#link").attr("../src/ConferenceScreens/CreateConference.html");
+                        })
+                        else if (phase == 1) $("#link").attr("href", "../src/ConferenceScreens/CreateConference.html"); // change accounts.
+                        else if (phase == 2) $("#link").attr("href", "../src/ConferenceScreens/CreateConference.html");
                         else if (phase == 3)
+                        $("#link").click(function (e) {
+                            e.preventDefault();
                         callAlert("Create sections or update conference?", "Create Sections", "Update Conference", 
                         function () {
-                            $("#link").attr("../src/CreateSection/createSection.html");
+                            window.location.href =  "../src/CreateSection/createSection.html";
                         },
                         function () {
-                            $("#link").attr("../src/ConferenceScreens/CreateConference.html")
+                            window.location.href =  "../src/ConferenceScreens/CreateConference.html"
                         });
-                        else $("#link").attr("../src/unavailable/unavailable.html");
+                    })
+                        else $("#link").attr("href", "../src/unavailable/unavailable.html");
                     }
                 },
                 error: function (data) {
