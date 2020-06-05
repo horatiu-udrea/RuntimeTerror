@@ -6,29 +6,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Change Date</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="changeDate.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="./changeDate.js" type="module"></script>
-
 </head>
 
-<body style="background-color: #FAF3DD;">
+<body >
     <!-- Print out conference details here -->
-
     <span id="conferenceDetails"></span>
+    <div class="form-group">
+        <label for="changeConferenceSubmissionsDeadline">Change Submission Deadline: </label>
+        <input type="date" class="form-control" id="changeConferenceSubmissionsDeadline" name="trip-start">
+    </div>
 
+    <div class="form-group">
+        <label for="changeConferenceProposalsDeadline">Change Proposals Deadline: </label>
+        <input type="date" class="form-control" id="changeConferenceProposalsDeadline" name="trip-start">
+    </div>
+    <div class="form-group">
+        <label for="changeConferenceBiddingDeadline">Change Bidding Deadline : </label>
+        <input type="date" class="form-control" id="changeConferenceBiddingDeadline" name="trip-start">
+    </div>
+    <div class="form-group">
+         <select id="phaseSelect" class="form-control">
+             <option value="Phase" disabled selected>Phase</option>
+             <option value="1">1</option>
+             <option value="2">2</option><option value="3">3</option></select>
+    </div>
 
-    Change Submissions Dealdline : <input type="date" id="changeConferenceSubmissionsDeadline" name="trip-start">
-    <br>
-    Change Proposals Deadline: <input type="date" id="changeConferenceProposalsDeadline" name="trip-start">
-    <br>
-    Change Bidding Deadline : <input type="date" id="changeConferenceBiddingDeadline" name="trip-start">
-    <br>
-    <input type="submit" name="chnageDateConference" id="changeDateConference" value="Change date">
-    
     <!--Andu added some shit here, sowwy-->
-    Change Phase : <select id="phaseSelect"><option value="Phase" disabled selected>Phase</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select>
-    <br>
-    <input type="submit" name="chnageDateConference" id="changeDateConference" value="Change date">
+    <div class="form-group">]
+        Change the conference date:<input type="submit" name="chnageDateConference" id="changeDateConference" value="Change date">
+    </div>
 </body>
 
 </html>

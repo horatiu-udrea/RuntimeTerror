@@ -5,9 +5,11 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Create Conference</title>
+    <link rel="stylesheet" href="createConference.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="./createConference.js" type="module"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
 <!-- Conferences should have : 
@@ -20,13 +22,20 @@
         7. bidding deadline - date
         8. submit paper early - bool -->
 
-<body style="background-color: #FAF3DD;">
+<body>
 
-    Conference Name: <input type="text" name="ConferenceName" id="conferenceName" placeholder="conference name">
-    <br>
-    Coneference Current Phase: <input type="text" name="ConferenceCurrentPhase" id="conferenceCurrentPhase" placeholder="conference current phase">
-    <br>
-    Start Date:<input type="date" id="conferenceStartDate" name="trip-start">
+    <div class="form-group">
+        <label for="conferenceName">Conference Name:</label>
+        <input type="text" class="form-control" name="ConferenceName" id="conferenceName" placeholder="conference name">
+    </div>
+    <div class="form-group">
+        <label for="conferenceCurrentPhase">Coneference Current Phase: </label>
+        <input type="text" class="form-control" name="ConferenceCurrentPhase" id="conferenceCurrentPhase" placeholder="conference current phase">
+    </div>
+    <div class="form-group">
+        <label for="conferenceStartDate"> Start Date: </label>
+        <input type="date" class="form-control" id="conferenceStartDate" name="trip-start">
+    </div>
     <br>
     End Date: <input type="date" id="conferenceEndDate" name="trip-start">
     <br>
