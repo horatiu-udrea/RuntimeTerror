@@ -59,7 +59,8 @@ These include, but are not limited to:
 - **Others:** [Trello](https://trello.com/), [Git](https://git-scm.com/), [GitHub](https://github.com/)
 
 # Diagrams
-_See [images](images)._
+_See [images](images) for all diagrams_
+![Architecture diagram](images/Architecture%20Diagram.png)
 
 # Help
 _See [manual](Manual.md)._
