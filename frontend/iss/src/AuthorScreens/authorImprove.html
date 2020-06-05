@@ -14,39 +14,46 @@
 
 <body id="improveMain" style="background-color: #FAF3DD;">
     <!-- <span id="PaperDetails"></span> -->
-    <h1 id ="title">
-        
-    </h1>
-    <span id ="PaperDetails"></span>
-    <script>
-        document.getElementById("title").innerHTML = localStorage.getItem("selectedProposal");
-    </script>
-    Reviews for this paper are: 
-    <br>
-    <span id="PaperReviews"></span>
-   <br>
-    Improve the description of this proposal: <input type="text" name="proposalDescription" id="proposalDescription" placeholder="...description">
-    
-    <input type="submit" name="submitProposal" id="submitProposal" value="Improve Proposal">
-<br><br>
+    <!-- <div id="improvetextfiled"> -->
+    <div id="styleImprove">
+        <h1 id="title">
 
-    Upload the document for this paper :
-    <form id="Upload">
-        <input type="file" name="upload" accept="application/pdf,application/vnd.ms-excel" />
-    </form>
-<br>
-    <input type="submit" id="uploadPaper" value="Upload!" /><br>
+        </h1>
+        <span id="PaperDetails"></span>
+        <script>
+            document.getElementById("title").innerHTML = localStorage.getItem("selectedProposal");
+        </script>
+        Reviews for this paper are:
+        <br>
+        <span id="PaperReviews"></span>
+        <br>
+        <div id="improveOnRight">
+            Improve the description of this proposal: <input type="text" name="proposalDescription"
+                id="proposalDescription" placeholder="...description">
+
+            <input type="submit" name="submitProposal" id="improve" value="Improve Proposal">
+            <br><br>
+            <br><br>
+            Upload the document for this paper :
+            <form id="Upload">
+                <input type="file" name="upload" accept="application/pdf,application/vnd.ms-excel" />
+            </form>
+            <br>
+            <input type="submit" id="upload" value="Upload!" /><br>
+        </div>
+    </div>
+
+    <div id="userButtons">
+        <label id="username">Placeholder Name: </label>
+        <input type="submit" id="logout" name="logout" value="Logout">
+        <input type="submit" id="back" name="back" value="back">
+    </div>
     <!-- Upload the document for this paper :
     <form id="Upload">
         <input type="file" name="upload" accept="application/pdf,application/vnd.ms-excel" />
     </form> -->
 
     <!-- <input type="submit" id="uploadPaper" value = "Improve!"/> -->
-    <div id="userButtons">
-        <label id="username">Placeholder Name: </label> 
-        <input type="submit" id="logout" name="logout" value="Logout">
-        <input type="submit" id="back" name="back" value="back">
-</div>
 </body>
 
 </html>

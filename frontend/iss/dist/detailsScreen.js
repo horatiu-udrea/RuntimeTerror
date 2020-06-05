@@ -57,7 +57,7 @@ $(document).ready(function () {
 
 
             if (role == 1) {
-                if (phase == 1) $("#link").attr("href", "../src/AuthorScreens/authorSubmit.html");
+                if (phase == 1) $("#link").attr("href", "../src/AuthorScreens/authorImproveAndUpdate.html");
                 else if (phase == 2) $("#link").attr("href", "../src/AuthorScreens/authorImproveAndUpdate.html");
                 else if (phase == 3) $("#link").attr("href", "../src/AuthorScreens/authorImproveAndUpdate.html");
                 else $("#link").attr("href", "../src/unavailable/unavailable.html");
