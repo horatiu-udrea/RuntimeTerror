@@ -297,8 +297,8 @@ UPDATE papers SET status = 2 WHERE pk_paperid = 8;
 -- all the users will specify the sections that they would like to attend and based on that the room name
 -- will be assigned
  */
-INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (7, 22, 1, 'MedSec', 'med.pptx', '2020-09-01 16:00:00', '2020-09-01 18:00:00', '');
-INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (8, 23, 2, 'AISec', 'ai.pptx', '2020-09-02 12:00:00', '2020-09-02 20:00:00', '');
-INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (9, 20, 4, 'MPPSec', 'mpp.pptx', '2020-09-01 16:00:00', '2020-09-01 20:00:00', '');
-INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (10, 17, 7, 'CarSec', 'car.pptx', '2020-09-03 12:00:00', '2020-09-03 18:00:00', '');
+INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (7, 22, 1, 'MedSec', 'med.pptx', '2020-09-01 16:00:00', '2020-09-01 18:00:00', 'Iuliu Maniu');
+INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (8, 23, 2, 'AISec', 'ai.pptx', '2020-09-02 12:00:00', '2020-09-02 20:00:00', 'Vasile Calugareanu');
+INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (9, 20, 4, 'MPPSec', 'mpp.pptx', '2020-09-01 16:00:00', '2020-09-01 20:00:00', '2/I');
+INSERT INTO CMS.sections (fk_sessionchair, fk_userid, fk_paperid, name, presentationdocumentpath, starttime, endtime, roomname) VALUES (10, 17, 7, 'CarSec', 'car.pptx', '2020-09-03 12:00:00', '2020-09-03 18:00:00', '6/II');
 

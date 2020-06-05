@@ -27,14 +27,25 @@ INNER JOIN papers p on bidpapers.fk_paperid = p.pk_paperid;
 /*
 PAPERS
 */
-SELECT name AS PaperName,
+SELECT papers.name AS PaperName, username AS UserName,
 CASE
-    WHEN status = 1 THEN 'Undecided'
-    WHEN status = 2 THEN 'Accepted'
-    WHEN status = 3 THEN 'Rejected'
-    WHEN status = 4 THEN 'Conflicting'
+    WHEN papers.status = 1 THEN 'Undecided'
+    WHEN papers.status = 2 THEN 'Accepted'
+    WHEN papers.status = 3 THEN 'Rejected'
+    WHEN papers.status = 4 THEN 'Conflicting'
 END AS Status
-FROM papers;
+FROM papers
+INNER JOIN papersubmissions p on papers.pk_paperid = p.fk_paperid
+INNER JOIN users u on p.fk_userid = u.pk_userid;
+
+/*
+SECTIONS
+*/
+
+SELECT a.username AS SessionChair, u.username AS AuthorUsername, p.name AS PaperName, sections.name AS SectionName FROM sections
+INNER JOIN users u on sections.fk_userid = u.pk_userid
+INNER JOIN papers p on sections.fk_paperid = p.pk_paperid
+INNER JOIN users a on sections.fk_sessionchair = a.pk_userid;
 
 /*
 PAPER SUBMISSIONS
@@ -61,14 +72,7 @@ FROM reviews
 INNER JOIN users u on reviews.fk_userid = u.pk_userid
 INNER JOIN papers p on reviews.fk_paperid = p.pk_paperid;
 
-/*
-SECTIONS
-*/
 
-SELECT a.username AS SessionChair, u.username AS AuthorUsername, p.name AS PaperName, sections.name AS SectionName FROM sections
-INNER JOIN users u on sections.fk_userid = u.pk_userid
-INNER JOIN papers p on sections.fk_paperid = p.pk_paperid
-INNER JOIN users a on sections.fk_sessionchair = a.pk_userid;
 
 /*
 USERS
