@@ -8,33 +8,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="./createSection.js" type="module"></script>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="sectionForm.css">
 </head> 
 
 <body style="background-color: #FAF3DD;">
+    <div class="form-group">
+    <div class="form-group">
+        <label for="conferenceName">Section Name:</label>
+         <input type="text" class="form-control" name="ConferenceName" id="conferenceName" placeholder="section name">
+        <br>
+<!--        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">-->
+<!--        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+    </div>
+    <div class="form-group">
+        <label for="roomName">Room Name:</label>
+        <input type="text" class="form-control" name="RoomName" id="roomName" placeholder="room name">
+    </div>
+    <div class="form-group">
+        <label for="conferenceStartDate">Start time:</label>
+        <input type="date" class=form-control id="conferenceStartDate" name="trip-start">
+    </div >
+    <div class="form-group">
+        <label for="conferenceEndDate">End Time: </label>
+        <input type="date" class="form-control" id="conferenceEndDate" name="trip-start">
+    </div>
 
-    Section Name: <input type="text" name="ConferenceName" id="conferenceName" placeholder="section name">
-   <br>
-   Room Name: <input type="text" name="RoomName" id="roomName" placeholder="room name">
-   <br>
-    Start time:<input type="date" id="conferenceStartDate" name="trip-start">
-    <br>
-    End Time: <input type="date" id="conferenceEndDate" name="trip-start">
-   
-    <br>
-    <select id="chairs" name = "Select a chair member">
+    <select id="chairs" name = "Select a chair member" class="form-control">
         <option selected = "selected"> Select a chair member</option>
        </select><br>
-       <select id="papers" name = "Select a paper">
+       <select id="papers" name = "Select a paper" class="form-control">
         <option selected = "selected"> Select a paper</option>
        </select><br>
        <span id="paperDetails"></span>
-       <select id="author" name = "Select an author">
+       <select id="author" name = "Select an author" class="form-control">
         <option selected = "selected"> Select an author</option>
        </select><br>
-    <input type="submit" name="createConference" id="createConference" value="Create Section"><br>
-    <a href="../ConferenceScreens/createConference.html">Change Conference Details</a>
-    <input type="submit" id="logout" name="logout" value="Logout">
+    <input type="submit" name="createConference" id="createConference" value="Create Section" class="form-control"><br>
+    <a href="../ConferenceScreens/createConference.html" class="form-control">Change Conference Details</a><br><br>
+    <input type="submit" id="logout" name="logout" value="Logout" class="form-control"><br>
+    </div>
 </body>
 
 </html>
