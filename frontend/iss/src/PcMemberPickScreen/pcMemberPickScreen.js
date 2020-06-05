@@ -55,7 +55,7 @@ $.ajaxSetup({
                     }),
                     complete: function (dataPut, statusText) {
                         if (dataPut == "OK") {
-                            $("#message").text("it worked.");
+                            alert("Updated Accounts");
                         }
                     }
                 });
@@ -68,7 +68,6 @@ $.ajaxSetup({
         fillList();
         $("#submitButton").click(function (e) {
             e.preventDefault();
-
             checkBoxes();
         });
 

@@ -45,7 +45,7 @@ $(document).ready(function () {
                 reviews.push(valueOfElemen);
                 //Status 4 = conflicting
                     let li = document.createElement("li");
-                    li.innerHTML = "<div class='title'>"+value.name+"</div><div class='content' height='0'><div class='pdfDisplay'><iframe src='"+HOST+PORT+"/document/"+value.documentPath+"' width='50%' scrolling='no'></iframe></div><div class ='textInput'><textarea class='recommendationInput' rows='10' cols='50'></textarea></div><div class='buttons'><button class='upButton'>Submit</button><select class='gradePuicker' name='Grade'><option value = 0 disabled selected>Grade</option><option value = 1>1</option><option value = 2>2</option><option value = 3>3</option><option value = 4>4</option><option value = 5>5</option><option value = 6>6</option><option value = 7>7</option></select></div></div>";
+                    li.innerHTML = "<div class='title'>"+value.name+"</div><div class='content' height='0'><div class='pdfDisplay'><iframe src='"+HOST+PORT+"/document/"+value.documentPath+"' width='50%' scrolling='no'></iframe></div><div class ='textInput'><textarea class='recommendationInput' rows='10' cols='50'></textarea></div><div class='buttons'><button class='upButton'>Submit</button><select class='gradePuicker' name='Grade'><option value = 0 disabled selected>Grade</option><option value = 1>Strong Accept</option><option value = 2>Accept</option><option value = 3>Weak Accept</option><option value = 4>Borderline Paper</option><option value = 5>Weak Reject</option><option value = 6>Reject</option><option value = 7>Strong Reject</option></select></div></div>";
                     li.setAttribute("value", value.paperId)
 
                     if(valueOfElemen.qualifier == 0){
