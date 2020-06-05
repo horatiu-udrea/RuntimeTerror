@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Create tables" type="DatabaseScript">
+    <script-file value="$PROJECT_DIR$/database/ddl.sql" />
+    <script-mode>FILE</script-mode>
+    <data-source id="45a192e9-2ad8-4ff9-8fef-5a1247dc1f9b" namespace="schema/&quot;CMS&quot;" />
+    <method v="2" />
+  </configuration>
+</component>

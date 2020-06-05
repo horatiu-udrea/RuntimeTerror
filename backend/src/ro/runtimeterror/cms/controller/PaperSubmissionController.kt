@@ -15,6 +15,7 @@ import ro.runtimeterror.cms.database.tables.UserTable
 import ro.runtimeterror.cms.model.Author
 import ro.runtimeterror.cms.model.Paper
 import ro.runtimeterror.cms.model.PaperStatus
+import ro.runtimeterror.cms.model.UserType
 import ro.runtimeterror.cms.model.validators.UserValidator
 
 class PaperSubmissionController
@@ -51,18 +52,33 @@ class PaperSubmissionController
         authors: List<Author>
     ) = transaction(connection) {
         UserValidator.exists(userID)
+        UserValidator.authorValidated(userID)
+
+        val newPaperId = addPaperAndGetID(name, abstract, field, keywords, topics)
+        markAsAuthor(userID, newPaperId)
+
+        authors.forEach { author ->
+            val user = UserDAO.find { UserTable.email eq author.email }.firstOrNull() ?:UserDAO.new {
+                this@new.name = author.name
+                this@new.username = ""
+                this@new.password = ""
+                this@new.affiliation = ""
+                this@new.email = author.email
+                this@new.webPage = ""
+                this@new.validated = false
+                this@new.typeValue = UserType.AUTHOR.value
+            }
+            markAsAuthor(user.id.value, newPaperId)
+        }
+    }
+
+    private fun markAsAuthor(userID: Int, newPaperId: Int)
+    {
 
         PaperSubmissionTable.insert {
-            it[paperID] = addPaperAndGetID(name, abstract, field, keywords, topics)
-            it[PaperSubmissionTable.userID] = userID
+            it[this@insert.paperID] = newPaperId
+            it[this@insert.userID] = userID
         }
-        authors
-            .forEach { author ->
-                UserTable.insert {
-                    it[username] = author.name
-                    it[email] = author.email
-                }
-            }
     }
 
     private fun addPaperAndGetID(name: String, abstract: String, field: String, keywords: String, topics: String): Int =
@@ -74,6 +90,7 @@ class PaperSubmissionController
                 newPaper[PaperTable.field] = field
                 newPaper[PaperTable.keywords] = keywords
                 newPaper[PaperTable.topics] = topics
+                newPaper[documentPath] = ""
                 newPaper[status] = PaperStatus.UNDECIDED.value
             }.value
         }

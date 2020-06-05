@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Submit Paper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="./authorSubmit.js" type="module"></script>
+    <link rel="stylesheet" href="authors.css">
+
+</head>
+
+<body id= "submit" style="background-color: #FAF3DD;">
+    <div id="styleSubmit">
+        <span id ="authorsDeets">
+
+        </span>
+        Name of Proposal: <input type="text" class = "styleTextField" name="proposalName" id="proposalName" placeholder="proposal name">
+        <br><br>
+        Fields: <input type="text" class = "styleTextField"  name="proposalFields" id="proposalFiels"
+            placeholder="fields of interest in the proposal">
+        <br><br>
+        Keywords of the presentation : <input type="text" class = "styleTextField"  name="proposalKeywords" id="proposalKeywords"
+            placeholder="keywords in the proposal">
+        <br><br>
+        Topics of the proposal: <input type="text" class = "styleTextField"  name="proposalTopics" id="proposalTopics"
+            placeholder="topics of the proposal">
+        <br><br>
+        Authors of the proposal: <input type="text" class = "styleTextField"  name="proposalAuthorName" id="proposalAuthorName"
+            placeholder="author's name ">
+        <input type="text" name="proposalAuthorEmail" class = "styleTextField"  id="proposalAuthorEmail" placeholder="author's email">
+        <!-- <input type="submit" name="addMoreAuthors" id="addMoreAuthors" value="Add author"> -->
+        <br><br>
+        <label id="authorCount">Current number of authors added: 0</label><input type="submit" name="addMoreAuthors" id="addMoreAuthors" value="Add author">
+        
+        <br><br>
+        Description the proposal: <input type="text"  class = "styleTextField"  name="proposalDescription" id="proposalDescription"
+            placeholder="...description">
+        <br>
+        <br>
+    </div>
+    <input type="submit" name="submitProposal" id="submitProposal" value="Submit Proposal"><br>
+
+    <div id="userButtons">
+        <label id="username">Placeholder Name: </label>
+        <input type="submit" id="logout" name="logout" value="Logout">
+        <input type="submit" id="back" name="back" value="back">
+    </div>
+</body>
+
+</html>

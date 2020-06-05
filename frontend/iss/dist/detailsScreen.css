@@ -1,0 +1,201 @@
+
+
+html,body{
+    height: 100%;
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+    overflow: hidden;
+}
+
+
+#middleVid{
+    position: absolute;
+    left:10%;
+    height: 100%;
+    width: 100%;
+    clip-path: polygon(0% 50%, 100% 0%, 100% 100%);
+    z-index: -1;
+}
+
+#dimmer{
+    position: absolute;
+    left:10%;
+    height: 100%;
+    width: 100%;
+    clip-path: polygon(9.3% 45.2%, 9.4% 54.8%, 100% 0%, 100% 100%);
+    z-index: 0;
+    background-color: rgba(0, 0, 0, 0.568);
+}
+
+#topVid{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    clip-path: polygon(0% 0%, 100% 0%, 0% 50%);
+    z-index: -1;
+}
+
+
+#bottomVid{
+    position: absolute;
+    height: 100%;
+    left: -10%;
+    width: 100%;
+    clip-path: polygon(0% 50%, 0% 100%, 100% 100%);
+    z-index: -1;
+}
+
+#link{
+    position: absolute;
+    font-family: "Arial Black", Gadget, sans-serif;
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: orange;
+    left:50%;
+    top:90%;
+    transform: translateX(-50%);
+    transition-property: color, text-decoration-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+#link:hover{
+    color: orange;
+    text-decoration-color: white;
+}
+
+#contentContainer{
+    height: 50%;
+    width: 35%;
+    background-color: transparent;
+    top:25%;
+    left:65%;
+    position: absolute;
+}
+
+#title{
+    position: absolute;
+    font-family: "Lucida Console", Monaco, monospace;
+    color: rgb(255, 255, 255);
+    left:0%;
+    top:2%;
+    font-size: larger;
+    text-decoration: underline;
+    text-decoration-color: orange;
+}
+
+.content{
+    position: absolute;
+    font-family: "Lucida Console", Monaco, monospace;
+    color: white;
+}
+
+#dates{
+    font-size: smaller;
+    top:90%; 
+    left:50%; 
+    transform:translateX(-50%);
+}
+
+#name{
+    top:15%; 
+    left:10%;
+}
+
+#sectionDetails{
+    position: absolute;
+    font-family: "Lucida Console", Monaco, monospace;
+    color: rgb(255, 255, 255);
+    left:20%;
+    top:40%;
+    font-size: larger;
+    text-decoration: underline;
+    text-decoration-color: orange;
+}
+
+#sectionsLink,#sectionsLink>a{
+    position: absolute;
+    top: 93%;
+    left:50%;
+    width: 100px; 
+    transform:translateX(-50%);
+    text-decoration: none;
+    font-size: 15;
+
+    transition: color 0.3s ease;
+}
+
+#sectionsLink>a:hover{
+    color:orange;
+}
+
+.dashFont{
+    color:orange;
+}
+
+#alertOuter{
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 30%;
+    background-color: #8A8D91;
+    border-style: solid;
+    border-color: #C3BAAA;
+    border-width: 1px;
+    border-radius: 20px;
+}
+
+#alertBackground{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 400;
+    backdrop-filter: blur(5px);
+    top:0%;
+    left:0%;
+}
+
+.buttonDiv{
+    position: absolute;
+    /*clip-path: polygon(15% 0%, 100% 0, 85% 100%, 0% 100%);*/
+    width: 200px;
+    height: 18px;
+
+    font-family: DejaVu Sans Mono;
+    user-select: none;
+
+    /*border: solid rgb(167, 0, 0) 1px;  this adds a border on the top and bottom and top of the div.*/
+    transition-property: border-color; 
+    transition-duration: 0.5s;
+    transition-timing-function: ease-out;
+    background-color: transparent;
+    border-radius: 20px;
+    border: solid 2px transparent;
+}
+
+.buttonDiv:hover{
+    border-color: rgb(141, 238, 255);
+}
+
+#alertButtonYes{
+    top:80%;
+    left: 4%;
+    background-color: #DDDFDF;
+}
+
+#alertButtonNo{
+    top:80%;
+    left:60%;
+    background-color: #DDDFDF;
+}
+
+#alertMessage{
+    top:30%;
+    width: 70%;
+    font-size: large;
+    font-family: DejaVu Sans Mono;
+    color: black;
+}

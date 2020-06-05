@@ -4,6 +4,7 @@ import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.request.receive
 import io.ktor.response.respond
+import io.ktor.response.respondFile
 import io.ktor.routing.*
 import ro.runtimeterror.cms.controller.PaperSubmissionController
 import ro.runtimeterror.cms.exceptions.ProgramException
@@ -14,6 +15,7 @@ import ro.runtimeterror.cms.networking.dto.CreatePaperDTO
 import ro.runtimeterror.cms.networking.dto.toDTO
 import ro.runtimeterror.cms.networking.uploadFile
 import ro.runtimeterror.cms.networking.userSession
+import java.io.File
 
 
 fun Route.paperSubmissionRoute(paperSubmissionController: PaperSubmissionController)
@@ -55,8 +57,8 @@ fun Route.paperSubmissionRoute(paperSubmissionController: PaperSubmissionControl
         put("/full/{paperId}") {
             authorize(UserType.AUTHOR)
             val user = userSession()
-            val path = uploadFile()
             val paperId = call.parameters["paperId"]?.toInt() ?: throw ProgramException("Specify the paper id")
+            val path = uploadFile(user.id)
             paperSubmissionController.uploadFullPaper(path, paperId, user.id)
             call.respond(HttpStatusCode.OK)
         }

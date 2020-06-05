@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="pcMemberStyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="pcMemberPickScreen.js" type="module"></script>
+</head>
+    <body>
+        <ul id='listOfPapers'>
+        </ul>
+        <form class="form-group">
+            <label>
+                Role:
+            </label>
+            <select class="form-control" name="role" id="roleSelector">
+                <option value="1">Author</option>
+                <option value="2">Pc Member</option>
+                <option value="3">co Chair</option>
+                <option value="4">Chair</option>
+            </select><br>
+            <label for="validCheckbox" class="card-title">
+                Valid:
+            </label>
+            <input type="checkbox" name="Valid" id="validCheckbox"><br><br>
+            <button id="submitButton" type='button'>Submit</button>
+        </form>
+        <p id="message"></p>
+
+        <div id="userButtons">
+            <label id="username">Placeholder Name: </label> 
+            <input type="submit" id="logout" name="logout" value="Logout">
+        </div>
+    </body>
+</html>

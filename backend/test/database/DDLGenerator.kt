@@ -20,7 +20,7 @@ fun main()
                 SectionTable,
                 UserSectionChoiceTable
         )
-        val file = File("../database/ddl.sql")
+        val file = File("ddl.sql")
         file.createNewFile()
         file.bufferedWriter().use { out ->
             createStatements.forEach {

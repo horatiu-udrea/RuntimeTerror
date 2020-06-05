@@ -18,7 +18,7 @@ class UserController
         }
 
     fun changeUser(userId: Int, type: UserType, validated: Boolean) = transaction {
-            UserValidator.exists(userId)
+        UserValidator.exists(userId)
 
             UserTable.update({UserTable.id eq userId}) {
                 it[UserTable.type] = type.value

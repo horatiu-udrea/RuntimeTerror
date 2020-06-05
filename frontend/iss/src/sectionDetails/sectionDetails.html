@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        Create Section
+    </title>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        #box {
+            position: absolute;
+            left:50%;
+            transform: translateX(-50%);
+
+            box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+            background-color: rgba(255, 255, 255, .15);
+            backdrop-filter: blur(5px);
+            
+            width: 50%;
+            height: 100%;
+            clip-path: polygon(0% 100%, 90% 100%, 100% 0%, 10% 0%);
+        
+            z-index:2;
+
+            text-align: center;
+        }
+
+        #innerBox{
+            position: absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+            color:white;
+            font-family: "Arial Black", Gadget, sans-serif;
+            font-size: large;
+        }
+
+        #rightStripe{
+            position: absolute;
+            left:83%;
+
+            top:-10%;
+            width: 10%;
+            height: 200%;
+            transform: rotate(6.2deg);
+
+            background-color: rgb(255, 255, 255);
+        }
+
+        #leftStripe{
+            position: absolute;
+            left:10%;
+
+            top:-10%;
+            width: 0.5%;
+            height: 200%;
+            transform: rotate(6.2deg);
+
+            background-color: orange;
+        }
+
+        @keyframes animation{
+            40%{width: 0%;}
+        }
+
+        .animuu{
+            animation: animation 0.4s;
+        }
+
+        .mySlides1 {
+            display: none
+        }
+
+        img {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: -1;
+        }
+
+        /* Slideshow container */
+        .slideshow-container {
+            /* max-width: 1000px; */
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a grey background color */
+        .prev:hover,
+        .next:hover {
+            background-color: #f1f1f1;
+            color: black;
+        }
+
+        #userButtons{
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    left: 0%;
+    top: 90%;
+
+    border-top: 2px solid white;
+    border-spacing: 3px;
+
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+
+    width: 430px;
+    height: 40px;
+
+    clip-path: polygon(0% 0%, 0% 100%, 90% 100%, 100% 0%);
+
+    color:rgb(0, 0, 0);
+    font-family: "Lucida Console", Monaco, monospace;
+} 
+#userButtons>*{
+    border: none;
+}
+#username{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+#logout{
+    position: absolute;
+    left: 40%;
+    width: 23%;
+    top:50%;
+    height: 100%;
+    transform: translateY(-50%);
+    clip-path: polygon(40% 0%, 0% 100%, 60% 100%, 100% 0%);
+    background-color: orange;
+    color:rgb(0, 0, 0);
+    font-family: "Arial Black", Gadget, sans-serif;
+}
+
+#back{
+    position: absolute;
+    left:65%;
+    top:50%;
+    height: 100%;
+    transform: translateY(-50%);
+    width: 23%;
+    clip-path: polygon(40% 0%, 0% 100%, 60% 100%, 100% 0%);
+    background-color: orange;
+    color:rgb(0, 0, 0);
+    font-family: "Arial Black", Gadget, sans-serif;
+}
+    </style>
+</head>
+
+<body style="overflow:hidden; margin: 0; padding: 0;">
+
+    <!-- <h2 style="text-align:center">Sections Details</h2> -->
+
+    <div class="slideshow-container">
+        <div class="mySlides1">
+            <img src="../../../resources/Details1.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides1">
+            <img src="../../../resources/Details3.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides1">
+            <img src="../../../resources/Details2.jpg" style="width:100%">
+        </div>
+
+        <a class="prev" >&#10094;</a>
+        <a class="next">&#10095;</a>
+    </div>
+
+    <div id='rightStripe'></div>
+    <div id='leftStripe'></div> 
+
+    <span id="box">
+        <div id="innerBox"></div>
+
+    </span>
+        <div id="userButtons">
+        <label id="username">Placeholder Name: </label> 
+        <input type="submit" id="logout" name="logout" value="Logout">
+        <input type="submit" id="back" name="back" value="back">
+    </div>
+    <script type ="module">
+        import {HOST, PORT} from "../Globuls.js";
+        var slideIndex = [1, 1];
+        let idx = 0;
+        var slideId = ["mySlides1"]
+        let info = [];
+
+        $(".prev")
+        .on("click", function(){
+            $("#box").addClass('animuu');
+        })
+        $("#box").on("animationend", function(){
+            $("#box").removeClass('animuu');
+        });
+
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: HOST + PORT + "/section",
+            dataType: "json",
+            complete: function (data) {
+                if (data.statusText == "OK") {
+                    let sectionDeets = [];
+
+                    data.responseJSON.forEach(element => {
+
+                        info.push({
+                            id: element.sectionId, value: ("Name " + element.name +
+                                "<br>Session Chair name " + element.sessionChair +
+                                "<br>Presenter Name " + element.user +
+                                "<br> Start time " + element.startTime +
+                                "<br> End Time " + element.endTime +
+                                "<br> Room Name " + element.roomName +
+                                + "<br>") // add paper
+                        })
+                    });
+                }
+                showSlides(1, 0);
+            }
+        })
+        
+
+        function plusSlides(n, no) {
+            showSlides(slideIndex[no] += n, no);
+        }
+
+        function showSlides(n, no) {
+            var i;
+            var x = document.getElementsByClassName(slideId[no]);
+            console.log(x);
+            if (n > x.length) { slideIndex[no] = 1 }
+            if (n < 1) { slideIndex[no] = x.length }
+            for (i = 0; i < x.length; i++) {
+                $(x[i]).fadeOut(500);
+            }
+            $(x[slideIndex[no] - 1]).fadeIn(500);
+
+            
+            $("#box").addClass('animuu');document.getElementById("innerBox").innerHTML = info[idx].value;
+            $("#box").on("animationend", function(){
+                $("#box").removeClass('animuu');
+            });
+
+
+            
+            idx = (idx + n) % info.length;
+            if(idx == -1) idx = info.length-1;
+            if(idx == info.length-1) idx = 0;
+        }
+        document.getElementsByClassName("prev")[0].addEventListener("click", function() {
+            document.getElementsByClassName("prex").innerHTML = "&#10094;"  ;
+            plusSlides(-1, 0);
+
+        })
+        document.getElementsByClassName("next")[0].addEventListener("click", function() {
+            document.getElementsByClassName("next").innerHTML = "&#10095;"  ;
+            plusSlides(1, 0);
+
+        })
+        
+        $(document).ready(function () {
+            $.ajax({
+                type: "get",
+                url: HOST + PORT + "/authentication",
+                contentType: "application/json",
+                    
+                complete: function (data) {
+                    $("#username").text(data.responseJSON.name)
+                }
+            })
+            
+            $("#logout").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: HOST + PORT + "/authentication/logout",
+                    contentType: "application/json",
+                
+                    complete: function (data) {
+                        if (data.statusText == "OK") {
+                            localStorage.clear();
+                            window.location = "../../dist/index.html";
+                        } else {
+                            alert("fail");
+                        }
+                    }
+                })
+    });
+
+    $("#back").click(function () {
+        
+        window.location = "../../dist/index.html";
+
+    });
+        });
+    
+    </script>
+
+</body>
+
+</html>

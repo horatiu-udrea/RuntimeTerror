@@ -1,0 +1,102 @@
+body{
+    background: url("../../resources/wall.jpg") no-repeat ;
+    /* background-position:; */
+    background-size: cover;
+   
+    padding: 0;
+    overflow: hidden;
+}
+#textfiled {
+    background-color: rgba(169, 169, 169, 0.5);
+    /* opacity: 0.8  */
+    height: 600px;
+    width: 600px;
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 10%;
+    text-align: center;
+}
+#conferenceName{
+    /* position: absolute; */
+    margin-top: 5%;
+    opacity: 1;
+}
+#cn{
+    position: absolute;
+    opacity: 1;
+    margin-top: 20px;
+    margin-left: 8%;
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+}
+.styleTextField{
+    border-radius: 10%;
+    border-style: outset;
+    height: 20px;
+    width: 230px;
+    opacity: 0.7;
+
+}
+
+
+#logout{
+    position: absolute;
+    margin-top: 19%;
+    margin-left:81%;
+    height: 95px;
+    width: 100px;
+    border-radius: 10%;
+    background-color: #a9a9a9;
+    border-radius: 10%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+    font-size: 20px;
+    opacity: 0.85;
+    /* fon */
+}
+#logout {
+    transition-duration: 0.4s;
+  }
+  
+  #logout:hover {
+    background-color: #a9a9a9; /* Green */
+    color: white;
+  }
+  
+#createConference {
+    transition-duration: 0.4s;
+  }
+  
+  #createConference:hover {
+    background-color: #a9a9a9;
+    color: #a9a9a9;
+  }
+  
+  
+#changeconf #createConference{
+    position: absolute;
+    margin-top: 20%;
+    margin-left: 70px;
+    /* margin-top: 20%; */
+    color: black;
+    height: 98px;
+    width: 198px;
+    border-radius: 10%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bolder;
+    font-size: 20px;
+    /* background-color: #a9a9a9;
+    opacity: 0.8; */
+}
+#changeDateConference{
+    transition-duration: 0.4s;
+    height: 30px;
+    font-weight: bolder;
+}
+
+#changeDateConference:hover {
+    background-color: #34d6ae;
+    color: black;
+    font-weight: bolder;
+  }

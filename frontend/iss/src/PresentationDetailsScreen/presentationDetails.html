@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="presentationDetails.js" type="module"></script>
+    <link rel="stylesheet" href="presentationDetails.css">
+</head>
+<body>
+    <di class="bigBoy">
+        
+        <div class = "container">
+            <h2 class="title"></h2>
+            <p id="startTime"></p>
+            <p id="endTime"></p>
+            <p id="roomName"></p>
+
+            <div style="display: flex; flex-direction:column;">
+            <input type="submit" id="uploadPaper" value="Upload!" />
+            <form id="Upload">
+                <input type="file" class="fileInput" name="upload" accept="application/pdf,application/vnd.ms-excel" />
+            </form>
+            </div>
+        </div>
+    </di>
+    <div id="userButtons">
+        <label id="username">Placeholder Name: </label> 
+        <input type="submit" id="logout" name="logout" value="Logout">
+        <input type="submit" id="back" name="back" value="back">
+    </div>
+</body>
+</html>

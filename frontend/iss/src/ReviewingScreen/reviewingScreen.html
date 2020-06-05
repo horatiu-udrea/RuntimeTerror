@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+
+    <link rel="stylesheet" href="reviewingScreen.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="reviewingScreen.js" type="module"></script>
+    
+</head>
+<body>
+    <img id="background1" src="ressources/1.jpg" style="z-index: -1;">
+    <img id="background2" src="ressources/2.jpg" style="z-index: -1;">
+    <img id="background3" src="ressources/3.jpg" style="z-index: -1;">
+    <img id="background4" src="ressources/4.jpg" style="z-index: -1;">
+
+    <div id="backgroundSupport" class="strip">
+        <div id="leftStrip" class="strip"></div>
+        <div id="rightStrip" class="strip"></div>
+
+        <div id="leftStrip1" class="strip"></div>
+        <div id="rightStrip1" class="strip"></div>
+
+        <div id="contentStrip" class="strip"></div>
+    </div>
+
+    <ul id ="list"></ul>
+    <div id="commentsDiv">Other Reviewers said:<ul id ="comments"></ul></div>
+    <div id="userButtons">
+        <span id="username">Placeholder Name: </span> 
+        <input type="submit" id="logout" name="logout" value="Logout">
+        <input type="submit" id="back" name="back" value="back">
+    </div>
+</body>
+</html>

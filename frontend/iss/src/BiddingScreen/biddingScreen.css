@@ -1,0 +1,182 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgb(44, 44, 44);
+    overflow: hidden;
+}
+
+div.container{
+    height: 150px;
+    width: 200px;
+    transform: translateY(-50%);
+    background-color: transparent;
+}
+
+div.banner,
+div.content{
+    height: 150px;
+    width: 240px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div.banner{
+    --glowColor: greenyellow;
+    position: absolute;
+    background-color: rgb(29, 29, 29);
+    text-align: center;
+    box-shadow:0px 16px 20px 5px rgb(0, 0, 0); 
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(65, 65, 65);
+
+    height: 151px;
+    width: 241px; /*this is here, because of a shitty border that showed up*/
+
+    transition-property: background-color box-shadow top color;
+    transition-timing-function: ease-out;
+    transition-duration: 0.2s;
+    z-index: 4;
+
+    
+}
+
+div.content{
+    position: absolute;
+    top: 50%;
+    background-color: whitesmoke;
+
+    transition: top 0.2s ease-out;
+    z-index: 1;
+}
+
+div.container:hover > div.banner{
+    top:0%;
+    background-color: var(--glowColor);
+    box-shadow:0 0 60px 30px var(--glowColor); 
+    color:whitesmoke;
+    font-family: 'Times New Roman', Times, serif;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+div.container:hover > div.content{
+    top:100%;
+    box-shadow:0px 16px 20px 5px rgb(0, 0, 0); 
+}
+
+div.buttonContainer{
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 20%;
+    top:70%;
+}
+
+
+button.button{
+    background-color: transparent;
+    border: 1px dashed black;
+    height: 100%;
+    width: 25%;
+    outline:0;
+
+    transition-property: border-color color;
+    transition-timing-function: linear;
+    transition-duration: 0.2s;
+}
+
+button:hover{
+    border-color: cornflowerblue;
+    color: cornflowerblue;
+}
+
+p.text{
+    margin:10px; 
+    height: 65%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: smaller;
+}
+
+ul{
+    top:0%;
+    height: 220%;
+    left: -43%;
+    width: 40%;
+    position: absolute;
+
+    transform: rotate(-90deg);
+    transform-origin: right top;
+
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+li{
+    transform: rotate(90deg);
+    transform-origin: right top;
+    margin-bottom: 230px;
+    margin-right: 55%;
+}
+
+#userButtons{
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    left: 0%;
+    top: 90%;
+
+    border-top: 2px solid white;
+    border-spacing: 3px;
+
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);   
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+
+    width: 430px;
+    height: 40px;
+
+    clip-path: polygon(0% 0%, 0% 100%, 90% 100%, 100% 0%);
+
+    color:rgb(0, 0, 0);
+    font-family: "Lucida Console", Monaco, monospace;
+} 
+#userButtons>*{
+    border: none;
+}
+#username{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+}
+#logout{
+    position: absolute;
+    left: 40%;
+    width: 23%;
+    top:50%;
+    height: 100%;
+    transform: translateY(-50%);
+    clip-path: polygon(40% 0%, 0% 100%, 60% 100%, 100% 0%);
+    background-color: orange;
+    color:rgb(0, 0, 0);
+    font-family: "Arial Black", Gadget, sans-serif;
+}
+
+#back{
+    position: absolute;
+    left:65%;
+    top:50%;
+    height: 100%;
+    transform: translateY(-50%);
+    width: 23%;
+    clip-path: polygon(40% 0%, 0% 100%, 60% 100%, 100% 0%);
+    background-color: orange;
+    color:rgb(0, 0, 0);
+    font-family: "Arial Black", Gadget, sans-serif;
+}

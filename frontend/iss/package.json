@@ -19,11 +19,14 @@
     "live-server": "^1.2.1",
     "three": "^0.115.0",
     "tslint-webpack-plugin": "^2.1.0",
-    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "write-file-webpack-plugin": "^4.5.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "webpack": "^4.43.0"
+  },
   "author": "",
   "license": "ISC"
 }

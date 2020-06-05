@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="assignToReviewer.js" type="module"></script>
+    <link rel="stylesheet" href="assignToReviewer.css">
+</head>
+<body>
+    <button id="button">Assign</button>
+
+    <div class="bigStrip strip" style="left:18%">
+        <ul id="paperList"></ul>
+    </div>
+    <div class="bigStrip strip" style="left:60%">
+        <ul id="pcMemberList"></ul>
+    </div>
+
+    <div class="medStrip strip" style="left:22%"></div>
+    <div class="medStrip strip" style="left:74%"></div>
+
+    <div class="smallStrip strip" style="left:18%"></div>
+    <div class="smallStrip strip" style="left:80%"></div>
+
+    <div class="smallStrip strip" style="left:38%; background-color: rgb(23,33,39);"></div>
+    <div class="smallStrip strip" style="left:59%; background-color: rgb(23,33,39);"></div>
+    
+    <svg height="200%" width="100%" id="svg" style="position: absolute;"></svg>
+ 
+    <div id="userButtons">
+        <label id="username">Placeholder Name: </label> 
+        <input type="submit" id="logout" name="logout" value="Logout">
+        <input type="submit" id="back" name="back" value="back">
+    </div>
+</body>
+</html>

@@ -1,7 +1,5 @@
 package ro.runtimeterror.cms.controller
 
-import org.jetbrains.exposed.dao.load
-import org.jetbrains.exposed.dao.with
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import ro.runtimeterror.cms.database.tables.ReviewTable
@@ -15,6 +13,7 @@ import ro.runtimeterror.cms.database.daos.UserDAO
 import ro.runtimeterror.cms.database.daos.withAuthors
 import ro.runtimeterror.cms.database.tables.PaperTable
 import ro.runtimeterror.cms.model.UserReview
+import ro.runtimeterror.cms.model.validators.UniquenessValidator
 
 class PaperReviewController
 {
@@ -38,7 +37,7 @@ class PaperReviewController
             .filter { it[ReviewTable.paperID] !in authoredPapers }
             .map {
                 PaperReview(
-                        PaperDAO.wrapRow(PaperTable.select { PaperTable.id eq ReviewTable.paperID }.first()),
+                        PaperDAO.wrapRow(PaperTable.select { PaperTable.id eq it[ReviewTable.paperID] }.first()),
                         it[ReviewTable.recommandation],
                         Qualifier.from(it[ReviewTable.qualifier]),
                         getOtherReviews(userId, it[ReviewTable.paperID])
@@ -49,7 +48,9 @@ class PaperReviewController
     private fun getOtherReviews(userId: Int, paperID: Int): List<UserReview> = transaction(connection) {
         return@transaction ReviewTable.select {
             (ReviewTable.paperID eq paperID) and (ReviewTable.userID eq userId)
-        }.map {
+        }
+            .filter { it[ReviewTable.userID] != userId }
+            .map {
             UserReview(
                     UserDAO.findById(it[ReviewTable.userID])!!,
                     it[ReviewTable.recommandation],
@@ -64,12 +65,22 @@ class PaperReviewController
     fun review(userID: Int, paperID: Int, recommendation: String, qualifier: Int)= transaction(connection) {
             UserValidator.exists(userID)
             PaperValidator.exists(paperID)
-            ReviewTable
+            PaperValidator.checkPcMemberAssigned(userID, paperID)
+            if(!UniquenessValidator.reviewExists(userID, paperID)){
+                ReviewTable
                     .insert {
                         it[ReviewTable.userID] = userID
                         it[ReviewTable.paperID] = paperID
                         it[ReviewTable.qualifier] = Qualifier.from(qualifier).value
                         it[recommandation] = recommendation
                     }
+            }else{
+                ReviewTable
+                    .update({(ReviewTable.userID eq userID) and (ReviewTable.paperID eq paperID)}) {
+                        it[ReviewTable.qualifier] = Qualifier.from(qualifier).value
+                        it[recommandation] = recommendation
+                    }
+            }
+
         }
 }
