@@ -19,7 +19,7 @@ $(document).ready(function () {
         }
         if (phase == 3) {
             document.getElementById("improveProposal").style.visibility = "visible";
-            document.getElementById("uploadProposal").value = "Upload Doc for presentation";
+            document.getElementById("uploadProposal").innerHTML = "Upload Doc for presentation";
             document.getElementById("addProposal").style.visibility = "hidden";
         }
     }
@@ -46,14 +46,24 @@ $(document).ready(function () {
 
                 }
             } else {
-                alert("Sorry, Your paper was not selected...");
+                alert("Sorry, you were not chosen to present in any section...");
+                var ul = document.getElementById("authorProposals");
+                var candidate = document.getElementById("proposalTitle");
+                var li = document.createElement("li");
+                li.setAttribute('id', -1);
+                li.setAttribute('class', "proposalTitle");
+                li.setAttribute('style', "font-size: x-large; text-align:center; color: rgb(255, 214, 29); font-family: 'Arial Black', Gadget, sans-serif; list-style: none;");
+                li.appendChild(document.createTextNode("You were not chosen to present in any section"));
+                ul.appendChild(li);
+                    document.getElementById("improveProposal").style.visibility = "hidden";
+                    document.getElementById("uploadProposal").style.visibility = "hidden";
             }
         }
     });
     function addSectionDetails(data) {
         let toWrite = " Name of the Section : " + data.name + "<br>" +
-            "Start time: " + data.startTime +
-            "<br>End time: " + data.endTime +
+            "Start Date: " + data.startTime +
+            "<br>End Date: " + data.endTime +
             "<br>Section Chair: " + data.sessionChair +
             "<br>Room name : " + data.roomName + "<br><br>";
 
@@ -62,7 +72,7 @@ $(document).ready(function () {
 
     function addItem(proposalTitle, id) {
         localStorage.setItem("selectedProposal", proposalTitle);
-        console.log(id);
+        keepInStore(id);
         var ul = document.getElementById("authorProposals");
         var candidate = document.getElementById("proposalTitle");
         var li = document.createElement("li");
